@@ -1,0 +1,23 @@
+$font-primary: 'Poetsen One', sans-serif;
+$color-primary: #0080ff;
+$color-secondary: #010c80;
+$color-third: #ff7f3e;
+$color-fourth: #ffda78;
+$color-darkwhite: rgba(245, 245, 245, 0.7);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  // border: 0.5px solid red;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  font-size: 100%;
+  font-family: $font-primary;
+}
