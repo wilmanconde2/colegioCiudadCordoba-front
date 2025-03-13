@@ -11,6 +11,7 @@
     "server": "json-server --watch data/db.json --port 8080"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

@@ -1,0 +1,38 @@
+@use '../base/Settings' as *;
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+
+  &.bg-transparent {
+    background-color: transparent !important;
+  }
+
+  &.bg-white {
+    background-color: white !important;
+  }
+}
+
+.navbar-logo {
+  margin: 0.5rem 0 0.5rem 0.5rem;
+  img {
+    width: 50px;
+    height: 50px;
+    margin: auto auto;
+  }
+}
+
+.navbar .dropdown-menu .dropdown-item{
+  color: $color-secondary !important;
+  background-color: transparent !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link {
+    color: $color-secondary !important; 
+    transition: color 0.3s ease; 
+  }
+

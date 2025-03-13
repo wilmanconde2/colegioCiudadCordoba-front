@@ -1,0 +1,90 @@
+@use '../base/Settings' as *;
+
+.imagen {
+  display: grid;
+  justify-content: center;
+  width: 90%;
+  margin: auto;
+  margin-top: 5rem;
+}
+
+.backgroundContainer {
+  color: $color-secondary;
+  display: grid;
+  &Text {
+    h1,
+    h2 {
+      display: block;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 25px;
+      border: 1px transparent;
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+    h1 {
+      font-size: 40px;
+      margin-bottom: 2rem;
+    }
+    h2 {
+      font-size: 24px;
+      margin-bottom: 2rem;
+    }
+    margin-top: 1rem;
+    margin-inline: 2rem;
+  }
+
+  .studentCode {
+    legend {
+      border-bottom: 1px solid $color-secondary;
+    }
+    display: grid;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 52rem; //TODO cambiar a 2rem
+    background-color: whitesmoke;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
+    cursor: pointer;
+    &:focus {
+      border: 1px solid $color-secondary;
+    }
+    &:hover {
+      border: 1px solid $color-secondary;
+    }
+    &:active {
+      border: 1px solid $color-secondary;
+    }
+
+    &Text {
+      color: white;
+    }
+    ::placeholder {
+      color: $color-secondary;
+      font-size: 10px;
+      font-weight: normal;
+      font-style: italic;
+    }
+    input {
+      width: 70%;
+      padding-left: 1rem;
+      color: $color-secondary;
+      border: none;
+      border-bottom: 1px solid $color-secondary;
+      &:focus {
+        border: none;
+      }
+      &:hover {
+        border: 1px solid $color-secondary;
+      }
+    }
+
+    button {
+      margin-top: 1rem;
+    }
+  }
+}
+
+.high{
+  height: 100vh; // TODO BORRAR AL TERMINAR
+}

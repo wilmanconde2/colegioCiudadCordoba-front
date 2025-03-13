@@ -1,4 +1,4 @@
-$font-primary: 'Poetsen One', sans-serif;
+$font-primary: 'Lora', serif;
 $color-primary: #0080ff;
 $color-secondary: #010c80;
 $color-third: #ff7f3e;
@@ -18,6 +18,6 @@ html {
 }
 
 body {
-  font-size: 100%;
   font-family: $font-primary;
+  color: $color-secondary;
 }
