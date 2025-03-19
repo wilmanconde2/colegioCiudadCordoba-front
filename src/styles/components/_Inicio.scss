@@ -86,3 +86,21 @@
     }
   }
 }
+
+.circular,
+.reporteAcademico,
+.recuperacion,
+.actividadesRecuperacion {
+  display: grid;
+  justify-content: center;
+  width: 80%;
+  margin: auto;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
+  cursor: pointer;
+
+  // TODO borrar
+  border: 1px solid blue;
+  height: 25rem;
+  margin-bottom: 2rem;
+}

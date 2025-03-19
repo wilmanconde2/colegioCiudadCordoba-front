@@ -28,7 +28,7 @@ const Navbar = () => {
   return (
     <nav className={`navbar navbar-expand-lg ${isScrolled ? 'bg-white' : 'bg-transparent'}`}>
       <div className='container-fluid'>
-        <NavLink className='navbar-logo' to='/'>
+        <NavLink className='navbar-logo' to='#'>
           <img src={logo} alt='logo' />
         </NavLink>
         <button
