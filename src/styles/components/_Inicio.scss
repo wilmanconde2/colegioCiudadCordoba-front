@@ -5,7 +5,10 @@
   justify-content: center;
   width: 90%;
   margin: auto;
-  margin-top: 5rem;
+  margin-top: 6rem;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
+  cursor: pointer;
 }
 
 .backgroundContainer {
@@ -23,7 +26,7 @@
     }
     h1 {
       font-size: 40px;
-      margin-bottom: 2rem;
+      margin-block: 2rem;
     }
     h2 {
       font-size: 24px;

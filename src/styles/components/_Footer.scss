@@ -1,12 +1,24 @@
+@use '../base/Settings' as *;
+
 .footer-fixed {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #333;
+  background-color: $color-secondary;
   color: white;
   text-align: center;
   padding: 10px;
   font-family: Arial, sans-serif;
   font-size: 14px;
+}
+
+.social {
+  color: white; /* Cambia el color de los íconos a blanco */
+  font-size: 20px; /* Tamaño de los íconos */
+}
+
+/* Estilo para cuando el icono es hover (cuando pasas el mouse por encima) */
+.social:hover {
+  color: #f1f1f1; /* Color ligeramente más claro al pasar el mouse */
 }

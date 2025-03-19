@@ -8,11 +8,11 @@
   transition: background-color 0.3s ease;
 
   &.bg-transparent {
-    background-color: transparent !important;
+    background-color: whitesmoke !important;
   }
 
   &.bg-white {
-    background-color: white !important;
+    background-color: whitesmoke !important;
   }
 }
 
@@ -25,9 +25,14 @@
   }
 }
 
+.navbar .dropdown-menu{
+  background-color: whitesmoke !important;
+  transition: background-color 0.3s ease;
+}
+
 .navbar .dropdown-menu .dropdown-item{
   color: $color-secondary !important;
-  background-color: transparent !important;
+  background-color: whitesmoke !important;
   transition: color 0.3s ease;
 }
 
@@ -36,3 +41,17 @@
     transition: color 0.3s ease; 
   }
 
+.social-links{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0 0.5rem 0.5rem;
+  font-size: 20px;
+  a {
+    margin: 0 0.5rem;
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+@use '../base/Settings' as *;
+
+.imagen {
+  display: grid;
+  justify-content: center;
+  max-width: 80%;
+  margin: auto;
+  margin-top: 6rem;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
+  cursor: pointer;
+}
+
+.texto {
+  width: 70%;
+  margin: auto;
+  margin-top: 2rem;
+  text-align: justify;
+  h1 {
+    text-align: center;
+  }
+}

@@ -1,5 +1,6 @@
 import useTitulo from '../hooks/useTitulo';
 import Formulario from '../components/Formulario';
+import Footer from '../components/Footer';
 
 const Inicio = () => {
   useTitulo('Inicio');
@@ -7,7 +8,7 @@ const Inicio = () => {
   return (
     <>
       <div>
-        <img className='imagen' src="/background.png" alt="imagen" />
+        <img className='imagen' src="/background1.webp" alt="imagen" />
       </div>
       <div className='backgroundContainerText'>
         <h1>Paz * Progreso * Futuro</h1>
@@ -20,6 +21,7 @@ const Inicio = () => {
       <div className='high'>
         {/* TODO borrar div al terminar */}
       </div>
+      <Footer />
     </>
   );
 };
