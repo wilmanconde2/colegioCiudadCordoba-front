@@ -4,6 +4,7 @@ import logo from '/logo.jpg';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
@@ -11,6 +12,10 @@ const Navbar = () => {
     } else {
       setIsScrolled(false);
     }
+  };
+
+  const handleNavLinkClick = () => {
+    setIsNavbarOpen(false); 
   };
 
   useEffect(() => {
@@ -23,24 +28,21 @@ const Navbar = () => {
   return (
     <nav className={`navbar navbar-expand-lg ${isScrolled ? 'bg-white' : 'bg-transparent'}`}>
       <div className='container-fluid'>
-        <NavLink className='navbar-logo' to='#'>
+        <NavLink className='navbar-logo' to='/'>
           <img src={logo} alt='logo' />
         </NavLink>
         <button
           className='navbar-toggler'
           type='button'
-          data-bs-toggle='collapse'
-          data-bs-target='#navbarNavDropdown'
-          aria-controls='navbarNavDropdown'
-          aria-expanded='false'
-          aria-label='Toggle navigation'
+          onClick={() => setIsNavbarOpen(!isNavbarOpen)}
+          aria-expanded={isNavbarOpen ? 'true' : 'false'}
         >
           <span className='navbar-toggler-icon'></span>
         </button>
-        <div className='collapse navbar-collapse' id='navbarNavDropdown'>
+        <div className={`collapse navbar-collapse ${isNavbarOpen ? 'show' : ''}`} id='navbarNavDropdown'>
           <ul className='navbar-nav'>
             <li className='nav-item'>
-              <NavLink className='nav-link active' aria-current='page' to='/'>
+              <NavLink className='nav-link active' aria-current='page' to='/' onClick={handleNavLinkClick}>
                 Inicio
               </NavLink>
             </li>
@@ -56,23 +58,23 @@ const Navbar = () => {
               </NavLink>
               <ul className='dropdown-menu'>
                 <li>
-                  <NavLink className='dropdown-item' to='/historia'>
+                  <NavLink className='dropdown-item' to='/historia' onClick={handleNavLinkClick}>
                     Historia
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='/perfiles-ccc'>
+                  <NavLink className='dropdown-item' to='/perfiles-ccc' onClick={handleNavLinkClick}>
                     Perfiles
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='/manual-convivencia'>
+                  <NavLink className='dropdown-item' to='/manual-convivencia' onClick={handleNavLinkClick}>
                     Manual de Convivencia
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='/mision-vision'>
-                    Mision y Vision
+                  <NavLink className='dropdown-item' to='/mision-vision' onClick={handleNavLinkClick}>
+                    Misión y Visión
                   </NavLink>
                 </li>
               </ul>
@@ -89,56 +91,64 @@ const Navbar = () => {
               </NavLink>
               <ul className='dropdown-menu'>
                 <li>
-                  <NavLink className='dropdown-item' to='/modalidades'>
+                  <NavLink className='dropdown-item' to='/modalidades' onClick={handleNavLinkClick}>
                     Modalidades
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='/formacion-deportiva'>
+                  <NavLink className='dropdown-item' to='/formacion-deportiva' onClick={handleNavLinkClick}>
                     Formación Deportiva
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='/ludicas'>
-                    Actividades Ludicas
+                  <NavLink className='dropdown-item' to='/ludicas' onClick={handleNavLinkClick}>
+                    Actividades Lúdicas
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='/cobertura'>
+                  <NavLink className='dropdown-item' to='/cobertura' onClick={handleNavLinkClick}>
                     Programa de Cobertura
                   </NavLink>
                 </li>
               </ul>
             </li>
             <li className='nav-item'>
-              <NavLink className='nav-link' to='/pqrs'>
+              <NavLink className='nav-link' to='/pqrs' onClick={handleNavLinkClick}>
                 PQRS
               </NavLink>
             </li>
             <li className='nav-item'>
-              <NavLink className='nav-link' to='/contacto'>
-                Contactanos
+              <NavLink className='nav-link' to='/contacto' onClick={handleNavLinkClick}>
+                Contáctanos
               </NavLink>
             </li>
           </ul>
 
           {/* redes sociales */}
-          <div className="social-links d-flex">
-            <a href="https://www.facebook.com/egresados.cocicor?fref=ts" target="_blank" className="social-icon mx-2">
-              <i className="fab fa-facebook-f"></i>
+          <div className='social-links d-flex'>
+            <a href='https://www.facebook.com/egresados.cocicor?fref=ts' target='_blank' className='social-icon mx-2'>
+              <i className='fab fa-facebook-f'></i>
             </a>
-            <a href="https://x.com/iecocicor" target="_blank" className="social-icon mx-2">
-              <i className="fab fa-twitter"></i>
+            <a href='https://x.com/iecocicor' target='_blank' className='social-icon mx-2'>
+              <i className='fab fa-twitter'></i>
             </a>
-            <a href="https://www.instagram.com/cocicor/?hl=es-la" target="_blank" className="social-icon mx-2">
-              <i className="fab fa-instagram"></i>
+            <a href='https://www.instagram.com/cocicor/?hl=es-la' target='_blank' className='social-icon mx-2'>
+              <i className='fab fa-instagram'></i>
             </a>
-            <a href="https://www.youtube.com/channel/UCDeENgR7gNEQUfjWMRxqj7g" target="_blank" className="social-icon mx-2">
-              <i className="fab fa-youtube"></i>
+            <a
+              href='https://www.youtube.com/channel/UCDeENgR7gNEQUfjWMRxqj7g'
+              target='_blank'
+              className='social-icon mx-2'
+            >
+              <i className='fab fa-youtube'></i>
             </a>
-            <a href="https://www.youtube.com/channel/UCxtPSGwRp7kmiDf-UHKQLAw" target="_blank" className="social-icon mx-2">
-              <i className="fab fa-youtube"></i>
-              <span className="kids-badge">Kids</span>
+            <a
+              href='https://www.youtube.com/channel/UCxtPSGwRp7kmiDf-UHKQLAw'
+              target='_blank'
+              className='social-icon mx-2'
+            >
+              <i className='fab fa-youtube'></i>
+              <span className='kids-badge'>Kids</span>
             </a>
           </div>
         </div>
