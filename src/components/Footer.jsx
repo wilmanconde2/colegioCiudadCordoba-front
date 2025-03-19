@@ -32,7 +32,7 @@ const Footer = () => {
           Cra. 42 B # 51-35 B/ Ciudad Córdoba Cali - Colombia
         </div>
         <div>
-          Tel: 327 26 85 - 328 83 73 / Fax: 328 22 12 / Cel: 3104280125
+          Tel: 327 26 85 - 328 83 73 | Fax: 328 22 12 | Cel: 3104280125
         </div>
         <div>
           colegiociudadcordoba@hotmail.com
