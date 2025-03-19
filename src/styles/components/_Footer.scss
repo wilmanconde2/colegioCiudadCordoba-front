@@ -1,9 +1,6 @@
 @use '../base/Settings' as *;
 
 .footer-fixed {
-  position: fixed;
-  bottom: 0;
-  left: 0;
   width: 100%;
   background-color: $color-secondary;
   color: white;
@@ -20,5 +17,5 @@
 
 /* Estilo para cuando el icono es hover (cuando pasas el mouse por encima) */
 .social:hover {
-  color: #f1f1f1; /* Color ligeramente más claro al pasar el mouse */
+  color: rgba(245, 245, 245, 0.4); /* Color ligeramente más claro al pasar el mouse */
 }

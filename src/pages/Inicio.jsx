@@ -7,21 +7,19 @@ const Inicio = () => {
 
   return (
     <>
-      <div>
-        <img className='imagen' src="/background1.webp" alt="imagen" />
+      <div className="fullContainer">
+        <div>
+          <img className='imagen' src="/background1.webp" alt="imagen" />
+        </div>
+        <div className='backgroundContainerText'>
+          <h1>Paz * Progreso * Futuro</h1>
+          <h2>
+            ¡Una comunidad acogedora que inspira posibilidades, conecta personas y estimula el
+            aprendizaje!
+          </h2>
+        </div>
+        <Formulario />
       </div>
-      <div className='backgroundContainerText'>
-        <h1>Paz * Progreso * Futuro</h1>
-        <h2>
-          ¡Una comunidad acogedora que inspira posibilidades, conecta personas y estimula el
-          aprendizaje!
-        </h2>
-      </div>
-      <Formulario />
-      <div className='high'>
-        {/* TODO borrar div al terminar */}
-      </div>
-      <Footer />
     </>
   );
 };

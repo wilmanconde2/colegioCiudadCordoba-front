@@ -40,7 +40,7 @@ const Navbar = () => {
         <div className='collapse navbar-collapse' id='navbarNavDropdown'>
           <ul className='navbar-nav'>
             <li className='nav-item'>
-              <NavLink className='nav-link active' aria-current='page' to='#'>
+              <NavLink className='nav-link active' aria-current='page' to='/'>
                 Inicio
               </NavLink>
             </li>
@@ -56,22 +56,22 @@ const Navbar = () => {
               </NavLink>
               <ul className='dropdown-menu'>
                 <li>
-                  <NavLink className='dropdown-item' to='#'>
+                  <NavLink className='dropdown-item' to='/historia'>
                     Historia
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='#'>
+                  <NavLink className='dropdown-item' to='/perfiles-ccc'>
                     Perfiles
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='#'>
+                  <NavLink className='dropdown-item' to='/manual-convivencia'>
                     Manual de Convivencia
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='#'>
+                  <NavLink className='dropdown-item' to='/mision-vision'>
                     Mision y Vision
                   </NavLink>
                 </li>
@@ -89,34 +89,34 @@ const Navbar = () => {
               </NavLink>
               <ul className='dropdown-menu'>
                 <li>
-                  <NavLink className='dropdown-item' to='#'>
+                  <NavLink className='dropdown-item' to='/modalidades'>
                     Modalidades
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='#'>
+                  <NavLink className='dropdown-item' to='/formacion-deportiva'>
                     Formación Deportiva
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='#'>
+                  <NavLink className='dropdown-item' to='/ludicas'>
                     Actividades Ludicas
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='#'>
+                  <NavLink className='dropdown-item' to='/cobertura'>
                     Programa de Cobertura
                   </NavLink>
                 </li>
               </ul>
             </li>
             <li className='nav-item'>
-              <NavLink className='nav-link' to='#'>
+              <NavLink className='nav-link' to='/pqrs'>
                 PQRS
               </NavLink>
             </li>
             <li className='nav-item'>
-              <NavLink className='nav-link' to='#'>
+              <NavLink className='nav-link' to='/contacto'>
                 Contactanos
               </NavLink>
             </li>
