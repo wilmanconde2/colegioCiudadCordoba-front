@@ -6,6 +6,8 @@ const PerfilesCCC = () => {
   return (
     <>
       <div className='fullContainer'>
+        <img className='imagen' src='/public/perfiles.webp' alt='perfiles' />
+
         <div className='container'>
           <h2>PERFIL DEL DIRECTIVO DOCENTE COCICOR</h2>
           <ul>
