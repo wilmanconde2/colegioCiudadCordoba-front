@@ -20,7 +20,7 @@ const Contacto = () => {
         </div>
         <div className='containerText'>
           <div className='direccion'>Cra. 42 B # 51-35 <br /> B/ Ciudad Córdoba Cali - Colombia</div>
-          <div className='telefonos'>Tel: 327 26 85 - 328 83 73 <br /> Fax: 328 22 12 <br /> Cel: 3104280125</div>
+          <div className='telefonos'>Tel: 6023272685 - 6023288373 <br /> Fax: 6023282212 <br /> Cel: 3104280125</div>
           <div className='email'>colegiociudadcordoba@hotmail.com</div>
         </div>
       </div>
