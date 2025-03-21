@@ -1,0 +1,16 @@
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.containerText {
+  width: 80%;
+  margin: auto;
+
+  .direccion,
+  .telefonos,
+  .email {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+}
