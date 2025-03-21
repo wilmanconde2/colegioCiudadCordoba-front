@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '/logo.jpg';
+import ppf from '/ppf.jpg';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,6 +31,9 @@ const Navbar = () => {
       <div className='container-fluid'>
         <NavLink className='navbar-logo' to='#'>
           <img src={logo} alt='logo' />
+        </NavLink>
+        <NavLink className='navbar-logo' to='#'>
+          <img src={ppf} alt='logo' />
         </NavLink>
         <button
           className='navbar-toggler'

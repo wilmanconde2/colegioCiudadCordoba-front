@@ -25,23 +25,23 @@
   }
 }
 
-.navbar .dropdown-menu{
+.navbar .dropdown-menu {
   background-color: whitesmoke !important;
   transition: background-color 0.3s ease;
 }
 
-.navbar .dropdown-menu .dropdown-item{
+.navbar .dropdown-menu .dropdown-item {
   color: $color-secondary !important;
   background-color: whitesmoke !important;
   transition: color 0.3s ease;
 }
 
 .nav-link {
-    color: $color-secondary !important; 
-    transition: color 0.3s ease; 
-  }
+  color: $color-secondary !important;
+  transition: color 0.3s ease;
+}
 
-.social-links{
+.social-links {
   display: flex;
   justify-content: center;
   align-items: center;
