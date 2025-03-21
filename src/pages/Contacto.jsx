@@ -19,9 +19,9 @@ const Contacto = () => {
           ></iframe>
         </div>
         <div className='containerText'>
-          <div className='direccion'>Cra. 42 B # 51-35 <br /> B/ Ciudad Córdoba Cali - Colombia</div>
+          <div className='direccion'>Dirección: Cra. 42 B # 51-35 <br /> B/ Ciudad Córdoba</div>
           <div className='telefonos'>Tel: 6023272685 - 6023288373 <br /> Fax: 6023282212 <br /> Cel: 3104280125</div>
-          <div className='email'>colegiociudadcordoba@hotmail.com</div>
+          <div className='email'>Correo: colegiociudadcordoba@hotmail.com</div>
         </div>
       </div>
     </>
