@@ -5,7 +5,9 @@ const NoEncontrado = () => {
 
   return (
     <>
-      <div className='display-4 text-danger text-center m-4 py-5'>Page Not Found - 404</div>
+      <div className='fullContainer'>
+        <div className='display-4 text-danger text-center m-4 py-5'>Page Not Found - 404</div>
+      </div>
     </>
   );
 };

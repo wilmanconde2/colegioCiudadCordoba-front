@@ -1,10 +1,9 @@
 import { useRoutes } from 'react-router';
 import Cobertura from '../pages/Cobertura';
 import Contacto from '../pages/Contacto';
-import FormacionDeportiva from '../pages/FormacionDeportiva';
+import DeporteLudica from '../pages/DeporteLudica';
 import Historia from '../pages/Historia';
 import Inicio from '../pages/Inicio';
-import Ludicas from '../pages/Ludicas';
 import ManualConvivencia from '../pages/ManualConvivencia';
 import MisionVision from '../pages/MisionVision';
 import Modalidades from '../pages/Modalidades';
@@ -27,17 +26,13 @@ const Rutas = () => {
       element: <Contacto />,
     },
     {
-      path: '/formacion-deportiva',
-      element: <FormacionDeportiva />,
+      path: '/deporte-ludica',
+      element: <DeporteLudica />,
     },
     {
       path: '/historia',
       element: <Historia />,
-    },
-    {
-      path: '/ludicas',
-      element: <Ludicas />,
-    },
+    }, 
     {
       path: '/manual-convivencia',
       element: <ManualConvivencia />,

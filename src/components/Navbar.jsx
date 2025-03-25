@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   const handleNavLinkClick = () => {
-    setIsNavbarOpen(false); 
+    setIsNavbarOpen(false);
   };
 
   useEffect(() => {
@@ -100,13 +100,8 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='/formacion-deportiva' onClick={handleNavLinkClick}>
-                    Formación Deportiva
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className='dropdown-item' to='/ludicas' onClick={handleNavLinkClick}>
-                    Actividades Lúdicas
+                  <NavLink className='dropdown-item' to='/deporte-ludica' onClick={handleNavLinkClick}>
+                    Deporte y Ludica
                   </NavLink>
                 </li>
                 <li>

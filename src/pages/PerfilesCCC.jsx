@@ -30,6 +30,7 @@ const PerfilesCCC = () => {
             </li>
           </ul>
         </div>
+        <img className='imagen' src='/perfiles.webp' alt='perfiles' />
         <div className='container'>
           <h2>PERFIL DEL DOCENTE COCICOR</h2>
           <ul>
@@ -53,6 +54,7 @@ const PerfilesCCC = () => {
             <li>Ser Idóneo y competente en su área</li>
           </ul>
         </div>
+        <img className='imagen' src='/perfiles.webp' alt='perfiles' />
         <div className='container'>
           <h2>PERFIL DEL ESTUDIANTE COCICOR</h2>
           <ul>
@@ -89,6 +91,7 @@ const PerfilesCCC = () => {
             <li>Que participen responsable y democráticamente en los comités o consejos de padres y otros órganos</li>
           </ul>
         </div>
+        <img className='imagen' src='/perfiles.webp' alt='perfiles' />
         <div className='container'>
           <h2>PERFIL DEL EGRESADO COCICOR</h2>
           <ul>
