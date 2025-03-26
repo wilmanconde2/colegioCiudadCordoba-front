@@ -16,6 +16,19 @@
   }
 }
 
+.container-fluid {
+  justify-content: space-around !important;
+
+  .navbar-logo {
+    margin: auto !important;
+  }
+}
+
+.navbar-toggler {
+  border: none;
+  margin: 0;
+}
+
 .navbar-logo {
   margin: 0.5rem 0 0.5rem 0.5rem;
   img {
@@ -23,6 +36,11 @@
     height: 50px;
     margin: auto auto;
   }
+}
+
+.span {
+  text-align: center;
+  font-weight: bolder;
 }
 
 .navbar .dropdown-menu {
@@ -53,5 +71,23 @@
       width: 30px;
       height: 30px;
     }
+  }
+
+  .ytkids {
+    text-align: center;
+  }
+}
+
+// -------------------------------------------------------------------
+// Responsive
+// -------------------------------------------------------------------
+
+@media (min-width: 992px) {
+  .navbar .container-fluid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    justify-self: center;
+    padding: 0 2rem;
   }
 }

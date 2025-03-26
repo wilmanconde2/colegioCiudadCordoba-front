@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '/logo.jpg';
-import ppf from '/ppf.jpg';
+import logo from '/logo.webp';
+import ppf from '/ppf.webp';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,7 +32,8 @@ const Navbar = () => {
         <NavLink className='navbar-logo' to='#'>
           <img src={logo} alt='logo' />
         </NavLink>
-        <NavLink className='navbar-logo' to='#'>
+          <span className='span'>Colegio Ciudad Cordoba </span>
+        <NavLink className='navbar-logo ppf' to='#'>
           <img src={ppf} alt='logo' />
         </NavLink>
         <button
@@ -144,7 +145,7 @@ const Navbar = () => {
             <a
               href='https://www.youtube.com/channel/UCxtPSGwRp7kmiDf-UHKQLAw'
               target='_blank'
-              className='social-icon mx-2'
+              className='social-icon mx-2 ytkids'
             >
               <i className='fab fa-youtube'></i>
               <span className='kids-badge'>Kids</span>
