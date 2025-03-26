@@ -3,6 +3,8 @@ import useTitulo from '../hooks/useTitulo';
 const PQRS = () => {
   useTitulo('PQRS');
 
+  // TODO implementar a donde va la información del formulario
+
   return (
     <>
       <div className='fullContainer'>
