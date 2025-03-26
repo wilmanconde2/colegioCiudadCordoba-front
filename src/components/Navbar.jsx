@@ -32,7 +32,7 @@ const Navbar = () => {
         <NavLink className='navbar-logo' to='#'>
           <img src={logo} alt='logo' />
         </NavLink>
-          <span className='span'>Colegio Ciudad Cordoba </span>
+        <span className='span'>Colegio Ciudad Cordoba </span>
         <NavLink className='navbar-logo ppf' to='#'>
           <img src={ppf} alt='logo' />
         </NavLink>
@@ -109,6 +109,11 @@ const Navbar = () => {
                   <NavLink className='dropdown-item' to='/cobertura' onClick={handleNavLinkClick}>
                     Programa de Cobertura
                   </NavLink>
+                </li>
+                <li>
+                  <a className='dropdown-item' href='http://ieccc.no-ip.biz:90/inicio' target='_blank'>
+                    Admin
+                  </a>
                 </li>
               </ul>
             </li>

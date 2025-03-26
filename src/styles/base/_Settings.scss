@@ -23,6 +23,17 @@ body {
 }
 
 .fullContainer{
-  margin-top: 7rem;
+  margin-top: 6rem;
   margin-bottom: 100px;
+}
+
+// -------------------------------------------------------------------
+// Responsive
+// -------------------------------------------------------------------
+
+
+@media(min-width: 992px){
+  .fullContainer{
+    margin-top: 10rem;
+  }
 }

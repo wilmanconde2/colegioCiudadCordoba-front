@@ -1,89 +1,60 @@
 @use '../base/Settings' as *;
 
-.imagen {
+.backgroundContainer {
   display: grid;
   justify-content: center;
-  width: 90%;
+  width: 80%;
   margin: auto;
-  border-radius: 15px;
-  box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
+  min-height: 50vh;
+  overflow: hidden;
+  background-size: contain;
   cursor: pointer;
+  position: relative;
+  z-index: 0;
+
+  .imageWrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: opacity 3s ease-in-out;
+    opacity: 0;
+
+    &.active {
+      opacity: 1;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 100px;
+    }
+  }
 }
 
-.backgroundContainer {
+.backgroundContainerText {
   color: $color-secondary;
   display: grid;
-  &Text {
-    h1,
-    h2 {
-      display: block;
-      text-align: center;
-      font-weight: bold;
-      border-radius: 25px;
-      border: 1px transparent;
-      background-color: rgba(255, 255, 255, 0.4);
-    }
-    h1 {
-      font-size: 40px;
-      margin-block: 2rem;
-    }
-    h2 {
-      font-size: 24px;
-      margin-bottom: 2rem;
-    }
-    margin-top: 1rem;
-    margin-inline: 2rem;
+  margin-inline: 2rem;
+
+  h1,
+  h2 {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 25px;
+    border: 1px transparent;
+    background-color: rgba(255, 255, 255, 0.4);
   }
 
-  .studentCode {
-    legend {
-      border-bottom: 1px solid $color-secondary;
-    }
-    display: grid;
-    width: 80%;
-    margin: auto;
+  h1 {
+    font-size: 40px;
+    margin-block: 2rem;
+  }
+
+  h2 {
+    font-size: 24px;
     margin-bottom: 2rem;
-    background-color: whitesmoke;
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
-    cursor: pointer;
-    &:focus {
-      border: 1px solid $color-secondary;
-    }
-    &:hover {
-      border: 1px solid $color-secondary;
-    }
-    &:active {
-      border: 1px solid $color-secondary;
-    }
-
-    &Text {
-      color: white;
-    }
-    ::placeholder {
-      color: $color-secondary;
-      font-size: 10px;
-      font-weight: normal;
-      font-style: italic;
-    }
-    input {
-      width: 70%;
-      padding-left: 1rem;
-      color: $color-secondary;
-      border: none;
-      border-bottom: 1px solid $color-secondary;
-      &:focus {
-        border: none;
-      }
-      &:hover {
-        border: 1px solid $color-secondary;
-      }
-    }
-
-    button {
-      margin-top: 1rem;
-    }
   }
 }
 
@@ -98,11 +69,34 @@
   border-radius: 15px;
   box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
   cursor: pointer;
-
-  // TODO borrar
-  border: 1px solid blue;
   height: 25rem;
   margin-bottom: 2rem;
 }
 
+// -------------------------------------------------------------------
+// Responsive (Mobile First)
+// -------------------------------------------------------------------
 
+@media (min-width: 576px) {
+  .backgroundContainer {
+    min-height: 65vh;
+    width: 75%;
+  }
+}
+
+@media (min-width: 768px) {
+  .backgroundContainer {
+    min-height: 80vh;
+    width: 70%;
+  }
+}
+
+@media (min-width: 992px) {
+  .backgroundContainer {
+    min-height: 95vh;
+    width: 65%;
+    background-attachment: fixed; // Activa el efecto parallax
+    background-size: cover; // Ajusta la imagen al contenedor
+    background-position: center; // Centra la imagen
+  }
+}

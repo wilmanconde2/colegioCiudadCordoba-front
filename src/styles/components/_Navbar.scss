@@ -3,6 +3,7 @@
 .navbar {
   position: fixed;
   width: 100%;
+  z-index: 1000;
   top: 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease;
@@ -81,6 +82,13 @@
 // -------------------------------------------------------------------
 // Responsive
 // -------------------------------------------------------------------
+
+@media (min-width: 768px) {
+  .span {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
 
 @media (min-width: 992px) {
   .navbar .container-fluid {
