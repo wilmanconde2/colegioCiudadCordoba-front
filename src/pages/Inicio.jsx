@@ -57,20 +57,12 @@ const Inicio = () => {
             administrativas. Puedes visualizar o descargar el documento a continuación.
           </p>
           <a
-            href='https://drive.google.com/uc?export=download&id=1Vq9ihhwGA2LrzNeWgr-p1AgApySRYkic'
+            href='#' //TODO enlace carpeta circular
             className='btn btn-primary'
             target='_blank'
             rel='noopener noreferrer'
           >
             Descargar
-          </a>
-          <a
-            href='https://drive.google.com/drive/folders/1WRVTj1ihAB29L8p_lBO3ehNmDIGhRGwy?usp=sharing'
-            className='btn btn-primary'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            testing
           </a>
         </div>
       </div>
