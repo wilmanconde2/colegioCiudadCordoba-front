@@ -1,5 +1,6 @@
 @use '../base/Settings' as *;
 
+// Contenedor del carrusel
 .backgroundContainer {
   display: grid;
   justify-content: center;
@@ -7,8 +8,6 @@
   margin: auto;
   min-height: 50vh;
   overflow: hidden;
-  background-size: contain;
-  cursor: pointer;
   position: relative;
   z-index: 0;
 
@@ -32,6 +31,7 @@
   }
 }
 
+// Texto principal
 .backgroundContainerText {
   color: $color-secondary;
   display: grid;
@@ -58,19 +58,38 @@
   }
 }
 
+// Secciones con borde y sombra
 .circular,
 .reporteAcademico,
 .recuperacion,
 .actividadesRecuperacion {
   display: grid;
-  justify-content: center;
   width: 80%;
+  height: 100%;
   margin: auto;
   border-radius: 15px;
   box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
   cursor: pointer;
-  height: 25rem;
+  min-height: 25rem;
   margin-bottom: 2rem;
+}
+
+// Circular principal para descargar PDF
+.circular {
+  color: $color-secondary;
+  font-family: $font-primary;
+  width: 65%;
+  height: auto;
+
+  h5,
+  p {
+    margin: 1rem;
+  }
+
+  a {
+    display: flex;
+    justify-self: center;
+  }
 }
 
 // -------------------------------------------------------------------
@@ -95,8 +114,18 @@
   .backgroundContainer {
     min-height: 95vh;
     width: 65%;
-    background-attachment: fixed; // Activa el efecto parallax
-    background-size: cover; // Ajusta la imagen al contenedor
-    background-position: center; // Centra la imagen
+  }
+}
+
+@media (min-width: 768px) {
+  .circular {
+    max-width: 55%;
+    max-height: none;
+  }
+}
+@media (min-width: 992px) {
+  .circular {
+    max-width: 45%;
+    max-height: none;
   }
 }
