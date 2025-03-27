@@ -56,14 +56,16 @@ const Inicio = () => {
             Ya está disponible la última Circular Informativa con novedades académicas y
             administrativas. Puedes visualizar o descargar el documento a continuación.
           </p>
-          <a
-            href='#' //TODO enlace carpeta circular
-            className='btn btn-primary'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            Descargar
-          </a>
+          <div className='boton'>
+            <a
+              href='#' //TODO enlace carpeta circular
+              className='btn btn-primary'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              Descargar
+            </a>
+          </div>
         </div>
       </div>
 
