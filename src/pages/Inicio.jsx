@@ -48,8 +48,7 @@ const Inicio = () => {
           <img src='/circular.jpg' className='card-img-top' alt='circular' />
           <h5 className='card-title'>Circular Informativa</h5>
           <p className='card-text'>
-            Ya está disponible la última Circular Informativa con novedades académicas y
-            administrativas. Puedes visualizar o descargar el documento a continuación.
+            Ya está disponible la última Circular Informativa con novedades académicas y administrativas. Puedes visualizar o descargar el documento a continuación.
           </p>
           <div className='boton'>
             <a
