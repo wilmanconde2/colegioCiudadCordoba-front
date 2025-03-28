@@ -7,7 +7,7 @@ const Modalidades = () => {
     <>
       <div className='fullContainer'>
         <div>
-          <img className='imagen comercial' src='/comercial.webp' alt='' />
+          <img className='imagen comercial' src='/comercial.jpg' alt='' />
         </div>
         <div className='container modText'>
           <h2>MODALIDAD COMERCIAL</h2>
@@ -18,7 +18,7 @@ const Modalidades = () => {
             en tela, oleo y arte barroco.
           </p>
         </div>
-        <img className='imagen industrial' src='/industrial.webp' alt='' />
+        <img className='imagen industrial' src='/industrial.jpg' alt='' />
         <div className='container modText'>
           <h2>MODALIDAD INDUSTRIAL</h2>
           <p>

@@ -7,7 +7,7 @@ const Cobertura = () => {
     <>
       <div className='fullContainer'>
         <div>
-            <img className='imagen' src="/cobertura.webp" alt="cobertura" />
+            <img className='imagen' src="/cobertura.jpg" alt="cobertura" />
         </div>
         <div className='container'>
           <h1>PROGRAMA DE AMPLIACIÓN DE COBERTURA </h1>

@@ -7,7 +7,7 @@ const ManualConvivencia = () => {
     <>
       <div className='fullContainer'>
         <div>
-          <img className='imagen' src='/manual.webp' alt='imagen' />
+          <img className='imagen' src='/manual.jpg' alt='imagen' />
         </div>
         <div className='container'>
           <h1>MANUAL DE CONVIVENCIA</h1>

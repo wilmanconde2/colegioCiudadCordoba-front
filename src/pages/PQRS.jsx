@@ -9,7 +9,7 @@ const PQRS = () => {
     <>
       <div className='fullContainer'>
         <div>
-          <img className='imagen' src='/pqrs.webp' alt='imagen' />
+          <img className='imagen' src='/pqrs.jpg' alt='imagen' />
         </div>
         <div className='container'>
           {/* <!-- FORMULARIO --> */}

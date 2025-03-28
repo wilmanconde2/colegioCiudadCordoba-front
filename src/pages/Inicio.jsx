@@ -53,7 +53,7 @@ const Inicio = () => {
           </p>
           <div className='boton'>
             <a
-              href='#' //TODO pedir y modificar enlace carpeta circular
+              href='https://drive.google.com/file/d/1Vq9ihhwGA2LrzNeWgr-p1AgApySRYkic/view'
               className='btn btn-primary'
               target='_blank'
               rel='noopener noreferrer'
@@ -316,7 +316,7 @@ const Inicio = () => {
       {/* Recuperacion */}
       <div className='card recuperacion'>
         <div className='card-body'>
-          <img src='/recuperacion.jpg' className='card-img-top' alt='reporte academico' />
+          <img src='/recuperacion.jpg' className='card-img-top' alt='reporte recuperacion' />
           <h5 className='card-title'>Actividades Recuperación</h5>
           <ul className='groupList'>
             <li>
@@ -435,7 +435,30 @@ const Inicio = () => {
         </div>
       </div>
 
-      <div className='mejoramientoAcademico'>Actividades Mejoramiento Académico</div>
+      {/* Mejoramiento academico descarga PDF*/}
+      <div className='card horariosRecuperacion'>
+        <div className='card-body'>
+          <img src='/horarios.jpg' className='card-img-top' alt='horarios' />
+          <h5 className='card-title'>Horarios Recuperación</h5>
+          <p className='card-text'>
+            <em>Nota:</em> ten presente que el horario publicado de recuperaciones en la página web,
+            no incluye algunas materias, si reprobaste una o varias materias que no están incluidas
+            en el horario publicado, debes buscar al docente correspondiente de dicha/s materia/s el
+            día lunes 25 de noviembre del presente año en la jornada de la mañana, para que cada
+            docente te asigne un horario de recuperación.
+          </p>
+          <div className='boton'>
+            <a
+              href='https://drive.google.com/drive/folders/1B3h2CbVgE375o5Bg1fuoSoAiViRazur3'
+              className='btn btn-primary'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              Descargar
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

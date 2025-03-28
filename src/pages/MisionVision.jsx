@@ -7,7 +7,7 @@ const MisionVision = () => {
     <>
       <div className='fullContainer'>
         <div>
-          <img className='imagen' src='/mision.webp' alt='imagen' />
+          <img className='imagen' src='/mision.jpg' alt='imagen' />
         </div>
         <div className='container'>
           <h1>Misión</h1>
