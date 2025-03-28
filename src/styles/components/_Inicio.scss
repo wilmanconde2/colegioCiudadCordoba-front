@@ -62,16 +62,23 @@
 .circular,
 .reporteAcademico,
 .recuperacion,
-.actividadesRecuperacion {
+.mejoramientoAcademico {
   display: grid;
   width: 80%;
   height: 100%;
   margin: auto;
   border-radius: 15px;
   box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
-  cursor: pointer;
   min-height: 25rem;
   margin-bottom: 2rem;
+}
+
+.card-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: $color-secondary;
+  margin-top: 1rem;
 }
 
 // Circular principal para descargar PDF
@@ -94,27 +101,124 @@
   }
 }
 
+// Reporte academico
+.reporteAcademico {
+  color: $color-secondary;
+  font-family: $font-primary;
+  width: 65%;
+  height: auto;
+
+  h5 {
+    margin: 1rem 0;
+  }
+
+  .groupList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+
+    li {
+      display: grid;
+      justify-content: space-evenly;
+    }
+
+    a {
+      text-decoration: none;
+      color: $color-secondary;
+      font-weight: bold;
+      padding: 0.5rem 0.5rem;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.4);
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        color: $color-primary;
+        background-color: rgba(255, 255, 255, 0.6);
+        transform: scale(1.05);
+        box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
+      }
+    }
+  }
+
+  .boton {
+    display: flex;
+    width: 100px;
+    height: 40px;
+    margin: auto;
+  }
+}
+
+em {
+  color: red;
+}
+
+// Recuperacion
+.recuperacion {
+  color: $color-secondary;
+  font-family: $font-primary;
+  width: 65%;
+  height: auto;
+
+  h5 {
+    margin: 1rem 0;
+  }
+
+  .groupList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+
+    li {
+      display: grid;
+      justify-content: space-evenly;
+    }
+
+    a {
+      text-decoration: none;
+      color: $color-secondary;
+      font-weight: bold;
+      padding: 0.5rem 0.5rem;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.4);
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        color: $color-primary;
+        background-color: rgba(255, 255, 255, 0.6);
+        transform: scale(1.05);
+        box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
+      }
+    }
+  }
+}
+
 // -------------------------------------------------------------------
 // Responsive (Mobile First)
 // -------------------------------------------------------------------
 
 @media (min-width: 576px) {
   .backgroundContainer {
-    min-height: 65vh;
+    min-height: 80vh;
     width: 75%;
   }
 }
 
 @media (min-width: 768px) {
   .backgroundContainer {
-    min-height: 80vh;
+    min-height: 100vh;
     width: 70%;
   }
 }
 
 @media (min-width: 992px) {
   .backgroundContainer {
-    min-height: 95vh;
+    min-height: 130vh;
+    width: 65%;
+  }
+}
+@media (min-width: 1200px) {
+  .backgroundContainer {
+    min-height: 150vh;
     width: 65%;
   }
 }
@@ -125,9 +229,50 @@
     max-height: none;
   }
 }
+
 @media (min-width: 992px) {
   .circular {
     max-width: 45%;
     max-height: none;
   }
+}
+
+@media (min-width: 768px) {
+  .reporteAcademico {
+    max-width: 50%;
+
+    .groupList {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+@media (min-width: 992px) {
+  .reporteAcademico {
+    max-width: 50%;
+
+    .groupList {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .recuperacion {
+    max-width: 50%;
+
+    .groupList {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .recuperacion {
+    max-width: 50%;
+    
+    .groupList {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
 }

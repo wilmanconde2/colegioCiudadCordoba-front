@@ -9,7 +9,7 @@ const Historia = () => {
       <div className="fullContainer">
 
         <div >
-          <img className="imagen" src="/background.webp" alt="" />
+          <img className="imagen" src="/background.jpg" alt="" />
         </div>
         <div className="texto">
           <h1>RESEÑA HISTÓRICA: AÑO 1990 - 2009</h1>
