@@ -1,11 +1,12 @@
 @use 'bootstrap';
 @use './base/Settings';
+@use './components/Carrusel';
 @use './components/Contacto';
 @use './components/DeporteLudica';
 @use './components/Footer';
 @use './components/Formulario';
 @use './components/Historia';
-@use './components/Inicio'; 
+@use './components/Inicio';
 @use './components/ManualConvivencia';
 @use './components/Modalidades';
 @use './components/Navbar';

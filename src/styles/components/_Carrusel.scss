@@ -1,0 +1,29 @@
+.backgroundContainer {
+  display: grid;
+  justify-content: center;
+  width: 80%;
+  margin: auto;
+  min-height: 50vh;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+
+  .imageWrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: opacity 3s ease-in-out;
+    opacity: 0;
+
+    &.active {
+      opacity: 1;
+    }
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 100px;
+    }
+  }
+}
