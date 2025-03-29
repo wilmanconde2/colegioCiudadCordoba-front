@@ -2,8 +2,17 @@ h1{
     text-align: center;
 }
 
-.manualH2{
+.manual{
     text-decoration: underline;
     font-variant: small-caps;
     margin-block: 2rem;
+}
+
+.btnManual{
+    margin: 2rem auto;
+    display: block;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
 }

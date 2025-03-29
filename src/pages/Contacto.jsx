@@ -20,7 +20,7 @@ const Contacto = () => {
             Dirección: Cra. 42 B # 51-35 <br /> B/ Ciudad Córdoba
           </div>
           <div className='telefonos'>
-            Tel: 6023272685 - 6023288373 <br /> Fax: 6023282212 <br /> Cel: 3104280125
+            Tel: 6023450411 - 6023731398 <br /> Cel: 3104280125
           </div>
           <div className='email'>Correo: colegiociudadcordoba@hotmail.com</div>
         </div>
