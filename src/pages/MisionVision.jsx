@@ -12,18 +12,12 @@ const MisionVision = () => {
         <div className='container'>
           <h1>Misión</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula, est eu vehicula fermentum, nunc
-            libero vehicula tortor, in efficitur arcu odio id erat. Nullam vehicula, est eu vehicula fermentum, nunc
-            libero vehicula tortor, in efficitur arcu odio id erat. Nullam vehicula, est eu vehicula fermentum, nunc
-            libero vehicula tortor, in efficitur arcu odio id erat.
+            Somos una institución educativa de carácter privado, que ofrece los niveles desde Pre-escolar hasta la media técnica comercial e industrial, fundamentada en la formación académica, deportiva, cultural, artística y de valores, utilizando la ciencia y la tecnología como una herramienta que contribuye al desarrollo de competencias laborales.
           </p>
 
           <h1>Visión</h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula, est eu vehicula fermentum, nunc
-            libero vehicula tortor, in efficitur arcu odio id erat. Nullam vehicula, est eu vehicula fermentum, nunc
-            libero vehicula tortor, in efficitur arcu odio id erat. Nullam vehicula, est eu vehicula fermentum, nunc
-            libero vehicula tortor, in efficitur arcu odio id erat.
+            Seguir posicionándonos como la mejor alternativa educativa de las instituciones del calendario A en Santiago de Cali para el año lectivo 2.025, en los procesos de formación académica y personal, destacando los valores morales, sociales, ambientales y tecnológicos.
           </p>
         </div>
       </div>
