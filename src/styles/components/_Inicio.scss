@@ -41,6 +41,15 @@
   .groupList {
     color: $color-secondary;
     text-align: center;
+    border: 1px solid $color-primary;
+    border-radius: 25px;
+    box-shadow: 2px 2px 5px $color-primary;
+    width: 80%;
+    margin: auto;
+
+    &:hover {
+      box-shadow: 2px 2px 5px $color-third;
+    }
   }
 
   .boton {
@@ -53,6 +62,7 @@
   h5,
   p {
     margin: 1rem 0;
+    text-align: center;
   }
 }
 
@@ -64,14 +74,6 @@
   margin-top: 1rem;
 }
 
-  // .circular
-.circular {
-  h5,
-  p {
-    text-align: center;
-  }
-}
-
 em {
   color: red !important;
 }
@@ -79,6 +81,8 @@ em {
 // !-------------------------------------------------------------------
 // ! Responsive (Mobile First)
 // !-------------------------------------------------------------------
+
+// TODO cambiar todo el aspecto desktop
 
 @media (min-width: 576px) {
   .backgroundContainer {
@@ -92,12 +96,62 @@ em {
     min-height: 100vh;
     width: 70%;
   }
+  .circular {
+    max-width: 55%;
+    max-height: none;
+  }
+
+  .reporteAcademico {
+    max-width: 50%;
+
+    .groupList {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .recuperacion {
+    max-width: 50%;
+
+    .groupList {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .horariosRecuperacion {
+    max-width: 55%;
+    max-height: none;
+  }
 }
 
 @media (min-width: 992px) {
   .backgroundContainer {
     min-height: 130vh;
     width: 65%;
+  }
+  .circular {
+    max-width: 45%;
+    max-height: none;
+  }
+
+  .reporteAcademico {
+    max-width: 50%;
+
+    .groupList {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .recuperacion {
+    max-width: 50%;
+
+    .groupList {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+    .horariosRecuperacion {
+    max-width: 45%;
+    max-height: none;
   }
 }
 
@@ -108,70 +162,3 @@ em {
   }
 }
 
-@media (min-width: 768px) {
-  .circular {
-    max-width: 55%;
-    max-height: none;
-  }
-}
-
-@media (min-width: 992px) {
-  .circular {
-    max-width: 45%;
-    max-height: none;
-  }
-}
-
-@media (min-width: 768px) {
-  .reporteAcademico {
-    max-width: 50%;
-
-    .groupList {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-}
-
-@media (min-width: 992px) {
-  .reporteAcademico {
-    max-width: 50%;
-
-    .groupList {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-}
-
-@media (min-width: 768px) {
-  .recuperacion {
-    max-width: 50%;
-
-    .groupList {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-}
-
-@media (min-width: 992px) {
-  .recuperacion {
-    max-width: 50%;
-
-    .groupList {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-}
-
-@media (min-width: 768px) {
-  .horariosRecuperacion {
-    max-width: 55%;
-    max-height: none;
-  }
-}
-
-@media (min-width: 992px) {
-  .horariosRecuperacion {
-    max-width: 45%;
-    max-height: none;
-  }
-}
