@@ -82,12 +82,15 @@ em {
 // ! Responsive (Mobile First)
 // !-------------------------------------------------------------------
 
-// TODO cambiar todo el aspecto desktop
 
 @media (min-width: 576px) {
   .backgroundContainer {
     min-height: 80vh;
     width: 75%;
+  }
+  .card {
+    max-width: 55%;
+    max-height: none;
   }
 }
 
@@ -96,29 +99,8 @@ em {
     min-height: 100vh;
     width: 70%;
   }
-  .circular {
-    max-width: 55%;
-    max-height: none;
-  }
-
-  .reporteAcademico {
-    max-width: 50%;
-
-    .groupList {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .recuperacion {
-    max-width: 50%;
-
-    .groupList {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .horariosRecuperacion {
-    max-width: 55%;
+   .card {
+    max-width: 45%;
     max-height: none;
   }
 }
@@ -127,30 +109,8 @@ em {
   .backgroundContainer {
     min-height: 130vh;
     width: 65%;
-  }
-  .circular {
-    max-width: 45%;
-    max-height: none;
-  }
-
-  .reporteAcademico {
-    max-width: 50%;
-
-    .groupList {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
-  .recuperacion {
-    max-width: 50%;
-
-    .groupList {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
-    .horariosRecuperacion {
-    max-width: 45%;
+  } .card {
+    max-width: 35%;
     max-height: none;
   }
 }
@@ -159,6 +119,8 @@ em {
   .backgroundContainer {
     min-height: 150vh;
     width: 65%;
+  } .card {
+    max-width: 30%;
+    max-height: none;
   }
 }
-

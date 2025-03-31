@@ -14,10 +14,30 @@
 .imagen {
   display: grid;
   justify-content: center;
-  width: 90%;
+  width: 60%;
   margin: auto;
   margin-bottom: 2rem;
   border-radius: 15px;
   box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
   cursor: pointer;
+}
+
+// !-------------------------------------------------------------------
+// ! Responsive (Mobile First)
+// !-------------------------------------------------------------------
+
+@media (min-width: 576px) {
+  .imagen {
+    width: 50%;
+  }
+}
+@media (min-width: 768px) {
+  .imagen {
+    width: 40%;
+  }
+}
+@media (min-width: 992px) {
+  .imagen {
+    width: 30%;
+  }
 }
