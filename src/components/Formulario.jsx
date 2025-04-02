@@ -34,7 +34,7 @@ const Formulario = () => {
     }
 
     try {
-      const response = await fetch('https://colegiociudadcordoba-back.onrender.com', {
+      const response = await fetch('https://colegiociudadcordoba-back.onrender.com/buscar-codigo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
