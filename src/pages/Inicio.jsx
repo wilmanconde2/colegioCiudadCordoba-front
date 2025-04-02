@@ -36,7 +36,7 @@ const Inicio = () => {
         titulo='Circular Informativa'
         imagen='/circular.jpg'
         texto='Ya está disponible la última Circular Informativa con novedades académicas y administrativas.'
-        link='https://drive.google.com/file/d/1Vq9ihhwGA2LrzNeWgr-p1AgApySRYkic/view'
+        link='https://drive.google.com/file/d/11IEZ8US0Jg1iGB580TDxqoJ7fUx5hYMy/view'
       />
 
       {/* CardSelection para Reporte Académico */}
@@ -63,7 +63,11 @@ const Inicio = () => {
         imagen='/horarios.jpg'
         texto={
           <>
-            <em>Nota:</em> ten presente que el horario publicado de recuperaciones en la página web, no incluye algunas materias, si reprobaste una o varias materias que no están incluidas en el horario publicado, debes buscar al docente correspondiente de dicha/s materia/s el día lunes 25 de noviembre del presente año en la jornada de la mañana, para que cada docente te asigne un horario de recuperación.
+            <em>Nota:</em> ten presente que el horario publicado de recuperaciones en la página web,
+            no incluye algunas materias, si reprobaste una o varias materias que no están incluidas
+            en el horario publicado, debes buscar al docente correspondiente de dicha/s materia/s el
+            día lunes 25 de noviembre del presente año en la jornada de la mañana, para que cada
+            docente te asigne un horario de recuperación.
           </>
         }
         link='https://drive.google.com/drive/folders/1B3h2CbVgE375o5Bg1fuoSoAiViRazur3'
