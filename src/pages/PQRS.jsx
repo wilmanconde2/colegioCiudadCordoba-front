@@ -60,8 +60,8 @@ const PQRS = () => {
   return (
     <>
       <div className='fullContainer'>
-        <div>
-          <img className='imagen' src='/pqrs.jpg' alt='imagen' />
+        <div className='imgPQRSContainer'>
+          <img className='imgPQRS' src='/pqrs.jpg' alt='imagen' />
         </div>
         <div className='container'>
           <div className='section-contact-us__form'>

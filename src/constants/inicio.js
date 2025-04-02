@@ -5,6 +5,31 @@ export const BACKGROUND_IMAGES = [
   '/background4.jpg',
 ];
 
+export const BACKGROUND_IMAGESdirectivo = [
+  '/background1.jpg',
+  '/background2.jpg',
+  '/background3.jpg',
+  '/background4.jpg',
+];
+export const BACKGROUND_IMAGESdocente = [
+  '/background1.jpg',
+  '/background2.jpg',
+  '/background3.jpg',
+  '/background4.jpg',
+];
+export const BACKGROUND_IMAGESestudiante = [
+  '/background1.jpg',
+  '/background2.jpg',
+  '/background3.jpg',
+  '/background4.jpg',
+];
+export const BACKGROUND_IMAGESegresado = [
+  '/background1.jpg',
+  '/background2.jpg',
+  '/background3.jpg',
+  '/background4.jpg',
+];
+
 export const REPORTE_OPCIONES = [
   {
     label: '6-1 COM',

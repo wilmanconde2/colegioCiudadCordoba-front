@@ -15,9 +15,9 @@ const ManualConvivencia = () => {
   };
 
   return (
-    <div className='fullContainer'>
-      <div>
-        <img className='imagen' src='/manual.jpg' alt='imagen' />
+    <div className='fullContainerManual'>
+      <div className='imgManualContainer'>
+        <img className='imgManual' src='/manual.jpg' alt='imagen' />
       </div>
       <div className='container'>
         <h1>MANUAL DE CONVIVENCIA 2025</h1>

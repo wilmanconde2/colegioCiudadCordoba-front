@@ -1,5 +1,14 @@
 @use '../base/Settings' as *;
 
+.fullContainer {
+  margin-inline: auto;
+
+  .mainImages {
+    width: 80%;
+    margin: auto;
+  }
+}
+
 // Texto principal
 .backgroundContainerText {
   color: $color-secondary;
@@ -82,11 +91,18 @@ em {
 // ! Responsive (Mobile First)
 // !-------------------------------------------------------------------
 
-
 @media (min-width: 576px) {
-  .backgroundContainer {
-    min-height: 80vh;
-    width: 75%;
+  .fullContainer {
+    .mainImages {
+      width: 80%;
+    }
+    // Estilo carrusel
+    .backgroundContainer {
+      height: 60vh;
+      img {
+        max-height: 60vh;
+      }
+    }
   }
   .card {
     max-width: 55%;
@@ -95,31 +111,39 @@ em {
 }
 
 @media (min-width: 768px) {
-  .backgroundContainer {
-    min-height: 100vh;
-    width: 70%;
+  .fullContainer {
+    .mainImages {
+      width: 60%;
+    }
   }
-   .card {
+  .card {
     max-width: 45%;
     max-height: none;
   }
 }
 
 @media (min-width: 992px) {
-  .backgroundContainer {
-    min-height: 130vh;
-    width: 65%;
-  } .card {
+  .fullContainer {
+    .mainImages {
+      width: 60%;
+    }
+    // Estilo carrusel
+    .backgroundContainer {
+      height: 80vh;
+      img {
+        max-height: 80vh;
+      }
+    }
+  }
+
+  .card {
     max-width: 35%;
     max-height: none;
   }
 }
 
 @media (min-width: 1200px) {
-  .backgroundContainer {
-    min-height: 150vh;
-    width: 65%;
-  } .card {
+  .card {
     max-width: 30%;
     max-height: none;
   }

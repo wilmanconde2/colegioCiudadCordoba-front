@@ -1,5 +1,22 @@
 @use '../base/Settings' as *;
 
+.fullContainer {
+  .imgPQRSContainer {
+    width: 80%;
+    margin-inline: auto;
+    margin-block: 2rem;
+
+    .imgPQRS {
+      display: grid;
+      justify-content: center;
+      max-width: 80%;
+      margin-inline: auto;
+      border-radius: 15px;
+      box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
+    }
+  }
+}
+
 .textarea {
   border-radius: 15px;
   padding: 1rem;
@@ -10,8 +27,20 @@
   box-sizing: border-box;
 }
 
-
 @media (min-width: 992px) {
   .textarea {
     width: 350px;
-  }}
+  }
+}
+
+// !-------------------------------------------------------------------
+// ! Responsive (Mobile First)
+// !-------------------------------------------------------------------
+
+@media (min-width: 576px) {
+  .fullContainer {
+    .imgPQRSContainer {
+      width: 40%;
+    }
+  }
+}

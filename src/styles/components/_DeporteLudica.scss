@@ -1,11 +1,66 @@
-.imgLudica {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s;
-  &:hover {
-    transform: scale(1.8);
+.fullContainerLudica {
+  width: 80%;
+  margin: auto;
+
+  h1 {
+    margin-top: 5rem;
+  }
+
+  .imgLudicaContainer {
+    margin-inline: auto;
+    margin-bottom: 2rem;
+
+    .imgLudica {
+      display: grid;
+      justify-content: center;
+      max-width: 80%;
+      margin-inline: auto;
+      border-radius: 15px;
+      box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
+      transition: all 0.3s;
+      &:hover {
+        transform: scale(1.5);
+      }
+    }
+  }
+}
+
+// !-------------------------------------------------------------------
+// ! Responsive (Mobile First)
+// !-------------------------------------------------------------------
+
+@media (min-width: 576px) {
+  .fullContainerLudica {
+    width: 90%;
+    .imgLudicaContainer {
+      width: 90%;
+       .imgLudica {
+        &:hover {
+          transform: scale(1.4);
+        }
+      }
+    }
+  }
+}
+@media (min-width: 768px) {
+  .fullContainerLudica {
+    width: 80%;
+    .imgLudicaContainer {
+      width: 80%;
+    }
+  }
+}
+@media (min-width: 992px) {
+  .fullContainerLudica {
+    h1 {
+      margin-top: 7rem;
+    }
+    .imgLudicaContainer {
+      .imgLudica {
+        &:hover {
+          transform: scale(1.3);
+        }
+      }
+    }
   }
 }

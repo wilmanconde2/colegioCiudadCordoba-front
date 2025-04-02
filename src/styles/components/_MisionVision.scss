@@ -1,14 +1,14 @@
-.fullContainerManual {
+.fullContainerMiVi {
   width: 80%;
   margin: auto;
 
-  .imgManualContainer {
-    width: 70%;
+  .imgMiViContainer {
+    width: 80%;
     margin-inline: auto;
     margin-block: 5rem auto;
     margin-bottom: 2rem;
 
-    .imgManual {
+    .imgMiVi {
       display: grid;
       justify-content: center;
       max-width: 80%;
@@ -19,24 +19,8 @@
   }
 }
 
-h1,
-h2 {
-  text-align: center;
-}
-
-.manual {
-  text-decoration: underline;
-  font-variant: small-caps;
-  margin-block: 2rem;
-}
-
-.btnManual {
-  margin: 2rem auto;
-  display: block;
-  text-align: center;
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-decoration: none;
+.container {
+  margin-bottom: 2rem;
 }
 
 // !-------------------------------------------------------------------
@@ -44,24 +28,24 @@ h2 {
 // !-------------------------------------------------------------------
 
 @media (min-width: 576px) {
-  .fullContainerManual {
-    width: 65%;
-    .imgManualContainer {
-      width: 65%;
+  .fullContainerMiVi {
+    width: 70%;
+    .imgMiViContainer {
+      width: 70%;
     }
   }
 }
 @media (min-width: 768px) {
-  .fullContainerManual {
-    width: 55%;
-    .imgManualContainer {
-      width: 55%;
+  .fullContainerMiVi {
+    width: 65%;
+    .imgMiViContainer {
+      width: 65%;
     }
   }
 }
 @media (min-width: 992px) {
-  .fullContainerManual {
-    .imgManualContainer {
+  .fullContainerMiVi {
+    .imgMiViContainer {
       margin-top: 8rem;
     }
   }

@@ -64,7 +64,7 @@ const Formulario = () => {
   };
 
   return (
-    <div className='container containerForm'>
+    <div className='containerForm'>
       <form className='studentCode' onSubmit={handleSubmit}>
         <legend>Solicitud Código Estudiantil</legend>
         <label htmlFor='apellido1'>Primer Apellido:</label>

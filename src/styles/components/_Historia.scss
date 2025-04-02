@@ -1,13 +1,19 @@
 @use '../base/Settings' as *;
 
-.imagen {
-  display: grid;
-  justify-content: center;
-  max-width: 80%;
-  margin: auto;
-  border-radius: 15px;
-  box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
-  cursor: pointer;
+.fullContainer {
+  .imgHistoriaContainer {
+    width: 80%;
+    margin-inline: auto;
+
+    .imgHistoria {
+      display: grid;
+      justify-content: center;
+      max-width: 80%;
+      margin-inline: auto;
+      border-radius: 15px;
+      box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
+    }
+  }
 }
 
 .texto {
@@ -17,5 +23,17 @@
   text-align: justify;
   h1 {
     text-align: center;
+  }
+}
+
+// !-------------------------------------------------------------------
+// ! Responsive (Mobile First)
+// !-------------------------------------------------------------------
+
+@media (min-width: 768px) {
+  .fullContainer {
+    .imgHistoriaContainer {
+      width: 60%;
+    }
   }
 }

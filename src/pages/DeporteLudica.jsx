@@ -5,9 +5,11 @@ const deporteLudica = () => {
 
   return (
     <>
-      <div className='fullContainer'>
+      <div className='fullContainerLudica'>
         <h1>Formacion Deportiva y Ludica</h1>
-        <img className='imagen imgLudica' src='/deporteLudica.png' alt='depor' />
+        <div className='imgLudicaContainer'>
+          <img className='imagen imgLudica' src='/deporteLudica.png' alt='depor' />
+        </div>
       </div>
     </>
   );

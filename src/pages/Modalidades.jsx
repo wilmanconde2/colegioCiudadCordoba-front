@@ -5,9 +5,9 @@ const Modalidades = () => {
 
   return (
     <>
-      <div className='fullContainer'>
-        <div>
-          <img className='imagen comercial' src='/comercial.jpg' alt='' />
+      <div className='fullContainerModalidades'>
+        <div className='imgComercialContainer'>
+          <img className='imgComercial' src='/comercial.jpg' alt='' />
         </div>
         <div className='container modText'>
           <h2>MODALIDAD COMERCIAL</h2>
@@ -21,7 +21,9 @@ const Modalidades = () => {
             cerámica, vitrales, pintura en tela, oleo y arte barroco.
           </p>
         </div>
-        <img className='imagen industrial' src='/industrial.jpg' alt='' />
+        <div className='imgIndustrialContainer'>
+          <img className='imgIndustrial' src='/industrial.jpg' alt='' />
+        </div>
         <div className='container modText'>
           <h2>MODALIDAD INDUSTRIAL</h2>
           <p>

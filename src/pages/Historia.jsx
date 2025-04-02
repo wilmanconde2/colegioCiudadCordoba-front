@@ -6,8 +6,8 @@ const Historia = () => {
   return (
     <>
       <div className='fullContainer'>
-        <div>
-          <img className='imagen' src='/background.jpg' alt='' />
+        <div className='imgHistoriaContainer'>
+          <img className='imgHistoria' src='/background.jpg' alt='' />
         </div>
         <div className='texto'>
           <h1>RESEÑA HISTÓRICA: AÑO 1990 - 2025</h1>

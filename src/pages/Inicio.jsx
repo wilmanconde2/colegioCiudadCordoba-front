@@ -19,7 +19,9 @@ const Inicio = () => {
 
   return (
     <div className='fullContainer'>
-      <Carrusel images={BACKGROUND_IMAGES} currentImageIndex={currentImageIndex} />
+      <div className='mainImages'>
+        <Carrusel images={BACKGROUND_IMAGES} currentImageIndex={currentImageIndex} />
+      </div>
 
       <div className='backgroundContainerText'>
         <h1>Paz - Progreso - Futuro</h1>

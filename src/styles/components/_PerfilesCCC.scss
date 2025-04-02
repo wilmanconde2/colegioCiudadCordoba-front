@@ -1,5 +1,5 @@
 .fullContainer {
-  .container {
+  .containerProfiles {
     margin-bottom: 2rem;
     h2 {
       text-align: center;
@@ -8,16 +8,20 @@
       list-style-type: square;
       margin-block: 15px;
     }
+
+    width: 70%;
   }
 }
 
-.imagen {
-  display: grid;
+.directivo,
+.docente,
+.estudiante,
+.egresado {
   justify-content: center;
   width: 60%;
   margin: auto;
   margin-bottom: 2rem;
-  border-radius: 15px;
+  border-radius: 150px;
   box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
   cursor: pointer;
 }
@@ -27,17 +31,59 @@
 // !-------------------------------------------------------------------
 
 @media (min-width: 576px) {
-  .imagen {
-    width: 50%;
+  .fullContainer {
+    .containerProfiles {
+      width: 80%;
+    }
+  }
+
+  .directivo,
+  .docente,
+  .estudiante,
+  .egresado {
+    width: 80%;
+
+    // Estilo carrusel
+    .backgroundContainer {
+      height: 60vh;
+      img {
+        max-height: 60vh;
+      }
+    }
   }
 }
 @media (min-width: 768px) {
-  .imagen {
-    width: 40%;
+  .fullContainer {
+    .containerProfiles {
+      width: 55%;
+    }
+  }
+  .directivo,
+  .docente,
+  .estudiante,
+  .egresado {
+    width: 60%;
   }
 }
+
 @media (min-width: 992px) {
-  .imagen {
-    width: 30%;
+  .fullContainer {
+    .containerProfiles {
+      width: 55%;
+    }
+  }
+  .directivo,
+  .docente,
+  .estudiante,
+  .egresado {
+    width: 60%;
+
+    // Estilo carrusel
+    .backgroundContainer {
+      height: 80vh;
+      img {
+        max-height: 80vh;
+      }
+    }
   }
 }
