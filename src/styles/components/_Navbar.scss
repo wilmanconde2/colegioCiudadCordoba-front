@@ -97,5 +97,10 @@
     justify-items: center;
     justify-self: center;
     padding: 0 2rem;
+
   }
+  .navbar .d-flex {
+    display: none !important;
+  }
+
 }

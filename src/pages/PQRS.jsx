@@ -20,6 +20,15 @@ const PQRS = () => {
     });
   };
 
+  const handleMessageChange = (e) => {
+    // Ajustamos la altura del textarea al contenido
+    const textarea = e.target;
+    textarea.style.height = 'auto'; // Reseteamos la altura
+    textarea.style.height = `${textarea.scrollHeight}px`; // Ajustamos la altura
+
+    handleChange(e); // Llamamos a handleChange para seguir actualizando el estado
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -30,7 +39,7 @@ const PQRS = () => {
         'template_lsi6s7d', // ID de la plantilla (de EeJS)
         formData, // Datos del formulario
         'n94QxfC16uQHXAfC6', // ID de usuario (de EeJS)
-      ) //TODO Cambiar correo electronico dentro de emailjs por el de la cuenta del colegio o rector
+      )
       .then((response) => {
         console.log('Correo enviado correctamente', response);
         alert('Formulario enviado correctamente');
@@ -93,14 +102,14 @@ const PQRS = () => {
                 </div>
                 <div className='contact__subject'>
                   <div>
-                    <label htmlFor='phone'>phone: *</label>
+                    <label htmlFor='phone'>Teléfono: *</label>
                   </div>
                   <div>
                     <input
                       type='tel'
                       id='phone'
                       name='phone'
-                      placeholder='phone'
+                      placeholder='Teléfono'
                       required
                       value={formData.phone}
                       onChange={handleChange}
@@ -113,12 +122,13 @@ const PQRS = () => {
                   </div>
                   <div>
                     <textarea
+                      className='textarea'
                       id='message'
                       name='message'
                       placeholder='Necesito ayuda con...'
                       required
                       value={formData.message}
-                      onChange={handleChange}
+                      onChange={handleMessageChange} // Usamos el manejador con auto-ajuste de altura
                     ></textarea>
                   </div>
                 </div>

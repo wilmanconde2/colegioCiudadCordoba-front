@@ -1,9 +1,11 @@
+@use '../base/Settings' as *;
+
 .containerForm {
-  display: none; // TODO ENCENDER
+  // display: none; // TODO encender formulario codigo estudiante
 }
 
 .container {
-  max-width: 80%;
+  max-width: 70%;
   margin: auto;
   padding: 2rem;
   border-radius: 10px;
@@ -52,4 +54,29 @@ button:hover {
 .error {
   color: red;
   font-size: 0.8rem;
+}
+
+.payOnline {
+  text-align: center;
+  margin-top: 2rem;
+  em {
+    font-size: .9rem;
+    font-weight: bold;
+    color: $color-third;
+  }
+}
+
+// !-------------------------------------------------------------------
+// ! Responsive (Mobile First)
+// !-------------------------------------------------------------------
+
+@media (min-width: 576px) {
+  .backgroundContainer {
+    min-height: 80vh;
+    width: 75%;
+  }
+
+  .container{
+    max-width: 40%;
+  }
 }
