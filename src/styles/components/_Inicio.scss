@@ -2,6 +2,8 @@
 
 .fullContainer {
   margin-inline: auto;
+  margin-top: 6rem;
+  margin-bottom: 100px;
 
   .mainImages {
     width: 80%;
@@ -124,6 +126,8 @@ em {
 
 @media (min-width: 992px) {
   .fullContainer {
+    margin-top: 10rem;
+
     .mainImages {
       width: 60%;
     }

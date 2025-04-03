@@ -17,10 +17,19 @@
       box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
     }
   }
+
+  p {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
+  }
 }
 
-.container {
+.containerMiVi {
   margin-bottom: 2rem;
+  width: 80%;
+  margin-inline: auto;
 }
 
 // !-------------------------------------------------------------------
@@ -46,7 +55,7 @@
 @media (min-width: 992px) {
   .fullContainerMiVi {
     .imgMiViContainer {
-      margin-top: 8rem;
+      margin-top: 10rem;
     }
   }
 }

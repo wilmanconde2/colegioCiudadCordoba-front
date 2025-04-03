@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '/logo.webp';
-import ppf from '/ppf.webp';
+import logo from '/logo.png';
+import ppf from '/ppf.png';
+import club from '/clubCCC.png';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,13 +30,15 @@ const Navbar = () => {
   return (
     <nav className={`navbar navbar-expand-lg ${isScrolled ? 'bg-white' : 'bg-transparent'}`}>
       <div className='container-fluid'>
-        <NavLink className='navbar-logo' to='#'>
-          <img src={logo} alt='logo' />
-        </NavLink>
-        <span className='span'>Colegio Ciudad Cordoba </span>
-        <NavLink className='navbar-logo ppf' to='#'>
+        <div className='navbar-logo ppf'>
           <img src={ppf} alt='logo' />
-        </NavLink>
+        </div>
+        <div className='navbar-logo club'>
+          <img src={club} alt='logo' />
+        </div>
+        <div className='navbar-logo logo'>
+          <img src={logo} alt='logo' />
+        </div>
         <button
           className='navbar-toggler'
           type='button'
@@ -44,10 +47,18 @@ const Navbar = () => {
         >
           <span className='navbar-toggler-icon'></span>
         </button>
-        <div className={`collapse navbar-collapse ${isNavbarOpen ? 'show' : ''}`} id='navbarNavDropdown'>
+        <div
+          className={`collapse navbar-collapse ${isNavbarOpen ? 'show' : ''}`}
+          id='navbarNavDropdown'
+        >
           <ul className='navbar-nav'>
             <li className='nav-item'>
-              <NavLink className='nav-link active' aria-current='page' to='/' onClick={handleNavLinkClick}>
+              <NavLink
+                className='nav-link active'
+                aria-current='page'
+                to='/'
+                onClick={handleNavLinkClick}
+              >
                 Inicio
               </NavLink>
             </li>
@@ -68,17 +79,29 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='/perfiles-ccc' onClick={handleNavLinkClick}>
+                  <NavLink
+                    className='dropdown-item'
+                    to='/perfiles-ccc'
+                    onClick={handleNavLinkClick}
+                  >
                     Perfiles
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='/manual-convivencia' onClick={handleNavLinkClick}>
+                  <NavLink
+                    className='dropdown-item'
+                    to='/manual-convivencia'
+                    onClick={handleNavLinkClick}
+                  >
                     Manual de Convivencia
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='/mision-vision' onClick={handleNavLinkClick}>
+                  <NavLink
+                    className='dropdown-item'
+                    to='/mision-vision'
+                    onClick={handleNavLinkClick}
+                  >
                     Misión y Visión
                   </NavLink>
                 </li>
@@ -101,7 +124,11 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='/deporte-ludica' onClick={handleNavLinkClick}>
+                  <NavLink
+                    className='dropdown-item'
+                    to='/deporte-ludica'
+                    onClick={handleNavLinkClick}
+                  >
                     Deporte y Ludica
                   </NavLink>
                 </li>
@@ -111,7 +138,11 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <a className='dropdown-item' href='http://ieccc.no-ip.biz:90/inicio' target='_blank'>
+                  <a
+                    className='dropdown-item'
+                    href='http://ieccc.no-ip.biz:90/inicio'
+                    target='_blank'
+                  >
                     Admin
                   </a>
                 </li>
@@ -131,13 +162,21 @@ const Navbar = () => {
 
           {/* redes sociales */}
           <div className='social-links d-flex'>
-            <a href='https://www.facebook.com/egresados.cocicor?fref=ts' target='_blank' className='social-icon mx-2'>
+            <a
+              href='https://www.facebook.com/egresados.cocicor?fref=ts'
+              target='_blank'
+              className='social-icon mx-2'
+            >
               <i className='fab fa-facebook-f'></i>
             </a>
             <a href='https://x.com/iecocicor' target='_blank' className='social-icon mx-2'>
               <i className='fab fa-twitter'></i>
             </a>
-            <a href='https://www.instagram.com/cocicor/?hl=es-la' target='_blank' className='social-icon mx-2'>
+            <a
+              href='https://www.instagram.com/cocicor/?hl=es-la'
+              target='_blank'
+              className='social-icon mx-2'
+            >
               <i className='fab fa-instagram'></i>
             </a>
             <a

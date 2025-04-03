@@ -19,6 +19,13 @@
   }
 }
 
+.containerManual {
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
 h1,
 h2 {
   text-align: center;
@@ -62,7 +69,7 @@ h2 {
 @media (min-width: 992px) {
   .fullContainerManual {
     .imgManualContainer {
-      margin-top: 8rem;
+      margin-top: 10rem;
     }
   }
 }

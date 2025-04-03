@@ -24,11 +24,13 @@
 
 .modText {
   text-align: center;
-
-  width: 80%;
+  width: 90%;
   margin: auto;
   p {
     margin-bottom: 2rem;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
   }
 }
 
@@ -58,7 +60,7 @@
   .fullContainerModalidades {
     .imgComercialContainer {
       width: 40%;
-      margin-top: 8rem;
+      margin-top: 10rem;
     }
     .imgIndustrialContainer {
       width: 40%;

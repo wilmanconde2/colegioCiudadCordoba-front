@@ -19,7 +19,7 @@ const ManualConvivencia = () => {
       <div className='imgManualContainer'>
         <img className='imgManual' src='/manual.jpg' alt='imagen' />
       </div>
-      <div className='container'>
+      <div className='containerManual'>
         <h1>MANUAL DE CONVIVENCIA 2025</h1>
         <h2 className='manual'>Colegio Ciudad Córdoba</h2>
         <button type='button' className='btn btn-primary btnManual' onClick={handleDownload}>

@@ -17,11 +17,25 @@
   }
 }
 
-.container-fluid {
-  justify-content: space-around !important;
+.navbar .container-fluid {
+  display: grid;
+  grid-template-columns: 0.5fr 0.3fr 0.3fr 0.1fr;
+
+  .navbar-toggler-icon {
+    display: flex;
+    justify-self: flex-end;
+  }
 
   .navbar-logo {
+    display: grid;
     margin: auto !important;
+  }
+
+  .ppf {
+    img {
+      display: flex;
+      width: 80%;
+    }
   }
 }
 
@@ -37,11 +51,6 @@
     height: 50px;
     margin: auto auto;
   }
-}
-
-.span {
-  text-align: center;
-  font-weight: bolder;
 }
 
 .navbar .dropdown-menu {
@@ -83,24 +92,25 @@
 // ! Responsive (Mobile First)
 // !-------------------------------------------------------------------
 
-@media (min-width: 768px) {
-  .span {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-}
-
 @media (min-width: 992px) {
   .navbar .container-fluid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    justify-items: center;
-    justify-self: center;
-    padding: 0 2rem;
+    padding-inline: 10px;
+    justify-content: center;
 
+    .logo,
+    .ppf,
+    .club {
+      text-align: center;
+
+      img {
+        height: 74px;
+        width: 100%;
+      }
+    }
   }
+
   .navbar .d-flex {
     display: none !important;
   }
-
 }

@@ -15,6 +15,13 @@
       box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
     }
   }
+
+   p {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
+  }
 }
 
 // !-------------------------------------------------------------------
@@ -44,7 +51,7 @@
     .imgCoberturaContainer {
       width: 65%;
 
-      margin-top: 8rem;
+      margin-top: 10rem;
     }
   }
 }

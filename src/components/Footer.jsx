@@ -26,7 +26,8 @@ const Footer = () => {
           </a>
         </div>
         <div>
-          © Copyright {year}
+          © Copyright {year} WC2 - Todos los derechos reservados || willconde2@hotmail.com || <a href="#">Política de Privacidad</a>
+          {/* // TODO politica de privacidad */}
         </div>
        
       </div>
