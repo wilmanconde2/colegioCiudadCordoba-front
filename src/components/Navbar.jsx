@@ -133,11 +133,6 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className='dropdown-item' to='/cobertura' onClick={handleNavLinkClick}>
-                    Programa de Cobertura
-                  </NavLink>
-                </li>
-                <li>
                   <a
                     className='dropdown-item'
                     href='http://ieccc.no-ip.biz:90/inicio'

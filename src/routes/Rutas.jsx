@@ -1,5 +1,4 @@
 import { useRoutes } from 'react-router';
-import Cobertura from '../pages/Cobertura';
 import Contacto from '../pages/Contacto';
 import DeporteLudica from '../pages/DeporteLudica';
 import Historia from '../pages/Historia';
@@ -18,10 +17,6 @@ const Rutas = () => {
       element: <Inicio />,
     },
     {
-      path: '/cobertura',
-      element: <Cobertura />,
-    },
-    {
       path: '/contacto',
       element: <Contacto />,
     },
@@ -32,7 +27,7 @@ const Rutas = () => {
     {
       path: '/historia',
       element: <Historia />,
-    }, 
+    },
     {
       path: '/manual-convivencia',
       element: <ManualConvivencia />,

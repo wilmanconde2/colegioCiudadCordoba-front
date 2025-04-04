@@ -105,6 +105,9 @@ const Formulario = () => {
 
         <button type='submit'>Buscar Código</button>
 
+        <span>
+          <em>¡Puede tardar un momento dependiendo de la velocidad de su internet!</em>
+        </span>
       </form>
       <div className='payOnline'>
         <h2>Paga en Línea</h2>
