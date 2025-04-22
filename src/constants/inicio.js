@@ -1,33 +1,54 @@
 export const BACKGROUND_IMAGES = [
-  '/background1.jpg',
-  '/background2.jpg',
-  '/background3.jpg',
-  '/background4.jpg',
+  '/background1.jpeg',
+  '/background2.jpeg',
+  '/background3.jpeg',
+  '/background4.jpeg',
+  '/background5.jpeg',
+  '/background6.jpeg',
+  '/background7.jpeg',
+  '/background8.jpeg',
+  '/background9.jpeg',
 ];
 
-export const BACKGROUND_IMAGESdirectivo = [
-  '/background1.jpg',
-  '/background2.jpg',
-  '/background3.jpg',
-  '/background4.jpg',
+export const BACKGROUND_IMAGES_DIRECTIVO = [
+  '/directivo1.png',
+  '/directivo2.png',
+  '/directivo3.png',
+  '/directivo4.png',
 ];
-export const BACKGROUND_IMAGESdocente = [
-  '/background1.jpg',
-  '/background2.jpg',
-  '/background3.jpg',
-  '/background4.jpg',
+export const BACKGROUND_IMAGES_DOCENTE = [
+  '/docente1.png',
+  '/docente2.png',
+  '/docente3.png',
+  '/docente4.png',
+  '/docente5.png',
+  '/docente6.png',
 ];
-export const BACKGROUND_IMAGESestudiante = [
-  '/background1.jpg',
-  '/background2.jpg',
-  '/background3.jpg',
-  '/background4.jpg',
+export const BACKGROUND_IMAGES_ESTUDIANTE = [
+  '/estudiante1.png',
+  '/estudiante2.png',
+  '/estudiante3.png',
+  '/estudiante4.png',
 ];
-export const BACKGROUND_IMAGESegresado = [
-  '/background1.jpg',
-  '/background2.jpg',
-  '/background3.jpg',
-  '/background4.jpg',
+export const BACKGROUND_IMAGES_EGRESADO = [
+  '/egresado1.png',
+  '/egresado2.png',
+  '/egresado3.png',
+  '/egresado4.png',
+  '/egresado5.png',
+  '/egresado6.png',
+  '/egresado7.png',
+  '/egresado8.png',
+  '/egresado9.png',
+  '/egresado10.png',
+];
+
+export const BACKGROUND_IMAGES_HISTORIA = [
+  '/historia1.png',
+  '/historia2.png',
+  '/historia3.png',
+  '/historia4.png',
+  '/historia5.png',
 ];
 
 export const REPORTE_OPCIONES = [

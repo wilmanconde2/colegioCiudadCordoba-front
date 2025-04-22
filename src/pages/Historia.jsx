@@ -1,13 +1,18 @@
 import useTitulo from '../hooks/useTitulo';
+import { Carrusel } from '../components/Carrusel';
+import { useCarrusel } from '../hooks/useCarrusel';
+import { BACKGROUND_IMAGES_HISTORIA } from '../constants/inicio';
 
 const Historia = () => {
   useTitulo('Historia');
+
+  const { currentImageIndex: indexHistoria } = useCarrusel(BACKGROUND_IMAGES_HISTORIA);
 
   return (
     <>
       <div className='fullContainer'>
         <div className='imgHistoriaContainer'>
-          <img className='imgHistoria' src='/background.jpg' alt='' />
+          <Carrusel images={BACKGROUND_IMAGES_HISTORIA} currentImageIndex={indexHistoria} />
         </div>
         <div className='texto'>
           <h1>RESEÑA HISTÓRICA: AÑO 1990 - 2025</h1>

@@ -61,7 +61,7 @@ const PQRS = () => {
     <>
       <div className='fullContainer'>
         <div className='imgPQRSContainer'>
-          <img className='imgPQRS' src='/pqrs.jpg' alt='imagen' />
+          <img className='imgPQRS' src='/pqrs.png' alt='imagen' />
         </div>
         <div className='container'>
           <div className='section-contact-us__form'>
