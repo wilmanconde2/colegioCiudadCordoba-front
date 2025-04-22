@@ -9,6 +9,13 @@
     width: 80%;
     margin: auto;
   }
+  .backgroundContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    max-width: 100%;
+  }
 }
 
 // Texto principal
@@ -100,10 +107,7 @@ em {
     }
     // Estilo carrusel
     .backgroundContainer {
-      height: 60vh;
-      img {
-        max-height: 60vh;
-      }
+      max-width: 100%;
     }
   }
   .card {
@@ -115,7 +119,7 @@ em {
 @media (min-width: 768px) {
   .fullContainer {
     .mainImages {
-      width: 60%;
+      width: 50%;
     }
   }
   .card {
@@ -126,18 +130,7 @@ em {
 
 @media (min-width: 992px) {
   .fullContainer {
-    margin-top: 10rem;
-
-    .mainImages {
-      width: 60%;
-    }
-    // Estilo carrusel
-    .backgroundContainer {
-      height: 80vh;
-      img {
-        max-height: 80vh;
-      }
-    }
+    margin-top: 8rem;
   }
 
   .card {

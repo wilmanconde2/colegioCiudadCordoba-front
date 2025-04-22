@@ -1,33 +1,54 @@
 export const BACKGROUND_IMAGES = [
-  '/background1.jpg',
-  '/background2.jpg',
-  '/background3.jpg',
-  '/background4.jpg',
+  '/background1.webp',
+  '/background2.webp',
+  '/background3.webp',
+  '/background4.webp',
+  '/background5.webp',
+  '/background6.webp',
+  '/background7.webp',
+  '/background8.webp',
+  '/background9.webp',
 ];
 
-export const BACKGROUND_IMAGESdirectivo = [
-  '/background1.jpg',
-  '/background2.jpg',
-  '/background3.jpg',
-  '/background4.jpg',
+export const BACKGROUND_IMAGES_DIRECTIVO = [
+  '/directivo1.webp',
+  '/directivo2.webp',
+  '/directivo3.webp',
+  '/directivo4.webp',
 ];
-export const BACKGROUND_IMAGESdocente = [
-  '/background1.jpg',
-  '/background2.jpg',
-  '/background3.jpg',
-  '/background4.jpg',
+export const BACKGROUND_IMAGES_DOCENTE = [
+  '/docente1.webp',
+  '/docente2.webp',
+  '/docente3.webp',
+  '/docente4.webp',
+  '/docente5.webp',
+  '/docente6.webp',
 ];
-export const BACKGROUND_IMAGESestudiante = [
-  '/background1.jpg',
-  '/background2.jpg',
-  '/background3.jpg',
-  '/background4.jpg',
+export const BACKGROUND_IMAGES_ESTUDIANTE = [
+  '/estudiante1.webp',
+  '/estudiante2.webp',
+  '/estudiante3.webp',
+  '/estudiante4.webp',
 ];
-export const BACKGROUND_IMAGESegresado = [
-  '/background1.jpg',
-  '/background2.jpg',
-  '/background3.jpg',
-  '/background4.jpg',
+export const BACKGROUND_IMAGES_EGRESADO = [
+  '/egresado1.webp',
+  '/egresado2.webp',
+  '/egresado3.webp',
+  '/egresado4.webp',
+  '/egresado5.webp',
+  '/egresado6.webp',
+  '/egresado7.webp',
+  '/egresado8.webp',
+  '/egresado9.webp',
+  '/egresado10.webp',
+];
+
+export const BACKGROUND_IMAGES_HISTORIA = [
+  '/historia1.webp',
+  '/historia2.webp',
+  '/historia3.webp',
+  '/historia4.webp',
+  '/historia5.webp',
 ];
 
 export const REPORTE_OPCIONES = [
