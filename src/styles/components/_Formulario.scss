@@ -60,9 +60,19 @@ button:hover {
     font-weight: bold;
     color: $color-third;
   }
+
+  .imagenPse {
+    img {
+      max-width: 70px;
+      max-height: 70px;
+      margin: auto;
+      display: block;
+      margin-top: 1rem;
+    }
+  }
 }
 
-span{
+span {
   font-size: 0.8rem;
   color: $color-third;
   margin-top: 1rem;

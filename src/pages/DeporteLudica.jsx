@@ -6,7 +6,7 @@ const deporteLudica = () => {
   return (
     <>
       <div className='fullContainerLudica'>
-        <h1>Formacion Deportiva y Ludica</h1>
+        <h1>Formación Deportiva y Lúdica</h1>
         <div className='imgLudicaContainer'>
           <img className='imagen imgLudica' src='/deporteLudica.png' alt='depor' />
         </div>
