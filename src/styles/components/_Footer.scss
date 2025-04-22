@@ -10,6 +10,10 @@
   font-size: 14px;
 }
 
+.footer-fixed:visited{
+  color: white;
+}
+
 .social {
   color: white;
   font-size: 20px;
@@ -17,4 +21,19 @@
 
 .social:hover {
   color: rgba(245, 245, 245, 0.4);
+}
+
+a i span {
+  font-size: small;
+  color: white;
+  text-decoration: none;
+}
+
+a i span:hover {
+  color: rgba(245, 245, 245, 0.4);
+}
+
+.redesSociales {
+  width: 1.3rem;
+  margin-right: 10px;
 }

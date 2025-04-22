@@ -1,4 +1,3 @@
-import React from 'react';
 import useTitulo from '../hooks/useTitulo';
 import Formulario from '../components/Formulario';
 import { Carrusel } from '../components/Carrusel';
@@ -36,7 +35,7 @@ const Inicio = () => {
       {/* Card Circular */}
       <CardInformation
         titulo='Circular Informativa'
-        imagen='/circular.jpg'
+        imagen='/circular.webp'
         texto='Ya está disponible la última Circular Informativa con novedades académicas y administrativas.'
         link='https://drive.google.com/file/d/11IEZ8US0Jg1iGB580TDxqoJ7fUx5hYMy/view'
       />
@@ -47,7 +46,7 @@ const Inicio = () => {
         opciones={REPORTE_OPCIONES}
         onChange={handleSelectChange}
         nota='selecciona tu grado y se abrirá el listado con los integrantes de tu salón de clases, busca tu nombre y revisa si debes presentar recuperaciones finales o si ya aprobaste tu año lectivo sin logros pendientes.'
-        imagen='/reporte.jpg'
+        imagen='/reporte.webp'
       />
 
       {/* CardSelection para Actividades Recuperación */}
@@ -56,20 +55,20 @@ const Inicio = () => {
         opciones={RECUPERACION_OPCIONES}
         onChange={handleSelectChange}
         nota='selecciona tu grado y se abrirán las actividades de recuperación de todas las materias. Recuerda descargar y realizar solo las que te corresponden.'
-        imagen='/recuperacion.jpg'
+        imagen='/recuperacion.webp'
       />
 
       {/* Card Horarios */}
       <CardInformation
         titulo='Horarios Recuperación'
-        imagen='/horarios.jpg'
+        imagen='/horarios.webp'
         texto={
           <>
-            <em>Nota:</em> ten presente que el horario publicado de recuperaciones en la página web,
-            no incluye algunas materias, si reprobaste una o varias materias que no están incluidas
-            en el horario publicado, debes buscar al docente correspondiente de dicha/s materia/s el
-            día lunes 25 de noviembre del presente año en la jornada de la mañana, para que cada
-            docente te asigne un horario de recuperación.
+            <em>Nota:</em> ten en cuenta que el horario de recuperación publicado en el sitio web
+            no incluye algunas asignaturas. Si reprobaste una o más asignaturas no incluidas en el
+            horario publicado, deberás contactar con el profesor correspondiente el lunes 25 de
+            noviembre de este año, durante la jornada de la mañana, para que cada profesor te asigne una
+            hora de recuperación.
           </>
         }
         link='https://drive.google.com/drive/folders/1B3h2CbVgE375o5Bg1fuoSoAiViRazur3'

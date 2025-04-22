@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ToastContainer, Zoom, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -106,10 +106,19 @@ const Formulario = () => {
         <button type='submit'>Buscar Código</button>
 
         <span>
-          <em>¡Puede tardar un momento dependiendo de la velocidad de su internet!</em>
+          <em>¡Puede tardar un momento dependiendo de la velocidad de tu internet!</em>
         </span>
       </form>
       <div className='payOnline'>
+        <div className='imagenPse'>
+          <a
+            href='https://www.avalpaycenter.com/wps/portal/portal-de-pagos/web/pagos-aval/resultado-busqueda/realizar-pago?idConv=00024146&origen=buscar'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <img src='/pse.png' alt='pse' />
+          </a>
+        </div>
         <h2>Paga en Línea</h2>
         <p>
           Realiza tu pago de manera rápida y segura{' '}
@@ -121,7 +130,7 @@ const Formulario = () => {
             AQUÍ
           </a>
           <br />
-          <em>Recuerda tener el codigo del estudiante a la mano!</em>
+          <em>¡Recuerda tener el codigo del estudiante a la mano!</em>
         </p>
       </div>
 

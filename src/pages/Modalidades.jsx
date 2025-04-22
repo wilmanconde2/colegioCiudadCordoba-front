@@ -7,33 +7,32 @@ const Modalidades = () => {
     <>
       <div className='fullContainerModalidades'>
         <div className='imgComercialContainer'>
-          <img className='imgComercial' src='/comercial.jpg' alt='' />
+          <img className='imgComercial' src='/comercial.webp' alt='comercial' />
         </div>
         <div className='container modText'>
           <h2>MODALIDAD COMERCIAL</h2>
           <p>
-            CONTABILIDAD Bachillerato comercial de sexto (6º) a undécimo (11º), con clases
-            sistematizadas, además en convenio con el SENA con el programa de formación titulado:
-            CONTABILIZACIÓN DE OPERACIONES COMERCIALES
-            <br />
-            <br />
-            ARTES PLÁSTICAS Área incluida en la técnica comercial, donde los estudiantes aprenden:
-            cerámica, vitrales, pintura en tela, oleo y arte barroco.
+            En bachillerato, los estudiantes que escogen la modalidad comercial, además de sus áreas
+            básicas y fundamentales, aprenden asignaturas como contabilidad, técnicas de oficina y
+            legislaciones en el programa de formación en “CONTABILIZACIÓN DE OPERACIONES COMERCIALES
+            Y FINANCIERAS”
           </p>
         </div>
         <div className='imgIndustrialContainer'>
-          <img className='imgIndustrial' src='/industrial.jpg' alt='' />
+          <img className='imgIndustrial' src='/industrial.webp' alt='industrial' />
         </div>
         <div className='container modText'>
           <h2>MODALIDAD INDUSTRIAL</h2>
           <p>
-            ELECTRICIDAD-ELECTRÓNICA Bachillerato industrial de sexto (6º) a undécimo (11º) con
-            clases en el aula multipropósito (Taller propuesto por el SENA) con el cual tenemos
-            convenio en el programa de formación titulada: INSTALACIONES ELÉCTRICAS RESIDENCIALES
+            En bachillerato, los estudiantes que escogen la modalidad industrial, además de sus
+            áreas básicas y fundamentales, aprenden asignaturas como dibujo técnico y
+            electricidad-electrónica en el programa de formación en “INSTALACIÓN DE REDES ELÉCTRICAS
+            RESIDENCIALES”.
             <br />
             <br />
-            DIBUJO TÉCNICO Aula de dibujo técnico para la elaboración de planos y maquetas, que
-            pueden diseñar apoyándose en programas de Autocad y diseño arquitectónico
+            En el año lectivo 2.025, los estudiantes de grado 9° y 10° de industrial estarán
+            realizando una prueba piloto en el área de Robótica, la cual depende de un resultado
+            positivo para ser incluida como el área base de esta modalidad.
           </p>
         </div>
       </div>
