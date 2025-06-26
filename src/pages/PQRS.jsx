@@ -133,7 +133,7 @@ const PQRS = () => {
                   </div>
                 </div>
                 <div className='contact__button'>
-                  <button type='submit'>Enviar</button>
+                  <button className='btn-pqrs' type='submit'>Enviar</button>
                 </div>
               </fieldset>
             </form>
