@@ -33,18 +33,38 @@ input {
   text-align: center;
 }
 
-button {
+.btn-form {
   margin-top: 1rem;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  min-width: 160px;
 }
 
-button:hover {
+.btn-form:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.btn-form:hover:not(:disabled) {
   background-color: #0056b3;
+}
+
+.resultadoCodigo {
+  margin-top: 1rem;
+  text-align: center;
+
+  p {
+    margin-bottom: 0;
+  }
 }
 
 .error {
@@ -55,6 +75,7 @@ button:hover {
 .payOnline {
   text-align: center;
   margin-top: 2rem;
+
   em {
     font-size: 0.9rem;
     font-weight: bold;
