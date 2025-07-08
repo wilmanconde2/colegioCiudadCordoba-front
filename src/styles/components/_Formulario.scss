@@ -61,9 +61,18 @@ input {
 .resultadoCodigo {
   margin-top: 1rem;
   text-align: center;
+  border-radius: 100px;
+  border: 10px solid $color-third;
+  // border-top: none;
+  border-left: none;
+  border-right: none;
 
+  h3 {
+    padding: 1rem 2rem 0rem 2rem;
+  }
   p {
     margin-bottom: 0;
+    font-size: 2rem;
   }
 }
 
