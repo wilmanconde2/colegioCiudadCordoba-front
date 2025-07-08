@@ -119,7 +119,7 @@ const Formulario = () => {
           )}
         </button>
 
-        {/* Mostrar el código si se encontró */}
+        {/* Mostrar el código persistente*/}
         {codigo && (
         <div className='resultadoCodigo'>
           <h3>Código del Estudiante:</h3>
