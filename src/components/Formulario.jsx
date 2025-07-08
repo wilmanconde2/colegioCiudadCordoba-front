@@ -120,16 +120,16 @@ const Formulario = () => {
         </button>
 
         {/* Mostrar el código persistente*/}
-        {/* {codigo && (
+        {codigo && (
         <div className='resultadoCodigo'>
           <h3>Código del Estudiante:</h3>
           <p>{codigo}</p>
         </div>
-      )} */}
+      )}
 
-        <span>
+        {/* <span>
           <em>¡Puede tardar un momento dependiendo de la velocidad de tu internet!</em>
-        </span>
+        </span> */}
       </form>
 
       <div className='payOnline'>
