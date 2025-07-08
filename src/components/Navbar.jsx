@@ -138,7 +138,7 @@ const Navbar = () => {
                     href='http://ieccc.no-ip.biz:90/inicio'
                     target='_blank'
                   >
-                    Admin
+                    SEVE
                   </a>
                 </li>
               </ul>
