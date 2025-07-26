@@ -7,6 +7,13 @@ const Footer = () => {
         {/* redes sociales */}
         <div className='social-links d-flex'>
           <a
+            href='https://drive.google.com/drive/folders/1WQxB8YcoqMrXuf9HG3P9DjbKSxGSifbk'
+            target='_blank'
+            className='social social-icon mx-2'
+          >
+            <img src='/dian.svg' alt='DIAN' className='dian-icon' />
+          </a>
+          <a
             href='https://www.facebook.com/egresados.cocicor?fref=ts'
             target='_blank'
             className='social social-icon mx-2'
@@ -41,7 +48,7 @@ const Footer = () => {
           </a>
         </div>
         <div>
-          © {year} &middot; by WC2 &middot; willconde2@hotmail.com &middot;
+          © {year} &middot; by Kraken &middot;
           <a href={'https://github.com/wilmanconde2'} target='_blank' rel='noopener noreferrer'>
             <img
               className='redesSociales'

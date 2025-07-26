@@ -1,5 +1,26 @@
 @use '../base/Settings' as *;
 
+// !---------------------------------------------------
+// ! TEMPORAL
+// TODO Eliminar después del dia de la familia
+.bannerTop {
+  position: sticky;
+  top: 90px;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0;
+  margin-bottom: 2rem;
+
+  img {
+    max-width: 460px;
+    width: 90%;
+    border-radius: 25px;
+  }
+}
+// !---------------------------------------------------
+
 .fullContainer {
   margin-inline: auto;
   margin-top: 6rem;
@@ -113,6 +134,16 @@ em {
     max-width: 55%;
     max-height: none;
   }
+
+  // !---------------------------------------------------
+  // ! TEMPORAL
+  // TODO Eliminar después del dia de la familia
+  .bannerTop {
+    img {
+      max-width: 576px;
+    }
+  }
+  // !---------------------------------------------------
 }
 
 @media (min-width: 768px) {
@@ -125,6 +156,16 @@ em {
     max-width: 45%;
     max-height: none;
   }
+
+  // !---------------------------------------------------
+  // ! TEMPORAL
+  // TODO Eliminar después del dia de la familia
+  .bannerTop {
+    img {
+      max-width: 768px;
+    }
+  }
+  // !---------------------------------------------------
 }
 
 @media (min-width: 992px) {
@@ -136,6 +177,16 @@ em {
     max-width: 35%;
     max-height: none;
   }
+
+  // !---------------------------------------------------
+  // ! TEMPORAL
+  // TODO Eliminar después del dia de la familia
+  .bannerTop {
+    img {
+      max-width: 992px;
+    }
+  }
+  // !---------------------------------------------------
 }
 
 @media (min-width: 1200px) {
@@ -143,4 +194,14 @@ em {
     max-width: 30%;
     max-height: none;
   }
+
+  // !---------------------------------------------------
+  // ! TEMPORAL
+  // TODO Eliminar después del dia de la familia
+  .bannerTop {
+    img {
+      max-width: 1200px;
+    }
+  }
+  // !---------------------------------------------------
 }

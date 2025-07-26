@@ -10,13 +10,17 @@
   font-size: 14px;
 }
 
-.footer-fixed:visited{
+.footer-fixed:visited {
   color: white;
 }
 
 .social {
   color: white;
   font-size: 20px;
+
+  .dian-icon {
+    width: 5rem;
+  }
 }
 
 .social:hover {

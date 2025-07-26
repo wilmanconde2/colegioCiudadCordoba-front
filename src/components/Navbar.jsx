@@ -135,7 +135,8 @@ const Navbar = () => {
                 <li>
                   <a
                     className='dropdown-item'
-                    href='http://ieccc.no-ip.biz:90/inicio'
+                    // href='http://ieccc.no-ip.biz:90/inicio'
+                    href='http://ccc.seveweb.com'
                     target='_blank'
                   >
                     SEVE
