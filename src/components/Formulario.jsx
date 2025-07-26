@@ -139,8 +139,9 @@ const Formulario = () => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <img src='/pse.png' alt='pse' />
+            <img src='/pse.webp' alt='pse' />
           </a>
+          <img className='codigoQR' src="/codigoQR.webp" alt="codigoQR" />
         </div>
         <h2>Paga en Línea</h2>
         <p>

@@ -17,7 +17,8 @@ const Inicio = () => {
   const [mostrarActividades, setMostrarActividades] = useState(false);
   const [mostrarHorarios, setMostrarHorarios] = useState(false);
 
-  const handleSelectChange = (url) => {
+  const handleSelectChange = (e) => {
+    const url = e.target.value;
     if (url) {
       window.open(url, '_blank', 'noopener,noreferrer');
     }
@@ -57,7 +58,7 @@ const Inicio = () => {
           titulo='Reporte Académico'
           opciones={REPORTE_OPCIONES}
           onChange={handleSelectChange}
-          nota='selecciona tu grado y se abrirá el listado con los integrantes de tu salón de clases, busca tu nombre y revisa si debes presentar recuperaciones finales o si ya aprobaste tu año lectivo sin logros pendientes.'
+          nota='Selecciona tu grado y se abrirá el listado con los integrantes de tu salón de clases. Busca tu nombre y revisa si debes presentar recuperaciones finales o si ya aprobaste tu año lectivo sin logros pendientes.'
           imagen='/reporte.webp'
         />
       )}
@@ -69,7 +70,7 @@ const Inicio = () => {
           titulo='Actividades Recuperación'
           opciones={RECUPERACION_OPCIONES}
           onChange={handleSelectChange}
-          nota='selecciona tu grado y se abrirán las actividades de recuperación de todas las materias. Recuerda descargar y realizar solo las que te corresponden.'
+          nota='Selecciona tu grado y se abrirán las actividades de recuperación de todas las materias. Recuerda descargar y realizar solo las que te corresponden.'
           imagen='/recuperacion.webp'
         />
       )}
@@ -82,7 +83,7 @@ const Inicio = () => {
           imagen='/horarios.webp'
           texto={
             <>
-              <em>Nota:</em> ten en cuenta que el horario de recuperación publicado en el sitio web
+              <em>Nota:</em> Ten en cuenta que el horario de recuperación publicado en el sitio web
               no incluye algunas asignaturas. Si reprobaste una o más asignaturas no incluidas en el
               horario publicado, deberás contactar con el profesor correspondiente el lunes 25 de
               noviembre de este año, durante la jornada de la mañana, para que cada profesor te
