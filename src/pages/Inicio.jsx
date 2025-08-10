@@ -27,8 +27,8 @@ const Inicio = () => {
   return (
     <div className='fullContainer'>
       {/* TEMPORAL Eliminar después del dia de la familia */}
-      <div className='bannerTop'>
-        <img src='/diaFamilia.webp' alt='diaFamilia' />
+      <div className='fecha'>
+        <img src='/fecha.webp' alt='fechaEvento' />
       </div>
       {/* TEMPORAL Eliminar después del dia de la familia */}
       <div className='mainImages'>
