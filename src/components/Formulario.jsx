@@ -119,20 +119,29 @@ const Formulario = () => {
           )}
         </button>
 
-        {/* Mostrar el código persistente*/}
         {codigo && (
-        <div className='resultadoCodigo'>
-          <h3>Código del Estudiante:</h3>
-          <p>{codigo}</p>
-        </div>
-      )}
-
-        {/* <span>
-          <em>¡Puede tardar un momento dependiendo de la velocidad de tu internet!</em>
-        </span> */}
+          <div className='resultadoCodigo'>
+            <h3>Código del Estudiante:</h3>
+            <p>{codigo}</p>
+          </div>
+        )}
       </form>
 
       <div className='payOnline'>
+        <div className='pse'>
+          <div className='captionPSE'>
+            <p>¿Cómo pagar por PSE?</p>
+            <video
+              className='videoPSE'
+              src='/PSE.mp4'
+              poster='/PSE-Cover.webp'
+              controls
+              playsInline
+            >
+              Tu navegador no soporta la reproducción de video.
+            </video>
+          </div>
+        </div>
         <div className='imagenPse'>
           <a
             href='https://www.avalpaycenter.com/wps/portal/portal-de-pagos/web/pagos-aval/resultado-busqueda/realizar-pago?idConv=00024146&origen=buscar'
@@ -141,7 +150,7 @@ const Formulario = () => {
           >
             <img src='/pse.webp' alt='pse' />
           </a>
-          <img className='codigoQR' src="/codigoQR.webp" alt="codigoQR" />
+          <img className='codigoQR' src='/codigoQR.webp' alt='codigoQR' />
         </div>
         <h2>Paga en Línea</h2>
         <p>

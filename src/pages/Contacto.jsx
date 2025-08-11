@@ -19,8 +19,17 @@ const Contacto = () => {
           <div className='direccion'>
             Dirección: Cra. 42 B # 51-35 <br /> B/ Ciudad Córdoba
           </div>
+          <section className='horariosOficina'>
+            <h4>Horarios de Oficina</h4>
+            <p>Tesorería y Secretaría</p>
+            <ul>
+              <li>-- Lunes a Viernes --</li>
+              <li>7:00 am - 12:00 pm</li>
+              <li>1:00 pm - 5:00 pm</li>
+            </ul>
+          </section>
           <div className='telefonos'>
-            Tel: 6023450411 - 6023731398 <br /> Cel: 3104280125
+            Tel: (602) 3450411 - (602) 3731398 <br /> Cel: 3104280125
           </div>
           <div className='email'>Correo: colegiociudadcordoba@hotmail.com</div>
         </div>

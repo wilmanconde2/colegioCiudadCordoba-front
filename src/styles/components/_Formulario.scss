@@ -84,6 +84,40 @@ input {
   text-align: center;
   margin-top: 2rem;
 
+  .captionPSE {
+    width: 90%;
+    margin: auto;
+
+    p {
+      font-variant: small-caps;
+      font-size: 1.5rem;
+    }
+  }
+  .videoPSE {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border: none;
+    box-shadow: 0 0 4px $color-primary, 0 0 8px $color-primary, 0 0 12px $color-primary,
+      0 0 32px $color-primary;
+
+    // Animación parpadeo sutil
+    animation: neonGlow 0.8s infinite alternate;
+  }
+
+  @keyframes neonGlow {
+    from {
+      box-shadow: 0 0 2.5px $color-primary, 0 0 5px $color-primary, 0 0 7.5px $color-primary;
+    }
+    to {
+      box-shadow: 0 0 5px $color-primary, 0 0 10px $color-primary, 0 0 15px $color-primary,
+        0 0 40px $color-primary;
+    }
+  }
+
   em {
     font-size: 0.9rem;
     font-weight: bold;
@@ -103,7 +137,7 @@ input {
       display: block;
       margin-top: 1rem;
     }
-    .codigoQR{
+    .codigoQR {
       max-width: 200px;
       max-height: 200px;
       margin: 1rem;
