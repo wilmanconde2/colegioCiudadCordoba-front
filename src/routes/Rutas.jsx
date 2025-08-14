@@ -2,6 +2,8 @@ import { useRoutes } from 'react-router';
 import Contacto from '../pages/Contacto';
 import DeporteLudica from '../pages/DeporteLudica';
 import Historia from '../pages/Historia';
+import HorarioPrimaria from '../pages/HorarioPrimaria';
+import HorarioSecundaria from '../pages/HorarioSecundaria';
 import Inicio from '../pages/Inicio';
 import ManualConvivencia from '../pages/ManualConvivencia';
 import MisionVision from '../pages/MisionVision';
@@ -28,6 +30,15 @@ const Rutas = () => {
       path: '/historia',
       element: <Historia />,
     },
+    {
+      path: '/horario-primaria',
+      element: <HorarioPrimaria />,
+    },
+    {
+      path: '/horario-secundaria',
+      element: <HorarioSecundaria />,
+    },
+
     {
       path: '/manual-convivencia',
       element: <ManualConvivencia />,

@@ -48,7 +48,7 @@ const Footer = () => {
           </a>
         </div>
         <div>
-          © {year} &middot; by Kraken &middot;
+          © {year} &middot; by Kraken Digital &middot;
           <a href={'https://github.com/wilmanconde2'} target='_blank' rel='noopener noreferrer'>
             <img
               className='redesSociales'

@@ -1,12 +1,16 @@
 @use 'bootstrap';
 @use './base/Settings';
 @use './components/Layout';
+@use './components/BotonWhatsapp';
 @use './components/Carrusel';
+@use './components/CarruselPerfiles';
 @use './components/Contacto';
 @use './components/DeporteLudica';
 @use './components/Footer';
 @use './components/Formulario';
 @use './components/Historia';
+@use './components/HorarioPrimaria';
+@use './components/HorarioSecundaria';
 @use './components/Inicio';
 @use './components/ManualConvivencia';
 @use './components/MisionVision';
@@ -14,5 +18,3 @@
 @use './components/Navbar';
 @use './components/PerfilesCCC';
 @use './components/PQRS';
-@use './components/CarruselPerfiles';
-@use './components/BotonWhatsapp';

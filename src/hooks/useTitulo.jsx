@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 const useTitulo = (textoTitulo = 'Sin titulo') => {
   useEffect(() => {
-    document.title = `CCCC - ${textoTitulo}`;
+    document.title = `CCC - ${textoTitulo}`;
   }, []);
 };
 

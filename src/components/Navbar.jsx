@@ -9,22 +9,14 @@ const Navbar = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
   const handleScroll = () => {
-    if (window.scrollY > 0) {
-      setIsScrolled(true);
-    } else {
-      setIsScrolled(false);
-    }
+    setIsScrolled(window.scrollY > 0);
   };
 
-  const handleNavLinkClick = () => {
-    setIsNavbarOpen(false);
-  };
+  const handleNavLinkClick = () => setIsNavbarOpen(false);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -39,39 +31,38 @@ const Navbar = () => {
         <div className='navbar-logo logo'>
           <img src={logo} alt='logo' />
         </div>
+
         <button
           className='navbar-toggler'
           type='button'
           onClick={() => setIsNavbarOpen(!isNavbarOpen)}
           aria-expanded={isNavbarOpen ? 'true' : 'false'}
+          aria-label='Toggle navigation'
         >
           <span className='navbar-toggler-icon'></span>
         </button>
+
         <div
           className={`collapse navbar-collapse ${isNavbarOpen ? 'show' : ''}`}
           id='navbarNavDropdown'
         >
           <ul className='navbar-nav'>
             <li className='nav-item'>
-              <NavLink
-                className='nav-link active'
-                aria-current='page'
-                to='/'
-                onClick={handleNavLinkClick}
-              >
+              <NavLink className='nav-link active' to='/' onClick={handleNavLinkClick}>
                 Inicio
               </NavLink>
             </li>
+
+            {/* Nosotros */}
             <li className='nav-item dropdown'>
-              <NavLink
-                className='nav-link dropdown-toggle'
-                to='#'
-                role='button'
+              <button
+                className='nav-link dropdown-toggle btn btn-link'
+                type='button'
                 data-bs-toggle='dropdown'
                 aria-expanded='false'
               >
                 Nosotros
-              </NavLink>
+              </button>
               <ul className='dropdown-menu'>
                 <li>
                   <NavLink className='dropdown-item' to='/historia' onClick={handleNavLinkClick}>
@@ -107,16 +98,18 @@ const Navbar = () => {
                 </li>
               </ul>
             </li>
+
+            {/* Servicios */}
             <li className='nav-item dropdown'>
-              <NavLink
-                className='nav-link dropdown-toggle'
-                to='#'
-                role='button'
+              <button
+                className='nav-link dropdown-toggle btn btn-link'
+                type='button'
                 data-bs-toggle='dropdown'
+                data-bs-auto-close='outside'
                 aria-expanded='false'
               >
                 Servicios
-              </NavLink>
+              </button>
               <ul className='dropdown-menu'>
                 <li>
                   <NavLink className='dropdown-item' to='/modalidades' onClick={handleNavLinkClick}>
@@ -129,21 +122,55 @@ const Navbar = () => {
                     to='/deporte-ludica'
                     onClick={handleNavLinkClick}
                   >
-                    Deporte y Ludica
+                    Deporte y Lúdica
                   </NavLink>
                 </li>
+
+                {/* Submenú Horario Profesores */}
+                <li className='dropdown'>
+                  <button
+                    className='dropdown-item dropdown-toggle'
+                    type='button'
+                    data-bs-toggle='dropdown'
+                    aria-expanded='false'
+                  >
+                    Horario Profesores
+                  </button>
+                  <ul className='dropdown-menu horarioMenu'>
+                    <li>
+                      <NavLink
+                        className='dropdown-item'
+                        to='/horario-primaria'
+                        onClick={handleNavLinkClick}
+                      >
+                        Primaria
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className='dropdown-item'
+                        to='/horario-secundaria'
+                        onClick={handleNavLinkClick}
+                      >
+                        Secundaria
+                      </NavLink>
+                    </li>
+                  </ul>
+                </li>
+
                 <li>
                   <a
                     className='dropdown-item'
-                    // href='http://ieccc.no-ip.biz:90/inicio'
                     href='http://ccc.seveweb.com'
                     target='_blank'
+                    rel='noreferrer'
                   >
                     SEVE
                   </a>
                 </li>
               </ul>
             </li>
+
             <li className='nav-item'>
               <NavLink className='nav-link' to='/pqrs' onClick={handleNavLinkClick}>
                 PQRS
@@ -156,21 +183,28 @@ const Navbar = () => {
             </li>
           </ul>
 
-          {/* redes sociales */}
+          {/* Redes sociales */}
           <div className='social-links d-flex'>
             <a
               href='https://www.facebook.com/egresados.cocicor?fref=ts'
               target='_blank'
+              rel='noreferrer'
               className='social-icon mx-2'
             >
               <i className='fab fa-facebook-f'></i>
             </a>
-            <a href='https://x.com/iecocicor' target='_blank' className='social-icon mx-2'>
+            <a
+              href='https://x.com/iecocicor'
+              target='_blank'
+              rel='noreferrer'
+              className='social-icon mx-2'
+            >
               <i className='fab fa-twitter'></i>
             </a>
             <a
               href='https://www.instagram.com/cocicor/?hl=es-la'
               target='_blank'
+              rel='noreferrer'
               className='social-icon mx-2'
             >
               <i className='fab fa-instagram'></i>
@@ -178,6 +212,7 @@ const Navbar = () => {
             <a
               href='https://www.youtube.com/channel/UCDeENgR7gNEQUfjWMRxqj7g'
               target='_blank'
+              rel='noreferrer'
               className='social-icon mx-2'
             >
               <i className='fab fa-youtube'></i>
@@ -185,6 +220,7 @@ const Navbar = () => {
             <a
               href='https://www.youtube.com/channel/UCxtPSGwRp7kmiDf-UHKQLAw'
               target='_blank'
+              rel='noreferrer'
               className='social-icon mx-2 ytkids'
             >
               <i className='fab fa-youtube'></i>
