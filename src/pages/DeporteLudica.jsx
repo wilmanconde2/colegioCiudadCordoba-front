@@ -8,7 +8,7 @@ const deporteLudica = () => {
       <div className='fullContainerLudica'>
         <h1>Formación Deportiva y Lúdica</h1>
         <div className='imgLudicaContainer'>
-          <img className='imagen imgLudica' src='/deporteLudica.png' alt='deporte y ludica' />
+          <img className='imagen imgLudica' src='/deporteLudica.webp' alt='deporte y ludica' />
         </div>
       </div>
     </>

@@ -51,7 +51,13 @@ const Inicio = () => {
           className='circular'
           // titulo='Circular Informativa'
           imagen='/circular.webp'
-          texto='Ya está disponible la última Circular Informativa con novedades académicas y administrativas.'
+          texto={
+            <>
+              Ya está disponible la Circular Informativa del mes de{' '}
+              <strong>{new Date().toLocaleString('es-ES', { month: 'long' })}</strong>, con
+              novedades académicas y administrativas.
+            </>
+          }
           link='https://drive.google.com/drive/folders/1469aSpKLwiiBQ53rCErN-EL29sCVizDs?usp=drive_link'
         />
       )}
