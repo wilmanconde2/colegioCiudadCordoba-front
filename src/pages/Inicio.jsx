@@ -1,5 +1,6 @@
 import useTitulo from '../hooks/useTitulo';
 import Formulario from '../components/Formulario';
+import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import { Carrusel } from '../components/Carrusel';
 import { CardSelection } from '../components/CardSelection';
@@ -28,9 +29,31 @@ const Inicio = () => {
     <div className='fullContainer'>
       {/* TEMPORAL Eliminar después del dia de la familia */}
       <div className='fecha'>
-        <img src='/fecha.webp' alt='fechaEvento' />
+        <img src='/fecha.webp' alt='fechaEvento' className='evento' />
+        <NavLink to='/inscripciones'>
+          <img src='/inscripciones.webp' alt='inscripciones' className='imgInscripciones' />
+        </NavLink>
+      </div>
+      <div className='infoInscripciones'>
+        <h2>Inscripciones Abiertas</h2>
+        <h3>Año Lectivo 2026</h3>
+        <p>
+          A partir del <em>1</em> de Septiembre en la secretaría de la institución
+        </p>
+        <ul className='horarioInscripciones'>
+          Lunes a Viernes
+          <li>7:00 am - 12:00 pm</li>
+          <li>1:00 pm - 5:00 pm</li>
+        </ul>
+        <p>
+          Desde Jardín <em>(4 años)</em> hasta grado Décimo
+        </p>
+        <NavLink to='inscripciones'>
+          <i>Más información aquí</i>
+        </NavLink>
       </div>
       {/* TEMPORAL Eliminar después del dia de la familia */}
+
       <div className='mainImages'>
         <Carrusel images={BACKGROUND_IMAGES} currentImageIndex={currentImageIndex} />
       </div>

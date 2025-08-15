@@ -3,6 +3,7 @@
 // !---------------------------------------------------
 // ! TEMPORAL
 // TODO Eliminar después del dia de la familia
+
 .fecha {
   top: 90px;
   z-index: 1;
@@ -12,12 +13,41 @@
   padding: 0.5rem 0;
   margin-bottom: 2rem;
 
-  img {
+  .evento {
     width: 80%;
     border-radius: 5px;
     border: 2px solid $color-primary;
     border-radius: 12px;
-    box-shadow: 0 0 8px $color-primary, 0 0 16px $color-primary, 0 0 32px $color-primary, inset 0 0 8px $color-primary;
+    box-shadow: 0 0 4px $color-primary, 0 0 8px $color-primary, 0 0 16px $color-primary,
+      inset 0 0 4px $color-primary;
+  }
+  .imgInscripciones {
+    width: 80%;
+    border-radius: 5px;
+    border: 2px solid $color-third;
+    border-radius: 12px;
+    box-shadow: 0 0 4px $color-third, 0 0 8px $color-third, 0 0 16px $color-third,
+      inset 0 0 4px $color-third;
+  }
+}
+
+.imgInscripciones {
+  display: none;
+}
+
+.infoInscripciones {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h2,
+  h3 {
+    font-variant: small-caps;
+  }
+
+  li {
+    list-style: none;
   }
 }
 
@@ -178,4 +208,40 @@ em {
     max-width: 30%;
     max-height: none;
   }
+
+  // !---------------------------------------------------
+  // ! TEMPORAL
+  // TODO Eliminar después del dia de la familia
+
+  .fecha {
+    width: 80%;
+    margin: auto;
+
+    img {
+      margin: 1rem;
+    }
+
+    .imgInscripciones {
+      width: 300px;
+      border-radius: 50%;
+      transition: transform 0.5s ease;
+
+      &:hover {
+        transform: scale(1.15);
+      }
+    }
+
+    .evento {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .infoInscripciones {
+    display: none;
+  }
+
+  .imgInscripciones {
+    display: initial;
+  }
+  // !---------------------------------------------------
 }
