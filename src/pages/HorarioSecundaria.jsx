@@ -10,14 +10,14 @@ const Secundaria = () => {
         <div className='imgSecundariaContainer'>
           <img
             className='imagen imgSecundaria'
-            src='horarioSecundaria1.png'
+            src='horarioSecundaria1.webp'
             alt='horarioSecundaria'
           />
         </div>
         <div className='imgSecundariaContainer'>
           <img
             className='imagen imgSecundaria'
-            src='horarioSecundaria2.png'
+            src='horarioSecundaria2.webp'
             alt='horarioSecundaria'
           />
         </div>

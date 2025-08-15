@@ -11,6 +11,7 @@ import Modalidades from '../pages/Modalidades';
 import NoEncontrado from '../pages/NoEncontrado';
 import PerfilesCCC from '../pages/PerfilesCCC';
 import PQRS from '../pages/PQRS';
+import Tesoreria from '../pages/Tesoreria';
 
 const Rutas = () => {
   const routes = useRoutes([
@@ -58,6 +59,10 @@ const Rutas = () => {
     {
       path: '/pqrs',
       element: <PQRS />,
+    },
+    {
+      path: '/tesoreria',
+      element: <Tesoreria />,
     },
     {
       path: '/*',

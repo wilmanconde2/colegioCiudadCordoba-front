@@ -8,7 +8,7 @@ const Primaria = () => {
       <div className='fullContainerPrimaria'>
         <h1>Horario de Atención Profesores Primaria</h1>
         <div className='imgPrimariaContainer'>
-          <img className='imagen imgPrimaria' src='/horarioPrimaria.png' alt='horarioPrimaria' />
+          <img className='imagen imgPrimaria' src='/horarioPrimaria.webp' alt='horarioPrimaria' />
         </div>
       </div>
     </>

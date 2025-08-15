@@ -112,6 +112,11 @@ const Navbar = () => {
               </button>
               <ul className='dropdown-menu'>
                 <li>
+                  <NavLink className='dropdown-item' to='/tesoreria' onClick={handleNavLinkClick}>
+                    Tesorería
+                  </NavLink>
+                </li>
+                <li>
                   <NavLink className='dropdown-item' to='/modalidades' onClick={handleNavLinkClick}>
                     Modalidades
                   </NavLink>
@@ -122,7 +127,7 @@ const Navbar = () => {
                     to='/deporte-ludica'
                     onClick={handleNavLinkClick}
                   >
-                    Deporte y Lúdica
+                    Deportes y Lúdicas
                   </NavLink>
                 </li>
 
@@ -134,7 +139,7 @@ const Navbar = () => {
                     data-bs-toggle='dropdown'
                     aria-expanded='false'
                   >
-                    Horario Profesores
+                    Horario de Atención
                   </button>
                   <ul className='dropdown-menu horarioMenu'>
                     <li>
@@ -143,7 +148,7 @@ const Navbar = () => {
                         to='/horario-primaria'
                         onClick={handleNavLinkClick}
                       >
-                        Primaria
+                        Profesores Primaria
                       </NavLink>
                     </li>
                     <li>
@@ -152,7 +157,7 @@ const Navbar = () => {
                         to='/horario-secundaria'
                         onClick={handleNavLinkClick}
                       >
-                        Secundaria
+                        Profesores Bachillerato
                       </NavLink>
                     </li>
                   </ul>
