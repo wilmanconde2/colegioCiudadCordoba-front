@@ -30,9 +30,13 @@ const Inicio = () => {
       {/* TEMPORAL Eliminar después del dia de la familia */}
       <div className='fecha'>
         <img src='/fecha.webp' alt='fechaEvento' className='evento' />
-        <NavLink to='/inscripciones'>
+        <a
+          href='https://drive.google.com/drive/folders/1-mDgt3M11XJmcvMJkjGK6EA4g4QRRIB5?usp=drive_link'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
           <img src='/inscripciones.webp' alt='inscripciones' className='imgInscripciones' />
-        </NavLink>
+        </a>
       </div>
       <div className='infoInscripciones'>
         <h2>Inscripciones Abiertas</h2>
@@ -48,9 +52,13 @@ const Inicio = () => {
         <p>
           Desde Jardín <em>(4 años)</em> hasta grado Décimo
         </p>
-        <NavLink to='inscripciones'>
-          <i>Más información aquí</i>
-        </NavLink>
+        <a
+          href='https://drive.google.com/drive/folders/1-mDgt3M11XJmcvMJkjGK6EA4g4QRRIB5?usp=drive_link'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          Más información aquí
+        </a>
       </div>
       {/* TEMPORAL Eliminar después del dia de la familia */}
 

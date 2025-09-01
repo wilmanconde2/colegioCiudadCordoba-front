@@ -5,7 +5,6 @@ import Historia from '../pages/Historia';
 import HorarioPrimaria from '../pages/HorarioPrimaria';
 import HorarioSecundaria from '../pages/HorarioSecundaria';
 import Inicio from '../pages/Inicio';
-import Inscripciones from '../pages/Inscripciones';
 import ManualConvivencia from '../pages/ManualConvivencia';
 import MisionVision from '../pages/MisionVision';
 import Modalidades from '../pages/Modalidades';
@@ -39,10 +38,6 @@ const Rutas = () => {
     {
       path: '/horario-secundaria',
       element: <HorarioSecundaria />,
-    },
-    {
-      path: '/inscripciones',
-      element: <Inscripciones />,
     },
     {
       path: '/manual-convivencia',
