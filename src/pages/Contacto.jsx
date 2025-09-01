@@ -23,7 +23,7 @@ const Contacto = () => {
             <h4>Horarios de Oficina</h4>
             <p>Tesorería y Secretaría</p>
             <ul>
-              <li>-- Lunes a Viernes --</li>
+              Lunes a Viernes
               <li>7:00 am - 12:00 pm</li>
               <li>1:00 pm - 5:00 pm</li>
             </ul>

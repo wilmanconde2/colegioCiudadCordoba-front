@@ -39,7 +39,6 @@ const Rutas = () => {
       path: '/horario-secundaria',
       element: <HorarioSecundaria />,
     },
-
     {
       path: '/manual-convivencia',
       element: <ManualConvivencia />,

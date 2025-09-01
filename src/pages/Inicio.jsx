@@ -28,9 +28,39 @@ const Inicio = () => {
     <div className='fullContainer'>
       {/* TEMPORAL Eliminar después del dia de la familia */}
       <div className='fecha'>
-        <img src='/fecha.webp' alt='fechaEvento' />
+        <img src='/fecha.webp' alt='fechaEvento' className='evento' />
+        <a
+          href='https://drive.google.com/drive/folders/1-mDgt3M11XJmcvMJkjGK6EA4g4QRRIB5?usp=drive_link'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <img src='/inscripciones.webp' alt='inscripciones' className='imgInscripciones' />
+        </a>
+      </div>
+      <div className='infoInscripciones'>
+        <h2>Inscripciones Abiertas</h2>
+        <h3>Año Lectivo 2026</h3>
+        <p>
+          A partir del <em>1</em> de Septiembre en la secretaría de la institución
+        </p>
+        <ul className='horarioInscripciones'>
+          Lunes a Viernes
+          <li>7:00 am - 12:00 pm</li>
+          <li>1:00 pm - 5:00 pm</li>
+        </ul>
+        <p>
+          Desde Jardín <em>(4 años)</em> hasta grado Décimo
+        </p>
+        <a
+          href='https://drive.google.com/drive/folders/1-mDgt3M11XJmcvMJkjGK6EA4g4QRRIB5?usp=drive_link'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          Más información aquí
+        </a>
       </div>
       {/* TEMPORAL Eliminar después del dia de la familia */}
+
       <div className='mainImages'>
         <Carrusel images={BACKGROUND_IMAGES} currentImageIndex={currentImageIndex} />
       </div>
