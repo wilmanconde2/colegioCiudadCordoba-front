@@ -1,14 +1,69 @@
-export const BACKGROUND_IMAGES = [
-  '/background1.webp',
-  '/background2.webp',
-  '/background3.webp',
-  '/background4.webp',
-  '/background5.webp',
-  '/background6.webp',
-  '/background7.webp',
-  '/background8.webp',
-  '/background9.webp',
+import { cldUrl, cldSrcSet } from '../utils/cloudinary';
+
+export const CARRUSEL_PUBLIC_IDS = [
+  'background1_cl',
+  'background2_cl',
+  'background3_cl',
+  'background4_cl',
+  'background5_cl',
+  'background6_cl',
+  'background7_cl',
+  'background8_cl',
+  'background9_cl',
 ];
+
+const CARRUSEL_WIDTHS = [640, 960, 1280, 1600, 1920];
+
+export const CARRUSEL_IMAGES = CARRUSEL_PUBLIC_IDS.map((id) => ({
+  src: cldUrl(id, { w: 1280, c: 'fit' }),
+  srcSet: cldSrcSet(id, CARRUSEL_WIDTHS, { c: 'fit' }),
+  sizes: '100vw',
+  alt: 'fondo',
+}));
+
+// —— Portada / Inscripciones ——
+const FECHA_WIDTHS = [480, 640, 768, 1024, 1280, 1600];
+export const FECHA_IMG = {
+  src: cldUrl('fecha_cl', { w: 1280, c: 'fit' }),
+  srcSet: cldSrcSet('fecha_cl', FECHA_WIDTHS, { c: 'fit' }),
+  sizes: '(min-width:576px) 70vw, 80vw',
+  width: 1280,
+};
+
+const INSC_WIDTHS = [300, 600];
+export const INSC_IMG = {
+  src: cldUrl('inscripciones_cl', { w: 600, c: 'fit' }),
+  srcSet: cldSrcSet('inscripciones_cl', INSC_WIDTHS, { c: 'fit' }),
+  sizes: '300px',
+  width: 600,
+};
+
+// —— Cards ——
+const CARD_WIDTHS = [600, 800, 1200, 1600];
+const CARD_SIZES = '(min-width:1200px) 600px, (min-width:768px) 400px, 90vw';
+
+export const CARD_IMGS = {
+  circular: {
+    src: cldUrl('circular_cl', { w: 1200, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto' }),
+    srcSet: cldSrcSet('circular_cl', CARD_WIDTHS, { c: 'fit', q: 'auto', f: 'auto' }),
+    sizes: CARD_SIZES,
+  },
+  reporte: {
+    src: cldUrl('reporte_cl', { w: 1200, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto' }),
+    srcSet: cldSrcSet('reporte_cl', CARD_WIDTHS, { c: 'fit', q: 'auto', f: 'auto' }),
+    sizes: CARD_SIZES,
+  },
+  recuperacion: {
+    src: cldUrl('recuperacion_cl', { w: 1200, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto' }),
+    srcSet: cldSrcSet('recuperacion_cl', CARD_WIDTHS, { c: 'fit', q: 'auto', f: 'auto' }),
+    sizes: CARD_SIZES,
+  },
+  horarios: {
+    src: cldUrl('horarios_cl', { w: 1200, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto' }),
+    srcSet: cldSrcSet('horarios_cl', CARD_WIDTHS, { c: 'fit', q: 'auto', f: 'auto' }),
+    sizes: CARD_SIZES,
+  },
+};
 
 export const BACKGROUND_IMAGES_DIRECTIVO = [
   '/directivo1.webp',
@@ -42,7 +97,6 @@ export const BACKGROUND_IMAGES_EGRESADO = [
   '/egresado9.webp',
   '/egresado10.webp',
 ];
-
 export const BACKGROUND_IMAGES_HISTORIA = [
   '/historia1.webp',
   '/historia2.webp',
