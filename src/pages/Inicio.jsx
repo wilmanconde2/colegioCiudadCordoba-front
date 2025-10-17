@@ -22,7 +22,7 @@ const Inicio = () => {
 
   const [mostrarCircular] = useState(true);
   const [mostrarReporte] = useState(false);
-  const [mostrarActividades] = useState(false);
+  const [mostrarActividades] = useState(true);
   const [mostrarHorarios] = useState(false);
 
   const handleSelectChange = (e) => {
