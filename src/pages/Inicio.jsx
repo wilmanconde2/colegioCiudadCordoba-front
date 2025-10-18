@@ -32,19 +32,8 @@ const Inicio = () => {
 
   return (
     <div className='fullContainer'>
-      {/* TEMPORAL Eliminar después del dia de la familia */}
+      {/* TEMPORAL Eliminar después de inscripciones*/}
       <div className='fecha'>
-        <img
-          src={FECHA_IMG.src}
-          srcSet={FECHA_IMG.srcSet}
-          sizes={FECHA_IMG.sizes}
-          alt='fechaEvento'
-          className='evento'
-          width={FECHA_IMG.width}
-          loading='lazy'
-          decoding='async'
-          style={{ height: 'auto', objectFit: 'contain' }}
-        />
         <a
           href='https://drive.google.com/drive/folders/1-mDgt3M11XJmcvMJkjGK6EA4g4QRRIB5?usp=drive_link'
           target='_blank'
@@ -86,7 +75,7 @@ const Inicio = () => {
           Más información aquí
         </a>
       </div>
-      {/* TEMPORAL Eliminar después del dia de la familia */}
+      {/* TEMPORAL Eliminar después de inscripciones*/}
 
       <div className='mainImages'>
         <Carrusel images={CARRUSEL_IMAGES} currentImageIndex={currentImageIndex} />
