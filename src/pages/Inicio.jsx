@@ -19,7 +19,10 @@ const Inicio = () => {
   useTitulo('Inicio');
 
   const { currentImageIndex } = useCarrusel(CARRUSEL_IMAGES);
+  const capitalizeFirst = (text) => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 
+
+// Tarjetas informativas y de selección
   const [mostrarCircular] = useState(true);
   const [mostrarReporte] = useState(false);
   const [mostrarActividades] = useState(true);
@@ -98,7 +101,7 @@ const Inicio = () => {
           texto={
             <>
               Ya está disponible la Circular Informativa del mes de{' '}
-              <strong>{new Date().toLocaleString('es-ES', { month: 'long' }).toUpperCase()}</strong>
+              <em>{capitalizeFirst(new Date().toLocaleString('es-ES', { month: 'long' }))}</em>
               , con novedades académicas y administrativas.
             </>
           }
@@ -125,10 +128,15 @@ const Inicio = () => {
           onChange={handleSelectChange}
           nota={
             <>
-              Para descargar la recuperación, se sugiere hacerlo desde un computador (PC) en lugar
-              de celulares o tabletas. <br></br>
-              El navegador recomendado es <em> Microsoft Edge</em>. <br></br>
-              Si presenta inconvenientes, intente abrir el enlace en una <em>ventana de incógnito</em> desde cualquier dispositivo y usando cualquier navegador.
+              Para descargar la recuperación, se sugiere hacerlo desde un computador (PC), sin
+              embargo, recuerda que también se puede realizar desde cualquier dispositivo y
+              navegador.
+              <br />
+              El navegador recomendado es <em>Microsoft Edge</em>. <br />
+              Si presenta inconvenientes, intente abrir el enlace usando <em>
+                Mozilla Firefox
+              </em>{' '}
+              como segunda opción. <br />
             </>
           }
           imagen={CARD_IMGS.recuperacion}
