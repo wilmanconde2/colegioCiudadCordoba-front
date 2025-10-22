@@ -123,7 +123,14 @@ const Inicio = () => {
           titulo='Actividades Recuperación'
           opciones={RECUPERACION_OPCIONES}
           onChange={handleSelectChange}
-          nota='Selecciona tu grado y se abrirán las actividades de recuperación...'
+          nota={
+            <>
+              Para descargar la recuperación, se sugiere hacerlo desde un computador (PC) en lugar
+              de celulares o tabletas. <br></br>
+              El navegador recomendado es <em> Microsoft Edge</em>. <br></br>
+              Si presenta inconvenientes, intente abrir el enlace en una <em>ventana de incógnito</em> desde cualquier dispositivo y usando cualquier navegador.
+            </>
+          }
           imagen={CARD_IMGS.recuperacion}
         />
       )}
