@@ -25,7 +25,7 @@ const Inicio = () => {
 // Tarjetas informativas y de selección
   const [mostrarCircular] = useState(true);
   const [mostrarReporte] = useState(false);
-  const [mostrarActividades] = useState(true);
+  const [mostrarActividades] = useState(false);
   const [mostrarHorarios] = useState(false);
 
   const handleSelectChange = (e) => {
