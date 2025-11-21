@@ -34,15 +34,6 @@ const Inicio = () => {
   return (
     <div className='fullContainer'>
       {/* TEMPORAL Eliminar después de inscripciones*/}
-      <div className='nota-rapida'>
-        <h2>IMPORTANTE</h2>
-        <p className='nota-p'>
-          <em>
-            La información de recuperaciones, horarios y calificaciones estará <u>disponible a partir de las 6:00p.m.</u> Por favor vuelve a esta página después de
-            esa hora para ver todos los datos actualizados.
-          </em>
-        </p>
-      </div>
       <div className='fecha'>
         <a
           href='https://drive.google.com/drive/folders/1-mDgt3M11XJmcvMJkjGK6EA4g4QRRIB5?usp=drive_link'
