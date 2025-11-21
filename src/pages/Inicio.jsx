@@ -8,7 +8,6 @@ import { useCarrusel } from '../hooks/useCarrusel';
 
 import {
   CARRUSEL_IMAGES,
-  FECHA_IMG,
   INSC_IMG,
   CARD_IMGS,
   REPORTE_OPCIONES,
@@ -21,8 +20,7 @@ const Inicio = () => {
   const { currentImageIndex } = useCarrusel(CARRUSEL_IMAGES);
   const capitalizeFirst = (text) => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 
-
-// Tarjetas informativas y de selección
+  // Tarjetas informativas y de selección
   const [mostrarCircular] = useState(true);
   const [mostrarReporte] = useState(false);
   const [mostrarActividades] = useState(false);
@@ -36,6 +34,15 @@ const Inicio = () => {
   return (
     <div className='fullContainer'>
       {/* TEMPORAL Eliminar después de inscripciones*/}
+      <div className='nota-rapida'>
+        <h2>IMPORTANTE</h2>
+        <p className='nota-p'>
+          <em>
+            La información de recuperaciones, horarios y calificaciones estará <u>disponible a partir de las 6:00p.m.</u> Por favor vuelve a esta página después de
+            esa hora para ver todos los datos actualizados.
+          </em>
+        </p>
+      </div>
       <div className='fecha'>
         <a
           href='https://drive.google.com/drive/folders/1-mDgt3M11XJmcvMJkjGK6EA4g4QRRIB5?usp=drive_link'
@@ -101,8 +108,8 @@ const Inicio = () => {
           texto={
             <>
               Ya está disponible la Circular Informativa del mes de{' '}
-              <em>{capitalizeFirst(new Date().toLocaleString('es-ES', { month: 'long' }))}</em>
-              , con novedades académicas y administrativas.
+              <em>{capitalizeFirst(new Date().toLocaleString('es-ES', { month: 'long' }))}</em>, con
+              novedades académicas y administrativas.
             </>
           }
           link='https://drive.google.com/drive/folders/1469aSpKLwiiBQ53rCErN-EL29sCVizDs?usp=drive_link'
@@ -112,10 +119,15 @@ const Inicio = () => {
       {mostrarReporte && (
         <CardSelection
           className='reporte text-center'
-          titulo='Reporte Académico'
+          titulo={
+            <>
+              Reporte Académico <br />
+              Periodo 4 y Años Anteriores
+            </>
+          }
           opciones={REPORTE_OPCIONES}
           onChange={handleSelectChange}
-          nota='Selecciona tu grado y se abrirá el listado con los integrantes de tu salón de clases...'
+          nota=''
           imagen={CARD_IMGS.reporte}
         />
       )}
@@ -146,15 +158,18 @@ const Inicio = () => {
       {mostrarHorarios && (
         <CardInformation
           className='horarios'
-          titulo='Horarios Recuperación'
+          titulo='Horarios Recuperacion'
           imagen={CARD_IMGS.horarios}
           texto={
             <>
-              <em>Nota:</em> Ten en cuenta que el horario de recuperación publicado no incluye
-              algunas asignaturas...
+              <em>Nota:</em> Ten presente que el horario publicado, no incluye todas las materias,
+              si perdiste una o varias materias que no están incluidas en el horario publicado,
+              debes buscar al docente correspondiente de dicha/s materia/s el día lunes 24 de
+              noviembre en cualquier hora libre que tengas, para que cada docente te asigne la
+              actividad de recuperación.
             </>
           }
-          link='https://drive.google.com/drive/folders/1B3h2CbVgE375o5Bg1fuoSoAiViRazur3'
+          link='https://drive.google.com/drive/folders/10tZQth5aMksTOEhyYCmv8fQbLBB8nKAp'
         />
       )}
     </div>

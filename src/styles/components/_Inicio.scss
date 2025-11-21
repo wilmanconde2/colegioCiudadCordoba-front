@@ -4,6 +4,25 @@
 // ! TEMPORAL
 // TODO Eliminar después del dia de la familia
 
+//TODO borrar
+
+.nota-rapida {
+  
+  h2 {
+    text-decoration: underline;
+    font-variant: small-caps;
+  }
+  p{
+    margin: 2rem;
+    border-radius: 20px;
+    border: 1px solid orange;
+    padding: 10px;
+    text-align: center;
+    font-size: 2rem;
+    background-color: lightblue;
+  }
+}
+
 .fecha {
   top: 90px;
   z-index: 1;
