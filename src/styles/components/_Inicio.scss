@@ -4,14 +4,56 @@
 // ! TEMPORAL
 // TODO Eliminar después del dia de la familia
 
+//TODO borrar
+
+.vacaciones {
+  text-align: center;
+  font-size: 1.5rem;
+  color: red;
+  font-weight: bold;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
+.nota-rapida {
+  h2 {
+    text-decoration: underline;
+    font-variant: small-caps;
+  }
+  p {
+    margin: 2rem;
+    border-radius: 20px;
+    border: 1px solid orange;
+    padding: 10px;
+    text-align: center;
+    font-size: 2rem;
+    background-color: lightblue;
+  }
+}
+
 .fecha {
   top: 90px;
   z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
   padding: 0.5rem 0;
-  margin-bottom: 2rem;
+  margin: auto;
+  margin-bottom: 4rem;
+
+  .card {
+    margin: 0;
+    background-color: transparent;
+    
+    img {
+      display: block; 
+      margin: 0 auto; 
+      max-width: 100%;
+      height: auto;
+    }
+  }
 
   .evento {
     width: 80%;
@@ -109,6 +151,7 @@
   margin: 2rem auto;
   border-radius: 15px;
   box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
+  text-align: center;
 
   .groupList {
     color: $color-secondary;
@@ -129,6 +172,7 @@
     width: 100px;
     height: 40px;
     margin: 1rem auto;
+    justify-content: center;
   }
 
   h5,
@@ -215,7 +259,8 @@ em {
 
   .fecha {
     width: 80%;
-    margin: auto;
+    justify-content: center;
+    align-items: center;
 
     img {
       margin: 1rem;

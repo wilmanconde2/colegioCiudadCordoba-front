@@ -8,7 +8,6 @@ import { useCarrusel } from '../hooks/useCarrusel';
 
 import {
   CARRUSEL_IMAGES,
-  FECHA_IMG,
   INSC_IMG,
   CARD_IMGS,
   REPORTE_OPCIONES,
@@ -21,9 +20,9 @@ const Inicio = () => {
   const { currentImageIndex } = useCarrusel(CARRUSEL_IMAGES);
   const capitalizeFirst = (text) => text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 
-
-// Tarjetas informativas y de selección
-  const [mostrarCircular] = useState(true);
+  // Tarjetas informativas y de selección
+  const [mostrarMatricula] = useState(true);
+  const [mostrarCircular] = useState(false);
   const [mostrarReporte] = useState(false);
   const [mostrarActividades] = useState(false);
   const [mostrarHorarios] = useState(false);
@@ -35,7 +34,10 @@ const Inicio = () => {
 
   return (
     <div className='fullContainer'>
-      {/* TEMPORAL Eliminar después de inscripciones*/}
+      {/* TEMPORAL Eliminar después de inscripciones y matriculas*/}
+      <h3 className='vacaciones'>
+        Nuestras oficinas estarán cerradas del 20 de diciembre de 2025 al 12 de enero de 2026, abriendo nuevamente el día 13 de enero</h3>
+
       <div className='fecha'>
         <a
           href='https://drive.google.com/drive/folders/1-mDgt3M11XJmcvMJkjGK6EA4g4QRRIB5?usp=drive_link'
@@ -54,18 +56,24 @@ const Inicio = () => {
             style={{ height: 'auto', objectFit: 'contain' }}
           />
         </a>
+        {mostrarMatricula && (
+          <CardInformation
+            className='matricula'
+            imagen={CARD_IMGS.matricula}
+            texto={<>Aquí encontraras toda la información!!</>}
+            link='https://drive.google.com/drive/folders/1ytcHPPBebATkgdB3S3eITQkLIUwqwA04'
+          />
+        )}
       </div>
 
       <div className='infoInscripciones'>
         <h2>Inscripciones Abiertas</h2>
         <h3>Año Lectivo 2026</h3>
-        <p>
-          A partir del <em>1</em> de Septiembre en la secretaría de la institución
-        </p>
+        <p>En la secretaría de la institución</p>
         <ul className='horarioInscripciones'>
           Lunes a Viernes
           <li>7:00 am - 12:00 pm</li>
-          <li>1:00 pm - 5:00 pm</li>
+          <li>1:00 pm - 4:00 pm</li>
         </ul>
         <p>
           Desde Jardín <em>(4 años)</em> hasta grado Décimo
@@ -78,7 +86,7 @@ const Inicio = () => {
           Más información aquí
         </a>
       </div>
-      {/* TEMPORAL Eliminar después de inscripciones*/}
+      {/* TEMPORAL Eliminar después de inscripciones y matriculas*/}
 
       <div className='mainImages'>
         <Carrusel images={CARRUSEL_IMAGES} currentImageIndex={currentImageIndex} />
@@ -101,8 +109,8 @@ const Inicio = () => {
           texto={
             <>
               Ya está disponible la Circular Informativa del mes de{' '}
-              <em>{capitalizeFirst(new Date().toLocaleString('es-ES', { month: 'long' }))}</em>
-              , con novedades académicas y administrativas.
+              <em>{capitalizeFirst(new Date().toLocaleString('es-ES', { month: 'long' }))}</em>, con
+              novedades académicas y administrativas.
             </>
           }
           link='https://drive.google.com/drive/folders/1469aSpKLwiiBQ53rCErN-EL29sCVizDs?usp=drive_link'
@@ -112,10 +120,15 @@ const Inicio = () => {
       {mostrarReporte && (
         <CardSelection
           className='reporte text-center'
-          titulo='Reporte Académico'
+          titulo={
+            <>
+              Reporte Académico <br />
+              Periodo 4 y Años Anteriores
+            </>
+          }
           opciones={REPORTE_OPCIONES}
           onChange={handleSelectChange}
-          nota='Selecciona tu grado y se abrirá el listado con los integrantes de tu salón de clases...'
+          nota=''
           imagen={CARD_IMGS.reporte}
         />
       )}
@@ -146,15 +159,18 @@ const Inicio = () => {
       {mostrarHorarios && (
         <CardInformation
           className='horarios'
-          titulo='Horarios Recuperación'
+          titulo='Horarios Recuperacion'
           imagen={CARD_IMGS.horarios}
           texto={
             <>
-              <em>Nota:</em> Ten en cuenta que el horario de recuperación publicado no incluye
-              algunas asignaturas...
+              <em>Nota:</em> Ten presente que el horario publicado, no incluye todas las materias,
+              si perdiste una o varias materias que no están incluidas en el horario publicado,
+              debes buscar al docente correspondiente de dicha/s materia/s el día lunes 24 de
+              noviembre en cualquier hora libre que tengas, para que cada docente te asigne la
+              actividad de recuperación.
             </>
           }
-          link='https://drive.google.com/drive/folders/1B3h2CbVgE375o5Bg1fuoSoAiViRazur3'
+          link='https://drive.google.com/drive/folders/10tZQth5aMksTOEhyYCmv8fQbLBB8nKAp'
         />
       )}
     </div>
