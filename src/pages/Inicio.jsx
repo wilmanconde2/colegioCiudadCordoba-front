@@ -22,9 +22,9 @@ const Inicio = () => {
 
   // Tarjetas informativas y de selección
   const [mostrarCircular] = useState(true);
-  const [mostrarReporte] = useState(true);
+  const [mostrarReporte] = useState(false);
   const [mostrarActividades] = useState(true);
-  const [mostrarHorarios] = useState(true);
+  const [mostrarHorarios] = useState(false);
 
   const handleSelectChange = (e) => {
     const url = e.target.value;
