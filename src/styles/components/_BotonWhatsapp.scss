@@ -1,0 +1,453 @@
+// src/styles/components/_BotonWhatsapp.scss
+
+.agenda-float {
+  position: fixed;
+  right: 14px;
+  bottom: max(18px, calc(env(safe-area-inset-bottom) + 14px));
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.65rem;
+
+  pointer-events: none;
+
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(10px) scale(0.97);
+    transform-origin: bottom right;
+
+    transition:
+      opacity 0.22s ease,
+      transform 0.22s ease,
+      visibility 0.22s ease;
+
+    width: min(82vw, 280px);
+    max-height: min(62vh, 420px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 2px;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    pointer-events: auto;
+  }
+
+  %agenda-mini-button {
+    width: 100%;
+    border-radius: 12px;
+
+    background: rgba(255, 250, 245, 0.98);
+    border: 1px solid rgba(94, 112, 201, 0.18);
+
+    box-shadow:
+      0 4px 12px rgba(72, 89, 187, 0.08),
+      0 1px 4px rgba(0, 0, 0, 0.04);
+
+    color: #5b67b3;
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.15;
+
+    transition:
+      transform 0.18s ease,
+      border-color 0.18s ease,
+      background-color 0.18s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      background: #fffdf9;
+      border-color: rgba(94, 112, 201, 0.3);
+    }
+
+    &:focus-visible {
+      outline: 3px solid rgba(255, 123, 61, 0.24);
+      outline-offset: 2px;
+    }
+  }
+
+  &__mobile-schedule {
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
+    pointer-events: auto;
+  }
+
+  &__mobile-schedule-links {
+    display: none;
+    flex-direction: column;
+    gap: 0.22rem;
+
+    &.is-open {
+      display: flex;
+    }
+  }
+
+  &__schedule-area {
+    display: flex;
+    flex-direction: column;
+    gap: 0.28rem;
+  }
+
+  &__schedule-toggle {
+    @extend %agenda-mini-button;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+
+    padding: 0.55rem 0.8rem;
+    text-align: left;
+  }
+
+  &__schedule-toggle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: #ff7b3d;
+    flex-shrink: 0;
+  }
+
+  &__schedule-link {
+    @extend %agenda-mini-button;
+    padding: 0.42rem 0.7rem;
+    text-decoration: none;
+  }
+
+  &__links {
+    display: none;
+    flex-direction: column;
+    gap: 0.22rem;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    gap: 0.62rem;
+
+    min-height: 44px;
+    padding: 0.62rem 0.72rem;
+
+    border-radius: 15px;
+    text-decoration: none;
+
+    background: rgba(255, 250, 245, 0.98);
+    border: 1px solid rgba(94, 112, 201, 0.22);
+
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    box-shadow:
+      0 8px 20px rgba(72, 89, 187, 0.12),
+      0 2px 6px rgba(0, 0, 0, 0.05);
+
+    color: #2f3e9e;
+
+    transition:
+      transform 0.18s ease,
+      border-color 0.18s ease,
+      background-color 0.18s ease;
+
+    pointer-events: auto;
+
+    &:hover {
+      transform: translateY(-2px);
+      background: #fffdf9;
+      border-color: rgba(94, 112, 201, 0.36);
+    }
+
+    &:focus-visible {
+      outline: 3px solid rgba(255, 123, 61, 0.28);
+      outline-offset: 2px;
+    }
+  }
+
+  &__option-icon {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(102, 123, 220, 0.12);
+    color: #3b4cbc;
+
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  &__option-text {
+    font-size: 0.76rem;
+    font-weight: 600;
+    line-height: 1.15;
+  }
+
+  &__trigger {
+    width: 78px;
+    min-height: 132px;
+    padding: 0;
+    border-radius: 50px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+
+    cursor: pointer;
+    text-align: center;
+
+    background: transparent;
+    border: none;
+
+    color: #2f3e9e;
+
+    // box-shadow:
+    //   0 8px 20px rgba(72, 89, 187, 0.12),
+    //   0 2px 6px rgba(0, 0, 0, 0.06);
+
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    pointer-events: auto;
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: rgba(94, 112, 201, 0.36);
+    }
+
+    &:focus-visible {
+      outline: 3px solid rgba(255, 123, 61, 0.28);
+      outline-offset: 2px;
+    }
+  }
+
+  &__trigger-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #25d366;
+    color: #fff;
+
+    font-size: 1.15rem;
+
+    box-shadow: 0 8px 18px rgba(37, 211, 102, 0.22);
+    flex-shrink: 0;
+  }
+
+  &__trigger-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__trigger-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.05;
+  }
+
+  &__trigger-arrow {
+    font-size: 0.82rem;
+    color: #ff7b3d;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  &.is-open {
+    .agenda-float__menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .agenda-float__trigger {
+      border-color: rgba(94, 112, 201, 0.36);
+      box-shadow:
+        0 14px 28px rgba(72, 89, 187, 0.16),
+        0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .agenda-float__trigger-arrow {
+      transform: rotate(180deg);
+    }
+
+    .agenda-float__mobile-schedule,
+    .agenda-float__card {
+      animation: agendaOptionIn 0.24s ease both;
+    }
+
+    .agenda-float__mobile-schedule {
+      animation-delay: 0.02s;
+    }
+
+    .agenda-float__card:nth-child(2) {
+      animation-delay: 0.04s;
+    }
+
+    .agenda-float__card:nth-child(3) {
+      animation-delay: 0.06s;
+    }
+
+    .agenda-float__card:nth-child(4) {
+      animation-delay: 0.08s;
+    }
+
+    .agenda-float__card:nth-child(5) {
+      animation-delay: 0.1s;
+    }
+  }
+}
+
+/* ---------- ANIMATION ---------- */
+
+@keyframes agendaOptionIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+
+/* ---------- BREAKPOINTS ---------- */
+@media (min-width: 576px) {
+  .agenda-float {
+    bottom: max(20px, calc(env(safe-area-inset-bottom) + 14px));
+
+    &__menu {
+      width: min(72vw, 290px);
+      max-height: 64vh;
+    }
+
+    &__trigger {
+      width: 84px;
+      min-height: 138px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+
+  
+  .agenda-float {
+    bottom: max(18px, calc(env(safe-area-inset-bottom) + 14px));
+
+    &__menu {
+      width: min(72vw, 320px);
+      max-height: min(68vh, 520px);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    &__trigger {
+      width: 80px;
+      min-height: 148px;
+      padding: 0.5rem 0;
+      margin: 0.5rem 0.4rem;
+    }
+
+    &__trigger-title {
+      font-size: 0.8rem;
+    }
+
+    &__option {
+      min-height: 48px;
+      padding: 0.7rem 0.8rem;
+    }
+
+    &__option-icon {
+      width: 34px;
+      height: 34px;
+      font-size: 1rem;
+    }
+
+    &__option-text {
+      font-size: 0.82rem;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .agenda-float {
+    bottom: max(18px, calc(env(safe-area-inset-bottom) + 14px));
+
+    &__menu {
+      width: min(34vw, 420px);
+      gap: 0.45rem;
+    }
+
+    &__card--with-schedule {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 0.45rem;
+    }
+
+    &__links {
+      display: flex;
+      width: 100%;
+      gap: 0.3rem;
+    }
+
+    &__mobile-schedule {
+      display: none;
+    }
+
+    &__schedule-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 48px;
+      font-size: 0.7rem;
+      padding: 0.42rem 0.5rem;
+    }
+
+    &__option {
+      padding: 0.7rem 0.85rem;
+    }
+
+    &__option-text {
+      font-size: 0.78rem;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .agenda-float {
+    bottom: max(18px, calc(env(safe-area-inset-bottom) + 14px));
+
+    &__menu {
+      width: min(30vw, 430px);
+    }
+  }
+}

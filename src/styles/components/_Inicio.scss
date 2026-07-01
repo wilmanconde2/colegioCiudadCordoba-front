@@ -1,0 +1,425 @@
+// src/styles/components/_Inicio.scss
+
+@use '../base/Settings' as *;
+
+// !---------------------------------------------------
+// ! TEMPORAL
+// TODO Eliminar después de inscripciones y matriculas
+// !---------------------------------------------------
+
+.vacaciones {
+  text-align: center;
+  font-size: 1.5rem;
+  color: red;
+  font-weight: bold;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
+.fecha {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  // width: min(100%, 1100px);
+  width: 80%;
+  margin: 0 auto 4rem;
+  padding: 0.5rem 0;
+
+  // Link del botón "inscripciones"
+  .link-subs {
+    display: none;
+  }
+
+  // CardInformation (usa .card internamente)
+  .card {
+    margin: 0;
+    width: min(70%, 520px);
+    background-color: transparent;
+
+    img {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  // Estilos comunes (evento / inscripciones)
+  .evento,
+  .imgInscripciones {
+    border: 2px solid transparent;
+    border-radius: 12px;
+    box-shadow:
+      0 0 4px transparent,
+      0 0 8px transparent,
+      0 0 16px transparent,
+      inset 0 0 4px transparent;
+  }
+
+  .evento {
+    width: 80%;
+    border-color: $color-primary;
+    box-shadow:
+      0 0 4px $color-primary,
+      0 0 8px $color-primary,
+      0 0 16px $color-primary,
+      inset 0 0 4px $color-primary;
+  }
+
+  // Imagen inscripciones (mobile)
+  .imgInscripciones {
+    width: min(80%, 320px);
+    height: auto;
+    object-fit: contain;
+    border-color: $color-third;
+    box-shadow:
+      0 0 4px $color-third,
+      0 0 8px $color-third,
+      0 0 16px $color-third,
+      inset 0 0 4px $color-third;
+  }
+}
+
+.infoInscripciones {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h2,
+  h3 {
+    font-variant: small-caps;
+  }
+
+  li {
+    list-style: none;
+  }
+}
+
+.infoTesoreria {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+
+  h2 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .btnTesoreria {
+    width: 100%;
+    border-radius: 35px;
+  }
+}
+
+
+.inicioHero {
+  --inicio-banner-size: clamp(145px, 33vw, 280px);
+
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 1rem;
+  width: min(92%, 1300px);
+  margin: 0 auto 1.5rem;
+
+  .mainImages {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: min(86vw, 490px);
+    margin: auto;
+  }
+}
+
+.inicioHero__banner {
+  width: var(--inicio-banner-size);
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.18));
+  animation: inicioBannerFloat 3.4s ease-in-out infinite;
+  will-change: transform;
+  z-index: 1;
+}
+
+.inicioHero__banner--left,
+.inicioHero__banner--right {
+  grid-row: 2;
+}
+
+.inicioHero__banner--right {
+  animation-delay: 0.45s;
+}
+
+@keyframes inicioBannerFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inicioHero__banner {
+    animation: none;
+  }
+}
+
+// !---------------------------------------------------
+// ! LAYOUT GENERAL
+// !---------------------------------------------------
+
+.fullContainer {
+  margin-inline: auto;
+  margin-top: 6rem;
+  margin-bottom: 100px;
+
+  .mainImages {
+    width: 80%;
+    margin: auto;
+  }
+
+  .backgroundContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    max-width: 100%;
+  }
+}
+
+// Texto principal
+.backgroundContainerText {
+  color: $color-secondary;
+  display: grid;
+  margin-inline: 2rem;
+
+  h1,
+  h2 {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 25px;
+    border: 1px transparent;
+    margin-bottom: 2rem;
+  }
+
+  h1 {
+    font-size: 40px;
+    margin-top: 3rem;
+  }
+
+  h2 {
+    font-size: 24px;
+    margin-top: 2rem;
+  }
+}
+
+// CardInformation (global)
+.card {
+  color: $color-secondary;
+  font-family: $font-primary;
+  width: 65%;
+  height: auto;
+  margin: 2rem auto;
+  border-radius: 15px;
+  box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
+  text-align: center;
+
+  .groupList {
+    color: $color-secondary;
+    text-align: center;
+    border: 1px solid $color-primary;
+    border-radius: 25px;
+    box-shadow: 2px 2px 5px $color-primary;
+    width: 80%;
+    margin: auto;
+
+    &:hover {
+      box-shadow: 2px 2px 5px $color-third;
+    }
+  }
+
+  .boton {
+    display: flex;
+    width: 100px;
+    height: 40px;
+    margin: 1rem auto;
+    justify-content: center;
+  }
+
+  h5,
+  p {
+    margin: 1rem 0;
+    text-align: center;
+  }
+}
+
+.card-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: $color-secondary;
+  margin-top: 1rem;
+}
+
+em {
+  color: red !important;
+}
+
+// ! -------------------------------------------------------------
+// ! Responsive (Mobile First)
+// ! -------------------------------------------------------------
+
+@media (min-width: 576px) {
+  .fullContainer {
+    .mainImages {
+      width: 80%;
+    }
+
+    .backgroundContainer {
+      max-width: 100%;
+    }
+  }
+
+  .card {
+    max-width: 55%;
+    max-height: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .fullContainer {
+    .mainImages {
+      width: 50%;
+    }
+  }
+
+  .infoInscripciones {
+    display: none;
+  }
+
+  .fecha {
+    flex-direction: row;
+    gap: 3rem;
+
+    .link-subs {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
+  .card {
+    max-width: 45%;
+    max-height: none;
+  }
+}
+
+.infoTesoreria {
+
+  .btnTesoreria {
+    width: 80%;
+  }
+}
+
+@media (min-width: 992px) {
+  .fullContainer {
+    margin-top: 8rem;
+  }
+
+  .card {
+    max-width: 35%;
+    max-height: none;
+  }
+
+  .fecha {
+    flex-direction: row;
+    gap: 3rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card {
+    max-width: 30%;
+    max-height: none;
+  }
+
+
+  .fecha {
+    .link-subs {
+      display: flex;
+      justify-content: center;
+      width: 30%;
+    }
+  }
+
+  // !---------------------------------------------------
+  // ! TEMPORAL (hover y versión circular solo en XL)
+  // !---------------------------------------------------
+  // TODO Eliminar después de inscripciones y matriculas
+
+  .fecha {
+    justify-content: space-around;
+
+    .imgInscripciones {
+      width: 100%;
+      border-radius: 50%;
+      transition: transform 0.5s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    .evento {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .imgInscripciones {
+    display: initial;
+  }
+}
+
+@media (min-width: 992px) {
+  .inicioHero {
+    --inicio-banner-size: clamp(190px, 21vw, 315px);
+
+    grid-template-columns: minmax(190px, 1fr) minmax(360px, 520px) minmax(190px, 1fr);
+    gap: clamp(1rem, 3vw, 3rem);
+    margin-bottom: 2rem;
+
+    .mainImages {
+      grid-column: 2;
+      grid-row: 1;
+      width: min(36vw, 520px);
+    }
+  }
+
+  .inicioHero__banner--left {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: center;
+  }
+
+  .inicioHero__banner--right {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: center;
+  }
+}
+
+@media (min-width: 1400px) {
+  .inicioHero {
+    --inicio-banner-size: clamp(250px, 24vw, 360px);
+  }
+}

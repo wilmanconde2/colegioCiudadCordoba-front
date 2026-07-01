@@ -1,0 +1,222 @@
+/* front/src/styles/components/_BuscadorCursoCard.scss */
+@use '../base/Settings' as *;
+
+.BuscadorCursoCard {
+  padding: 18px 0;
+  position: relative;
+  z-index: 60;
+  width: 100%;
+  margin: 0 auto;
+
+  max-width: 100%;
+  padding-inline: 12px;
+
+  &__card {
+    width: min(980px, 85%);
+    margin: 0 auto 2rem;
+    border-radius: 14px;
+    box-shadow: 0 5px 15px rgb(13, 16, 199);
+    border: 1px solid rgba(9, 24, 185, 0.603);
+    padding: 18px;
+    color: $color-secondary;
+
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+
+    h2 {
+      color: $color-third;
+    }
+  }
+
+  &__header {
+    h2 {
+      margin: 0 0 6px;
+      font-size: 20px;
+    }
+
+    p {
+      margin: 0;
+      opacity: 0.75;
+    }
+  }
+
+  &__search {
+    margin-top: 14px;
+    position: relative;
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      outline: none;
+      transition: all 0.2s;
+
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      color: $color-third;
+
+      &:focus {
+        border-color: rgba(0, 80, 200, 0.35);
+        box-shadow: 0 0 0 4px rgba(0, 80, 200, 0.12);
+      }
+    }
+  }
+
+  &__hint {
+    display: inline-block;
+    margin-top: 8px;
+    opacity: 0.7;
+    font-size: 13px;
+  }
+
+  &__error {
+    display: inline-block;
+    margin-top: 8px;
+    color: #b00020;
+    font-size: 13px;
+  }
+
+  &__dropdown {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 8px);
+    z-index: 999;
+
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+  }
+
+  &__option {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    border: 0;
+    cursor: pointer;
+    background: white;
+    text-align: left;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .name {
+      font-weight: 600;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: $color-secondary;
+    }
+
+    .course {
+      opacity: 0.75;
+      white-space: nowrap;
+      color: $color-secondary;
+    }
+  }
+
+  &__result {
+    margin-top: 14px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding-top: 14px;
+  }
+
+  &__empty {
+    opacity: 0.8;
+  }
+
+  &__found {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    align-items: start;
+
+    .muted {
+      opacity: 0.75;
+      margin-top: 4px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: $color-third;
+      border: 1px solid rgba(0, 80, 200, 0.18);
+      font-weight: 600;
+      color: white;
+    }
+  }
+
+  &__foundInfo {
+    min-width: 0;
+  }
+
+  &__foundAction {
+    width: 100%;
+  }
+
+  &__cta {
+    width: 100%;
+    max-width: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 0;
+    background: $color-primary;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    white-space: normal;
+
+    &:hover {
+      filter: brightness(0.95);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding-inline: 0;
+
+    &__card {
+      width: 65%;
+    }
+
+    &__found {
+      grid-template-columns: 1fr auto;
+      align-items: center;
+    }
+
+    &__foundAction {
+      width: auto;
+    }
+
+    &__cta {
+      width: auto;
+      min-width: 260px;
+      white-space: nowrap;
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding-inline: 0;
+
+    &__card {
+      width: 55%;
+    }
+  }
+}

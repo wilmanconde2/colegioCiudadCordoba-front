@@ -1,0 +1,122 @@
+// src/styles/components/_Navbar.scss
+
+@use '../base/Settings' as *;
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  top: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+
+  &.bg-transparent {
+    background-color: whitesmoke !important;
+  }
+
+  &.bg-white {
+    background-color: whitesmoke !important;
+  }
+}
+
+.navbar .container-fluid {
+  display: grid;
+  grid-template-columns: 0.5fr 0.3fr 0.3fr 0.1fr;
+
+  .navbar-toggler-icon {
+    display: flex;
+    justify-self: flex-end;
+  }
+
+  .navbar-logo {
+    display: grid;
+    margin: auto !important;
+  }
+
+  .ppf {
+    img {
+      display: flex;
+      width: 80%;
+    }
+  }
+}
+
+.navbar-toggler {
+  border: none;
+  margin: 0;
+}
+
+.navbar-logo {
+  margin: 0.5rem 0 0.5rem 0.5rem;
+  img {
+    width: 50px;
+    height: 50px;
+    margin: auto auto;
+  }
+}
+
+.navbar .dropdown-menu {
+  background-color: whitesmoke !important;
+  transition: background-color 0.3s ease;
+}
+
+.navbar .dropdown-menu .dropdown-item {
+  color: $color-secondary !important;
+  background-color: whitesmoke !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link {
+  color: $color-secondary !important;
+  transition: color 0.3s ease;
+}
+
+.horarioMenu{
+  text-align: center;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0 0.5rem 0.5rem;
+  font-size: 20px;
+  a {
+    margin: 0 0.5rem;
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .ytkids {
+    text-align: center;
+  }
+}
+
+// !-------------------------------------------------------------------
+// ! Responsive (Mobile First)
+// !-------------------------------------------------------------------
+
+@media (min-width: 992px) {
+  .navbar .container-fluid {
+    display: grid;
+    padding-inline: 10px;
+    justify-content: center;
+
+    .logo,
+    .ppf,
+    .club {
+      text-align: center;
+
+      img {
+        height: 74px;
+        width: 100%;
+      }
+    }
+  }
+
+  .navbar .d-flex {
+    display: none !important;
+  }
+}
