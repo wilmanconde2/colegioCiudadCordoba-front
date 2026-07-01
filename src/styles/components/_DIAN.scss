@@ -1,0 +1,54 @@
+// src/styles/pages/_DIAN.scss
+
+@use '../base/Settings' as *;
+
+.dian-page {
+    min-height: 60vh;
+    padding-top: 8rem !important;
+    padding-bottom: 4rem !important;
+
+    .dian-logo {
+        max-width: 150px;
+        width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    h1 {
+        margin-bottom: 1rem;
+        font-weight: 700;
+        color: $color-secondary;
+    }
+
+    p {
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        line-height: 1.7;
+        color: $color-secondary;
+        font-size: 1.2rem;
+    }
+
+    .btn {
+        min-width: 260px;
+        padding: 0.85rem 1.5rem;
+        font-weight: 600;
+    }
+}
+
+@media (max-width: 768px) {
+    .dian-page {
+        padding-top: 6rem !important;
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        p {
+            padding: 0 1rem;
+        }
+
+        .btn {
+            width: 100%;
+            max-width: 320px;
+        }
+    }
+}

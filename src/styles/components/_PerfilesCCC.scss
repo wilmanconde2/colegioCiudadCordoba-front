@@ -1,0 +1,87 @@
+.fullContainer {
+  .containerProfiles {
+    margin-bottom: 2rem;
+    h2 {
+      text-align: center;
+    }
+    li {
+      list-style-type: square;
+      margin-block: 15px;
+    }
+
+    width: 70%;
+  }
+}
+
+.directivo,
+.docente,
+.estudiante,
+.egresado {
+  justify-content: center;
+  width: 60%;
+  margin: auto;
+  margin-bottom: 2rem;
+  border-radius: 150px;
+}
+
+// !-------------------------------------------------------------------
+// ! Responsive (Mobile First)
+// !-------------------------------------------------------------------
+
+@media (min-width: 576px) {
+  .fullContainer {
+    .containerProfiles {
+      width: 80%;
+    }
+  }
+
+  .directivo,
+  .docente,
+  .estudiante,
+  .egresado {
+    width: 80%;
+
+    // Estilo carrusel
+    .backgroundContainer {
+      height: 60vh;
+      img {
+        max-height: 60vh;
+      }
+    }
+  }
+}
+@media (min-width: 768px) {
+  .fullContainer {
+    .containerProfiles {
+      width: 55%;
+    }
+  }
+  .directivo,
+  .docente,
+  .estudiante,
+  .egresado {
+    width: 60%;
+  }
+}
+
+@media (min-width: 992px) {
+  .fullContainer {
+    .containerProfiles {
+      width: 55%;
+    }
+  }
+  .directivo,
+  .docente,
+  .estudiante,
+  .egresado {
+    width: 60%;
+
+    // Estilo carrusel
+    .backgroundContainer {
+      height: 80vh;
+      img {
+        max-height: 80vh;
+      }
+    }
+  }
+}

@@ -1,0 +1,316 @@
+// front/src/styles/components/_Formulario.scss
+
+@use '../base/Settings' as *;
+
+.containerForm {
+  max-width: 90%;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
+  margin-bottom: 2rem;
+}
+
+.studentCode {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+
+  legend {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.Formulario__label {
+  margin-top: 1rem;
+}
+
+.Formulario__searchWrap {
+  position: relative;
+  width: 100%;
+}
+
+.Formulario__input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: $color-secondary;
+
+  &::placeholder {
+    text-align: center;
+  }
+}
+
+.Formulario__loadingRow {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: $color-third;
+}
+
+.Formulario__error {
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.Formulario__dropdown {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  overflow: hidden;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.Formulario__option {
+  width: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 10px 12px;
+  text-align: left;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: rgba(0, 123, 255, 0.08);
+  }
+
+  &:active {
+    background: rgba(0, 123, 255, 0.14);
+  }
+}
+
+.Formulario__optionName {
+  font-weight: 600;
+  color: $color-secondary;
+  font-size: 0.95rem;
+  line-height: 1.15;
+}
+
+.Formulario__optionCourse {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.65);
+  white-space: normal;
+  /* evita cortes */
+  line-height: 1.1;
+}
+
+.resultadoCodigo {
+  margin: 1rem;
+  text-align: center;
+  border-radius: 10px;
+  border: 5px solid $color-third;
+  border-left: none;
+  border-right: none;
+
+  h3 {
+    padding: 1rem 2rem 0rem 2rem;
+  }
+}
+
+.btn-form {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+
+  &:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+}
+
+.Formulario__btnClear {
+  margin-top: 12px;
+}
+
+.Formulario__result {
+  margin-top: 14px;
+  width: 100%;
+  /* evita que el botón se salga */
+}
+
+.Formulario__resultLine {
+  margin-bottom: 6px;
+
+  &:last-of-type {
+    margin-bottom: 10px;
+  }
+}
+
+.Formulario__codeTitle {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.Formulario__codeValue {
+  margin-bottom: 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.payOnline {
+  text-align: center;
+  margin-top: 2rem;
+
+  .captionPSE {
+    width: 90%;
+    margin: auto;
+
+    p {
+      font-variant: small-caps;
+      font-size: 1.5rem;
+    }
+  }
+
+  .videoPSE {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border: none;
+    box-shadow:
+      0 0 4px $color-primary,
+      0 0 8px $color-primary,
+      0 0 12px $color-primary,
+      0 0 32px $color-primary;
+    animation: neonGlow 0.8s infinite alternate;
+  }
+
+
+  @keyframes neonGlow {
+    from {
+      box-shadow:
+        0 0 2.5px $color-primary,
+        0 0 5px $color-primary,
+        0 0 7.5px $color-primary;
+    }
+
+    to {
+      box-shadow:
+        0 0 5px $color-primary,
+        0 0 10px $color-primary,
+        0 0 15px $color-primary,
+        0 0 40px $color-primary;
+    }
+  }
+
+  em {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: $color-third;
+  }
+
+  .imagenPse {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      margin: 1rem;
+      display: block;
+    }
+
+    .pseCostos {
+      width: 100px;
+    }
+
+    .codigoQR {
+      width: 200px;
+    }
+  }
+}
+
+.Formulario__hint {
+  font-size: 0.8rem;
+  color: $color-third;
+  margin-top: 0.5rem;
+  text-decoration: underline;
+}
+
+// !-------------------------------------------------------------------
+// ! Responsive (Mobile First)
+// !-------------------------------------------------------------------
+
+@media (min-width: 576px) {
+  .containerForm {
+    max-width: 50%;
+  }
+
+  .Formulario__option {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .Formulario__optionCourse {
+    white-space: nowrap;
+  }
+
+  .Formulario__optionName {
+    font-size: 1rem;
+  }
+
+  .Formulario__optionCourse {
+    font-size: 0.85rem;
+  }
+
+  .resultadoCodigo {
+    margin-top: 1rem;
+    text-align: center;
+    border-radius: 100px;
+    border: 10px solid $color-third;
+    border-left: none;
+    border-right: none;
+
+    h3 {
+      padding: 1rem 2rem 0rem 2rem;
+    }
+  }
+
+  .btn-form {
+    width: auto;
+    max-width: none;
+  }
+}
