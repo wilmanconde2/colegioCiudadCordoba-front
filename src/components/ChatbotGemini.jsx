@@ -21,6 +21,25 @@ const QUICK_QUESTIONS = [
   '¿Quién atiende Quinto 2?',
 ];
 
+const renderMessageText = (text) => {
+  const parts = text.split(/(https?:\/\/[^\s]+)/g);
+
+  return parts.map((part, index) => {
+    if (!part.startsWith('http://') && !part.startsWith('https://')) return part;
+
+    return (
+      <a
+        key={`${part}-${index}`}
+        href={part}
+        target='_blank'
+        rel='noopener noreferrer'
+      >
+        Abrir enlace de WhatsApp
+      </a>
+    );
+  });
+};
+
 const ChatbotGemini = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
@@ -47,7 +66,10 @@ const ChatbotGemini = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: cleanQuestion }),
+        body: JSON.stringify({
+          message: cleanQuestion,
+          history: messages.slice(-6).map(({ role, text }) => ({ role, text })),
+        }),
       });
 
       const data = await response.json();
@@ -145,7 +167,7 @@ const ChatbotGemini = () => {
                 key={`${message.role}-${index}`}
                 className={`chatbot-gemini__message chatbot-gemini__message--${message.role}`}
               >
-                {message.text}
+                {renderMessageText(message.text)}
               </div>
             ))}
 

@@ -140,6 +140,13 @@
     line-height: 1.35;
     white-space: pre-line;
 
+    a {
+      color: #010c80;
+      font-weight: 700;
+      text-decoration: underline;
+      overflow-wrap: anywhere;
+    }
+
     &--assistant {
       align-self: flex-start;
       background: #f2f5ff;

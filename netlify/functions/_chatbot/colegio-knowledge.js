@@ -2,7 +2,65 @@
 // netlify/functions/_chatbot/colegio-knowledge.js
 
 export const DEFAULT_ANSWER =
-  'Por ahora no tengo esa información. Por favor comunícate con secretaría o tesorería.';
+  'Por ahora no tengo información confirmada sobre esa consulta. Para verificarla, comunícate con el colegio al WhatsApp 3104280125.';
+
+export const APPOINTMENT_LINKS = {
+  coordination:
+    'https://wa.me/573104280125?text=Hola%2C%20deseo%20agendar%20una%20cita%20con%20coordinaci%C3%B3n.',
+  teachers:
+    'https://wa.me/573104280125?text=Hola%2C%20deseo%20agendar%20una%20cita%20con%20un%20profesor%20o%20profesora.',
+  psychology:
+    'https://wa.me/573175016066?text=Hola%2C%20deseo%20agendar%20una%20cita%20con%20psicolog%C3%ADa.',
+};
+
+export const ADMISSIONS_2027 = {
+  availableFrom: '1 de septiembre de 2026',
+};
+
+export const COORDINATORS = {
+  primary: {
+    name: 'Diana Díaz',
+    area: 'Coordinación Primaria',
+    schedules: [
+      'Jornada mañana: lunes a viernes, 8:00 a.m. a 10:00 a.m.',
+      'Jornada tarde: lunes, martes, miércoles y viernes, 2:30 p.m. a 4:10 p.m.',
+      'Jueves en la tarde no atiende.',
+    ],
+  },
+  secondary: {
+    name: 'Alexander Fajardo',
+    area: 'Coordinación Secundaria',
+    schedules: [
+      'Jornada mañana: lunes a viernes, 8:00 a.m. a 10:00 a.m.',
+      'Jornada tarde: lunes, martes, jueves y viernes, 2:30 p.m. a 4:10 p.m.',
+      'Miércoles en la tarde no atiende.',
+    ],
+  },
+};
+
+export const PSYCHOLOGISTS = [
+  {
+    name: 'Hannyt Kienesberger',
+    schedules: [
+      'Lunes, martes, miércoles y viernes.',
+      'Mañana: 7:00 a.m. a 1:00 p.m.',
+      'Tarde: 1:30 p.m. a 5:40 p.m.',
+      'Jueves no atiende.',
+    ],
+    whatsapp: '3175016066',
+  },
+  {
+    name: 'Ángela Ceballos Conde',
+    schedules: [
+      'Lunes: 9:00 a.m. a 1:00 p.m. y 1:30 p.m. a 3:30 p.m.',
+      'Martes: 9:00 a.m. a 1:00 p.m. y 1:30 p.m. a 2:30 p.m.',
+      'Miércoles: 9:00 a.m. a 1:00 p.m. y 1:30 p.m. a 3:00 p.m.',
+      'Jueves: 9:00 a.m. a 1:00 p.m. y 1:30 p.m. a 3:00 p.m.',
+      'Viernes: 9:00 a.m. a 1:00 p.m.',
+    ],
+    whatsapp: '3175016066',
+  },
+];
 
 export const GENERAL_CONTEXT = [
   'Eres Keyla, la asistente virtual del Colegio Ciudad Córdoba de Cali.',
@@ -10,7 +68,13 @@ export const GENERAL_CONTEXT = [
   'Keyla es el nombre de la asistente, no del usuario. Nunca llames al usuario Keyla.',
   'Responde únicamente con información institucional incluida en la base de conocimiento.',
   'No inventes datos. Responde corto, claro y amable.',
-  'Si no tienes la información exacta, responde: Por ahora no tengo esa información. Por favor comunícate con secretaría o tesorería.',
+  'Si no tienes la información exacta, indica claramente que no está confirmada y remite al WhatsApp institucional 3104280125.',
+  'Responde solo lo que preguntaron. No agregues información de otra persona, nivel, costo o servicio.',
+  'Distingue requisitos de matrícula de costos de matrícula: no son lo mismo.',
+  'En este contexto, ruta escolar significa transporte escolar; no significa dirección ni ubicación.',
+  'Si solicitan una persona específica, responde únicamente su información.',
+  'Profe del curso se refiere al director de grupo; profe de una asignatura se refiere al docente de esa materia.',
+  'Las citas se solicitan por WhatsApp para Coordinación, Profesores o Psicología.',
 ].join('\n');
 
 export const KNOWLEDGE_ENTRIES = [
@@ -69,6 +133,13 @@ export const KNOWLEDGE_ENTRIES = [
     keywords: ['matricula', 'matrícula', 'matriculas', 'matrículas', 'extraordinaria', 'ordinaria', 'inscripcion', 'inscripción'],
     answer:
       'Costos de matrícula 2026:\n- Matrícula ordinaria: $387.000 para todos los niveles.\n- Matrícula extraordinaria: $424.340 para todos los niveles.\n- La matrícula extraordinaria aplica con recargo del 10% a partir del 13 de diciembre de 2025.\n- La estampilla Pro-cultura 1,5% y el carné estudiantil están incluidos en el costo de matrícula.',
+  },
+  {
+    id: 'inscripciones-2027',
+    title: 'Disponibilidad de información para Inscripciones 2027',
+    keywords: ['inscripciones 2027', 'inscripcion 2027', 'matricula 2027', 'matriculas 2027', 'cupos 2027', 'cupo 2027', 'ano lectivo 2027'],
+    answer:
+      'La información de Inscripciones 2027 estará disponible a partir del 1 de septiembre de 2026.',
   },
   {
     id: 'pension-preescolar-primaria',

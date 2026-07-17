@@ -1,12 +1,15 @@
 // netlify/functions/_chatbot/local-answer.js
 
 import {
+  ADMISSIONS_2027,
+  COORDINATORS,
   DEFAULT_ANSWER,
-  KNOWLEDGE_ENTRIES,
-  TEACHERS,
-  GROUP_DIRECTORS,
-  TUITION_FEES_2026,
   ENROLLMENT_2026,
+  GROUP_DIRECTORS,
+  KNOWLEDGE_ENTRIES,
+  PSYCHOLOGISTS,
+  TEACHERS,
+  TUITION_FEES_2026,
 } from './colegio-knowledge.js';
 
 const normalize = (value = '') =>
@@ -19,24 +22,30 @@ const normalize = (value = '') =>
     .replace(/\s+/g, ' ')
     .trim();
 
-const compact = (value = '') => normalize(value).replace(/\s+/g, '');
+const compact = (value = '') => normalize(value).replace(/[\s-]+/g, '');
 
-const unique = (items) => [...new Set(items.filter(Boolean))];
+const containsPhrase = (text, phrase) => {
+  const cleanText = ` ${normalize(text).replace(/-/g, ' ')} `;
+  const cleanPhrase = normalize(phrase).replace(/-/g, ' ');
+  return cleanPhrase ? cleanText.includes(` ${cleanPhrase} `) : false;
+};
+
+const hasAny = (text, phrases = []) => phrases.some((phrase) => containsPhrase(text, phrase));
 
 const GRADE_ALIASES = {
   jardin: ['jardin', 'prejardin', 'preescolar'],
-  transicion: ['transicion', 'transición'],
-  primero: ['primero', '1', '01', '1ro', '1°'],
-  segundo: ['segundo', '2', '02', '2do', '2°'],
-  tercero: ['tercero', '3', '03', '3ro', '3°'],
-  cuarto: ['cuarto', '4', '04', '4to', '4°'],
-  quinto: ['quinto', '5', '05', '5to', '5°'],
-  sexto: ['sexto', '6', '06', '6to', '6°'],
-  septimo: ['septimo', 'séptimo', '7', '07', '7mo', '7°'],
-  octavo: ['octavo', '8', '08', '8vo', '8°'],
-  noveno: ['noveno', '9', '09', '9no', '9°'],
-  decimo: ['decimo', 'décimo', '10', '10°'],
-  once: ['once', '11', '11°'],
+  transicion: ['transicion'],
+  primero: ['primero', '1ro'],
+  segundo: ['segundo', '2do'],
+  tercero: ['tercero', '3ro'],
+  cuarto: ['cuarto', '4to'],
+  quinto: ['quinto', '5to'],
+  sexto: ['sexto', '6to'],
+  septimo: ['septimo', '7mo'],
+  octavo: ['octavo', '8vo'],
+  noveno: ['noveno', '9no'],
+  decimo: ['decimo'],
+  once: ['once'],
 };
 
 const NUMBER_TO_GRADE = {
@@ -53,21 +62,103 @@ const NUMBER_TO_GRADE = {
   11: 'once',
 };
 
-const getGradeKeyFromText = (text = '') => {
-  const clean = normalize(text);
+const GRADE_TO_NUMBER = Object.fromEntries(
+  Object.entries(NUMBER_TO_GRADE).map(([number, grade]) => [grade, Number(number)])
+);
 
+const getGradeKeyFromText = (text = '') => {
   for (const [grade, aliases] of Object.entries(GRADE_ALIASES)) {
-    if (aliases.some((alias) => new RegExp(`\\b${normalize(alias)}\\b`).test(clean))) {
-      return grade;
-    }
+    if (aliases.some((alias) => containsPhrase(text, alias))) return grade;
   }
 
   return null;
 };
 
-const hasAny = (question, words = []) => {
-  const clean = normalize(question);
-  return words.some((word) => clean.includes(normalize(word)));
+const getModality = (text = '') => {
+  if (hasAny(text, ['com', 'comercial'])) return 'com';
+  if (hasAny(text, ['ind', 'industrial'])) return 'ind';
+  return null;
+};
+
+const extractRequestedCourse = (text = '') => {
+  const raw = text.toString().toLowerCase();
+  const clean = normalize(text).replace(/-/g, ' ');
+  const labeledNumbers = clean.match(/\b(?:grado|curso|grupo|salon)\s+(1[01]|[1-9])\s+([1-5])\b/);
+
+  if (labeledNumbers) {
+    const gradeNumber = Number(labeledNumbers[1]);
+    return {
+      grade: NUMBER_TO_GRADE[gradeNumber],
+      gradeNumber,
+      section: String(Number(labeledNumbers[2])),
+      modality: getModality(text),
+    };
+  }
+
+  const separatedNumbers = raw.match(/\b(1[01]|[1-9])\s*(?:[.-]|[°º]\s*)\s*([1-5])\b/);
+
+  if (separatedNumbers) {
+    const gradeNumber = Number(separatedNumbers[1]);
+    return {
+      grade: NUMBER_TO_GRADE[gradeNumber],
+      gradeNumber,
+      section: String(Number(separatedNumbers[2])),
+      modality: getModality(text),
+    };
+  }
+
+  const grade = getGradeKeyFromText(text);
+
+  if (!grade) return null;
+
+  const aliases = GRADE_ALIASES[grade].map(normalize).join('|');
+  const sectionMatch = clean.match(new RegExp(`\\b(?:${aliases})\\s+([1-5a-c])\\b`));
+
+  return {
+    grade,
+    gradeNumber: GRADE_TO_NUMBER[grade] || null,
+    section: sectionMatch ? sectionMatch[1] : null,
+    modality: getModality(text),
+  };
+};
+
+const parseStoredCourse = (course = '') => {
+  const clean = normalize(course).replace(/-/g, ' ');
+  const grade = getGradeKeyFromText(course);
+  const numbers = clean.match(/\d+/g)?.map(Number) || [];
+
+  if (grade) {
+    const aliases = GRADE_ALIASES[grade].map(normalize).join('|');
+    const sectionMatch = clean.match(new RegExp(`\\b(?:${aliases})\\s+([1-5a-c])\\b`));
+
+    return {
+      grade,
+      gradeNumber: GRADE_TO_NUMBER[grade] || null,
+      section: sectionMatch?.[1] || (numbers[0] ? String(numbers[0]) : null),
+      modality: getModality(course),
+    };
+  }
+
+  return {
+    grade: NUMBER_TO_GRADE[numbers[0]] || null,
+    gradeNumber: numbers[0] || null,
+    section: numbers[1] ? String(numbers[1]) : null,
+    modality: getModality(course),
+  };
+};
+
+const courseMatchesQuestion = (course, question) => {
+  const requested = extractRequestedCourse(question);
+
+  if (!requested) return compact(question).includes(compact(course));
+
+  const stored = parseStoredCourse(course);
+
+  if (!stored.grade || stored.grade !== requested.grade) return false;
+  if (requested.section && stored.section !== requested.section) return false;
+  if (requested.modality && stored.modality !== requested.modality) return false;
+
+  return true;
 };
 
 const teacherToAnswer = (teacher) => {
@@ -77,167 +168,100 @@ const teacherToAnswer = (teacher) => {
     : '';
   const schedules = teacher.schedules?.length
     ? teacher.schedules.map((schedule) => `- ${schedule}`).join('\n')
-    : '- Por ahora no tengo horario registrado.';
+    : '- Por ahora no tengo un horario confirmado.';
 
   return `${teacher.name}${courses}${subjects}\nHorario de atención a padres:\n${schedules}`;
 };
 
-const directorToAnswer = (director) =>
-  `El director(a) de grupo de ${director.course} es ${director.teacher}.`;
+const coordinatorToAnswer = (coordinator) =>
+  `${coordinator.name} - ${coordinator.area}:\n${coordinator.schedules
+    .map((schedule) => `- ${schedule}`)
+    .join('\n')}`;
 
-const courseMatchesQuestion = (course, question) => {
-  const cleanCourse = normalize(course);
-  const cleanQuestion = normalize(question);
-  const compactCourse = compact(course);
-  const compactQuestion = compact(question);
+const psychologistToAnswer = (psychologist) =>
+  `${psychologist.name} - Psicología:\n${psychologist.schedules
+    .map((schedule) => `- ${schedule}`)
+    .join('\n')}\nWhatsApp Psicología: ${psychologist.whatsapp}.`;
 
-  const exactNumericCourse = cleanQuestion.match(/\b(\d{1,2})\s*-\s*(\d{1,2})\b/);
-
-  if (exactNumericCourse) {
-    const requestedGrade = String(Number(exactNumericCourse[1]));
-    const requestedSection = String(Number(exactNumericCourse[2]));
-
-    const courseNumbers = cleanCourse.match(/\d+/g) || [];
-
-    if (courseNumbers.length >= 2) {
-      return (
-        String(Number(courseNumbers[0])) === requestedGrade &&
-        String(Number(courseNumbers[1])) === requestedSection
-      );
-    }
-
-    const gradeWord = NUMBER_TO_GRADE[Number(requestedGrade)];
-
-    if (!gradeWord) return false;
-
-    return (
-      new RegExp(`\\b${gradeWord}\\b`).test(cleanCourse) &&
-      new RegExp(`\\b${requestedSection}\\b`).test(cleanCourse)
-    );
-  }
-
-  if (compactQuestion.includes(compactCourse)) return true;
-
-  const courseParts = cleanCourse.split(' ').filter(Boolean);
-  const questionParts = cleanQuestion.split(' ').filter(Boolean);
-
-  const courseNumbers = cleanCourse.match(/\d+/g) || [];
-  const questionNumbers = cleanQuestion.match(/\d+/g) || [];
-
-  const hasComInd = ['com', 'ind'].every((tag) => {
-    if (!courseParts.includes(tag)) return true;
-    return questionParts.includes(tag);
-  });
-
-  if (!hasComInd) return false;
-
-  const courseGradeNumber = courseNumbers[0];
-  const courseSectionNumber = courseNumbers[1];
-
-  if (courseGradeNumber) {
-    const gradeWord = NUMBER_TO_GRADE[Number(courseGradeNumber)];
-    const gradeAliases = gradeWord ? GRADE_ALIASES[gradeWord] : [courseGradeNumber];
-
-    const questionHasGrade =
-      gradeAliases?.some((alias) => new RegExp(`\\b${normalize(alias)}\\b`).test(cleanQuestion)) ||
-      questionNumbers.includes(courseGradeNumber);
-
-    const questionHasSection = courseSectionNumber
-      ? questionNumbers.includes(courseSectionNumber)
-      : true;
-
-    return questionHasGrade && questionHasSection;
-  }
-
-  const courseGradeWord = getGradeKeyFromText(cleanCourse);
-
-  if (courseGradeWord) {
-    const gradeAliases = GRADE_ALIASES[courseGradeWord];
-
-    const questionHasGrade = gradeAliases.some((alias) =>
-      new RegExp(`\\b${normalize(alias)}\\b`).test(cleanQuestion)
-    );
-
-    const courseSection = courseNumbers[1] || cleanCourse.match(/\b[a-z]\b/)?.[0];
-
-    if (courseSection) {
-      return questionHasGrade && cleanQuestion.includes(courseSection);
-    }
-
-    return questionHasGrade;
-  }
-
-  return courseParts.length > 0 && courseParts.every((part) => cleanQuestion.includes(part));
-};
-
-const findTeacherByName = (question) => {
+const findPersonByName = (question, people) => {
   const cleanQuestion = normalize(question);
   const questionTokens = cleanQuestion.split(' ').filter((token) => token.length > 2);
+  const scored = people
+    .map((person) => {
+      const nameTokens = normalize(person.name)
+        .split(' ')
+        .filter((token) => token.length > 2);
+      const score = nameTokens.filter((token) => questionTokens.includes(token)).length;
 
-  const scored = TEACHERS.map((teacher) => {
-    const nameTokens = normalize(teacher.name)
-      .split(' ')
-      .filter((token) => token.length > 2);
-
-    const matches = nameTokens.filter((token) => questionTokens.includes(token));
-
-    return {
-      teacher,
-      score: matches.length,
-      exact: compact(question).includes(compact(teacher.name)),
-    };
-  })
+      return {
+        person,
+        score,
+        exact: compact(question).includes(compact(person.name)),
+      };
+    })
     .filter((item) => item.exact || item.score > 0)
-    .sort((a, b) => {
-      if (b.exact !== a.exact) return Number(b.exact) - Number(a.exact);
-      return b.score - a.score;
-    });
+    .sort((a, b) => Number(b.exact) - Number(a.exact) || b.score - a.score);
 
   if (!scored.length) return null;
+  if (scored[0].exact) return scored[0].person;
 
-  const bestScore = scored[0].score;
-  const bestItems = scored.filter((item) => item.exact || item.score === bestScore);
-
-  if (bestItems.length === 1) return bestItems[0].teacher;
-
-  const strongMatches = bestItems.filter((item) => item.score >= 2 || item.exact);
-
-  if (strongMatches.length === 1) return strongMatches[0].teacher;
-
-  return null;
+  const best = scored.filter((item) => item.score === scored[0].score);
+  return best.length === 1 ? best[0].person : null;
 };
 
+const findExactPersonByName = (question, people) =>
+  people.find((person) => compact(question).includes(compact(person.name))) || null;
+
+const findTeacherByName = (question) => findPersonByName(question, TEACHERS);
+
+const findCoordinatorByName = (question) =>
+  findPersonByName(question, Object.values(COORDINATORS));
+
+const findPsychologistByName = (question) => findPersonByName(question, PSYCHOLOGISTS);
+
+const subjectMatchesQuestion = (subject, question) => {
+  const words = normalize(subject)
+    .replace(/-/g, ' ')
+    .split(' ')
+    .filter((word) => word.length > 3);
+
+  return words.length > 0 && words.every((word) => containsPhrase(question, word));
+};
+
+const questionHasKnownSubject = (question) =>
+  TEACHERS.some((teacher) =>
+    teacher.subjects?.some((subject) => subjectMatchesQuestion(subject, question))
+  );
+
 const findTeachersByCourseOrSubject = (question) => {
-  const cleanQuestion = normalize(question);
+  const hasRequestedCourse = Boolean(extractRequestedCourse(question));
+  const hasRequestedSubject = questionHasKnownSubject(question);
 
   return TEACHERS.filter((teacher) => {
     const courseMatch = teacher.courses?.some((course) => courseMatchesQuestion(course, question));
+    const subjectMatch = teacher.subjects?.some((subject) =>
+      subjectMatchesQuestion(subject, question)
+    );
 
-    const subjectMatch = teacher.subjects?.some((subject) => {
-      const subjectWords = normalize(subject)
-        .split(' ')
-        .filter((word) => word.length > 3);
+    if (hasRequestedCourse && hasRequestedSubject) return courseMatch && subjectMatch;
+    if (hasRequestedCourse) return courseMatch;
+    if (hasRequestedSubject) return subjectMatch;
 
-      return subjectWords.length && subjectWords.every((word) => cleanQuestion.includes(word));
-    });
-
-    return courseMatch || subjectMatch;
+    return false;
   });
 };
 
 const findTeacherAnswer = (question) => {
   const teacherByName = findTeacherByName(question);
-
   if (teacherByName) return teacherToAnswer(teacherByName);
 
   const matchedTeachers = findTeachersByCourseOrSubject(question);
-
   if (matchedTeachers.length === 1) return teacherToAnswer(matchedTeachers[0]);
 
   if (matchedTeachers.length > 1) {
-    return `Encontré varios docentes relacionados con tu consulta:\n\n${matchedTeachers
-      .map((teacher) => teacherToAnswer(teacher))
-      .join('\n\n')}`;
+    return `Encontré varios docentes relacionados. Indica el nombre del docente o si buscas al director de grupo:\n- ${matchedTeachers
+      .map((teacher) => teacher.name)
+      .join('\n- ')}`;
   }
 
   return null;
@@ -248,34 +272,72 @@ const findDirectorAnswer = (question) => {
     courseMatchesQuestion(director.course, question)
   );
 
-  if (matched.length === 1) return directorToAnswer(matched[0]);
-
   if (matched.length > 1) {
-    return `Encontré varios directores de grupo relacionados:\n${matched
-      .map((item) => `- ${item.course}: ${item.teacher}`)
-      .join('\n')}`;
+    const requested = extractRequestedCourse(question);
+    const modalities = new Set(matched.map((item) => parseStoredCourse(item.course).modality));
+
+    if (requested?.section && modalities.has('com') && modalities.has('ind')) {
+      return `Encontré el mismo grupo en las modalidades Comercial e Industrial. Indica la modalidad para darte únicamente el docente y horario correctos.`;
+    }
+
+    return `Necesito el grupo completo para identificar al docente exacto. Indica grado y número, por ejemplo: Tercero 3.`;
   }
 
-  return null;
+  if (!matched.length) return null;
+
+  const director = matched[0];
+  const teacher = TEACHERS.find(
+    (item) => normalize(item.name) === normalize(director.teacher)
+  );
+
+  if (!teacher) {
+    return `El director o directora de grupo de ${director.course} es ${director.teacher}.`;
+  }
+
+  return `Director(a) de grupo de ${director.course}:\n${teacherToAnswer(teacher)}`;
+};
+
+const findCoordinatorAnswer = (question) => {
+  const namedCoordinator = findCoordinatorByName(question);
+
+  if (namedCoordinator) return coordinatorToAnswer(namedCoordinator);
+
+  if (hasAny(question, ['primaria'])) {
+    return coordinatorToAnswer(COORDINATORS.primary);
+  }
+
+  if (hasAny(question, ['secundaria', 'bachillerato', 'bto'])) {
+    return coordinatorToAnswer(COORDINATORS.secondary);
+  }
+
+  return `${coordinatorToAnswer(COORDINATORS.primary)}\n\n${coordinatorToAnswer(
+    COORDINATORS.secondary
+  )}`;
+};
+
+const findPsychologistAnswer = (question) => {
+  const namedPsychologist = findPsychologistByName(question);
+
+  if (namedPsychologist) return psychologistToAnswer(namedPsychologist);
+
+  return PSYCHOLOGISTS.map(psychologistToAnswer).join('\n\n');
 };
 
 const findTuitionAnswer = (question) => {
-  const cleanQuestion = normalize(question);
+  if (
+    !hasAny(question, [
+      'pension',
+      'mensualidad',
+      'cuota mensual',
+      'valor de la pension',
+      'cuanto vale la pension',
+      'cuanto cuesta la pension',
+    ])
+  ) {
+    return null;
+  }
 
-  const wantsTuition = hasAny(cleanQuestion, [
-    'pension',
-    'pensión',
-    'mensualidad',
-    'mensual',
-    'cuota',
-    'valor pension',
-    'cuanto vale la pension',
-    'cuanto cuesta la pension',
-  ]);
-
-  if (!wantsTuition) return null;
-
-  const grade = getGradeKeyFromText(cleanQuestion);
+  const grade = getGradeKeyFromText(question);
 
   if (!grade) {
     return `Pensiones 2026:
@@ -285,7 +347,6 @@ const findTuitionAnswer = (question) => {
   }
 
   const fee = TUITION_FEES_2026[grade];
-
   if (!fee) return null;
 
   return `Pensión 2026 para ${fee.label}:
@@ -294,19 +355,26 @@ const findTuitionAnswer = (question) => {
 - Desde el día 9: ${fee.late}.`;
 };
 
-const findEnrollmentAnswer = (question) => {
-  const cleanQuestion = normalize(question);
-
-  const wantsEnrollment = hasAny(cleanQuestion, [
+const findEnrollmentCostAnswer = (question) => {
+  const enrollmentIntent = hasAny(question, [
     'matricula',
-    'matrícula',
     'matriculas',
-    'matrículas',
     'inscripcion',
-    'inscripción',
+    'inscripciones',
+  ]);
+  const costIntent = hasAny(question, [
+    'cuanto',
+    'costo',
+    'costos',
+    'precio',
+    'valor',
+    'vale',
+    'cuesta',
+    'ordinaria',
+    'extraordinaria',
   ]);
 
-  if (!wantsEnrollment) return null;
+  if (!enrollmentIntent || !costIntent) return null;
 
   return `Costos de matrícula 2026:
 - Matrícula ordinaria: ${ENROLLMENT_2026.ordinary}.
@@ -316,101 +384,335 @@ const findEnrollmentAnswer = (question) => {
 };
 
 const findKnowledgeAnswer = (question) => {
-  const cleanQuestion = normalize(question);
+  const ignoredSingleKeywords = new Set([
+    'colegio',
+    'nombre',
+    'padres',
+    'docente',
+    'primaria',
+    'jardin',
+    'transicion',
+    'primero',
+    'segundo',
+    'tercero',
+    'cuarto',
+    'quinto',
+    'sexto',
+    'septimo',
+    'octavo',
+    'noveno',
+    'decimo',
+    'once',
+  ]);
 
   const scored = KNOWLEDGE_ENTRIES.map((entry) => {
-    const score = entry.keywords.reduce((total, keyword) => {
-      const normalizedKeyword = normalize(keyword);
+    const matches = entry.keywords
+      .map(normalize)
+      .filter(Boolean)
+      .filter((keyword) => {
+        const words = keyword.split(' ');
+        if (words.length === 1 && ignoredSingleKeywords.has(keyword)) return false;
+        return containsPhrase(question, keyword);
+      });
 
-      if (!normalizedKeyword) return total;
-
-      if (cleanQuestion.includes(normalizedKeyword)) {
-        return total + normalizedKeyword.length + 10;
-      }
-
-      const keywordWords = normalizedKeyword.split(' ').filter((word) => word.length > 3);
-      const partialScore = keywordWords.filter((word) => cleanQuestion.includes(word)).length;
-
-      return total + partialScore;
-    }, 0);
-
-    return { entry, score };
+    return {
+      entry,
+      score: matches.reduce((total, keyword) => total + keyword.length, 0),
+    };
   })
     .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score);
 
   if (!scored.length) return null;
-
+  if (scored[1] && scored[1].score === scored[0].score) return null;
   return scored[0].entry.answer;
 };
 
-const isGreetingOnly = (question) => {
-  const clean = normalize(question);
-  return ['hola', 'buenas', 'buenos dias', 'buenas tardes', 'buenas noches'].includes(clean);
+const isGreetingOnly = (question) =>
+  ['hola', 'buenas', 'buenos dias', 'buenas tardes', 'buenas noches'].includes(
+    normalize(question)
+  );
+
+const isReferentialFollowUp = (question) =>
+  hasAny(question, [
+    'ella',
+    'esa persona',
+    'ese coordinador',
+    'esa coordinadora',
+    'con ella',
+    'con el',
+  ]);
+
+const historyToText = (history = []) =>
+  history
+    .slice(-6)
+    .map((message) => message?.text || '')
+    .filter(Boolean)
+    .join(' ');
+
+const createWhatsAppLink = (number, message) =>
+  `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+
+const buildAppointmentAnswer = (type, personName = '') => {
+  if (type === 'coordination') {
+    const message = `Hola, deseo agendar una cita con coordinación${
+      personName ? ` (${personName})` : ''
+    }.
+
+Nombre completo acudiente:
+Nombre del estudiante:
+Grado:
+Motivo de la cita:
+Día y hora, de acuerdo con el horario de atención:
+Teléfono de contacto:`;
+
+    return `Puedes solicitar la cita con Coordinación por WhatsApp aquí:\n${createWhatsAppLink(
+      '573104280125',
+      message
+    )}`;
+  }
+
+  if (type === 'psychology') {
+    const message = `Hola, deseo agendar una cita con Psicología${
+      personName ? ` (${personName})` : ''
+    }.
+
+Nombre del acudiente:
+Nombre del estudiante:
+Grado:
+Motivo de la consulta:
+Día y hora, de acuerdo con el horario de atención:
+Teléfono de contacto:`;
+
+    return `Puedes solicitar la cita con Psicología por WhatsApp aquí:\n${createWhatsAppLink(
+      '573175016066',
+      message
+    )}`;
+  }
+
+  const message = `Hola, deseo agendar una cita con un profesor o profesora.
+
+Nombre del profesor: ${personName}
+Nombre completo acudiente:
+Nombre del estudiante:
+Grado:
+Motivo de la cita:
+Día y hora, de acuerdo con el horario de atención:
+Teléfono de contacto:`;
+
+  return `Puedes solicitar la cita con el docente por WhatsApp aquí:\n${createWhatsAppLink(
+    '573104280125',
+    message
+  )}`;
 };
 
-export const getLocalAnswer = (question = '') => {
-  const cleanQuestion = normalize(question);
+const findSingleDirectorTeacher = (question) => {
+  const matchedDirector = GROUP_DIRECTORS.filter((director) =>
+    courseMatchesQuestion(director.course, question)
+  );
 
-  if (!cleanQuestion) return null;
+  if (matchedDirector.length !== 1) return null;
 
-  if (isGreetingOnly(cleanQuestion)) {
+  return TEACHERS.find(
+    (teacher) => normalize(teacher.name) === normalize(matchedDirector[0].teacher)
+  );
+};
+
+export const getLocalAnswer = (question = '', history = []) => {
+  if (!normalize(question)) return null;
+
+  if (isGreetingOnly(question)) {
     return 'Hola. Soy Keyla, la asistente virtual del Colegio Ciudad Córdoba. Puedo ayudarte con costos, matrículas, pensiones, horarios, docentes, cronograma, pagos y contacto institucional.';
   }
 
-  const teacherIntent = hasAny(cleanQuestion, [
+  const conversationContext = historyToText(history);
+  const resolvedQuestion = isReferentialFollowUp(question)
+    ? `${question} ${conversationContext}`
+    : question;
+
+  const admissions2027Intent =
+    containsPhrase(question, '2027') &&
+    hasAny(question, [
+      'inscripcion',
+      'inscripciones',
+      'matricula',
+      'matriculas',
+      'cupo',
+      'cupos',
+      'ano lectivo',
+    ]);
+
+  if (admissions2027Intent) {
+    return `La información de Inscripciones 2027 estará disponible a partir del ${ADMISSIONS_2027.availableFrom}.`;
+  }
+
+  const appointmentIntent =
+    containsPhrase(question, 'cita') &&
+    hasAny(question, [
+      'agendar',
+      'agendo',
+      'sacar',
+      'saco',
+      'pedir',
+      'solicitar',
+      'programar',
+      'programo',
+      'separar',
+      'reservar',
+      'necesito',
+      'quiero',
+    ]);
+
+  if (appointmentIntent) {
+    const exactCoordinator = findExactPersonByName(
+      resolvedQuestion,
+      Object.values(COORDINATORS)
+    );
+    const exactPsychologist = findExactPersonByName(resolvedQuestion, PSYCHOLOGISTS);
+    const exactTeacher = findExactPersonByName(resolvedQuestion, TEACHERS);
+
+    if (exactCoordinator) return buildAppointmentAnswer('coordination', exactCoordinator.name);
+    if (exactPsychologist) return buildAppointmentAnswer('psychology', exactPsychologist.name);
+    if (exactTeacher) return buildAppointmentAnswer('teachers', exactTeacher.name);
+
+    const namedCoordinator = findCoordinatorByName(resolvedQuestion);
+
+    if (hasAny(resolvedQuestion, ['coordinacion', 'coordinador', 'coordinadora'])) {
+      return buildAppointmentAnswer('coordination', namedCoordinator?.name);
+    }
+
+    const namedPsychologist = findPsychologistByName(resolvedQuestion);
+
+    if (hasAny(resolvedQuestion, ['psicologia', 'psicologa', 'psicologo'])) {
+      return buildAppointmentAnswer('psychology', namedPsychologist?.name);
+    }
+
+    const namedTeacher = findTeacherByName(resolvedQuestion);
+    const directorTeacher = questionHasKnownSubject(resolvedQuestion)
+      ? null
+      : findSingleDirectorTeacher(resolvedQuestion);
+    const matchedTeachers = findTeachersByCourseOrSubject(resolvedQuestion);
+    const resolvedTeacher =
+      namedTeacher || directorTeacher || (matchedTeachers.length === 1 ? matchedTeachers[0] : null);
+    const explicitTeacherType = hasAny(resolvedQuestion, [
+      'profesor',
+      'profesora',
+      'profe',
+      'docente',
+      'director de grupo',
+      'directora de grupo',
+    ]);
+
+    if (
+      explicitTeacherType ||
+      (resolvedTeacher && !namedCoordinator && !namedPsychologist)
+    ) {
+      return buildAppointmentAnswer('teachers', resolvedTeacher?.name);
+    }
+
+    const partialPeople = [namedCoordinator, namedPsychologist, namedTeacher].filter(Boolean);
+
+    if (partialPeople.length === 1 && namedCoordinator) {
+      return buildAppointmentAnswer('coordination', namedCoordinator.name);
+    }
+
+    if (partialPeople.length === 1 && namedPsychologist) {
+      return buildAppointmentAnswer('psychology', namedPsychologist.name);
+    }
+
+    if (partialPeople.length > 1) {
+      return 'Encontré más de una persona con ese nombre. Indica el nombre completo o si pertenece a Coordinación, Profesores o Psicología.';
+    }
+
+    return `Para agendar la cita necesito saber si es con Coordinación, un docente o Psicología.`;
+  }
+
+  const enrollmentRequirementsIntent =
+    hasAny(question, ['requisito', 'requisitos', 'documento', 'documentos', 'papeles', 'que necesito']) &&
+    hasAny(question, ['matricula', 'matriculas', 'inscripcion', 'inscripciones']);
+
+  if (enrollmentRequirementsIntent) {
+    return 'Por ahora no tengo confirmada la lista de requisitos o documentos para la matrícula. Para solicitar la información correcta, comunícate con Secretaría al WhatsApp 3104280125.';
+  }
+
+  const schoolTransportIntent =
+    hasAny(question, ['ruta escolar', 'transporte escolar', 'bus escolar', 'buseta escolar']) ||
+    (containsPhrase(question, 'ruta') &&
+      hasAny(question, ['tiene', 'ofrece', 'servicio', 'ninos', 'estudiantes', 'colegio']));
+
+  if (schoolTransportIntent) {
+    return 'Por ahora no tengo información confirmada sobre el servicio de ruta o transporte escolar. Para verificar su disponibilidad, comunícate con el colegio al WhatsApp 3104280125.';
+  }
+
+  const teacherRoleIntent = hasAny(question, [
     'profesor',
     'profesora',
+    'profe',
     'docente',
     'maestro',
     'maestra',
-    'director',
-    'directora',
-    'titular',
-    'grupo',
-    'curso',
-    'salon',
-    'salón',
-    'atiende',
-    'atencion',
-    'atención',
-    'horario',
-    'asignatura',
-    'materia',
   ]);
-
-  const directorIntent = hasAny(cleanQuestion, [
-    'director de grupo',
-    'directora de grupo',
-    'titular',
-    'director',
-    'directora',
-  ]);
+  const directorIntent =
+    hasAny(question, [
+      'director de grupo',
+      'directora de grupo',
+      'director del grupo',
+      'directora del grupo',
+      'titular del grupo',
+    ]) ||
+    (teacherRoleIntent && Boolean(extractRequestedCourse(question)) && !questionHasKnownSubject(question));
 
   if (directorIntent) {
     const directorAnswer = findDirectorAnswer(question);
     if (directorAnswer) return directorAnswer;
   }
 
-  if (teacherIntent) {
-    const teacherAnswer = findTeacherAnswer(question);
-    if (teacherAnswer) return teacherAnswer;
-  }
+  const coordinatorIntent = hasAny(question, [
+    'coordinacion',
+    'coordinador',
+    'coordinadora',
+    'diana diaz',
+    'alexander fajardo',
+  ]);
 
-  const enrollmentAnswer = findEnrollmentAnswer(question);
+  if (coordinatorIntent) return findCoordinatorAnswer(question);
+
+  const psychologyIntent = hasAny(question, [
+    'psicologia',
+    'psicologa',
+    'psicologo',
+    'hannyt',
+    'kienesberger',
+    'angela ceballos',
+  ]);
+
+  if (psychologyIntent) return findPsychologistAnswer(question);
+
+  const namedTeacher = findTeacherByName(question);
+  if (namedTeacher) return teacherToAnswer(namedTeacher);
+
+  const enrollmentAnswer = findEnrollmentCostAnswer(question);
   if (enrollmentAnswer) return enrollmentAnswer;
 
   const tuitionAnswer = findTuitionAnswer(question);
   if (tuitionAnswer) return tuitionAnswer;
 
+  const teacherIntent = teacherRoleIntent || hasAny(question, [
+    'quien atiende',
+    'cuando atiende',
+    'horario del profesor',
+    'horario de la profesora',
+    'asignatura',
+    'materia',
+  ]);
+
+  if (teacherIntent) {
+    const teacherAnswer = findTeacherAnswer(question);
+    if (teacherAnswer) return teacherAnswer;
+  }
+
   const knowledgeAnswer = findKnowledgeAnswer(question);
   if (knowledgeAnswer) return knowledgeAnswer;
-
-  const teacherAnswer = findTeacherAnswer(question);
-  if (teacherAnswer) return teacherAnswer;
-
-  const directorAnswer = findDirectorAnswer(question);
-  if (directorAnswer) return directorAnswer;
 
   return null;
 };

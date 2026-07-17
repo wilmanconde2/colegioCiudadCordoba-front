@@ -36,8 +36,15 @@ const jsonResponse = (statusCode, headers, payload) => ({
   body: JSON.stringify(payload),
 });
 
-const buildGeminiPrompt = (message) => `
+const buildGeminiPrompt = (message, history = []) => `
 ${SCHOOL_CONTEXT}
+
+CONTEXTO RECIENTE DE LA CONVERSACIÓN:
+${
+  history.length
+    ? history.map((item) => `${item.role === 'user' ? 'Usuario' : 'Keyla'}: ${item.text}`).join('\n')
+    : 'No hay mensajes anteriores.'
+}
 
 PREGUNTA DEL USUARIO:
 ${message}
@@ -50,17 +57,47 @@ Reglas obligatorias:
 - No uses información externa.
 - No cortes respuestas.
 - Responde corto, claro y completo.
+- Responde solamente la intención concreta de la pregunta actual.
+- Usa el contexto reciente únicamente para resolver referencias como "ella", "él" o "esa persona".
+- No agregues datos de otra persona, nivel, costo o servicio que no hayan solicitado.
 - Si preguntan por costos, entrega el valor completo según grado y fecha de pago.
 - Si preguntan por pensión, incluye los tres rangos: día 1 al 4, día 5 al 8 y desde el día 9.
-- Si preguntan por matrícula, incluye ordinaria y extraordinaria.
+- Si preguntan por el costo de matrícula, incluye ordinaria y extraordinaria.
+- Los requisitos de matrícula y el costo de matrícula son intenciones distintas. No respondas costos cuando soliciten requisitos.
+- Si preguntan por ruta escolar, se refieren a transporte escolar, no a la ubicación del colegio.
+- Si preguntan por inscripciones, matrículas o cupos de 2027, informa que los datos estarán disponibles desde el 1 de septiembre de 2026.
+- Si preguntan por una persona específica, responde únicamente la información de esa persona.
+- Si preguntan por Coordinación de Primaria o Bachillerato/Secundaria, responde únicamente el coordinador solicitado y su horario.
+- Si preguntan por una profesional específica de Psicología, responde únicamente su información y horario.
 - Si preguntan por docentes, entrega nombre, curso/asignatura y horario completo.
-- Si preguntan por director de grupo, responde con el docente exacto.
+- Si preguntan por un director de grupo concreto, responde con el docente exacto y su horario. Los formatos 3.3, 3-3 y Tercero 3 representan el mismo grupo.
+- Si dicen "profe del curso" sin asignatura, interpreta que buscan al director de ese grupo. Si mencionan una asignatura, busca al docente de esa asignatura para el curso indicado.
+- Si el mismo número de grupo existe en Comercial e Industrial y no indican la modalidad, solicita la modalidad; no elijas ni mezcles docentes.
+- Si solicitan agendar una cita, comparte el enlace de WhatsApp correspondiente a Coordinación, Profesores o Psicología usando el contexto para identificar a la persona.
 - No uses markdown complejo.
 - No saludes si el usuario no saluda.
 
 Si no existe la información exacta, responde exactamente:
 "${DEFAULT_ANSWER}"
 `;
+
+const getSafeHistory = (history) => {
+  if (!Array.isArray(history)) return [];
+
+  return history
+    .filter(
+      (item) =>
+        item &&
+        ['user', 'assistant'].includes(item.role) &&
+        typeof item.text === 'string' &&
+        item.text.trim()
+    )
+    .slice(-6)
+    .map((item) => ({
+      role: item.role,
+      text: item.text.trim().slice(0, 500),
+    }));
+};
 
 export async function handler(event) {
   const headers = buildHeaders(event);
@@ -105,6 +142,7 @@ export async function handler(event) {
     }
 
     const message = body.message?.toString().trim();
+    const history = getSafeHistory(body.history);
 
     if (!message) {
       return jsonResponse(400, headers, {
@@ -119,7 +157,7 @@ export async function handler(event) {
     }
 
     // Respuesta local primero
-    const localAnswer = getLocalAnswer(message);
+    const localAnswer = getLocalAnswer(message, history);
 
     if (localAnswer) {
       return jsonResponse(200, headers, {
@@ -157,13 +195,13 @@ export async function handler(event) {
                 role: 'user',
                 parts: [
                   {
-                    text: buildGeminiPrompt(message),
+                    text: buildGeminiPrompt(message, history),
                   },
                 ],
               },
             ],
             generationConfig: {
-              temperature: 0.1,
+              temperature: 0,
               topP: 0.7,
               maxOutputTokens: 1600,
             },
