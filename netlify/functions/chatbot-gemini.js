@@ -6,6 +6,7 @@ import { getLocalAnswer } from './_chatbot/local-answer.js';
 const ALLOWED_ORIGINS = [
   'http://localhost:8888',
   'http://localhost:5173',
+  'https://colegioccc.netlify.app',
   'https://colegiociudadcordoba.edu.co',
   'https://www.colegiociudadcordoba.edu.co',
 ];

@@ -3,7 +3,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { FaPaperPlane, FaRobot, FaTimes } from 'react-icons/fa';
 
-const API_URL = import.meta.env.VITE_CHATBOT_API_URL || '/.netlify/functions/chatbot-gemini';
+const CHATBOT_API_URL = '/.netlify/functions/chatbot-gemini';
+
+const MAX_MESSAGE_LENGTH = 500;
+const REQUEST_TIMEOUT_MS = 30_000;
+const MAX_HISTORY_MESSAGES = 6;
 
 const INITIAL_MESSAGES = [
   {
@@ -21,21 +25,43 @@ const QUICK_QUESTIONS = [
   '¿Quién atiende Quinto 2?',
 ];
 
+const getSafeHistory = (messages) =>
+  messages
+    .filter(
+      (message) =>
+        message &&
+        ['user', 'assistant'].includes(message.role) &&
+        typeof message.text === 'string' &&
+        message.text.trim(),
+    )
+    .slice(-MAX_HISTORY_MESSAGES)
+    .map(({ role, text }) => ({
+      role,
+      text: text.trim().slice(0, MAX_MESSAGE_LENGTH),
+    }));
+
 const renderMessageText = (text) => {
+  if (typeof text !== 'string') return null;
+
   const parts = text.split(/(https?:\/\/[^\s]+)/g);
 
   return parts.map((part, index) => {
-    if (!part.startsWith('http://') && !part.startsWith('https://')) return part;
+    const isUrl = part.startsWith('http://') || part.startsWith('https://');
+
+    if (!isUrl) {
+      return part;
+    }
+
+    const normalizedUrl = part.replace(/[),.;!?]+$/, '');
+    const trailingCharacters = part.slice(normalizedUrl.length);
 
     return (
-      <a
-        key={`${part}-${index}`}
-        href={part}
-        target='_blank'
-        rel='noopener noreferrer'
-      >
-        Abrir enlace de WhatsApp
-      </a>
+      <span key={`${normalizedUrl}-${index}`}>
+        <a href={normalizedUrl} target='_blank' rel='noopener noreferrer'>
+          Abrir enlace
+        </a>
+        {trailingCharacters}
+      </span>
     );
   });
 };
@@ -45,115 +71,215 @@ const ChatbotGemini = () => {
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
   const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
+  const requestControllerRef = useRef(null);
+  const requestInProgressRef = useRef(false);
 
   useEffect(() => {
     if (!isOpen) return;
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isOpen]);
+
+    messagesEndRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    });
+  }, [messages, isLoading, isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const focusTimer = window.setTimeout(() => {
+      inputRef.current?.focus();
+    }, 100);
+
+    return () => {
+      window.clearTimeout(focusTimer);
+    };
+  }, [isOpen]);
+
+  useEffect(
+    () => () => {
+      requestControllerRef.current?.abort();
+    },
+    [],
+  );
 
   const askGemini = async (question) => {
-    const cleanQuestion = question.trim();
-    if (!cleanQuestion || isLoading) return;
+    const cleanQuestion = question?.toString().trim();
 
-    setMessages((prev) => [...prev, { role: 'user', text: cleanQuestion }]);
-    setInput('');
+    if (!cleanQuestion || requestInProgressRef.current) {
+      return;
+    }
+
+    if (cleanQuestion.length > MAX_MESSAGE_LENGTH) {
+      setMessages((previousMessages) => [
+        ...previousMessages,
+        {
+          role: 'assistant',
+          text: `La pregunta no puede superar los ${MAX_MESSAGE_LENGTH} caracteres.`,
+        },
+      ]);
+
+      return;
+    }
+
+    const conversationHistory = getSafeHistory(messages);
+
+    requestInProgressRef.current = true;
     setIsLoading(true);
+    setInput('');
+
+    setMessages((previousMessages) => [
+      ...previousMessages,
+      {
+        role: 'user',
+        text: cleanQuestion,
+      },
+    ]);
+
+    const controller = new AbortController();
+    requestControllerRef.current = controller;
+
+    const timeoutId = window.setTimeout(() => {
+      controller.abort();
+    }, REQUEST_TIMEOUT_MS);
 
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(CHATBOT_API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           message: cleanQuestion,
-          history: messages.slice(-6).map(({ role, text }) => ({ role, text })),
+          history: conversationHistory,
         }),
+        signal: controller.signal,
       });
 
-      const data = await response.json();
+      const rawResponse = await response.text();
+
+      let data = {};
+
+      if (rawResponse) {
+        try {
+          data = JSON.parse(rawResponse);
+        } catch {
+          throw new Error('INVALID_SERVER_RESPONSE');
+        }
+      }
 
       if (!response.ok) {
-        console.error('Chatbot error:', data);
+        console.error('Chatbot HTTP error:', {
+          status: response.status,
+          data,
+        });
 
-        if (data.code === 'QUOTA_EXCEEDED') {
+        if (response.status === 429 || data?.code === 'QUOTA_EXCEEDED') {
           throw new Error('QUOTA_EXCEEDED');
         }
 
-        if (data.code === 'INVALID_API_KEY') {
-          throw new Error('INVALID_API_KEY');
+        if (
+          response.status === 401 ||
+          response.status === 403 ||
+          data?.code === 'INVALID_API_KEY'
+        ) {
+          throw new Error('SERVICE_UNAVAILABLE');
         }
 
-        throw new Error(data?.error || 'No se pudo obtener respuesta.');
+        throw new Error(data?.error || 'CHATBOT_REQUEST_FAILED');
       }
 
-      setMessages((prev) => [
-        ...prev,
+      const answer =
+        typeof data?.answer === 'string' && data.answer.trim()
+          ? data.answer.trim()
+          : 'Por ahora no tengo esa información. Puedes comunicarte directamente con el colegio para recibir orientación.';
+
+      setMessages((previousMessages) => [
+        ...previousMessages,
         {
           role: 'assistant',
-          text: data.answer || 'No tengo respuesta para esa consulta.',
+          text: answer,
         },
       ]);
     } catch (error) {
       console.error('Chatbot request error:', error);
 
       let errorMessage =
-        'En este momento no puedo responder. Intenta de nuevo o comunícate con secretaría.';
+        'En este momento no puedo responder. Intenta nuevamente o comunícate con secretaría.';
 
-      if (error.message === 'QUOTA_EXCEEDED') {
+      if (error?.name === 'AbortError') {
+        errorMessage = 'La consulta tardó demasiado tiempo. Por favor intenta nuevamente.';
+      } else if (error?.message === 'QUOTA_EXCEEDED') {
         errorMessage =
-          'Keyla está atendiendo muchas consultas en este momento. Por favor intenta nuevamente en aproximadamente 1 minuto.';
+          'Keyla está atendiendo muchas consultas en este momento. Intenta nuevamente en aproximadamente un minuto.';
+      } else if (error?.message === 'SERVICE_UNAVAILABLE') {
+        errorMessage =
+          'El asistente virtual se encuentra temporalmente en mantenimiento. Intenta nuevamente más tarde.';
       }
 
-      if (error.message === 'INVALID_API_KEY') {
-        errorMessage =
-          'El asistente virtual se encuentra temporalmente en mantenimiento. Por favor intenta nuevamente más tarde.';
-      }
-
-      setMessages((prev) => [
-        ...prev,
+      setMessages((previousMessages) => [
+        ...previousMessages,
         {
           role: 'assistant',
           text: errorMessage,
         },
       ]);
     } finally {
+      window.clearTimeout(timeoutId);
+
+      if (requestControllerRef.current === controller) {
+        requestControllerRef.current = null;
+      }
+
+      requestInProgressRef.current = false;
       setIsLoading(false);
     }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    askGemini(input);
+    void askGemini(input);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  const handleToggle = () => {
+    setIsOpen((previousState) => !previousState);
   };
 
   return (
     <div className={`chatbot-gemini ${isOpen ? 'is-open' : ''}`}>
       {isOpen && (
-        <section className='chatbot-gemini__panel' aria-label='Asistente virtual del colegio'>
+        <section
+          className='chatbot-gemini__panel'
+          aria-label='Asistente virtual del Colegio Ciudad Córdoba'
+          aria-live='polite'
+        >
           <header className='chatbot-gemini__header'>
             <div>
-              {/* <span className='chatbot-gemini__eyebrow'>Hola, soy Keyla </span> */}
-              <h2>¿en qué puedo ayudarte?</h2>
+              <h2>¿En qué puedo ayudarte?</h2>
             </div>
 
             <button
               type='button'
               className='chatbot-gemini__close'
-              onClick={() => setIsOpen(false)}
+              onClick={handleClose}
               aria-label='Cerrar asistente virtual'
             >
               <FaTimes aria-hidden='true' />
             </button>
           </header>
 
-          <div className='chatbot-gemini__quick'>
+          <div className='chatbot-gemini__quick' aria-label='Preguntas frecuentes'>
             {QUICK_QUESTIONS.map((question) => (
               <button
                 key={question}
                 type='button'
-                onClick={() => askGemini(question)}
+                onClick={() => void askGemini(question)}
                 disabled={isLoading}
               >
                 {question}
@@ -161,10 +287,15 @@ const ChatbotGemini = () => {
             ))}
           </div>
 
-          <div className='chatbot-gemini__messages'>
+          <div
+            className='chatbot-gemini__messages'
+            role='log'
+            aria-label='Conversación con Keyla'
+            aria-relevant='additions'
+          >
             {messages.map((message, index) => (
               <div
-                key={`${message.role}-${index}`}
+                key={`${message.role}-${index}-${message.text.slice(0, 20)}`}
                 className={`chatbot-gemini__message chatbot-gemini__message--${message.role}`}
               >
                 {renderMessageText(message.text)}
@@ -172,7 +303,10 @@ const ChatbotGemini = () => {
             ))}
 
             {isLoading && (
-              <div className='chatbot-gemini__message chatbot-gemini__message--assistant'>
+              <div
+                className='chatbot-gemini__message chatbot-gemini__message--assistant'
+                aria-label='Keyla está consultando información'
+              >
                 Consultando información...
               </div>
             )}
@@ -182,12 +316,17 @@ const ChatbotGemini = () => {
 
           <form className='chatbot-gemini__form' onSubmit={handleSubmit}>
             <input
+              ref={inputRef}
               type='text'
               value={input}
-              onChange={(event) => setInput(event.target.value)}
+              onChange={(event) => setInput(event.target.value.slice(0, MAX_MESSAGE_LENGTH))}
+              maxLength={MAX_MESSAGE_LENGTH}
               placeholder='Escribe tu pregunta...'
               aria-label='Pregunta para el asistente virtual'
+              autoComplete='off'
+              disabled={isLoading}
             />
+
             <button
               type='submit'
               disabled={isLoading || !input.trim()}
@@ -202,9 +341,11 @@ const ChatbotGemini = () => {
       <button
         type='button'
         className='chatbot-gemini__trigger'
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={handleToggle}
         aria-expanded={isOpen}
-        aria-label='Abrir asistente virtual del colegio'
+        aria-label={
+          isOpen ? 'Cerrar asistente virtual del colegio' : 'Abrir asistente virtual del colegio'
+        }
       >
         <FaRobot aria-hidden='true' />
         <span>Soy Keyla</span>
