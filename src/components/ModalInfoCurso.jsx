@@ -1,5 +1,6 @@
 // front/src/components/ModalInfoCurso.jsx
 import { useEffect, useMemo, useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   IMG_INFO_GENERAL,
   VIDEOS_POR_CURSO,
@@ -50,15 +51,13 @@ export default function ModalInfoCurso({ open, onClose, alumno, curso }) {
   const [tab, setTab] = useState('general');
   const [horarioSel, setHorarioSel] = useState(null);
 
-  useEffect(() => {
-    if (!open) return;
-    setTab('general');
-    setHorarioSel(null);
-  }, [open]);
+  const handleTabChange = (nextTab) => {
+    setTab(nextTab);
 
-  useEffect(() => {
-    if (tab === 'horarios') setHorarioSel(null);
-  }, [tab]);
+    if (nextTab === 'horarios') {
+      setHorarioSel(null);
+    }
+  };
 
   useEffect(() => {
     function onKey(e) {
@@ -136,7 +135,7 @@ export default function ModalInfoCurso({ open, onClose, alumno, curso }) {
           <button
             type='button'
             className={`ModalCursos__tab ${tab === 'general' ? 'is-active' : ''}`}
-            onClick={() => setTab('general')}
+            onClick={() => handleTabChange('general')}
           >
             1. Ver información general
           </button>
@@ -144,7 +143,7 @@ export default function ModalInfoCurso({ open, onClose, alumno, curso }) {
           <button
             type='button'
             className={`ModalCursos__tab ${tab === 'horarios' ? 'is-active' : ''}`}
-            onClick={() => setTab('horarios')}
+            onClick={() => handleTabChange('horarios')}
           >
             2. Ver horarios de atención de profesores
           </button>
@@ -152,7 +151,7 @@ export default function ModalInfoCurso({ open, onClose, alumno, curso }) {
           <button
             type='button'
             className={`ModalCursos__tab ${tab === 'video' ? 'is-active' : ''}`}
-            onClick={() => setTab('video')}
+            onClick={() => handleTabChange('video')}
           >
             3. Ver video informativo del curso
           </button>
@@ -273,3 +272,14 @@ export default function ModalInfoCurso({ open, onClose, alumno, curso }) {
     </div>
   );
 }
+
+
+ModalInfoCurso.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  alumno: PropTypes.shape({
+    nombreCompleto: PropTypes.string,
+    profesor: PropTypes.string,
+  }),
+  curso: PropTypes.string,
+};

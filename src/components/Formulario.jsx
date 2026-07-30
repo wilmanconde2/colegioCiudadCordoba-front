@@ -1,6 +1,7 @@
 // src/components/Formulario.jsx
 
 import { useMemo, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import { ToastContainer, Zoom, toast } from 'react-toastify';
 import { ClipLoader } from 'react-spinners';
 import 'react-toastify/dist/ReactToastify.css';
@@ -259,6 +260,10 @@ const Formulario = ({ typeSearch = 'codigo' }) => {
       />
     </div>
   );
+};
+
+Formulario.propTypes = {
+  typeSearch: PropTypes.oneOf(['codigo', 'mensualidad']),
 };
 
 export default Formulario;

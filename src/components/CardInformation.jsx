@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 function getImgProps(imagen, { alt, width, height } = {}) {
   if (!imagen) return null;
 
@@ -80,3 +82,29 @@ export function CardInformation({
     </div>
   );
 }
+
+
+const imagePropType = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    srcSet: PropTypes.string,
+    sizes: PropTypes.string,
+    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    alt: PropTypes.string,
+  }),
+]);
+
+CardInformation.propTypes = {
+  className: PropTypes.string,
+  titulo: PropTypes.node,
+  imagen: imagePropType,
+  imgAlt: PropTypes.string,
+  imgWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  imgHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  texto: PropTypes.node,
+  link: PropTypes.string,
+  linkText: PropTypes.string,
+  onClick: PropTypes.func,
+};

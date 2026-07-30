@@ -1,5 +1,7 @@
 // src/components/Carrusel.jsx
 
+import PropTypes from 'prop-types';
+
 export const Carrusel = ({ images, currentImageIndex }) => (
   <div className='backgroundContainer'>
     {images.map((img, index) => {
@@ -9,7 +11,7 @@ export const Carrusel = ({ images, currentImageIndex }) => (
       const alt =
         typeof img === 'string' ? `background-${index}` : img.alt || `background-${index}`;
       return (
-        <div key={index} className={`imageWrapper ${index === currentImageIndex ? 'active' : ''}`}>
+        <div key={src} className={`imageWrapper ${index === currentImageIndex ? 'active' : ''}`}>
           <img
             src={src}
             srcSet={srcSet}
@@ -23,3 +25,19 @@ export const Carrusel = ({ images, currentImageIndex }) => (
     })}
   </div>
 );
+
+
+Carrusel.propTypes = {
+  images: PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        src: PropTypes.string.isRequired,
+        srcSet: PropTypes.string,
+        sizes: PropTypes.string,
+        alt: PropTypes.string,
+      }),
+    ]),
+  ).isRequired,
+  currentImageIndex: PropTypes.number.isRequired,
+};

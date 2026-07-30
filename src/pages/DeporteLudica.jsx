@@ -1,6 +1,6 @@
 import useTitulo from '../hooks/useTitulo';
 
-const deporteLudica = () => {
+const DeporteLudica = () => {
   useTitulo('Deporte y Ludica');
 
   return (
@@ -15,4 +15,4 @@ const deporteLudica = () => {
   );
 };
 
-export default deporteLudica;
+export default DeporteLudica;

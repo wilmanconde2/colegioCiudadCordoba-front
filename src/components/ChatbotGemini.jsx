@@ -9,8 +9,16 @@ const MAX_MESSAGE_LENGTH = 500;
 const REQUEST_TIMEOUT_MS = 30_000;
 const MAX_HISTORY_MESSAGES = 6;
 
+let messageSequence = 0;
+
+const createMessageId = () => {
+  messageSequence += 1;
+  return `message-${Date.now()}-${messageSequence}`;
+};
+
 const INITIAL_MESSAGES = [
   {
+    id: 'initial-assistant-message',
     role: 'assistant',
     text: 'Hola. Soy Keyla, asistente virtual del Colegio Ciudad Córdoba. Puedo ayudarte con costos, matrículas, pensiones, pagos, horarios, cronograma y contacto.',
   },
@@ -44,8 +52,9 @@ const renderMessageText = (text) => {
   if (typeof text !== 'string') return null;
 
   const parts = text.split(/(https?:\/\/[^\s]+)/g);
+  const urlOccurrences = new Map();
 
-  return parts.map((part, index) => {
+  return parts.map((part) => {
     const isUrl = part.startsWith('http://') || part.startsWith('https://');
 
     if (!isUrl) {
@@ -54,9 +63,11 @@ const renderMessageText = (text) => {
 
     const normalizedUrl = part.replace(/[),.;!?]+$/, '');
     const trailingCharacters = part.slice(normalizedUrl.length);
+    const occurrence = (urlOccurrences.get(normalizedUrl) || 0) + 1;
+    urlOccurrences.set(normalizedUrl, occurrence);
 
     return (
-      <span key={`${normalizedUrl}-${index}`}>
+      <span key={`${normalizedUrl}-${occurrence}`}>
         <a href={normalizedUrl} target='_blank' rel='noopener noreferrer'>
           Abrir enlace
         </a>
@@ -116,6 +127,7 @@ const ChatbotGemini = () => {
       setMessages((previousMessages) => [
         ...previousMessages,
         {
+          id: createMessageId(),
           role: 'assistant',
           text: `La pregunta no puede superar los ${MAX_MESSAGE_LENGTH} caracteres.`,
         },
@@ -133,6 +145,7 @@ const ChatbotGemini = () => {
     setMessages((previousMessages) => [
       ...previousMessages,
       {
+        id: createMessageId(),
         role: 'user',
         text: cleanQuestion,
       },
@@ -199,6 +212,7 @@ const ChatbotGemini = () => {
       setMessages((previousMessages) => [
         ...previousMessages,
         {
+          id: createMessageId(),
           role: 'assistant',
           text: answer,
         },
@@ -222,6 +236,7 @@ const ChatbotGemini = () => {
       setMessages((previousMessages) => [
         ...previousMessages,
         {
+          id: createMessageId(),
           role: 'assistant',
           text: errorMessage,
         },
@@ -293,9 +308,9 @@ const ChatbotGemini = () => {
             aria-label='Conversación con Keyla'
             aria-relevant='additions'
           >
-            {messages.map((message, index) => (
+            {messages.map((message) => (
               <div
-                key={`${message.role}-${index}-${message.text.slice(0, 20)}`}
+                key={message.id}
                 className={`chatbot-gemini__message chatbot-gemini__message--${message.role}`}
               >
                 {renderMessageText(message.text)}

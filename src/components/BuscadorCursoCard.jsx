@@ -135,12 +135,14 @@ export default function BuscadorCursoCard() {
         </div>
       </section>
 
-      <ModalInfoCurso
-        open={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        alumno={selected}
-        curso={cursoDetectado}
-      />
+      {isModalOpen && (
+        <ModalInfoCurso
+          open
+          onClose={() => setIsModalOpen(false)}
+          alumno={selected}
+          curso={cursoDetectado}
+        />
+      )}
     </>
   );
 }
