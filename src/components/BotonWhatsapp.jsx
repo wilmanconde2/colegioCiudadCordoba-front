@@ -1,7 +1,7 @@
 // src/components/BotonWhatsapp.jsx
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router';
 import {
   FaWhatsapp,
   FaChevronUp,

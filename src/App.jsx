@@ -1,6 +1,6 @@
 // src/App.jsx
 
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router';
 import Rutas from './routes/Rutas';
 import Header from './components/Header';
 import Footer from './components/Footer';

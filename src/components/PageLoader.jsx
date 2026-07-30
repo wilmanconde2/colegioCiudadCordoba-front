@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import { ClipLoader } from 'react-spinners';
 
 const RouteLoadingOverlay = () => {

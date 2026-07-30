@@ -6,7 +6,7 @@ import { Carrusel } from '../components/Carrusel';
 import { CardSelection } from '../components/CardSelection';
 import { CardInformation } from '../components/CardInformation';
 import { useCarrusel } from '../hooks/useCarrusel';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router';
 import BuscadorCursoCard from '../components/BuscadorCursoCard';
 
 import {
