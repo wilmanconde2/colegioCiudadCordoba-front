@@ -242,3 +242,10 @@ test('conserva las respuestas de costos y pensiones existentes', () => {
 test('devuelve null cuando no existe información local relacionada', () => {
   assert.equal(getLocalAnswer('¿Qué menú ofrecen mañana en la cafetería?'), null);
 });
+
+test('responde localmente un resumen de los servicios institucionales', () => {
+  const answer = getLocalAnswer('Resume en una frase qué servicios ofrece el colegio.');
+
+  assert.match(answer, /educación privada desde Preescolar hasta Media Técnica/i);
+  assert.match(answer, /modalidades Comercial e Industrial/i);
+});

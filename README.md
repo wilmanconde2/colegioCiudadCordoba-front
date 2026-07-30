@@ -142,3 +142,29 @@ https://github.com/wilmanconde2
 
 KrakenDigitalSD
 https://krakendigitalsd.netlify.app/
+## Arquitectura de Keyla
+
+```text
+Keyla
+├── Base de conocimiento local
+│   ├── netlify/functions/_chatbot/colegio-knowledge.js
+│   └── netlify/functions/_chatbot/local-answer.js
+├── AI Provider
+│   └── netlify/functions/_chatbot/providers/
+│       ├── groq.js
+│       ├── gemini.js
+│       ├── openai.js
+│       └── claude.js
+└── Frontend
+    └── src/components/ChatbotGemini.jsx
+```
+
+El endpoint principal es `/.netlify/functions/chatbot`. La respuesta local siempre se intenta primero. El proveedor remoto se selecciona con `AI_PROVIDER`; inicialmente se usa `groq`.
+
+Variables mínimas en Netlify:
+
+```env
+AI_PROVIDER=groq
+GROQ_API_KEY=...
+GROQ_MODEL=llama-3.1-8b-instant
+```

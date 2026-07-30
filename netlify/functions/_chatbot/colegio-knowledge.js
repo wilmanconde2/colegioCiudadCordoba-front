@@ -191,6 +191,13 @@ export const KNOWLEDGE_ENTRIES = [
       'Psicología 2026:\nHannyt Kienesberger:\n- Lunes, martes, miércoles y viernes.\n- Mañana: 7:00 a.m. a 1:00 p.m.\n- Tarde: 1:30 p.m. a 5:40 p.m.\n- Jueves no atiende.\n\nÁngela Ceballos Conde:\n- Lunes: 9:00 a.m. a 1:00 p.m. y 1:30 p.m. a 3:30 p.m.\n- Martes: 9:00 a.m. a 1:00 p.m. y 1:30 p.m. a 2:30 p.m.\n- Miércoles: 9:00 a.m. a 1:00 p.m. y 1:30 p.m. a 3:00 p.m.\n- Jueves: 9:00 a.m. a 1:00 p.m. y 1:30 p.m. a 3:00 p.m.\n- Viernes: 9:00 a.m. a 1:00 p.m.\nWhatsApp psicología: 3175016066.',
   },
   {
+    id: 'servicios-institucionales',
+    title: 'Servicios y propuesta institucional',
+    keywords: ['servicios del colegio', 'servicios ofrece', 'que ofrece el colegio', 'oferta educativa', 'propuesta educativa', 'niveles educativos', 'formacion integral'],
+    answer:
+      'El Colegio Ciudad Córdoba ofrece educación privada desde Preescolar hasta Media Técnica, con formación académica, deportiva, cultural, artística y en valores. Cuenta con modalidades Comercial e Industrial, articulación con el SENA, orientación psicológica, coordinación académica, actividades deportivas y lúdicas, y uso de tecnología y robótica como apoyo al aprendizaje.',
+  },
+  {
     id: 'deporte-ludica',
     title: 'Formación deportiva y lúdica',
     keywords: ['deporte', 'ludica', 'lúdica', 'futbol', 'fútbol', 'voleibol', 'danzas', 'salsa', 'musica', 'música', 'poliza', 'póliza'],

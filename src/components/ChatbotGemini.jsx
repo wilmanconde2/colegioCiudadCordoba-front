@@ -3,8 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { FaPaperPlane, FaRobot, FaTimes } from 'react-icons/fa';
 
-const CHATBOT_API_URL =
-  import.meta.env.VITE_CHATBOT_API_URL || '/.netlify/functions/chatbot';
+const CHATBOT_API_URL = '/.netlify/functions/chatbot';
 
 const MAX_MESSAGE_LENGTH = 500;
 const REQUEST_TIMEOUT_MS = 30_000;
