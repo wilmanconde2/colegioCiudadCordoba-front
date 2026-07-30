@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { FaPaperPlane, FaRobot, FaTimes } from 'react-icons/fa';
 
-const CHATBOT_API_URL = '/.netlify/functions/chatbot-gemini';
+const CHATBOT_API_URL =
+  import.meta.env.VITE_CHATBOT_API_URL || '/.netlify/functions/chatbot';
 
 const MAX_MESSAGE_LENGTH = 500;
 const REQUEST_TIMEOUT_MS = 30_000;
@@ -116,7 +117,7 @@ const ChatbotGemini = () => {
     [],
   );
 
-  const askGemini = async (question) => {
+  const askKeyla = async (question) => {
     const cleanQuestion = question?.toString().trim();
 
     if (!cleanQuestion || requestInProgressRef.current) {
@@ -255,7 +256,7 @@ const ChatbotGemini = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    void askGemini(input);
+    void askKeyla(input);
   };
 
   const handleClose = () => {
@@ -294,7 +295,7 @@ const ChatbotGemini = () => {
               <button
                 key={question}
                 type='button'
-                onClick={() => void askGemini(question)}
+                onClick={() => void askKeyla(question)}
                 disabled={isLoading}
               >
                 {question}

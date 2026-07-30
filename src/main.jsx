@@ -12,6 +12,3 @@ createRoot(document.getElementById('root')).render(
   </StrictMode>,
 );
 
-export default {
-  // variables de entorno
-};
