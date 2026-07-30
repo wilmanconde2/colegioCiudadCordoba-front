@@ -1,9 +1,17 @@
 function getImgProps(imagen, { alt, width, height } = {}) {
   if (!imagen) return null;
+
   if (typeof imagen === 'string') {
-    return { src: imagen, alt: alt || 'imagen', width, height };
+    return {
+      src: imagen,
+      alt: alt || 'imagen',
+      width,
+      height,
+    };
   }
+
   const { src, srcSet, sizes, width: w, height: h, alt: a } = imagen;
+
   return {
     src,
     srcSet,
@@ -21,11 +29,16 @@ export function CardInformation({
   imgAlt,
   imgWidth,
   imgHeight,
-  texto, 
-  link, 
+  texto,
+  link,
   linkText = 'Ver más',
+  onClick,
 }) {
-  const imgProps = getImgProps(imagen, { alt: imgAlt, width: imgWidth, height: imgHeight });
+  const imgProps = getImgProps(imagen, {
+    alt: imgAlt,
+    width: imgWidth,
+    height: imgHeight,
+  });
 
   return (
     <div className={`card ${className}`}>
@@ -37,22 +50,31 @@ export function CardInformation({
           className='card-img-top'
           loading='lazy'
           decoding='async'
-          style={{ height: 'auto', objectFit: 'contain' }}
+          style={{
+            height: 'auto',
+            objectFit: 'contain',
+          }}
         />
       )}
 
       <div className='card-body'>
         {texto && <div className='card-text'>{texto}</div>}
 
-        {link && (
-          <a
-            className='btn btn-primary boton'
-            href={link}
-            target='_blank'
-            rel='noopener noreferrer'
-          >
+        {onClick ? (
+          <button type='button' className='btn btn-primary boton' onClick={onClick}>
             {linkText}
-          </a>
+          </button>
+        ) : (
+          link && (
+            <a
+              className='btn btn-primary boton'
+              href={link}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              {linkText}
+            </a>
+          )
         )}
       </div>
     </div>

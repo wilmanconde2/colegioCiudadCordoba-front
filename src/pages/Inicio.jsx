@@ -35,6 +35,18 @@ const Inicio = () => {
     if (url) window.open(url, '_blank', 'noopener,noreferrer');
   };
 
+  const handleDownloadCircular = () => {
+    const pdfUrl = '/CircularMensual.pdf';
+    const link = document.createElement('a');
+
+    link.href = pdfUrl;
+    link.download = 'CircularMensual.pdf';
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className='fullContainer'>
       <section className='inicioHero' aria-label='Información destacada'>
@@ -76,7 +88,8 @@ const Inicio = () => {
               Ya está disponible la Circular Informativa con novedades académicas y administrativas.
             </>
           }
-          link='https://drive.google.com/drive/folders/1469aSpKLwiiBQ53rCErN-EL29sCVizDs?usp=drive_link'
+          linkText='Descargar'
+          onClick={handleDownloadCircular}
         />
       )}
 
