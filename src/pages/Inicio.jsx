@@ -7,10 +7,12 @@ import { CardSelection } from '../components/CardSelection';
 import { CardInformation } from '../components/CardInformation';
 import { useCarrusel } from '../hooks/useCarrusel';
 import { NavLink } from 'react-router';
+// eslint-disable-next-line no-unused-vars
 import BuscadorCursoCard from '../components/BuscadorCursoCard';
 
 import {
   CARRUSEL_IMAGES,
+  // eslint-disable-next-line no-unused-vars
   INSC_IMG,
   CARD_IMGS,
   REPORTE_OPCIONES,
@@ -22,6 +24,7 @@ const Inicio = () => {
 
   const { currentImageIndex } = useCarrusel(CARRUSEL_IMAGES);
   // Tarjetas informativas y de selección
+  // eslint-disable-next-line no-unused-vars
   const [mostrarMatricula] = useState(false);
   const [mostrarCircular] = useState(true);
   const [mostrarReporte] = useState(false);
