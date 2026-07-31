@@ -11,6 +11,9 @@ export class ProviderError extends Error {
 export const classifyHttpError = (provider, status, message = '') => {
   const normalized = message.toLowerCase();
 
+  if (status === 413 || normalized.includes('request too large') || normalized.includes('too many tokens')) {
+    return new ProviderError(provider, 'request-too-large', message, status);
+  }
   if (status === 429 || normalized.includes('quota') || normalized.includes('rate limit')) {
     return new ProviderError(provider, 'quota', message, status);
   }

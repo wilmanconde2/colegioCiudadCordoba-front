@@ -14,3 +14,16 @@ test('usa Groq como proveedor predeterminado', () => {
   assert.equal(provider.name, 'groq');
   if (previous) process.env.AI_PROVIDER = previous;
 });
+
+import { classifyHttpError } from './providers/provider-error.js';
+
+test('clasifica 413 de Groq como request-too-large', () => {
+  const error = classifyHttpError(
+    'groq',
+    413,
+    'Request too large for model llama-3.1-8b-instant on tokens per minute'
+  );
+
+  assert.equal(error.code, 'request-too-large');
+  assert.equal(error.status, 413);
+});

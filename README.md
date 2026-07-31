@@ -149,6 +149,8 @@ Keyla
 ├── Base de conocimiento local
 │   ├── netlify/functions/_chatbot/colegio-knowledge.js
 │   └── netlify/functions/_chatbot/local-answer.js
+├── Recuperación de contexto
+│   └── netlify/functions/_chatbot/context-retriever.js
 ├── AI Provider
 │   └── netlify/functions/_chatbot/providers/
 │       ├── groq.js
@@ -159,7 +161,7 @@ Keyla
     └── src/components/ChatbotGemini.jsx
 ```
 
-El endpoint principal es `/.netlify/functions/chatbot`. La respuesta local siempre se intenta primero. El proveedor remoto se selecciona con `AI_PROVIDER`; inicialmente se usa `groq`.
+El endpoint principal es `/.netlify/functions/chatbot`. La respuesta local siempre se intenta primero. Si no existe una respuesta local exacta, `context-retriever.js` selecciona únicamente los bloques institucionales relevantes antes de llamar al proveedor remoto. Esto evita enviar toda la base de conocimiento en cada solicitud y mantiene el consumo de tokens bajo control. El proveedor remoto se selecciona con `AI_PROVIDER`; inicialmente se usa `groq`.
 
 Variables mínimas en Netlify:
 
@@ -168,3 +170,7 @@ AI_PROVIDER=groq
 GROQ_API_KEY=...
 GROQ_MODEL=llama-3.1-8b-instant
 ```
+
+## Keyla retrieval quality (v1.6.2)
+
+The semantic retriever now prioritizes institutional value-proposition context for synthesis, comparison, strengths, benefits, and family enrollment-intent questions. It keeps the existing local-first and multi-provider architecture unchanged while improving the quality of Groq responses without increasing the 6,500-character context ceiling.
