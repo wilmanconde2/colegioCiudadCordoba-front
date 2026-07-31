@@ -35,8 +35,8 @@ export const getSafeHistory = (history) => {
   if (!Array.isArray(history)) return [];
   return history
     .filter((item) => item && ['user', 'assistant'].includes(item.role) && typeof item.text === 'string' && item.text.trim())
-    .slice(-6)
-    .map((item) => ({ role: item.role, text: item.text.trim().slice(0, 500) }));
+    .slice(-4)
+    .map((item) => ({ role: item.role, text: item.text.trim().slice(0, 300) }));
 };
 
 export async function chatbotHandler(event) {
