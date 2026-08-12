@@ -15,6 +15,7 @@ import {
   // eslint-disable-next-line no-unused-vars
   INSC_IMG,
   CARD_IMGS,
+  TALLERES_OPCIONES,
   REPORTE_OPCIONES,
   RECUPERACION_OPCIONES,
 } from '../constants/inicio';
@@ -26,7 +27,9 @@ const Inicio = () => {
   // Tarjetas informativas y de selección
   // eslint-disable-next-line no-unused-vars
   const [mostrarMatricula] = useState(false);
+  const [mostrarCircularEspecial] = useState(true);
   const [mostrarCircular] = useState(true);
+  const [mostrarTalleres] = useState(true);
   const [mostrarReporte] = useState(false);
   const [mostrarActividades] = useState(false);
   const [mostrarHorarios] = useState(false);
@@ -48,11 +51,42 @@ const Inicio = () => {
     document.body.removeChild(link);
   };
 
+  const handleDownloadCircularEspecial = () => {
+    const pdfUrl = '/circular.pdf';
+    const link = document.createElement('a');
+
+    link.href = pdfUrl;
+    link.download = 'circular.pdf';
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className='fullContainer'>
+      {/* TEMPORAL: Circular especial por la situación actual en Cali. */}
+      {mostrarCircularEspecial && (
+        <CardInformation
+          className='circular circular-especial'
+          titulo='Circular Especial 13-14-15 de agosto de 2026'
+          imagen='/circular-especial.webp'
+          imgAlt='Comunicado especial del Colegio Ciudad Córdoba para el 13, 14 y 15 de agosto de 2026'
+          texto={
+            <>
+              Información especial sobre actividades académicas, entrega de boletines y retorno a la
+              presencialidad, de acuerdo con las directrices de la Secretaría de Educación
+              Distrital.
+            </>
+          }
+          linkText='Descargar'
+          onClick={handleDownloadCircularEspecial}
+        />
+      )}
+      
       <section className='inicioHero' aria-label='Información destacada'>
         <img
-          src='/infoInscripciones.png'
+          src='/infoInscripciones.webp'
           alt='Toda la información de Inscripciones 2027 estará disponible desde el 1 de septiembre.'
           className='inicioHero__banner inicioHero__banner--left'
           loading='eager'
@@ -64,7 +98,7 @@ const Inicio = () => {
         </div>
 
         <img
-          src='/prize.png'
+          src='/prize.webp'
           alt='Clasificación A+ en el ICFES 2025.'
           className='inicioHero__banner inicioHero__banner--right'
           loading='eager'
@@ -91,6 +125,36 @@ const Inicio = () => {
           }
           linkText='Descargar'
           onClick={handleDownloadCircular}
+        />
+      )}
+
+      {/* TEMPORAL Eliminar cuando se retomen las clases presenciales */}
+      {mostrarTalleres && (
+        <CardSelection
+          className='talleres text-center'
+          titulo='Talleres Académicos'
+          opciones={TALLERES_OPCIONES}
+          onChange={handleSelectChange}
+          selectLabel='Selecciona tu grupo'
+          nota={
+            <>
+              Teniendo en cuenta la situación actual y siguiendo las directrices de la Secretaría de
+              Educación, durante esta semana se implementarán talleres de refuerzo y repaso para
+              nuestros estudiantes. Selecciona tu grupo para acceder a las actividades
+              correspondientes. <br />
+              <em>
+                <b>
+                  <i>NOTA: </i>
+                </b>
+              </em>
+              <i>
+                Las actividades académicas que se encuentran en los talleres, pueden ser
+                desarrolladas en los respectivos cuadernos.
+              </i>
+            </>
+          }
+          imagen={CARD_IMGS.talleres}
+          imgAlt='Estudiantes desarrollando talleres académicos desde casa'
         />
       )}
 

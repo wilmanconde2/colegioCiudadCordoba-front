@@ -11,7 +11,7 @@ const Tesoreria = () => {
       <div className='fullContainerCostos'>
         <h1>Costos Educativos y Medios de Pago</h1>
         <div className='imgCostosContainer'>
-          <img src='/costos2026.png' alt='costos2025' className='imgCostos' />
+          <img src='/costos2026.webp' alt='costos2025' className='imgCostos' />
         </div>
         <div className='infoCostos'>
           <h2>Medios de pago:</h2>
