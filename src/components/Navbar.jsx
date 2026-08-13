@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router';
-import logo from '/logo.webp';
-import ppf from '/ppf.webp';
-import club from '/clubCCC.webp';
+import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
+
+const { logo, ppf, clubCCC: club } = CLOUDINARY_ASSETS;
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);

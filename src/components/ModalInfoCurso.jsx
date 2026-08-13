@@ -6,6 +6,7 @@ import {
   VIDEOS_POR_CURSO,
   CLOUDINARY_IMG_TRANSFORM,
 } from '../constants/recursosCursos';
+import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
 
 function buildCloudinaryBestUrl(rawUrl) {
   if (!rawUrl) return '';
@@ -35,12 +36,12 @@ function normalizeVideoUrl(url) {
 const HORARIOS_ALUMNOS = {
   primaria: {
     label: 'Horario Primaria',
-    rawUrl: '/horarioPrimaria.webp',
+    rawUrl: CLOUDINARY_ASSETS.horarioPrimariaRaw,
     title: 'Horario Primaria',
   },
   bachillerato: {
     label: 'Horario Bachillerato',
-    rawUrl: '/horarioSecundaria.webp',
+    rawUrl: CLOUDINARY_ASSETS.horarioSecundariaRaw,
     title: 'Horario Bachillerato',
   },
 };

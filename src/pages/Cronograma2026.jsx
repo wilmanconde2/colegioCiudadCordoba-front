@@ -1,4 +1,5 @@
 import useTitulo from '../hooks/useTitulo';
+import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
 
 const Cronograma2026 = () => {
   useTitulo('Cronograma 2026');
@@ -8,7 +9,7 @@ const Cronograma2026 = () => {
       <div className='fullContainerCostos'>
         <h1>Cronograma 2026</h1>
         <div className='imgCostosContainer'>
-          <img src='/cronograma2026.webp' alt='cronograma2026' className='imgCostos' />
+          <img src={CLOUDINARY_ASSETS.cronograma2026} alt='cronograma2026' className='imgCostos' />
         </div>
       </div>
     </>

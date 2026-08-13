@@ -1,6 +1,7 @@
 // src/pages/Tesoreria.jsx
 
 import useTitulo from '../hooks/useTitulo';
+import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
 import Formulario from '../components/Formulario';
 
 const Tesoreria = () => {
@@ -11,13 +12,13 @@ const Tesoreria = () => {
       <div className='fullContainerCostos'>
         <h1>Costos Educativos y Medios de Pago</h1>
         <div className='imgCostosContainer'>
-          <img src='/costos2026.webp' alt='costos2025' className='imgCostos' />
+          <img src={CLOUDINARY_ASSETS.costos2026} alt='costos2025' className='imgCostos' />
         </div>
         <div className='infoCostos'>
           <h2>Medios de pago:</h2>
           <p>
             <a href='https://www.avalpaycenter.com/wps/portal/portal-de-pagos/web/pagos-aval/resultado-busqueda/realizar-pago?idConv=00024146&origen=buscar'>
-              <img src='/pse.webp' alt='pse' className='pseCostos' />
+              <img src={CLOUDINARY_ASSETS.pse} alt='pse' className='pseCostos' />
             </a>
           </p>
           <p>Tesorería de la institución</p>

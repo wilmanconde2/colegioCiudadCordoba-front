@@ -1,4 +1,5 @@
 import useTitulo from '../hooks/useTitulo';
+import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
 
 const WHATSAPP_NUMBER = '573104280125';
 const MENSAJE_PREDEFINIDO = 'Hola, necesito ayuda con un PQRS.';
@@ -17,7 +18,7 @@ const PQRS = () => {
   return (
     <div className='fullContainer'>
       <div className='imgPQRSContainer'>
-        <img className='imgPQRS' src='/pqrs.webp' alt='imagen' />
+        <img className='imgPQRS' src={CLOUDINARY_ASSETS.pqrs} alt='imagen' />
       </div>
       <div className='btn-container'>
         <button className='btn-pqrs' onClick={handleClick}>

@@ -1,6 +1,7 @@
 // src/pages/HorarioPsicologia.jsx
 
 import useTitulo from '../hooks/useTitulo';
+import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
 
 const HorarioPsicologia = () => {
   useTitulo('Horario Psicología');
@@ -12,7 +13,7 @@ const HorarioPsicologia = () => {
         <div className='imgPsicologiaContainer'>
           <img
             className='imagen imgPsicologia'
-            src='/horarioPsicologia.webp'
+            src={CLOUDINARY_ASSETS.horarioPsicologia}
             alt='horarioPsicologia'
           />
         </div>

@@ -5,13 +5,20 @@ $color-third: #ff7f3e;
 $color-fourth: #ffda78;
 $color-darkwhite: rgba(245, 245, 245, 0.7);
 
+$content-image-hover-scale: 1.3;
+
+@mixin content-image-hover {
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale($content-image-hover-scale);
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-
-  // border: 0.5px solid red;
-}
+  box-sizing: border-box;}
 
 html {
   font-size: 100%;

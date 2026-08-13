@@ -46,7 +46,11 @@ const CARD_WIDTHS = [600, 800, 1200, 1600];
 const CARD_SIZES = '(min-width:1200px) 600px, (min-width:768px) 400px, 90vw';
 
 export const CARD_IMGS = {
-  talleres: '/talleres-emergencia.webp',
+  talleres: {
+    src: cldUrl('talleres-emergencia_cl', { w: 960, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
+    srcSet: cldSrcSet('talleres-emergencia_cl', [320, 480, 640, 960], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
+    sizes: CARD_SIZES,
+  },
   circular: {
     src: cldUrl('circular_cl', { w: 1200, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto' }),
     srcSet: cldSrcSet('circular_cl', CARD_WIDTHS, { c: 'fit', q: 'auto', f: 'auto' }),
@@ -75,45 +79,89 @@ export const CARD_IMGS = {
 
 };
 
+export const INICIO_HERO_IMAGES = {
+  infoInscripciones: {
+    src: cldUrl('infoInscripciones_cl', { w: 800, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
+    srcSet: cldSrcSet('infoInscripciones_cl', [240, 320, 480, 640, 800], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
+    sizes: '(min-width: 992px) 280px, (min-width: 768px) 24vw, 42vw',
+  },
+  prize: {
+    src: cldUrl('prize_cl', { w: 800, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
+    srcSet: cldSrcSet('prize_cl', [240, 320, 480, 640, 800], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
+    sizes: '(min-width: 992px) 280px, (min-width: 768px) 24vw, 42vw',
+  },
+  circularEspecial: {
+    src: cldUrl('circular-especial_cl', { w: 800, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
+    srcSet: cldSrcSet('circular-especial_cl', [320, 480, 640, 800], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
+    sizes: CARD_SIZES,
+  },
+  tesoreriaBtn: {
+    src: cldUrl('tesoreria-btn_cl', { w: 800, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
+    srcSet: cldSrcSet('tesoreria-btn_cl', [320, 480, 640, 800], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
+    sizes: '(min-width: 768px) 500px, 90vw',
+  },
+};
+
 export const BACKGROUND_IMAGES_DIRECTIVO = [
-  '/directivo1.webp',
-  '/directivo2.webp',
-  '/directivo3.webp',
-  '/directivo4.webp',
-];
+  'directivo1_cl',
+  'directivo2_cl',
+  'directivo3_cl',
+  'directivo4_cl',
+].map((id) => ({
+  src: cldUrl(id, { w: 960, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
+  srcSet: cldSrcSet(id, [320, 480, 640, 960], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
+  sizes: '(min-width: 992px) 45vw, 90vw',
+  alt: 'fondo',
+}));
 export const BACKGROUND_IMAGES_DOCENTE = [
-  '/docente1.webp',
-  '/docente2.webp',
-  '/docente3.webp',
-  '/docente4.webp',
-  '/docente5.webp',
-  '/docente6.webp',
-];
+  'docente1_cl',
+  'docente2_cl',
+  'docente3_cl',
+  'docente4_cl',
+  'docente5_cl',
+  'docente6_cl',
+].map((id) => ({
+  src: cldUrl(id, { w: 960, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
+  srcSet: cldSrcSet(id, [320, 480, 640, 960], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
+  sizes: '(min-width: 992px) 45vw, 90vw',
+  alt: 'fondo',
+}));
 export const BACKGROUND_IMAGES_ESTUDIANTE = [
-  '/estudiante1.webp',
-  '/estudiante2.webp',
-  '/estudiante3.webp',
-  '/estudiante4.webp',
-];
+  'estudiante1_cl',
+  'estudiante2_cl',
+  'estudiante3_cl',
+  'estudiante4_cl',
+].map((id) => ({
+  src: cldUrl(id, { w: 960, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
+  srcSet: cldSrcSet(id, [320, 480, 640, 960], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
+  sizes: '(min-width: 992px) 45vw, 90vw',
+  alt: 'fondo',
+}));
 export const BACKGROUND_IMAGES_EGRESADO = [
-  '/egresado1.webp',
-  '/egresado2.webp',
-  '/egresado3.webp',
-  '/egresado4.webp',
-  '/egresado5.webp',
-  '/egresado6.webp',
-  '/egresado7.webp',
-  '/egresado8.webp',
-  '/egresado9.webp',
-  '/egresado10.webp',
-];
+  'egresado1_cl',
+  'egresado2_cl',
+  'egresado3_cl',
+  'egresado4_cl',
+  'egresado5_cl',
+  'egresado6_cl',
+].map((id) => ({
+  src: cldUrl(id, { w: 960, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
+  srcSet: cldSrcSet(id, [320, 480, 640, 960], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
+  sizes: '(min-width: 992px) 45vw, 90vw',
+  alt: 'fondo',
+}));
 export const BACKGROUND_IMAGES_HISTORIA = [
-  '/historia1.webp',
-  '/historia2.webp',
-  '/historia3.webp',
-  '/historia4.webp',
-  '/historia5.webp',
-];
+  'historia1_cl',
+  'historia2_cl',
+  'historia3_cl',
+  'historia4_cl',
+  'historia5_cl',
+].map((id) => ({
+  src: cldUrl(id, { w: 960, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
+  srcSet: cldSrcSet(id, [320, 480, 640, 960], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
+  sizes: '(min-width: 992px) 45vw, 90vw',
+  alt: 'fondo',
+}));
 
 
 export const TALLERES_OPCIONES = [

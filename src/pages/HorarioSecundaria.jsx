@@ -1,6 +1,7 @@
 // src/pages/HorarioSecundaria.jsx
 
 import useTitulo from '../hooks/useTitulo';
+import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
 
 const Secundaria = () => {
   useTitulo('Horario Secundaria');
@@ -12,7 +13,7 @@ const Secundaria = () => {
         <div className='imgSecundariaContainer'>
           <img
             className='imagen imgSecundaria'
-            src='horarioSecundaria.webp'
+            src={CLOUDINARY_ASSETS.horarioSecundaria}
             alt='horarioSecundaria'
           />
         </div>

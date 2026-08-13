@@ -1,4 +1,5 @@
 import useTitulo from '../hooks/useTitulo';
+import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
 
 const Modalidades = () => {
   useTitulo('Modalidades');
@@ -7,7 +8,7 @@ const Modalidades = () => {
     <>
       <div className='fullContainerModalidades'>
         <div className='imgComercialContainer'>
-          <img className='imgComercial' src='/comercial.webp' alt='comercial' />
+          <img className='imgComercial' src={CLOUDINARY_ASSETS.comercial} alt='comercial' />
         </div>
         <div className='container modText'>
           <h2>MODALIDAD COMERCIAL</h2>
@@ -19,7 +20,7 @@ const Modalidades = () => {
           </p>
         </div>
         <div className='imgIndustrialContainer'>
-          <img className='imgIndustrial' src='/industrial.webp' alt='industrial' />
+          <img className='imgIndustrial' src={CLOUDINARY_ASSETS.industrial} alt='industrial' />
         </div>
         <div className='container modText'>
           <h2>MODALIDAD INDUSTRIAL</h2>

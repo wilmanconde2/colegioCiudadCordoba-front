@@ -1,4 +1,5 @@
 import useTitulo from '../hooks/useTitulo';
+import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
 
 const MisionVision = () => {
   useTitulo('Misión y Visión');
@@ -7,7 +8,7 @@ const MisionVision = () => {
     <>
       <div className='fullContainerMiVi'>
         <div className='imgMiViContainer'>
-          <img className='imgMiVi' src='/mision.webp' alt='imagen' />
+          <img className='imgMiVi' src={CLOUDINARY_ASSETS.mision} alt='imagen' />
         </div>
         <div className='containerMiVi'>
           <h1>Misión</h1>

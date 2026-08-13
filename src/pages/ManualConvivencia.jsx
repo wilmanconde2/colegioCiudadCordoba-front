@@ -1,4 +1,5 @@
 import useTitulo from '../hooks/useTitulo';
+import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
 
 const ManualConvivencia = () => {
   useTitulo('Manual de Convivencia');
@@ -17,7 +18,7 @@ const ManualConvivencia = () => {
   return (
     <div className='fullContainerManual'>
       <div className='imgManualContainer'>
-        <img className='imgManual' src='/manual.webp' alt='imagen' />
+        <img className='imgManual' src={CLOUDINARY_ASSETS.manual} alt='imagen' />
       </div>
       <div className='containerManual'>
         <h1>MANUAL DE CONVIVENCIA 2026</h1>

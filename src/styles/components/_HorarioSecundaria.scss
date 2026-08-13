@@ -1,5 +1,7 @@
 // src/styles/components/_HorarioSecundaria.scss
 
+@use '../base/Settings' as *;
+
 .fullContainerSecundaria {
   margin: auto;
   width: 80%;
@@ -19,10 +21,7 @@
       margin-inline: auto;
       border-radius: 15px;
       box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
-      transition: all 0.3s;
-      &:hover {
-        transform: scale(1.5);
-      }
+      @include content-image-hover;
     }
   }
 }
@@ -34,24 +33,23 @@
 @media (min-width: 576px) {
   .fullContainerSecundaria {
     width: 90%;
+
     .imgSecundariaContainer {
       width: 90%;
-      .imgSecundaria {
-        &:hover {
-          transform: scale(1.8);
-        }
-      }
     }
   }
 }
+
 @media (min-width: 768px) {
   .fullContainerSecundaria {
     width: 80%;
+
     .imgSecundariaContainer {
       width: 80%;
     }
   }
 }
+
 @media (min-width: 992px) {
   .fullContainerSecundaria {
     h1 {

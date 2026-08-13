@@ -2,6 +2,10 @@
 
 const CLOUD_NAME = 'dx5zamphx';
 
+export function cldRawUrl(publicId) {
+  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/${publicId}`;
+}
+
 export function cldUrl(
   publicId,
   { w, h, ar = '16:9', c = 'fill', f = 'auto', q = 'auto', dpr = 'auto' } = {},

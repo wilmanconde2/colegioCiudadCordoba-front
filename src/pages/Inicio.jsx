@@ -15,6 +15,7 @@ import {
   // eslint-disable-next-line no-unused-vars
   INSC_IMG,
   CARD_IMGS,
+  INICIO_HERO_IMAGES,
   TALLERES_OPCIONES,
   REPORTE_OPCIONES,
   RECUPERACION_OPCIONES,
@@ -70,7 +71,7 @@ const Inicio = () => {
         <CardInformation
           className='circular circular-especial'
           titulo='Circular Especial 13-14-15 de agosto de 2026'
-          imagen='/circular-especial.webp'
+          imagen={INICIO_HERO_IMAGES.circularEspecial}
           imgAlt='Comunicado especial del Colegio Ciudad Córdoba para el 13, 14 y 15 de agosto de 2026'
           texto={
             <>
@@ -86,7 +87,9 @@ const Inicio = () => {
       
       <section className='inicioHero' aria-label='Información destacada'>
         <img
-          src='/infoInscripciones.webp'
+          src={INICIO_HERO_IMAGES.infoInscripciones.src}
+          srcSet={INICIO_HERO_IMAGES.infoInscripciones.srcSet}
+          sizes={INICIO_HERO_IMAGES.infoInscripciones.sizes}
           alt='Toda la información de Inscripciones 2027 estará disponible desde el 1 de septiembre.'
           className='inicioHero__banner inicioHero__banner--left'
           loading='eager'
@@ -98,7 +101,9 @@ const Inicio = () => {
         </div>
 
         <img
-          src='/prize.webp'
+          src={INICIO_HERO_IMAGES.prize.src}
+          srcSet={INICIO_HERO_IMAGES.prize.srcSet}
+          sizes={INICIO_HERO_IMAGES.prize.sizes}
           alt='Clasificación A+ en el ICFES 2025.'
           className='inicioHero__banner inicioHero__banner--right'
           loading='eager'
@@ -283,7 +288,9 @@ const Inicio = () => {
         <h2>Información para pagos</h2>
         <NavLink to='/tesoreria' aria-label='Ir a Tesorería' onClick={() => window.scrollTo(0, 0)}>
           <img
-            src='/tesoreria-btn.webp'
+            src={INICIO_HERO_IMAGES.tesoreriaBtn.src}
+            srcSet={INICIO_HERO_IMAGES.tesoreriaBtn.srcSet}
+            sizes={INICIO_HERO_IMAGES.tesoreriaBtn.sizes}
             alt='Ir a Tesorería - Pagos y Consultas'
             className='btnTesoreria'
           />

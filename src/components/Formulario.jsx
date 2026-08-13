@@ -6,6 +6,7 @@ import { ToastContainer, Zoom, toast } from 'react-toastify';
 import { ClipLoader } from 'react-spinners';
 import 'react-toastify/dist/ReactToastify.css';
 import { loadAlumnos } from '../utils/loadAlumnos';
+import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
 
 function normalizeText(str = '') {
   return str
@@ -225,9 +226,9 @@ const Formulario = ({ typeSearch = 'codigo' }) => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <img src='/pse.webp' alt='pse' className='pseCostos' />
+            <img src={CLOUDINARY_ASSETS.pse} alt='pse' className='pseCostos' />
           </a>
-          <img className='codigoQR' src='/codigoQR.webp' alt='codigoQR' />
+          <img className='codigoQR' src={CLOUDINARY_ASSETS.codigoQR} alt='codigoQR' />
         </div>
 
         <h2>Paga en Línea</h2>

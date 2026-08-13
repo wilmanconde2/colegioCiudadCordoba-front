@@ -21,11 +21,7 @@
       margin-inline: auto;
       border-radius: 15px;
       box-shadow: 2px 2px 5px rgba(17, 44, 199, 0.784);
-      transition: all 0.3s;
-
-      &:hover {
-        transform: scale(1.4);
-      }
+      @include content-image-hover;
     }
   }
 
@@ -69,17 +65,9 @@
 
     .imgCostosContainer {
       width: 90%;
-
-      .imgCostos {
-        &:hover {
-          transform: scale(1.4);
-        }
-      }
     }
 
     .infoCostos {
-      width: 80%;
-
       .notaCodigo {
         font-size: 1rem;
       }
@@ -103,17 +91,7 @@
       margin-top: 10rem;
     }
 
-    .imgCostosContainer {
-      .imgCostos {
-        &:hover {
-          transform: scale(1.3);
-        }
-      }
-    }
-
     .infoCostos {
-      width: 80%;
-
       .notaCodigo {
         font-size: 1.2rem;
       }
