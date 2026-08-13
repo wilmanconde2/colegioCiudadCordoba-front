@@ -1,23 +1,25 @@
 // src/routes/Rutas.jsx
 
+import { lazy, Suspense } from 'react';
 import { useRoutes } from 'react-router';
-import Contacto from '../pages/Contacto';
-import Cronograma2026 from '../pages/Cronograma2026';
-import DeporteLudica from '../pages/DeporteLudica';
-import DIAN from '../pages/DIAN';
-import Historia from '../pages/Historia';
-import HorarioCoordinadores from '../pages/HorarioCoordinadores';
-import HorarioPrimaria from '../pages/HorarioPrimaria';
-import HorarioPsicologia from '../pages/HorarioPsicologia';
-import HorarioSecundaria from '../pages/HorarioSecundaria';
 import Inicio from '../pages/Inicio';
-import ManualConvivencia from '../pages/ManualConvivencia';
-import MisionVision from '../pages/MisionVision';
-import Modalidades from '../pages/Modalidades';
-import NoEncontrado from '../pages/NoEncontrado';
-import PerfilesCCC from '../pages/PerfilesCCC';
-import PQRS from '../pages/PQRS';
-import Tesoreria from '../pages/Tesoreria';
+
+const Contacto = lazy(() => import('../pages/Contacto'));
+const Cronograma2026 = lazy(() => import('../pages/Cronograma2026'));
+const DeporteLudica = lazy(() => import('../pages/DeporteLudica'));
+const DIAN = lazy(() => import('../pages/DIAN'));
+const Historia = lazy(() => import('../pages/Historia'));
+const HorarioCoordinadores = lazy(() => import('../pages/HorarioCoordinadores'));
+const HorarioPrimaria = lazy(() => import('../pages/HorarioPrimaria'));
+const HorarioPsicologia = lazy(() => import('../pages/HorarioPsicologia'));
+const HorarioSecundaria = lazy(() => import('../pages/HorarioSecundaria'));
+const ManualConvivencia = lazy(() => import('../pages/ManualConvivencia'));
+const MisionVision = lazy(() => import('../pages/MisionVision'));
+const Modalidades = lazy(() => import('../pages/Modalidades'));
+const NoEncontrado = lazy(() => import('../pages/NoEncontrado'));
+const PerfilesCCC = lazy(() => import('../pages/PerfilesCCC'));
+const PQRS = lazy(() => import('../pages/PQRS'));
+const Tesoreria = lazy(() => import('../pages/Tesoreria'));
 
 const Rutas = () => {
   const routes = useRoutes([
@@ -91,7 +93,7 @@ const Rutas = () => {
     },
   ]);
 
-  return routes;
+  return <Suspense fallback={null}>{routes}</Suspense>;
 };
 
 export default Rutas;
