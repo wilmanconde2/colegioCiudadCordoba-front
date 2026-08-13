@@ -50,6 +50,8 @@ export const CARD_IMGS = {
     src: cldUrl('talleres-emergencia_cl', { w: 960, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
     srcSet: cldSrcSet('talleres-emergencia_cl', [320, 480, 640, 960], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
     sizes: CARD_SIZES,
+    width: 1536,
+    height: 1024,
   },
   circular: {
     src: cldUrl('circular_cl', { w: 1200, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto' }),
@@ -84,22 +86,58 @@ export const INICIO_HERO_IMAGES = {
     src: cldUrl('infoInscripciones_cl', { w: 800, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
     srcSet: cldSrcSet('infoInscripciones_cl', [240, 320, 480, 640, 800], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
     sizes: '(min-width: 992px) 280px, (min-width: 768px) 24vw, 42vw',
+    width: 800,
+    height: 533,
   },
   prize: {
     src: cldUrl('prize_cl', { w: 800, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
     srcSet: cldSrcSet('prize_cl', [240, 320, 480, 640, 800], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
     sizes: '(min-width: 992px) 280px, (min-width: 768px) 24vw, 42vw',
+    width: 800,
+    height: 800,
   },
   circularEspecial: {
     src: cldUrl('circular-especial_cl', { w: 800, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
     srcSet: cldSrcSet('circular-especial_cl', [320, 480, 640, 800], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
     sizes: CARD_SIZES,
+    width: 1000,
+    height: 533,
   },
   tesoreriaBtn: {
     src: cldUrl('tesoreria-btn_cl', { w: 800, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
     srcSet: cldSrcSet('tesoreria-btn_cl', [320, 480, 640, 800], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
     sizes: '(min-width: 768px) 500px, 90vw',
+    width: 1000,
+    height: 500,
   },
+};
+
+const PROFILE_IMAGE_DIMENSIONS = {
+  directivo1_cl: { width: 435, height: 550 },
+  directivo2_cl: { width: 960, height: 1280 },
+  directivo3_cl: { width: 506, height: 550 },
+  directivo4_cl: { width: 960, height: 1280 },
+  docente1_cl: { width: 473, height: 550 },
+  docente2_cl: { width: 475, height: 550 },
+  docente3_cl: { width: 413, height: 550 },
+  docente4_cl: { width: 453, height: 550 },
+  docente5_cl: { width: 444, height: 550 },
+  docente6_cl: { width: 470, height: 550 },
+  estudiante1_cl: { width: 381, height: 550 },
+  estudiante2_cl: { width: 379, height: 550 },
+  estudiante3_cl: { width: 401, height: 550 },
+  estudiante4_cl: { width: 382, height: 550 },
+  egresado1_cl: { width: 469, height: 550 },
+  egresado2_cl: { width: 434, height: 550 },
+  egresado3_cl: { width: 520, height: 550 },
+  egresado4_cl: { width: 396, height: 550 },
+  egresado5_cl: { width: 446, height: 550 },
+  egresado6_cl: { width: 472, height: 550 },
+  historia1_cl: { width: 900, height: 630 },
+  historia2_cl: { width: 900, height: 621 },
+  historia3_cl: { width: 900, height: 400 },
+  historia4_cl: { width: 900, height: 529 },
+  historia5_cl: { width: 900, height: 526 },
 };
 
 export const BACKGROUND_IMAGES_DIRECTIVO = [
@@ -112,6 +150,7 @@ export const BACKGROUND_IMAGES_DIRECTIVO = [
   srcSet: cldSrcSet(id, [320, 480, 640, 960], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
   sizes: '(min-width: 992px) 45vw, 90vw',
   alt: 'fondo',
+  ...PROFILE_IMAGE_DIMENSIONS[id],
 }));
 export const BACKGROUND_IMAGES_DOCENTE = [
   'docente1_cl',
@@ -125,6 +164,7 @@ export const BACKGROUND_IMAGES_DOCENTE = [
   srcSet: cldSrcSet(id, [320, 480, 640, 960], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
   sizes: '(min-width: 992px) 45vw, 90vw',
   alt: 'fondo',
+  ...PROFILE_IMAGE_DIMENSIONS[id],
 }));
 export const BACKGROUND_IMAGES_ESTUDIANTE = [
   'estudiante1_cl',
@@ -136,6 +176,7 @@ export const BACKGROUND_IMAGES_ESTUDIANTE = [
   srcSet: cldSrcSet(id, [320, 480, 640, 960], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
   sizes: '(min-width: 992px) 45vw, 90vw',
   alt: 'fondo',
+  ...PROFILE_IMAGE_DIMENSIONS[id],
 }));
 export const BACKGROUND_IMAGES_EGRESADO = [
   'egresado1_cl',
@@ -149,6 +190,7 @@ export const BACKGROUND_IMAGES_EGRESADO = [
   srcSet: cldSrcSet(id, [320, 480, 640, 960], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
   sizes: '(min-width: 992px) 45vw, 90vw',
   alt: 'fondo',
+  ...PROFILE_IMAGE_DIMENSIONS[id],
 }));
 export const BACKGROUND_IMAGES_HISTORIA = [
   'historia1_cl',
@@ -161,6 +203,7 @@ export const BACKGROUND_IMAGES_HISTORIA = [
   srcSet: cldSrcSet(id, [320, 480, 640, 960], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
   sizes: '(min-width: 992px) 45vw, 90vw',
   alt: 'fondo',
+  ...PROFILE_IMAGE_DIMENSIONS[id],
 }));
 
 

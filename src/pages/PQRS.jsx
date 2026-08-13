@@ -18,7 +18,7 @@ const PQRS = () => {
   return (
     <div className='fullContainer'>
       <div className='imgPQRSContainer'>
-        <img className='imgPQRS' src={CLOUDINARY_ASSETS.pqrs} alt='imagen' />
+        <img className='imgPQRS' src={CLOUDINARY_ASSETS.pqrs} alt='imagen' width='500' height='500' />
       </div>
       <div className='btn-container'>
         <button className='btn-pqrs' onClick={handleClick}>

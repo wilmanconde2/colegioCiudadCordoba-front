@@ -226,9 +226,9 @@ const Formulario = ({ typeSearch = 'codigo' }) => {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <img src={CLOUDINARY_ASSETS.pse} alt='pse' className='pseCostos' />
+            <img src={CLOUDINARY_ASSETS.pse} alt='pse' className='pseCostos' width='350' height='350' />
           </a>
-          <img className='codigoQR' src={CLOUDINARY_ASSETS.codigoQR} alt='codigoQR' />
+          <img className='codigoQR' src={CLOUDINARY_ASSETS.codigoQR} alt='codigoQR' width='230' height='230' />
         </div>
 
         <h2>Paga en Línea</h2>

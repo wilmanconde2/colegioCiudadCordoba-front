@@ -5,7 +5,7 @@ const DIAN_URL = 'https://drive.google.com/drive/folders/1WQxB8YcoqMrXuf9HG3P9Dj
 const DIAN = () => {
   return (
     <section className='container py-5 text-center dian-page'>
-      <img src='/dian.svg' alt='DIAN' className='dian-logo' />
+      <img src='/dian.svg' alt='DIAN' className='dian-logo' width='100' height='17' />
 
       <h1>Documentos DIAN</h1>
 

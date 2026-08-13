@@ -10,6 +10,8 @@ export const Carrusel = ({ images, currentImageIndex }) => (
       const sizes = typeof img === 'string' ? '100vw' : img.sizes || '100vw';
       const alt =
         typeof img === 'string' ? `background-${index}` : img.alt || `background-${index}`;
+      const width = typeof img === 'string' ? undefined : img.width;
+      const height = typeof img === 'string' ? undefined : img.height;
       return (
         <div key={src} className={`imageWrapper ${index === currentImageIndex ? 'active' : ''}`}>
           <img
@@ -17,6 +19,8 @@ export const Carrusel = ({ images, currentImageIndex }) => (
             srcSet={srcSet}
             sizes={sizes}
             alt={alt}
+            width={width}
+            height={height}
             loading={index === currentImageIndex ? 'eager' : 'lazy'}
             decoding='async'
           />
@@ -36,6 +40,8 @@ Carrusel.propTypes = {
         srcSet: PropTypes.string,
         sizes: PropTypes.string,
         alt: PropTypes.string,
+        width: PropTypes.number,
+        height: PropTypes.number,
       }),
     ]),
   ).isRequired,

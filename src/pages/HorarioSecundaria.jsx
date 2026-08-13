@@ -15,6 +15,8 @@ const Secundaria = () => {
             className='imagen imgSecundaria'
             src={CLOUDINARY_ASSETS.horarioSecundaria}
             alt='horarioSecundaria'
+            width='3900'
+            height='2550'
           />
         </div>
       </div>

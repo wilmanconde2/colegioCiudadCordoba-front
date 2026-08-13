@@ -92,6 +92,8 @@ const Inicio = () => {
           sizes={INICIO_HERO_IMAGES.infoInscripciones.sizes}
           alt='Toda la información de Inscripciones 2027 estará disponible desde el 1 de septiembre.'
           className='inicioHero__banner inicioHero__banner--left'
+          width={INICIO_HERO_IMAGES.infoInscripciones.width}
+          height={INICIO_HERO_IMAGES.infoInscripciones.height}
           loading='eager'
           decoding='async'
         />
@@ -106,6 +108,8 @@ const Inicio = () => {
           sizes={INICIO_HERO_IMAGES.prize.sizes}
           alt='Clasificación A+ en el ICFES 2025.'
           className='inicioHero__banner inicioHero__banner--right'
+          width={INICIO_HERO_IMAGES.prize.width}
+          height={INICIO_HERO_IMAGES.prize.height}
           loading='eager'
           decoding='async'
         />
@@ -293,6 +297,8 @@ const Inicio = () => {
             sizes={INICIO_HERO_IMAGES.tesoreriaBtn.sizes}
             alt='Ir a Tesorería - Pagos y Consultas'
             className='btnTesoreria'
+            width={INICIO_HERO_IMAGES.tesoreriaBtn.width}
+            height={INICIO_HERO_IMAGES.tesoreriaBtn.height}
           />
         </NavLink>
       </div>

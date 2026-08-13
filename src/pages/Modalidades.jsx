@@ -8,7 +8,7 @@ const Modalidades = () => {
     <>
       <div className='fullContainerModalidades'>
         <div className='imgComercialContainer'>
-          <img className='imgComercial' src={CLOUDINARY_ASSETS.comercial} alt='comercial' />
+          <img className='imgComercial' src={CLOUDINARY_ASSETS.comercial} alt='comercial' width='600' height='428' />
         </div>
         <div className='container modText'>
           <h2>MODALIDAD COMERCIAL</h2>
@@ -20,7 +20,7 @@ const Modalidades = () => {
           </p>
         </div>
         <div className='imgIndustrialContainer'>
-          <img className='imgIndustrial' src={CLOUDINARY_ASSETS.industrial} alt='industrial' />
+          <img className='imgIndustrial' src={CLOUDINARY_ASSETS.industrial} alt='industrial' width='600' height='428' />
         </div>
         <div className='container modText'>
           <h2>MODALIDAD INDUSTRIAL</h2>

@@ -11,7 +11,7 @@ const Primaria = () => {
       <div className='fullContainerPrimaria'>
         <h1>Horario de Atención Profesores Primaria</h1>
         <div className='imgPrimariaContainer'>
-          <img className='imagen imgPrimaria' src={CLOUDINARY_ASSETS.horarioPrimaria} alt='horarioPrimaria' />
+          <img className='imagen imgPrimaria' src={CLOUDINARY_ASSETS.horarioPrimaria} alt='horarioPrimaria' width='3900' height='2550' />
         </div>
       </div>
     </>

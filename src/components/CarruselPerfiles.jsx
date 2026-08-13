@@ -13,6 +13,8 @@ export const CarruselPerfiles = ({ images, currentImageIndex, backgroundColor })
             srcSet={image.srcSet}
             sizes={image.sizes}
             alt={image.alt || `background-${index}`}
+            width={image.width}
+            height={image.height}
             loading={index === currentImageIndex ? 'eager' : 'lazy'}
             decoding='async'
           />
@@ -29,6 +31,8 @@ CarruselPerfiles.propTypes = {
       srcSet: PropTypes.string,
       sizes: PropTypes.string,
       alt: PropTypes.string,
+      width: PropTypes.number,
+      height: PropTypes.number,
     }),
   ).isRequired,
   currentImageIndex: PropTypes.number.isRequired,

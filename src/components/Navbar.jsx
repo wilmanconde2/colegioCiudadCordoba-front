@@ -26,13 +26,13 @@ const Navbar = () => {
     <nav className={`navbar navbar-expand-lg ${isScrolled ? 'bg-white' : 'bg-transparent'}`}>
       <div className='container-fluid'>
         <div className='navbar-logo ppf'>
-          <img src={ppf} alt='logo' />
+          <img src={ppf} alt='logo' width='4729' height='1021' />
         </div>
         <div className='navbar-logo club'>
-          <img src={club} alt='logo' />
+          <img src={club} alt='logo' width='153' height='135' />
         </div>
         <div className='navbar-logo logo'>
-          <img src={logo} alt='logo' />
+          <img src={logo} alt='logo' width='3400' height='4400' />
         </div>
 
         <button

@@ -15,6 +15,8 @@ const HorarioPsicologia = () => {
             className='imagen imgPsicologia'
             src={CLOUDINARY_ASSETS.horarioPsicologia}
             alt='horarioPsicologia'
+            width='3300'
+            height='2550'
           />
         </div>
       </div>

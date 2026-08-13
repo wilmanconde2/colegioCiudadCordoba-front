@@ -9,7 +9,7 @@ const Cronograma2026 = () => {
       <div className='fullContainerCostos'>
         <h1>Cronograma 2026</h1>
         <div className='imgCostosContainer'>
-          <img src={CLOUDINARY_ASSETS.cronograma2026} alt='cronograma2026' className='imgCostos' />
+          <img src={CLOUDINARY_ASSETS.cronograma2026} alt='cronograma2026' className='imgCostos' width='995' height='591' />
         </div>
       </div>
     </>

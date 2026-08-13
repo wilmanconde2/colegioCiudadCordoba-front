@@ -8,7 +8,7 @@ const MisionVision = () => {
     <>
       <div className='fullContainerMiVi'>
         <div className='imgMiViContainer'>
-          <img className='imgMiVi' src={CLOUDINARY_ASSETS.mision} alt='imagen' />
+          <img className='imgMiVi' src={CLOUDINARY_ASSETS.mision} alt='imagen' width='550' height='367' />
         </div>
         <div className='containerMiVi'>
           <h1>Misión</h1>

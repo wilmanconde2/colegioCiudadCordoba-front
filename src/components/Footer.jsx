@@ -14,7 +14,7 @@ const Footer = () => {
             href='/dian'
             className='social social-icon mx-2'
           >
-            <img src='/dian.svg' alt='DIAN' className='dian-icon' />
+            <img src='/dian.svg' alt='DIAN' className='dian-icon' width='100' height='17' />
           </a>
           <a
             href='https://www.facebook.com/egresados.cocicor?fref=ts'
@@ -72,6 +72,8 @@ const Footer = () => {
               className='redesSociales'
               src='/githubWhite.png'
               alt='Github icons created by -Artist - Flaticon'
+              width='512'
+              height='512'
             />
           </a>
           <a
@@ -83,6 +85,8 @@ const Footer = () => {
               className='redesSociales'
               src='/linkedinWhite.png'
               alt='Linkedin icons created by Smashicons - Flaticon'
+              width='512'
+              height='512'
             />
           </a>
         </div>
