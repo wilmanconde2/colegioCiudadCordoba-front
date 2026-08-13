@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router';
+import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
 
 const { logo, ppf, clubCCC: club } = CLOUDINARY_ASSETS;
@@ -223,7 +224,7 @@ const Navbar = () => {
               rel='noopener noreferrer'
               className='social-icon mx-2'
             >
-              <i className='fab fa-facebook-f'></i>
+              <FaFacebookF aria-hidden='true' />
             </a>
             <a
               href='https://x.com/iecocicor'
@@ -231,7 +232,7 @@ const Navbar = () => {
               rel='noopener noreferrer'
               className='social-icon mx-2'
             >
-              <i className='fab fa-twitter'></i>
+              <FaTwitter aria-hidden='true' />
             </a>
             <a
               href='https://www.instagram.com/cocicor/?hl=es-la'
@@ -239,7 +240,7 @@ const Navbar = () => {
               rel='noopener noreferrer'
               className='social-icon mx-2'
             >
-              <i className='fab fa-instagram'></i>
+              <FaInstagram aria-hidden='true' />
             </a>
             <a
               href='https://www.youtube.com/channel/UCDeENgR7gNEQUfjWMRxqj7g'
@@ -247,7 +248,7 @@ const Navbar = () => {
               rel='noopener noreferrer'
               className='social-icon mx-2'
             >
-              <i className='fab fa-youtube'></i>
+              <FaYoutube aria-hidden='true' />
             </a>
             <a
               href='https://www.youtube.com/channel/UCxtPSGwRp7kmiDf-UHKQLAw'
@@ -255,7 +256,7 @@ const Navbar = () => {
               rel='noopener noreferrer'
               className='social-icon mx-2 ytkids'
             >
-              <i className='fab fa-youtube'></i>
+              <FaYoutube aria-hidden='true' />
               <span className='kids-badge'>Kids</span>
             </a>
           </div>

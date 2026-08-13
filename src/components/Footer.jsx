@@ -1,5 +1,7 @@
 // src/components/Footer.jsx
 
+import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+
 const year = new Date().getFullYear();
 
 const Footer = () => {
@@ -20,7 +22,7 @@ const Footer = () => {
             rel='noopener noreferrer'
             className='social social-icon mx-2'
           >
-            <i className='fab fa-facebook-f'></i>
+            <FaFacebookF aria-hidden='true' />
           </a>
           <a
             href='https://x.com/iecocicor'
@@ -28,7 +30,7 @@ const Footer = () => {
             rel='noopener noreferrer'
             className='social social-icon mx-2'
           >
-            <i className='fab fa-twitter'></i>
+            <FaTwitter aria-hidden='true' />
           </a>
           <a
             href='https://www.instagram.com/cocicor/?hl=es-la'
@@ -36,7 +38,7 @@ const Footer = () => {
             rel='noopener noreferrer'
             className='social social-icon mx-2'
           >
-            <i className='fab fa-instagram'></i>
+            <FaInstagram aria-hidden='true' />
           </a>
           <a
             href='https://www.youtube.com/channel/UCDeENgR7gNEQUfjWMRxqj7g'
@@ -44,7 +46,7 @@ const Footer = () => {
             rel='noopener noreferrer'
             className='social social-icon mx-2'
           >
-            <i className='fab fa-youtube'></i>
+            <FaYoutube aria-hidden='true' />
           </a>
           <a
             href='https://www.youtube.com/channel/UCxtPSGwRp7kmiDf-UHKQLAw'
@@ -52,9 +54,10 @@ const Footer = () => {
             rel='noopener noreferrer'
             className='social social-icon mx-2'
           >
-            <i className='fab fa-youtube ytk'>
+            <span className='ytk'>
+              <FaYoutube aria-hidden='true' />
               <span className='kids-badge'>Kids</span>
-            </i>
+            </span>
           </a>
         </div>
 
