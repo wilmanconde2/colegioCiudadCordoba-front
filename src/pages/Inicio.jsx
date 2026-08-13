@@ -70,7 +70,7 @@ const Inicio = () => {
       {mostrarCircularEspecial && (
         <CardInformation
           className='circular circular-especial'
-          titulo='Circular Especial 13-14-15 de agosto de 2026'
+          titulo='Circular Especial 13, 14 y 15 de agosto de 2026'
           imagen={INICIO_HERO_IMAGES.circularEspecial}
           imgAlt='Comunicado especial del Colegio Ciudad Córdoba para el 13, 14 y 15 de agosto de 2026'
           texto={
