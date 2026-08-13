@@ -15,12 +15,16 @@ export const CARRUSEL_PUBLIC_IDS = [
   'background10_cl',
 ];
 
-const CARRUSEL_WIDTHS = [640, 960, 1280, 1600, 1920];
+const CARRUSEL_WIDTHS = [320, 480, 640, 960, 1280, 1600, 1920];
+const CARRUSEL_SIZES =
+  '(min-width: 1445px) 520px, (min-width: 992px) 36vw, (min-width: 768px) 50vw, 80vw';
 
 export const CARRUSEL_IMAGES = CARRUSEL_PUBLIC_IDS.map((id) => ({
   src: cldUrl(id, { w: 1280, c: 'fit' }),
-  srcSet: cldSrcSet(id, CARRUSEL_WIDTHS, { c: 'fit' }),
-  sizes: '100vw',
+  // Width-descriptor srcset already lets the browser account for DPR.
+  // Keep Cloudinary DPR at 1 here to avoid requesting an oversized variant twice.
+  srcSet: cldSrcSet(id, CARRUSEL_WIDTHS, { c: 'fit', dpr: 1 }),
+  sizes: CARRUSEL_SIZES,
   alt: 'fondo',
 }));
 
@@ -42,40 +46,41 @@ export const INSC_IMG = {
 };
 
 // —— Cards ——
-const CARD_WIDTHS = [600, 800, 1200, 1600];
-const CARD_SIZES = '(min-width:1200px) 600px, (min-width:768px) 400px, 90vw';
+const CARD_WIDTHS = [240, 320, 480, 640, 800, 1200, 1600];
+const CARD_SIZES =
+  '(min-width: 1200px) 30vw, (min-width: 992px) 35vw, (min-width: 768px) 45vw, (min-width: 576px) 55vw, 65vw';
 
 export const CARD_IMGS = {
   talleres: {
     src: cldUrl('talleres-emergencia_cl', { w: 960, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
-    srcSet: cldSrcSet('talleres-emergencia_cl', [320, 480, 640, 960], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
+    srcSet: cldSrcSet('talleres-emergencia_cl', CARD_WIDTHS, { c: 'fit', q: 'auto', f: 'auto', dpr: 1, ar: null }),
     sizes: CARD_SIZES,
     width: 1536,
     height: 1024,
   },
   circular: {
     src: cldUrl('circular_cl', { w: 1200, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto' }),
-    srcSet: cldSrcSet('circular_cl', CARD_WIDTHS, { c: 'fit', q: 'auto', f: 'auto' }),
+    srcSet: cldSrcSet('circular_cl', CARD_WIDTHS, { c: 'fit', q: 'auto', f: 'auto', dpr: 1 }),
     sizes: CARD_SIZES,
   },
   reporte: {
     src: cldUrl('reporte_cl', { w: 1200, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto' }),
-    srcSet: cldSrcSet('reporte_cl', CARD_WIDTHS, { c: 'fit', q: 'auto', f: 'auto' }),
+    srcSet: cldSrcSet('reporte_cl', CARD_WIDTHS, { c: 'fit', q: 'auto', f: 'auto', dpr: 1 }),
     sizes: CARD_SIZES,
   },
   recuperacion: {
-    src: cldUrl('recuperacion_cl', { w: 1200, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto' }),
-    srcSet: cldSrcSet('recuperacion_cl', CARD_WIDTHS, { c: 'fit', q: 'auto', f: 'auto' }),
+    src: cldUrl('v1786807011/recuperacion_cl', { w: 1200, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto' }),
+    srcSet: cldSrcSet('v1786807011/recuperacion_cl', CARD_WIDTHS, { c: 'fit', q: 'auto', f: 'auto', dpr: 1 }),
     sizes: CARD_SIZES,
   },
   horarios: {
     src: cldUrl('horarios_cl', { w: 1200, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto' }),
-    srcSet: cldSrcSet('horarios_cl', CARD_WIDTHS, { c: 'fit', q: 'auto', f: 'auto' }),
+    srcSet: cldSrcSet('horarios_cl', CARD_WIDTHS, { c: 'fit', q: 'auto', f: 'auto', dpr: 1 }),
     sizes: CARD_SIZES,
   },
   matricula: {
     src: cldUrl('matricula_cl', { w: 1200, c: 'fit', q: 'auto', f: 'auto', ar: null }),
-    srcSet: cldSrcSet('matricula_cl', CARD_WIDTHS, { c: 'fit', q: 'auto', f: 'auto', ar: null }),
+    srcSet: cldSrcSet('matricula_cl', CARD_WIDTHS, { c: 'fit', q: 'auto', f: 'auto', dpr: 1, ar: null }),
     sizes: CARD_SIZES,
   },
 
@@ -84,28 +89,28 @@ export const CARD_IMGS = {
 export const INICIO_HERO_IMAGES = {
   infoInscripciones: {
     src: cldUrl('infoInscripciones_cl', { w: 800, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
-    srcSet: cldSrcSet('infoInscripciones_cl', [240, 320, 480, 640, 800], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
-    sizes: '(min-width: 992px) 280px, (min-width: 768px) 24vw, 42vw',
+    srcSet: cldSrcSet('infoInscripciones_cl', [160, 240, 320, 480, 640, 800], { c: 'fit', q: 'auto', f: 'auto', dpr: 1, ar: null }),
+    sizes: '(min-width: 1500px) 360px, (min-width: 1400px) 24vw, (min-width: 992px) 21vw, (min-width: 849px) 280px, (min-width: 440px) 33vw, 145px',
     width: 800,
     height: 533,
   },
   prize: {
     src: cldUrl('prize_cl', { w: 800, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
-    srcSet: cldSrcSet('prize_cl', [240, 320, 480, 640, 800], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
-    sizes: '(min-width: 992px) 280px, (min-width: 768px) 24vw, 42vw',
+    srcSet: cldSrcSet('prize_cl', [160, 240, 320, 480, 640, 800], { c: 'fit', q: 'auto', f: 'auto', dpr: 1, ar: null }),
+    sizes: '(min-width: 1500px) 360px, (min-width: 1400px) 24vw, (min-width: 992px) 21vw, (min-width: 849px) 280px, (min-width: 440px) 33vw, 145px',
     width: 800,
     height: 800,
   },
   circularEspecial: {
     src: cldUrl('circular-especial_cl', { w: 800, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
-    srcSet: cldSrcSet('circular-especial_cl', [320, 480, 640, 800], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
+    srcSet: cldSrcSet('circular-especial_cl', [240, 320, 480, 640, 800, 960, 1200], { c: 'fit', q: 'auto', f: 'auto', dpr: 1, ar: null }),
     sizes: CARD_SIZES,
     width: 1000,
     height: 533,
   },
   tesoreriaBtn: {
     src: cldUrl('tesoreria-btn_cl', { w: 800, c: 'fit', q: 'auto', f: 'auto', dpr: 'auto', ar: null }),
-    srcSet: cldSrcSet('tesoreria-btn_cl', [320, 480, 640, 800], { c: 'fit', q: 'auto', f: 'auto', ar: null }),
+    srcSet: cldSrcSet('tesoreria-btn_cl', [240, 320, 480, 640, 800, 1000], { c: 'fit', q: 'auto', f: 'auto', dpr: 1, ar: null }),
     sizes: '(min-width: 768px) 500px, 90vw',
     width: 1000,
     height: 500,
@@ -152,6 +157,7 @@ export const BACKGROUND_IMAGES_DIRECTIVO = [
   alt: 'fondo',
   ...PROFILE_IMAGE_DIMENSIONS[id],
 }));
+
 export const BACKGROUND_IMAGES_DOCENTE = [
   'docente1_cl',
   'docente2_cl',
@@ -166,6 +172,7 @@ export const BACKGROUND_IMAGES_DOCENTE = [
   alt: 'fondo',
   ...PROFILE_IMAGE_DIMENSIONS[id],
 }));
+
 export const BACKGROUND_IMAGES_ESTUDIANTE = [
   'estudiante1_cl',
   'estudiante2_cl',
@@ -178,6 +185,7 @@ export const BACKGROUND_IMAGES_ESTUDIANTE = [
   alt: 'fondo',
   ...PROFILE_IMAGE_DIMENSIONS[id],
 }));
+
 export const BACKGROUND_IMAGES_EGRESADO = [
   'egresado1_cl',
   'egresado2_cl',
@@ -192,6 +200,7 @@ export const BACKGROUND_IMAGES_EGRESADO = [
   alt: 'fondo',
   ...PROFILE_IMAGE_DIMENSIONS[id],
 }));
+
 export const BACKGROUND_IMAGES_HISTORIA = [
   'historia1_cl',
   'historia2_cl',
@@ -205,7 +214,6 @@ export const BACKGROUND_IMAGES_HISTORIA = [
   alt: 'fondo',
   ...PROFILE_IMAGE_DIMENSIONS[id],
 }));
-
 
 export const TALLERES_OPCIONES = [
   { label: 'Jardín', value: 'https://drive.google.com/drive/folders/1IP_cwUnn1U9CFW8MKtfMjchl7bU2-3is?usp=sharing' },

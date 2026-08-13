@@ -30,9 +30,9 @@ const Inicio = () => {
   const [mostrarMatricula] = useState(false);
   const [mostrarCircularEspecial] = useState(true);
   const [mostrarCircular] = useState(true);
-  const [mostrarTalleres] = useState(true);
+  const [mostrarTalleres] = useState(false);
   const [mostrarReporte] = useState(false);
-  const [mostrarActividades] = useState(false);
+  const [mostrarActividades] = useState(true);
   const [mostrarHorarios] = useState(false);
 
   const handleSelectChange = (e) => {
@@ -246,7 +246,7 @@ const Inicio = () => {
       {mostrarActividades && (
         <CardSelection
           className='actividades text-center'
-          titulo='Actividades Recuperación'
+          titulo='Actividades Recuperación Acumulado Primer y Segundo Periodo'
           opciones={RECUPERACION_OPCIONES}
           onChange={handleSelectChange}
           nota={
