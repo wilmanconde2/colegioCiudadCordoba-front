@@ -168,7 +168,7 @@ Variables mínimas en Netlify:
 ```env
 AI_PROVIDER=groq
 GROQ_API_KEY=...
-GROQ_MODEL=llama-3.1-8b-instant
+GROQ_MODEL=openai/gpt-oss-20b
 ```
 
 ## Keyla retrieval quality (v1.6.2)
