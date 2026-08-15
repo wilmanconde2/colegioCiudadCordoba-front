@@ -143,3 +143,15 @@ test('el prompt evita generalizaciones no respaldadas sobre robótica y formaci�
   assert.match(system, /actividades prácticas/i);
   assert.match(system, /resultados laborales/i);
 });
+
+
+test('el prompt no convierte menciones curriculares en obligatoriedad o proyectos', () => {
+  const system = getSystemMessage(
+    '¿Cómo se integra la robótica en la formación de los estudiantes?'
+  );
+
+  assert.match(system, /no autoriza a afirmar que una asignatura o actividad es obligatoria/i);
+  assert.match(system, /práctica, un proyecto, un taller/i);
+  assert.match(system, /si el contexto solo dice que un área "se trabaja"/i);
+  assert.match(system, /no añadas cómo se desarrolla, su obligatoriedad ni actividades asociadas/i);
+});
