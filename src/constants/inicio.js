@@ -56,6 +56,12 @@ const CARD_WIDTHS = [240, 320, 480, 640, 800, 1200, 1600];
 const CARD_SIZES =
   '(min-width: 1200px) 30vw, (min-width: 992px) 35vw, (min-width: 768px) 45vw, (min-width: 576px) 55vw, 65vw';
 
+// Tesorería is a wide banner, not a card. The current CSS renders it at
+// 80% of an 80%-wide container, so its effective rendered width is ~64vw.
+const TESORERIA_PUBLIC_ID = 'v1786813958/tesoreria-btn_cl';
+const TESORERIA_WIDTHS = [320, 480, 640, 800, 960, 1280, 1600, 1700];
+const TESORERIA_SIZES = '64vw';
+
 export const CARD_IMGS = {
   talleres: {
     src: cldUrl('talleres-emergencia_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 960 }),
@@ -96,15 +102,15 @@ export const CARD_IMGS = {
 
 export const INICIO_HERO_IMAGES = {
   infoInscripciones: {
-    src: cldUrl('infoInscripciones_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 800 }),
-    srcSet: cldSrcSet('infoInscripciones_cl', [160, 240, 320, 480, 640, 800], RESPONSIVE_IMAGE_OPTIONS),
+    src: cldUrl('v1786815753/infoInscripciones_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 800 }),
+    srcSet: cldSrcSet('v1786815753/infoInscripciones_cl', [160, 240, 320, 480, 640, 800], RESPONSIVE_IMAGE_OPTIONS),
     sizes: '(min-width: 1500px) 360px, (min-width: 1400px) 24vw, (min-width: 992px) 21vw, (min-width: 849px) 280px, (min-width: 440px) 33vw, 145px',
     width: 800,
     height: 533,
   },
   prize: {
-    src: cldUrl('prize_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 800 }),
-    srcSet: cldSrcSet('prize_cl', [160, 240, 320, 480, 640, 800], RESPONSIVE_IMAGE_OPTIONS),
+    src: cldUrl('v1786815728/prize_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 800 }),
+    srcSet: cldSrcSet('v1786815728/prize_cl', [160, 240, 320, 480, 640, 800], RESPONSIVE_IMAGE_OPTIONS),
     sizes: '(min-width: 1500px) 360px, (min-width: 1400px) 24vw, (min-width: 992px) 21vw, (min-width: 849px) 280px, (min-width: 440px) 33vw, 145px',
     width: 800,
     height: 800,
@@ -117,11 +123,11 @@ export const INICIO_HERO_IMAGES = {
     height: 533,
   },
   tesoreriaBtn: {
-    src: cldUrl('tesoreria-btn_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 800 }),
-    srcSet: cldSrcSet('tesoreria-btn_cl', capWidths(CARD_WIDTHS, 1000), RESPONSIVE_IMAGE_OPTIONS),
-    sizes: '(min-width: 768px) 500px, 90vw',
-    width: 1000,
-    height: 500,
+    src: cldUrl(TESORERIA_PUBLIC_ID, { ...RESPONSIVE_IMAGE_OPTIONS, w: 1280 }),
+    srcSet: cldSrcSet(TESORERIA_PUBLIC_ID, TESORERIA_WIDTHS, RESPONSIVE_IMAGE_OPTIONS),
+    sizes: TESORERIA_SIZES,
+    width: 1700,
+    height: 925,
   },
 };
 

@@ -299,6 +299,8 @@ const Inicio = () => {
             className='btnTesoreria'
             width={INICIO_HERO_IMAGES.tesoreriaBtn.width}
             height={INICIO_HERO_IMAGES.tesoreriaBtn.height}
+            loading='lazy'
+            decoding='async'
           />
         </NavLink>
       </div>
