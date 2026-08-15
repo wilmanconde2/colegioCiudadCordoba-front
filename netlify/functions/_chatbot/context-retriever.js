@@ -85,6 +85,42 @@ const SEMANTIC_INTENTS = [
     preferredEntryIds: ['servicios-institucionales', 'modalidades', 'mision', 'vision'],
     expansionTerms: ['formacion academica', 'media tecnica', 'sena', 'robotica', 'tecnologia', 'valores'],
   },
+  {
+    id: 'technology-technical-education',
+    patterns: [
+      /\b(tecnologia|robotica|programacion)\b.*\b(formacion|educacion|propuesta|aprendizaje|tecnica)\b/,
+      /\b(formacion|educacion|propuesta|aprendizaje|tecnica)\b.*\b(tecnologia|robotica|programacion)\b/,
+      /\bcomo\b.*\b(integran|integra|relacionan|relaciona)\b.*\b(tecnologia|robotica|tecnica)\b/,
+    ],
+    preferredEntryIds: ['modalidades', 'vision', 'mision', 'servicios-institucionales'],
+    expansionTerms: [
+      'modalidad industrial',
+      'robotica',
+      'programacion',
+      'ciencia y tecnologia',
+      'media tecnica',
+      'competencias laborales',
+      'sena',
+    ],
+  },
+  {
+    id: 'modalities-labor-future',
+    patterns: [
+      /\b(modalidades?|comercial|industrial)\b.*\b(futuro laboral|laboral|trabajo|competencias laborales)\b/,
+      /\b(futuro laboral|laboral|trabajo|competencias laborales)\b.*\b(modalidades?|comercial|industrial)\b/,
+      /\bcomo\b.*\b(relacionan|relaciona)\b.*\b(comercial|industrial|modalidades?)\b/,
+    ],
+    preferredEntryIds: ['modalidades', 'mision', 'perfiles', 'historia-resumen'],
+    expansionTerms: [
+      'competencias laborales',
+      'media tecnica',
+      'modalidad comercial',
+      'modalidad industrial',
+      'sena',
+      'emprendimiento',
+      'egresado',
+    ],
+  },
 ];
 
 const detectSemanticIntents = (searchText) => {

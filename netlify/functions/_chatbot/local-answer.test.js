@@ -249,3 +249,20 @@ test('responde localmente un resumen de los servicios institucionales', () => {
   assert.match(answer, /educación privada desde Preescolar hasta Media Técnica/i);
   assert.match(answer, /modalidades Comercial e Industrial/i);
 });
+
+
+test('deja pasar a IA las consultas de síntesis sobre modalidades y futuro laboral', () => {
+  const answer = getLocalAnswer(
+    'Resume cómo se relacionan las modalidades Comercial e Industrial con la formación para el futuro laboral de los estudiantes.'
+  );
+
+  assert.equal(answer, null);
+});
+
+test('deja pasar a IA las consultas explicativas de tecnología, robótica y formación técnica', () => {
+  const answer = getLocalAnswer(
+    'Describe de forma breve cómo se integran la tecnología, la robótica y la formación técnica en la propuesta educativa del colegio.'
+  );
+
+  assert.equal(answer, null);
+});

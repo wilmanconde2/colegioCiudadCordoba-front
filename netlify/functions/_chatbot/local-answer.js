@@ -383,6 +383,63 @@ const findEnrollmentCostAnswer = (question) => {
 - La estampilla Pro-cultura 1,5% y el carné estudiantil están incluidos en el costo de matrícula.`;
 };
 
+const isSynthesisOrRelationshipIntent = (question = '') => {
+  const clean = normalize(question);
+
+  // Las consultas directas sobre "qué servicios ofrece" tienen una respuesta local
+  // completa y estable; conservarlas localmente evita gastar una llamada al proveedor.
+  const directServicesIntent =
+    hasAny(clean, ['servicios ofrece', 'servicios del colegio', 'que ofrece el colegio']) &&
+    !hasAny(clean, [
+      'ventajas',
+      'fortalezas',
+      'por que',
+      'como se relacionan',
+      'como se integra',
+      'como se integran',
+    ]);
+
+  if (directServicesIntent) return false;
+
+  const synthesisIntent =
+    hasAny(clean, [
+      'resume',
+      'resumen',
+      'resumir',
+      'brevemente',
+      'en pocas lineas',
+      'principales fortalezas',
+      'principales ventajas',
+      'ventajas educativas',
+      'por que deberia',
+      'por que considerar',
+      'por que elegir',
+    ]);
+
+  const relationshipIntent =
+    hasAny(clean, [
+      'como se relacionan',
+      'como se relaciona',
+      'como integra',
+      'como integran',
+      'como se integra',
+      'como se integran',
+    ]) &&
+    hasAny(clean, [
+      'modalidad',
+      'modalidades',
+      'comercial',
+      'industrial',
+      'futuro laboral',
+      'formacion tecnica',
+      'tecnologia',
+      'robotica',
+      'sena',
+    ]);
+
+  return synthesisIntent || relationshipIntent;
+};
+
 const findKnowledgeAnswer = (question) => {
   const ignoredSingleKeywords = new Set([
     'colegio',
@@ -711,8 +768,10 @@ export const getLocalAnswer = (question = '', history = []) => {
     if (teacherAnswer) return teacherAnswer;
   }
 
-  const knowledgeAnswer = findKnowledgeAnswer(question);
-  if (knowledgeAnswer) return knowledgeAnswer;
+  if (!isSynthesisOrRelationshipIntent(question)) {
+    const knowledgeAnswer = findKnowledgeAnswer(question);
+    if (knowledgeAnswer) return knowledgeAnswer;
+  }
 
   return null;
 };

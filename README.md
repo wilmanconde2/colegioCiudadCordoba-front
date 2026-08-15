@@ -171,6 +171,10 @@ GROQ_API_KEY=...
 GROQ_MODEL=openai/gpt-oss-20b
 ```
 
-## Keyla retrieval quality (v1.6.2)
+## Keyla retrieval quality (v1.6.3)
 
 The semantic retriever now prioritizes institutional value-proposition context for synthesis, comparison, strengths, benefits, and family enrollment-intent questions. It keeps the existing local-first and multi-provider architecture unchanged while improving the quality of Groq responses without increasing the 6,500-character context ceiling.
+
+### Groq model
+
+Groq uses `openai/gpt-oss-20b` as the current default model. The local-first flow and semantic context retrieval remain unchanged; synthesis and relationship questions are routed to the provider when a raw local knowledge entry would not satisfy the requested intent.
