@@ -1,3 +1,5 @@
+// src/constants/cloudinaryAssets.js
+
 import { cldRawUrl, cldUrl } from '../utils/cloudinary';
 
 const imageUrl = (publicId, width) =>
@@ -7,7 +9,7 @@ const imageUrl = (publicId, width) =>
     ar: null,
     q: 'auto',
     f: 'auto',
-    dpr: 'auto',
+    dpr: 1,
   });
 
 export const CLOUDINARY_ASSETS = {

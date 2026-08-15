@@ -8,7 +8,7 @@ export function cldRawUrl(publicId) {
 
 export function cldUrl(
   publicId,
-  { w, h, ar = '16:9', c = 'fill', f = 'auto', q = 'auto', dpr = 'auto' } = {},
+  { w, h, ar = null, c = 'fit', f = 'auto', q = 'auto', dpr = 1 } = {},
 ) {
   const parts = [
     `f_${f}`,
