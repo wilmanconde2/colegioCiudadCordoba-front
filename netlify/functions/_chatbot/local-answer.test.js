@@ -266,3 +266,28 @@ test('deja pasar a IA las consultas explicativas de tecnología, robótica y for
 
   assert.equal(answer, null);
 });
+
+
+test('responde únicamente la modalidad Comercial cuando se solicita de forma individual', () => {
+  const answer = getLocalAnswer('¿Qué ofrece la modalidad Comercial?');
+
+  assert.match(answer, /^Modalidad Comercial:/);
+  assert.match(answer, /contabilidad/i);
+  assert.doesNotMatch(answer, /Modalidad Industrial/i);
+});
+
+test('responde únicamente la modalidad Industrial cuando se solicita de forma individual', () => {
+  const answer = getLocalAnswer('¿Qué ofrece la modalidad Industrial?');
+
+  assert.match(answer, /^Modalidad Industrial:/);
+  assert.match(answer, /robótica/i);
+  assert.doesNotMatch(answer, /Modalidad Comercial/i);
+});
+
+test('mantiene la consulta comparativa de ambas modalidades fuera del resolver individual', () => {
+  const answer = getLocalAnswer(
+    'Resume cómo se relacionan las modalidades Comercial e Industrial con la formación de los estudiantes.'
+  );
+
+  assert.equal(answer, null);
+});

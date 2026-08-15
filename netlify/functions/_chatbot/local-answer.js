@@ -439,6 +439,26 @@ const isSynthesisOrRelationshipIntent = (question = '') => {
   return synthesisIntent || relationshipIntent;
 };
 
+const findSpecificModalityAnswer = (question = '') => {
+  const clean = normalize(question);
+  const asksCommercial = hasAny(clean, ['modalidad comercial', 'comercial']);
+  const asksIndustrial = hasAny(clean, ['modalidad industrial', 'industrial']);
+
+  // If the user explicitly asks about both modalities, keep the existing
+  // combined knowledge entry / synthesis flow.
+  if (asksCommercial && asksIndustrial) return null;
+
+  if (asksCommercial) {
+    return 'Modalidad Comercial: los estudiantes trabajan contabilidad, técnicas de oficina, legislación laboral, legislación comercial, ciencia y tecnología, y emprendimiento.';
+  }
+
+  if (asksIndustrial) {
+    return 'Modalidad Industrial: los estudiantes trabajan robótica, electricidad, electrónica, dibujo técnico y emprendimiento.';
+  }
+
+  return null;
+};
+
 const findKnowledgeAnswer = (question) => {
   const ignoredSingleKeywords = new Set([
     'colegio',
@@ -766,6 +786,9 @@ export const getLocalAnswer = (question = '', history = []) => {
     const teacherAnswer = findTeacherAnswer(question);
     if (teacherAnswer) return teacherAnswer;
   }
+
+  const specificModalityAnswer = findSpecificModalityAnswer(question);
+  if (specificModalityAnswer) return specificModalityAnswer;
 
   if (!isSynthesisOrRelationshipIntent(question)) {
     const knowledgeAnswer = findKnowledgeAnswer(question);

@@ -131,3 +131,15 @@ test('el prompt exige explicar relaciones y sintetizar cuando el usuario lo pide
   assert.match(system, /sintetiza la respuesta/i);
   assert.match(system, /explica explícitamente la relación/i);
 });
+
+
+test('el prompt evita generalizaciones no respaldadas sobre robótica y formación técnica', () => {
+  const system = getSystemMessage(
+    '¿Cómo se integra la robótica en la formación de los estudiantes?'
+  );
+
+  assert.match(system, /no generalices a otros niveles/i);
+  assert.match(system, /forma parte integral del plan de estudios/i);
+  assert.match(system, /actividades prácticas/i);
+  assert.match(system, /resultados laborales/i);
+});
