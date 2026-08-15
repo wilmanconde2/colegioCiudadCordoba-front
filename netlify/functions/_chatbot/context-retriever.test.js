@@ -78,7 +78,7 @@ test('recupera fortalezas académicas y formativas con contexto diverso', () => 
 
   assert.match(context, /Servicios y propuesta institucional/i);
   assert.match(context, /Modalidades Comercial e Industrial/i);
-  assert.match(context, /SENA|robótica|tecnología/i);
+  assert.match(context, /robótica|tecnología/i);
 });
 
 test('el prompt de propuesta de valor instruye síntesis factual y mantiene tamaño seguro', () => {
@@ -109,18 +109,18 @@ test('prioriza modalidades y competencias laborales cuando preguntan por futuro 
   );
 
   assert.match(context, /Modalidades Comercial e Industrial/i);
-  assert.match(context, /competencias laborales|Contabilización de Operaciones|Redes Eléctricas/i);
+  assert.match(context, /competencias laborales|contabilidad|electricidad|electrónica|robótica/i);
   assert.match(context, /Misión|Perfiles COCICOR|Reseña histórica/i);
 });
 
-test('el prompt prohíbe inferir títulos o certificaciones no afirmadas por la base', () => {
+test('el prompt prohíbe inferir convenios, títulos o salidas laborales no afirmadas por la base', () => {
   const system = getSystemMessage(
     'Redacta una respuesta breve para una familia interesada en conocer las principales ventajas educativas del colegio.'
   );
 
   assert.match(system, /terminología institucional exacta/i);
-  assert.match(system, /títulos profesionales/i);
-  assert.match(system, /no afirmes/i);
+  assert.match(system, /no deduzcas profesiones, empleos, certificaciones, convenios/i);
+  assert.match(system, /explícitamente respaldado/i);
 });
 
 test('el prompt exige explicar relaciones y sintetizar cuando el usuario lo pide', () => {

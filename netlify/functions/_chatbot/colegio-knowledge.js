@@ -195,7 +195,7 @@ export const KNOWLEDGE_ENTRIES = [
     title: 'Servicios y propuesta institucional',
     keywords: ['servicios del colegio', 'servicios ofrece', 'que ofrece el colegio', 'oferta educativa', 'propuesta educativa', 'niveles educativos', 'formacion integral'],
     answer:
-      'El Colegio Ciudad Córdoba ofrece educación privada desde Preescolar hasta Media Técnica, con formación académica, deportiva, cultural, artística y en valores. Cuenta con modalidades Comercial e Industrial, articulación con el SENA, orientación psicológica, coordinación académica, actividades deportivas y lúdicas, y uso de tecnología y robótica como apoyo al aprendizaje.',
+      'El Colegio Ciudad Córdoba ofrece educación privada desde Preescolar hasta Media Técnica, con formación académica, deportiva, cultural, artística y en valores. Cuenta con modalidades Comercial e Industrial, orientación psicológica, coordinación académica, actividades deportivas y lúdicas, y uso de tecnología y robótica como apoyo al aprendizaje.',
   },
   {
     id: 'deporte-ludica',
@@ -207,9 +207,9 @@ export const KNOWLEDGE_ENTRIES = [
   {
     id: 'modalidades',
     title: 'Modalidades Comercial e Industrial',
-    keywords: ['modalidad', 'modalidades', 'comercial', 'industrial', 'sena', 'robotica', 'robótica', 'contabilidad', 'electricidad'],
+    keywords: ['modalidad', 'modalidades', 'comercial', 'industrial', 'robotica', 'robótica', 'contabilidad', 'electricidad'],
     answer:
-      'Modalidades:\n- Modalidad Comercial: los estudiantes aprenden contabilidad, técnicas de oficina y legislaciones en el programa de formación en Contabilización de Operaciones Comerciales y Financieras. También se trabaja contabilidad, legislación laboral, legislación comercial, ciencia y tecnología, y emprendimiento.\n- Modalidad Industrial: los estudiantes aprenden dibujo técnico y electricidad-electrónica en el programa de Instalación de Redes Eléctricas Residenciales. También se trabaja robótica, electricidad, electrónica, dibujo técnico y emprendimiento.\n- Desde 2026, grado sexto no se divide por modalidades.\n- De sexto a noveno ven asignaturas optativas como contabilidad, programación, robótica, dibujo técnico y artes plásticas.',
+      'Modalidades:\n- Modalidad Comercial: los estudiantes trabajan contabilidad, técnicas de oficina, legislación laboral, legislación comercial, ciencia y tecnología, y emprendimiento.\n- Modalidad Industrial: los estudiantes trabajan robótica, electricidad, electrónica, dibujo técnico y emprendimiento.\n- Desde 2026, grado sexto no se divide por modalidades.\n- De sexto a noveno ven asignaturas optativas como contabilidad, programación, robótica, dibujo técnico y artes plásticas.',
   },
   {
     id: 'manual-convivencia',
@@ -242,9 +242,9 @@ export const KNOWLEDGE_ENTRIES = [
   {
     id: 'historia-resumen',
     title: 'Reseña histórica',
-    keywords: ['historia', 'reseña historica', 'reseña histórica', 'fundacion', 'fundación', '1990', 'rector', 'sena', 'icfes'],
+    keywords: ['historia', 'reseña historica', 'reseña histórica', 'fundacion', 'fundación', '1990', 'rector', 'icfes'],
     answer:
-      'Reseña histórica: El Colegio Ciudad Córdoba fue fundado en 1990 con educación preescolar, básica primaria y básica secundaria. Su primer rector fue Armando Gordillo López. En 1994-1995 graduó la primera promoción comercial; en 2000-2001 la primera promoción industrial. En 2007-2008 inició integración con el SENA para grado once en modalidades industrial y comercial. El colegio también ha desarrollado procesos de calidad, plataforma virtual, actividades deportivas y culturales, y presencia institucional en la comuna 15 de Cali.',
+      'Reseña histórica: El Colegio Ciudad Córdoba fue fundado en 1990 con educación preescolar, básica primaria y básica secundaria. Su primer rector fue Armando Gordillo López. En 1994-1995 graduó la primera promoción comercial; en 2000-2001 la primera promoción industrial. El colegio también ha desarrollado procesos de calidad, plataforma virtual, actividades deportivas y culturales, y presencia institucional en la comuna 15 de Cali.',
   },
 ];
 

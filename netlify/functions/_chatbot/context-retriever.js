@@ -68,7 +68,6 @@ const SEMANTIC_INTENTS = [
       'propuesta educativa',
       'formacion integral',
       'modalidades',
-      'sena',
       'robotica',
       'tecnologia',
       'valores',
@@ -83,7 +82,7 @@ const SEMANTIC_INTENTS = [
       /\b(compara|comparar)\b.*\b(academica|formativa|modalidad|formacion)\b/,
     ],
     preferredEntryIds: ['servicios-institucionales', 'modalidades', 'mision', 'vision'],
-    expansionTerms: ['formacion academica', 'media tecnica', 'sena', 'robotica', 'tecnologia', 'valores'],
+    expansionTerms: ['formacion academica', 'media tecnica', 'robotica', 'tecnologia', 'valores'],
   },
   {
     id: 'technology-technical-education',
@@ -100,7 +99,6 @@ const SEMANTIC_INTENTS = [
       'ciencia y tecnologia',
       'media tecnica',
       'competencias laborales',
-      'sena',
     ],
   },
   {
@@ -116,7 +114,6 @@ const SEMANTIC_INTENTS = [
       'media tecnica',
       'modalidad comercial',
       'modalidad industrial',
-      'sena',
       'emprendimiento',
       'egresado',
     ],

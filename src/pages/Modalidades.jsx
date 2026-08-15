@@ -14,9 +14,8 @@ const Modalidades = () => {
           <h2>MODALIDAD COMERCIAL</h2>
           <p>
             En bachillerato, los estudiantes que escogen la modalidad comercial, además de sus áreas
-            básicas y fundamentales, aprenden asignaturas como contabilidad, técnicas de oficina y
-            legislaciones en el programa de formación en “CONTABILIZACIÓN DE OPERACIONES COMERCIALES
-            Y FINANCIERAS”
+            básicas y fundamentales, trabajan asignaturas como contabilidad, técnicas de oficina,
+            legislación laboral, legislación comercial, ciencia y tecnología, y emprendimiento.
           </p>
         </div>
         <div className='imgIndustrialContainer'>
@@ -26,9 +25,8 @@ const Modalidades = () => {
           <h2>MODALIDAD INDUSTRIAL</h2>
           <p>
             En bachillerato, los estudiantes que escogen la modalidad industrial, además de sus
-            áreas básicas y fundamentales, aprenden asignaturas como dibujo técnico y
-            electricidad-electrónica en el programa de formación en “INSTALACIÓN DE REDES ELÉCTRICAS
-            RESIDENCIALES”.
+            áreas básicas y fundamentales, trabajan asignaturas como dibujo técnico, electricidad,
+            electrónica, robótica y emprendimiento.
             <br />
             <br />
             En el año lectivo 2.025, los estudiantes de grado 9° y 10° de industrial estarán

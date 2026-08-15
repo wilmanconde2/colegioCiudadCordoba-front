@@ -434,7 +434,6 @@ const isSynthesisOrRelationshipIntent = (question = '') => {
       'formacion tecnica',
       'tecnologia',
       'robotica',
-      'sena',
     ]);
 
   return synthesisIntent || relationshipIntent;
