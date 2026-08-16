@@ -116,8 +116,8 @@ export const INICIO_HERO_IMAGES = {
     height: 800,
   },
   circularEspecial: {
-    src: cldUrl('circular-especial_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 800 }),
-    srcSet: cldSrcSet('circular-especial_cl', capWidths(CARD_WIDTHS, 1000), RESPONSIVE_IMAGE_OPTIONS),
+    src: cldUrl('v1786860811/circular-especial_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 800 }),
+    srcSet: cldSrcSet('v1786860811/circular-especial_cl', capWidths(CARD_WIDTHS, 1000), RESPONSIVE_IMAGE_OPTIONS),
     sizes: CARD_SIZES,
     width: 1000,
     height: 533,
