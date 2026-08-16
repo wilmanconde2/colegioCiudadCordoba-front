@@ -14,10 +14,10 @@ const imageUrl = (publicId, width) =>
 
 export const CLOUDINARY_ASSETS = {
   codigoQR: imageUrl('codigoQR_cl', 460),
-  pse: imageUrl('v1786815705/pse_cl', 700),
-  horarioPrimaria: imageUrl('v1786813789/horarioPrimaria_cl', 1600),
+  pse: imageUrl('v1787787304/pse_cl', 700),
+  horarioPrimaria: imageUrl('v1787796427/horarioPrimaria_cl', 1600),
   horarioPrimariaRaw: cldRawUrl('v1786813789/horarioPrimaria_cl'),
-  horarioSecundaria: imageUrl('v1786813506/horarioSecundaria_cl', 1600),
+  horarioSecundaria: imageUrl('v1787669265/horarioSecundaria_cl', 1600),
   horarioSecundariaRaw: cldRawUrl('v1786813506/horarioSecundaria_cl'),
   clubCCC: imageUrl('clubCCC_cl', 306),
   logo: imageUrl('v1786815674/logo_cl', 256),
