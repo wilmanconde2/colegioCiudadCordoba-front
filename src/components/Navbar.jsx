@@ -186,7 +186,7 @@ const Navbar = () => {
                         to='/horario-secundaria'
                         onClick={handleNavLinkClick}
                       >
-                        Profesores Bachillerato
+                        Profesores Secundaria
                       </NavLink>
                     </li>
                   </ul>

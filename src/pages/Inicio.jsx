@@ -28,7 +28,7 @@ const Inicio = () => {
   // Tarjetas informativas y de selección
   // eslint-disable-next-line no-unused-vars
   const [mostrarMatricula] = useState(false);
-  const [mostrarCircularEspecial] = useState(true);
+  const [mostrarCircularEspecial] = useState(false);
   const [mostrarCircular] = useState(true);
   const [mostrarTalleres] = useState(false);
   const [mostrarReporte] = useState(false);
@@ -70,12 +70,12 @@ const Inicio = () => {
       {mostrarCircularEspecial && (
         <CardInformation
           className='circular circular-especial'
-          titulo='Circular Especial 13, 14 y 15 de agosto de 2026'
+          titulo='Información Importante'
           imagen={INICIO_HERO_IMAGES.circularEspecial}
           imgAlt='Comunicado especial del Colegio Ciudad Córdoba para el 13, 14 y 15 de agosto de 2026'
           texto={
             <>
-              Información especial sobre actividades académicas, entrega de boletines y retorno a la
+              Información especial sobre actividades académicas y retorno a la
               presencialidad, de acuerdo con las directrices de la Secretaría de Educación
               Distrital.
             </>

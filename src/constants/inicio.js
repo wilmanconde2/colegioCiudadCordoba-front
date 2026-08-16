@@ -116,8 +116,8 @@ export const INICIO_HERO_IMAGES = {
     height: 800,
   },
   circularEspecial: {
-    src: cldUrl('circular-especial_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 800 }),
-    srcSet: cldSrcSet('circular-especial_cl', capWidths(CARD_WIDTHS, 1000), RESPONSIVE_IMAGE_OPTIONS),
+    src: cldUrl('v1786860811/circular-especial_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 800 }),
+    srcSet: cldSrcSet('v1786860811/circular-especial_cl', capWidths(CARD_WIDTHS, 1000), RESPONSIVE_IMAGE_OPTIONS),
     sizes: CARD_SIZES,
     width: 1000,
     height: 533,
@@ -435,13 +435,13 @@ export const RECUPERACION_OPCIONES = [
     value: 'https://drive.google.com/drive/folders/1KkWEzh9tfHSjHDrtccihf1j5b3cPvDOh',
   },
   {
-    label: '6 COM',
+    label: '6',
     value: 'https://drive.google.com/drive/folders/1__TEGZa-HLe_MHRczk40ql6jC95zSCFM',
   },
-  {
-    label: '6 IND',
-    value: 'https://drive.google.com/drive/folders/1tw_eg8YfRsEjATHyuQNroGhPPbjb25Qj',
-  },
+  // {
+  //   label: '6 IND',
+  //   value: 'https://drive.google.com/drive/folders/1tw_eg8YfRsEjATHyuQNroGhPPbjb25Qj',
+  // },
   {
     label: '7 COM',
     value: 'https://drive.google.com/drive/folders/1wqIH_pEk0cpCItY7MzaBPbpKBPvvFiFE',
