@@ -23,7 +23,7 @@ const Inicio = () => {
   useTitulo('Inicio');
 
   const { currentImageIndex } = useCarrusel(CARRUSEL_IMAGES);
-  // Tarjetas informativas y de selección
+  // Tarjetas informativas y de selección, se pueden habilitar o deshabilitar según la necesidad de la página de inicio.
   const [mostrarCircularEspecial] = useState(false);
   const [mostrarCircular] = useState(true);
   const [mostrarTalleres] = useState(false);
