@@ -1,0 +1,92 @@
+@use '../base/Settings' as *;
+
+.inscripciones {
+  --inscripciones-ink: #17345f;
+  --inscripciones-soft: #eef4fb;
+  color: var(--inscripciones-ink);
+  margin-top: 5.7rem;
+  padding-bottom: 5rem;
+}
+
+.inscripciones__hero {
+  padding: clamp(4rem, 10vw, 8rem) max(1.25rem, calc((100vw - 1120px) / 2));
+  text-align: center;
+  background: linear-gradient(135deg, rgba($color-secondary, 0.98), rgba($color-primary, 0.9));
+  color: #fff;
+
+  h1 { margin: 0 auto 2rem; font-size: clamp(2.4rem, 8vw, 5.6rem); line-height: 0.95; text-transform: uppercase; }
+  h1 span { display: block; margin-top: 0.65rem; font-size: 0.48em; letter-spacing: 0.09em; }
+}
+
+.inscripciones__eyebrow,
+.inscripciones__heading > p { margin-bottom: 0.65rem; color: $color-primary; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+.inscripciones__hero .inscripciones__eyebrow { color: #fff; }
+
+.inscripciones__kids { width: min(100%, 620px); margin: auto; padding: 1.5rem; border: 1px solid rgba(255,255,255,.45); border-radius: 1.25rem; background: rgba(255,255,255,.12); backdrop-filter: blur(5px); }
+.inscripciones__kids h2 { font-size: clamp(1.35rem, 4vw, 2rem); }
+.inscripciones__kids p { display: inline-block; margin: .5rem .75rem; }
+.inscripciones__kids .inscripciones__note { display: block; margin-top: 1rem; }
+
+.inscripciones__section { width: min(1120px, calc(100% - 2.5rem)); margin: 0 auto; padding: clamp(3.5rem, 8vw, 6rem) 0 0; }
+.inscripciones__section--tint { width: 100%; padding-inline: max(1.25rem, calc((100vw - 1120px) / 2)); padding-bottom: clamp(3.5rem, 8vw, 6rem); background: var(--inscripciones-soft); }
+.inscripciones__heading { margin-bottom: 2rem; }
+.inscripciones__heading h2 { margin: 0; font-size: clamp(2rem, 5vw, 3.2rem); }
+
+.inscripciones__grid { display: grid; gap: 1.25rem; }
+.inscripciones__card,
+.inscripciones__service { padding: clamp(1.35rem, 4vw, 2rem); border: 1px solid #dce5f0; border-radius: 1.25rem; background: #fff; box-shadow: 0 12px 35px rgba(23, 52, 95, .08); }
+.inscripciones__card h3,
+.inscripciones__service h3 { color: $color-secondary; }
+.inscripciones__card h4 { margin-top: 1.5rem; font-size: 1rem; text-transform: uppercase; letter-spacing: .06em; }
+.inscripciones__card li,
+.inscripciones__conditions li,
+.inscripciones__steps li { margin-bottom: .55rem; }
+.inscripciones__degree { margin-top: 1.5rem; }
+.inscripciones__service { border-top: 4px solid $color-primary; }
+.inscripciones__service p { margin-bottom: 0; }
+.inscripciones__card dl div { display: grid; grid-template-columns: 5rem 1fr; gap: .75rem; }
+.inscripciones__card dt { font-weight: 700; }
+
+.inscripciones__cta { display: inline-block; margin-top: 1rem; padding: .8rem 1.2rem; border: 2px solid $color-primary; border-radius: 999px; background: $color-primary; color: #fff; font-weight: 700; text-decoration: none; }
+.inscripciones__cta:hover { background: transparent; color: $color-secondary; }
+.inscripciones__cta:focus-visible,
+.inicioHero__bannerLink:focus-visible { outline: 4px solid $color-third; outline-offset: 4px; }
+
+.inscripciones__steps { --inscripciones-step-size: 3rem; position: relative; margin: 0; padding: 0; list-style: none; }
+.inscripciones__steps > li { position: relative; display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+.inscripciones__steps > li:not(:last-child)::after { content: ''; position: absolute; z-index: 0; top: var(--inscripciones-step-size); bottom: -1.5rem; left: 1.45rem; width: 3px; background: rgba($color-primary, .28); }
+.inscripciones__steps > li > div { padding: 1.25rem; border-radius: 1rem; background: var(--inscripciones-soft); }
+.inscripciones__steps h3 { font-size: 1.2rem; }
+.inscripciones__stepNumber { z-index: 1; display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 50%; background: $color-primary; color: #fff; font-weight: 800; }
+
+.inscripciones__conditions { width: min(1120px, calc(100% - 2.5rem)); margin: clamp(3.5rem, 8vw, 6rem) auto 0; padding: clamp(1.5rem, 5vw, 2.75rem); border-left: 8px solid $color-third; border-radius: 1rem; background: #fff5dd; color: #4d3900; }
+.inscripciones__conditions h2 { color: inherit; }
+
+.inscripciones__costs { overflow-x: auto; border-radius: 1rem; box-shadow: 0 10px 30px rgba(23, 52, 95, .1); }
+.inscripciones__costs table { width: 100%; min-width: 520px; border-collapse: collapse; background: #fff; }
+.inscripciones__costs th,
+.inscripciones__costs td { padding: 1rem; border-bottom: 1px solid #dce5f0; text-align: left; }
+.inscripciones__costs thead { background: $color-secondary; color: #fff; }
+.inscripciones__warning { margin: 1.5rem 0 0; padding: 1.25rem; border-radius: .75rem; background: var(--inscripciones-soft); font-weight: 600; }
+
+@media (min-width: 768px) {
+  .inscripciones { margin-top: 7.8rem; }
+  .inscripciones__grid--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .inscripciones__grid--three,
+  .inscripciones__grid--services { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .inscripciones__steps { --inscripciones-step-size: 4rem; }
+  .inscripciones__steps > li { grid-template-columns: 4rem 1fr; gap: 1.5rem; }
+  .inscripciones__steps > li:not(:last-child)::after { left: 1.95rem; }
+  .inscripciones__stepNumber { width: 4rem; height: 4rem; }
+}
+
+@media (min-width: 992px) {
+  .inscripciones__grid--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .inscripciones__grid--services { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .inscripciones__grid--services .inscripciones__service { grid-column: span 2; }
+  .inscripciones__grid--services .inscripciones__service:nth-child(4) { grid-column: 2 / span 2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inscripciones__cta { transition: none; }
+}

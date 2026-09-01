@@ -12,8 +12,6 @@ import BuscadorCursoCard from '../components/BuscadorCursoCard';
 
 import {
   CARRUSEL_IMAGES,
-  // eslint-disable-next-line no-unused-vars
-  INSC_IMG,
   CARD_IMGS,
   INICIO_HERO_IMAGES,
   TALLERES_OPCIONES,
@@ -26,8 +24,6 @@ const Inicio = () => {
 
   const { currentImageIndex } = useCarrusel(CARRUSEL_IMAGES);
   // Tarjetas informativas y de selección
-  // eslint-disable-next-line no-unused-vars
-  const [mostrarMatricula] = useState(false);
   const [mostrarCircularEspecial] = useState(false);
   const [mostrarCircular] = useState(true);
   const [mostrarTalleres] = useState(false);
@@ -86,17 +82,23 @@ const Inicio = () => {
       )}
       
       <section className='inicioHero' aria-label='Información destacada'>
-        <img
-          src={INICIO_HERO_IMAGES.infoInscripciones.src}
-          srcSet={INICIO_HERO_IMAGES.infoInscripciones.srcSet}
-          sizes={INICIO_HERO_IMAGES.infoInscripciones.sizes}
-          alt='Toda la información de Inscripciones 2027 estará disponible desde el 1 de septiembre.'
-          className='inicioHero__banner inicioHero__banner--left'
-          width={INICIO_HERO_IMAGES.infoInscripciones.width}
-          height={INICIO_HERO_IMAGES.infoInscripciones.height}
-          loading='eager'
-          decoding='async'
-        />
+        <NavLink
+          to='/inscripciones'
+          className='inicioHero__bannerLink inicioHero__banner--left'
+          aria-label='Consultar toda la información de Inscripciones 2027'
+        >
+          <img
+            src={INICIO_HERO_IMAGES.infoInscripciones.src}
+            srcSet={INICIO_HERO_IMAGES.infoInscripciones.srcSet}
+            sizes={INICIO_HERO_IMAGES.infoInscripciones.sizes}
+            alt='Inscripciones 2027'
+            className='inicioHero__banner'
+            width={INICIO_HERO_IMAGES.infoInscripciones.width}
+            height={INICIO_HERO_IMAGES.infoInscripciones.height}
+            loading='eager'
+            decoding='async'
+          />
+        </NavLink>
 
         <div className='mainImages'>
           <Carrusel images={CARRUSEL_IMAGES} currentImageIndex={currentImageIndex} />
@@ -167,65 +169,6 @@ const Inicio = () => {
         />
       )}
 
-      {/* TEMPORAL Eliminar después de inscripciones y matriculas*/}
-      {/* <h3 className='vacaciones'>
-        Mañana habrá atención <u><i>EXCLUSIVA</i></u> para venta de uniformes en las instalaciones del
-        colegio, <br /> en el horario de 8:00 a. m. a 12:00 m.
-      </h3> */}
-
-      {/* TODO ARCHIVOS CREADOS: recursosCursos.js - BuscadorCursoCard.jsx - ModalInfoCurso.jsx - _BuscadorCursoCard.scss - _ModalCursos.scss */}
-
-      {/* <div className='fecha'>
-        <a
-          className='link-subs'
-          href='https://drive.google.com/drive/folders/1-mDgt3M11XJmcvMJkjGK6EA4g4QRRIB5?usp=drive_link'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <img
-            src={INSC_IMG.src}
-            srcSet={INSC_IMG.srcSet}
-            sizes={INSC_IMG.sizes}
-            alt='inscripciones'
-            className='imgInscripciones'
-            width={INSC_IMG.width}
-            loading='lazy'
-            decoding='async'
-            style={{ height: 'auto', objectFit: 'contain' }}
-          />
-        </a>
-        {mostrarMatricula && (
-          <CardInformation
-            className='matricula'
-            imagen={CARD_IMGS.matricula}
-            texto={<>Aquí encontraras toda la información!!</>}
-            link='https://drive.google.com/drive/folders/1ytcHPPBebATkgdB3S3eITQkLIUwqwA04'
-          />
-        )}
-      </div>
-
-      <div className='infoInscripciones'>
-        <h2>Inscripciones Abiertas</h2>
-        <h3>Año Lectivo 2026</h3>
-        <p>En la secretaría de la institución</p>
-        <ul className='horarioInscripciones'>
-          Lunes a Viernes
-          <li>7:00 am - 12:00 pm</li>
-          <li>1:00 pm - 4:00 pm</li>
-        </ul>
-        <p>
-          Desde Jardín <em>(4 años)</em> hasta grado Décimo
-        </p>
-        <a
-          href='https://drive.google.com/drive/folders/1-mDgt3M11XJmcvMJkjGK6EA4g4QRRIB5?usp=drive_link'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Más información aquí
-        </a>
-      </div> */}
-
-      {/* TEMPORAL Eliminar después de inscripciones y matriculas*/}
 
       {mostrarReporte && (
         <CardSelection

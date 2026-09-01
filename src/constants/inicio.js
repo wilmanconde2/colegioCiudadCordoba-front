@@ -34,23 +34,6 @@ export const CARRUSEL_IMAGES = CARRUSEL_PUBLIC_IDS.map((id) => ({
   alt: 'fondo',
 }));
 
-// —— Portada / Inscripciones ——
-const FECHA_WIDTHS = [480, 640, 768, 1024, 1280, 1600];
-export const FECHA_IMG = {
-  src: cldUrl('fecha_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1280 }),
-  srcSet: cldSrcSet('fecha_cl', FECHA_WIDTHS, RESPONSIVE_IMAGE_OPTIONS),
-  sizes: '(min-width:576px) 70vw, 80vw',
-  width: 1280,
-};
-
-const INSC_WIDTHS = [300, 600];
-export const INSC_IMG = {
-  src: cldUrl('inscripciones_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 600 }),
-  srcSet: cldSrcSet('inscripciones_cl', INSC_WIDTHS, RESPONSIVE_IMAGE_OPTIONS),
-  sizes: '300px',
-  width: 600,
-};
-
 // —— Cards ——
 const CARD_WIDTHS = [240, 320, 480, 640, 800, 1200, 1600];
 const CARD_SIZES =
@@ -92,12 +75,6 @@ export const CARD_IMGS = {
     srcSet: cldSrcSet('horarios_cl', CARD_WIDTHS, RESPONSIVE_IMAGE_OPTIONS),
     sizes: CARD_SIZES,
   },
-  matricula: {
-    src: cldUrl('matricula_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1200 }),
-    srcSet: cldSrcSet('matricula_cl', CARD_WIDTHS, RESPONSIVE_IMAGE_OPTIONS),
-    sizes: CARD_SIZES,
-  },
-
 };
 
 export const INICIO_HERO_IMAGES = {

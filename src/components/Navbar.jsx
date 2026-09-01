@@ -206,6 +206,11 @@ const Navbar = () => {
             </li>
 
             <li className='nav-item'>
+              <NavLink className='nav-link nav-link--inscripciones' to='/inscripciones' onClick={handleNavLinkClick}>
+                Inscripciones 2027
+              </NavLink>
+            </li>
+            <li className='nav-item'>
               <NavLink className='nav-link' to='/pqrs' onClick={handleNavLinkClick}>
                 PQRS
               </NavLink>

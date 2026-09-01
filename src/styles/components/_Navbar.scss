@@ -71,6 +71,11 @@
   transition: color 0.3s ease;
 }
 
+.nav-link--inscripciones {
+  font-weight: 700;
+  color: $color-primary !important;
+}
+
 .horarioMenu{
   text-align: center;
 }
