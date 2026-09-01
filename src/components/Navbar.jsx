@@ -205,11 +205,13 @@ const Navbar = () => {
               </ul>
             </li>
 
+            {/* TEMPORAL: habilitar el 7 de septiembre de 2026
             <li className='nav-item'>
               <NavLink className='nav-link nav-link--inscripciones' to='/inscripciones' onClick={handleNavLinkClick}>
                 Inscripciones 2027
               </NavLink>
             </li>
+            */}
             <li className='nav-item'>
               <NavLink className='nav-link' to='/pqrs' onClick={handleNavLinkClick}>
                 PQRS

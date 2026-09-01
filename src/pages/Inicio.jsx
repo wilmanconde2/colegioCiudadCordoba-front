@@ -82,23 +82,18 @@ const Inicio = () => {
       )}
       
       <section className='inicioHero' aria-label='Información destacada'>
-        <NavLink
-          to='/inscripciones'
-          className='inicioHero__bannerLink inicioHero__banner--left'
-          aria-label='Consultar toda la información de Inscripciones 2027'
-        >
-          <img
-            src={INICIO_HERO_IMAGES.infoInscripciones.src}
-            srcSet={INICIO_HERO_IMAGES.infoInscripciones.srcSet}
-            sizes={INICIO_HERO_IMAGES.infoInscripciones.sizes}
-            alt='Inscripciones 2027'
-            className='inicioHero__banner'
-            width={INICIO_HERO_IMAGES.infoInscripciones.width}
-            height={INICIO_HERO_IMAGES.infoInscripciones.height}
-            loading='eager'
-            decoding='async'
-          />
-        </NavLink>
+        {/* TEMPORAL: habilitar CTA hacia /inscripciones el 7 de septiembre de 2026 */}
+        <img
+          src={INICIO_HERO_IMAGES.infoInscripciones.src}
+          srcSet={INICIO_HERO_IMAGES.infoInscripciones.srcSet}
+          sizes={INICIO_HERO_IMAGES.infoInscripciones.sizes}
+          alt='Inscripciones 2027'
+          className='inicioHero__banner inicioHero__banner--left'
+          width={INICIO_HERO_IMAGES.infoInscripciones.width}
+          height={INICIO_HERO_IMAGES.infoInscripciones.height}
+          loading='eager'
+          decoding='async'
+        />
 
         <div className='mainImages'>
           <Carrusel images={CARRUSEL_IMAGES} currentImageIndex={currentImageIndex} />
