@@ -2,103 +2,6 @@
 
 @use '../base/Settings' as *;
 
-// !---------------------------------------------------
-// ! TEMPORAL
-// TODO Eliminar después de inscripciones y matriculas
-// !---------------------------------------------------
-
-.vacaciones {
-  text-align: center;
-  font-size: 1.5rem;
-  color: red;
-  font-weight: bold;
-  width: 80%;
-  margin: auto;
-  margin-bottom: 2rem;
-}
-
-.fecha {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  // width: min(100%, 1100px);
-  width: 80%;
-  margin: 0 auto 4rem;
-  padding: 0.5rem 0;
-
-  // Link del botón "inscripciones"
-  .link-subs {
-    display: none;
-  }
-
-  // CardInformation (usa .card internamente)
-  .card {
-    margin: 0;
-    width: min(70%, 520px);
-    background-color: transparent;
-
-    img {
-      display: block;
-      margin: 0 auto;
-      max-width: 100%;
-      height: auto;
-    }
-  }
-
-  // Estilos comunes (evento / inscripciones)
-  .evento,
-  .imgInscripciones {
-    border: 2px solid transparent;
-    border-radius: 12px;
-    box-shadow:
-      0 0 4px transparent,
-      0 0 8px transparent,
-      0 0 16px transparent,
-      inset 0 0 4px transparent;
-  }
-
-  .evento {
-    width: 80%;
-    border-color: $color-primary;
-    box-shadow:
-      0 0 4px $color-primary,
-      0 0 8px $color-primary,
-      0 0 16px $color-primary,
-      inset 0 0 4px $color-primary;
-  }
-
-  // Imagen inscripciones (mobile)
-  .imgInscripciones {
-    width: min(80%, 320px);
-    height: auto;
-    object-fit: contain;
-    border-color: $color-third;
-    box-shadow:
-      0 0 4px $color-third,
-      0 0 8px $color-third,
-      0 0 16px $color-third,
-      inset 0 0 4px $color-third;
-  }
-}
-
-.infoInscripciones {
-  width: 80%;
-  margin: auto;
-  text-align: center;
-  margin-bottom: 2rem;
-
-  h2,
-  h3 {
-    font-variant: small-caps;
-  }
-
-  li {
-    list-style: none;
-  }
-}
-
 .infoTesoreria {
   width: 80%;
   margin: auto;
@@ -146,6 +49,12 @@
   animation: inicioBannerFloat 3.4s ease-in-out infinite;
   will-change: transform;
   z-index: 1;
+}
+
+.inicioHero__bannerLink {
+  display: grid;
+  place-items: center;
+  border-radius: 1rem;
 }
 
 .inicioHero__banner--left,
@@ -304,21 +213,6 @@ em {
     }
   }
 
-  .infoInscripciones {
-    display: none;
-  }
-
-  .fecha {
-    flex-direction: row;
-    gap: 3rem;
-
-    .link-subs {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    }
-  }
-
   .card {
     max-width: 45%;
     max-height: none;
@@ -342,10 +236,6 @@ em {
     max-height: none;
   }
 
-  .fecha {
-    flex-direction: row;
-    gap: 3rem;
-  }
 }
 
 @media (min-width: 1200px) {
@@ -354,41 +244,6 @@ em {
     max-height: none;
   }
 
-
-  .fecha {
-    .link-subs {
-      display: flex;
-      justify-content: center;
-      width: 30%;
-    }
-  }
-
-  // !---------------------------------------------------
-  // ! TEMPORAL (hover y versión circular solo en XL)
-  // !---------------------------------------------------
-  // TODO Eliminar después de inscripciones y matriculas
-
-  .fecha {
-    justify-content: space-around;
-
-    .imgInscripciones {
-      width: 100%;
-      border-radius: 50%;
-      transition: transform 0.5s ease;
-
-      &:hover {
-        transform: scale(1.05);
-      }
-    }
-
-    .evento {
-      margin-bottom: 2rem;
-    }
-  }
-
-  .imgInscripciones {
-    display: initial;
-  }
 }
 
 @media (min-width: 992px) {

@@ -13,6 +13,7 @@ const HorarioCoordinadores = lazy(() => import('../pages/HorarioCoordinadores'))
 const HorarioPrimaria = lazy(() => import('../pages/HorarioPrimaria'));
 const HorarioPsicologia = lazy(() => import('../pages/HorarioPsicologia'));
 const HorarioSecundaria = lazy(() => import('../pages/HorarioSecundaria'));
+const Inscripciones = lazy(() => import('../pages/Inscripciones'));
 const ManualConvivencia = lazy(() => import('../pages/ManualConvivencia'));
 const MisionVision = lazy(() => import('../pages/MisionVision'));
 const Modalidades = lazy(() => import('../pages/Modalidades'));
@@ -62,6 +63,10 @@ const Rutas = () => {
     {
       path: '/horario-coordinadores',
       element: <HorarioCoordinadores />,
+    },
+    {
+      path: '/inscripciones',
+      element: <Inscripciones />,
     },
     {
       path: '/manual-convivencia',

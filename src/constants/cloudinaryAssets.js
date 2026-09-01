@@ -19,7 +19,7 @@ export const CLOUDINARY_ASSETS = {
   horarioPrimariaRaw: cldRawUrl('v1786813789/horarioPrimaria_cl'),
   horarioSecundaria: imageUrl('v1787669265/horarioSecundaria_cl', 1600),
   horarioSecundariaRaw: cldRawUrl('v1786813506/horarioSecundaria_cl'),
-  clubCCC: imageUrl('clubCCC_cl', 306),
+  clubCCC: imageUrl('v1788279960/clubCCC_cl', 306),
   logo: imageUrl('v1786815674/logo_cl', 256),
   ppf: imageUrl('v1786815658/ppf_cl', 640),
   cronograma2026: imageUrl('v1786813627/cronograma2026_cl', 1200),
