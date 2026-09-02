@@ -41,7 +41,7 @@ const CARD_SIZES =
 
 // Tesorería is a wide banner, not a card. The current CSS renders it at
 // 80% of an 80%-wide container, so its effective rendered width is ~64vw.
-const TESORERIA_PUBLIC_ID = 'v1786813958/tesoreria-btn_cl';
+const TESORERIA_PUBLIC_ID = 'v1788379473/tesoreria-btn_cl';
 const TESORERIA_WIDTHS = [320, 480, 640, 800, 960, 1280, 1600, 1700];
 const TESORERIA_SIZES = '64vw';
 
@@ -64,8 +64,8 @@ export const CARD_IMGS = {
     sizes: CARD_SIZES,
   },
   recuperacion: {
-    src: cldUrl('v1786807011/recuperacion_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1122 }),
-    srcSet: cldSrcSet('v1786807011/recuperacion_cl', capWidths(CARD_WIDTHS, 1122), RESPONSIVE_IMAGE_OPTIONS),
+    src: cldUrl('v1788365280/recuperacion_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1122 }),
+    srcSet: cldSrcSet('v1788365280/recuperacion_cl', capWidths(CARD_WIDTHS, 1122), RESPONSIVE_IMAGE_OPTIONS),
     sizes: CARD_SIZES,
     width: 1122,
     height: 1402,
@@ -80,7 +80,7 @@ export const CARD_IMGS = {
 export const INICIO_HERO_IMAGES = {
   infoInscripciones: {
     src: cldUrl('v1788230477/infoInscripciones_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 800 }),
-    srcSet: cldSrcSet('v1786815753/infoInscripciones_cl', [160, 240, 320, 480, 640, 800], RESPONSIVE_IMAGE_OPTIONS),
+    srcSet: cldSrcSet('v1788230477/infoInscripciones_cl', [160, 240, 320, 480, 640, 800], RESPONSIVE_IMAGE_OPTIONS),
     sizes: '(min-width: 1500px) 360px, (min-width: 1400px) 24vw, (min-width: 992px) 21vw, (min-width: 849px) 280px, (min-width: 440px) 33vw, 145px',
     width: 800,
     height: 533,

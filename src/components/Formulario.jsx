@@ -7,6 +7,10 @@ import { ClipLoader } from 'react-spinners';
 import 'react-toastify/dist/ReactToastify.css';
 import { loadAlumnos } from '../utils/loadAlumnos';
 import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
+import PsePaymentCta from './PsePaymentCta';
+
+const PSE_PAYMENT_URL =
+  'https://www.avalpaycenter.com/wps/portal/portal-de-pagos/web/pagos-aval/resultado-busqueda/realizar-pago?idConv=00024146&origen=buscar';
 
 function normalizeText(str = '') {
   return str
@@ -221,13 +225,7 @@ const Formulario = ({ typeSearch = 'codigo' }) => {
         </div>
 
         <div className='imagenPse'>
-          <a
-            href='https://www.avalpaycenter.com/wps/portal/portal-de-pagos/web/pagos-aval/resultado-busqueda/realizar-pago?idConv=00024146&origen=buscar'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <img src={CLOUDINARY_ASSETS.pse} alt='pse' className='pseCostos' width='350' height='350' />
-          </a>
+          <PsePaymentCta href={PSE_PAYMENT_URL} />
           <img className='codigoQR' src={CLOUDINARY_ASSETS.codigoQR} alt='codigoQR' width='230' height='230' />
         </div>
 
@@ -235,7 +233,7 @@ const Formulario = ({ typeSearch = 'codigo' }) => {
         <p>
           Realiza tu pago de manera rápida y segura dando click{' '}
           <a
-            href='https://www.avalpaycenter.com/wps/portal/portal-de-pagos/web/pagos-aval/resultado-busqueda/realizar-pago?idConv=00024146&origen=buscar'
+            href={PSE_PAYMENT_URL}
             target='_blank'
             rel='noopener noreferrer'
           >

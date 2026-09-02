@@ -187,19 +187,7 @@ const Inicio = () => {
           titulo='Actividades Recuperación Acumulado Primer y Segundo Periodo'
           opciones={RECUPERACION_OPCIONES}
           onChange={handleSelectChange}
-          nota={
-            <>
-              Para descargar la recuperación, se sugiere hacerlo desde un computador (PC), sin
-              embargo, recuerda que también se puede realizar desde cualquier dispositivo y
-              navegador.
-              <br />
-              El navegador recomendado es <em>Microsoft Edge</em>. <br />
-              Si presenta inconvenientes, intente abrir el enlace usando <em>
-                Mozilla Firefox
-              </em>{' '}
-              como segunda opción. <br />
-            </>
-          }
+          nota='Descarga la actividad de recuperación correspondiente a tu grado.'
           imagen={CARD_IMGS.recuperacion}
         />
       )}

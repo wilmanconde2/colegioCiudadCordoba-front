@@ -3,6 +3,10 @@
 import useTitulo from '../hooks/useTitulo';
 import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
 import Formulario from '../components/Formulario';
+import PsePaymentCta from '../components/PsePaymentCta';
+
+const PSE_PAYMENT_URL =
+  'https://www.avalpaycenter.com/wps/portal/portal-de-pagos/web/pagos-aval/resultado-busqueda/realizar-pago?idConv=00024146&origen=buscar';
 
 const Tesoreria = () => {
   useTitulo('Tesorería');
@@ -16,11 +20,7 @@ const Tesoreria = () => {
         </div>
         <div className='infoCostos'>
           <h2>Medios de pago:</h2>
-          <p>
-            <a href='https://www.avalpaycenter.com/wps/portal/portal-de-pagos/web/pagos-aval/resultado-busqueda/realizar-pago?idConv=00024146&origen=buscar'>
-              <img src={CLOUDINARY_ASSETS.pse} alt='pse' className='pseCostos' width='350' height='350' />
-            </a>
-          </p>
+          <PsePaymentCta href={PSE_PAYMENT_URL} />
           <p>Tesorería de la institución</p>
           <ul>
             <li>Efectivo</li>
