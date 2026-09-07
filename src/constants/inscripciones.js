@@ -28,7 +28,7 @@ export const SERVICIOS = [
   { titulo: 'Clases de deportes', texto: 'Espacios para práctica deportiva en el Polideportivo 3A-3B de Ciudad Córdoba, mediante convenio institucional.' },
   { titulo: 'Departamento de Psicología', texto: 'Contamos con 2 psicólogas que brindan acompañamiento mediante escuela de padres, convivencias y conferencias.' },
   { titulo: 'Laboratorio de Química y Física', texto: 'Espacio para prácticas y proyectos de Ciencias Naturales.' },
-  { titulo: 'Salas audiovisuales' },
+  { titulo: 'Salas audiovisuales', texto: 'Espacios tecnológicos diseñados para enriquecer el aprendizaje mediante recursos audiovisuales, actividades interactivas y laboratorios de inglés.' },
 ];
 
 export const PASOS_INSCRIPCION = [

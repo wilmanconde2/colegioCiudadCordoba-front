@@ -32,4 +32,8 @@ export const CLOUDINARY_ASSETS = {
   industrial: imageUrl('industrial_cl', 1200),
   pqrs: imageUrl('pqrs_cl', 1000),
   costos2026: imageUrl('v1786813633/costos2026_cl', 1600),
+  inscripcionesHero: imageUrl('v1788822950/inscripcionesHero_cl', 1600),
+  inscripcionesClase: imageUrl('v1788823066/inscripcionesClase_cl', 1200),
+  inscripcionesDeporte: imageUrl('v1788823706/inscripcionesDeporte_cl', 1200),
+  inscripcionesLudica: imageUrl('v1788823812/inscripcionesLudica_cl', 1200),
 };

@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router';
 import useTitulo from '../hooks/useTitulo';
+import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
 import {
   CONDICIONES,
   COSTOS_2026,
@@ -17,6 +17,13 @@ const Inscripciones = () => {
       <header className='inscripciones__hero'>
         <p className='inscripciones__eyebrow'>Colegio Ciudad Córdoba</p>
         <h1>Inscripciones <span>Año lectivo 2027</span></h1>
+        <img
+          className='inscripciones__heroImage'
+          src={CLOUDINARY_ASSETS.inscripcionesHero}
+          alt='Estudiantes del Colegio Ciudad Córdoba participando en actividades institucionales'
+          loading='eager'
+          decoding='async'
+        />
         <div className='inscripciones__kids'>
           <h2>COCICOR KIDS 2027</h2>
           <p><strong>Jardín:</strong> 4 años</p>
@@ -45,6 +52,13 @@ const Inscripciones = () => {
           <p>Nuestra propuesta</p>
           <h2 id='oferta-title'>Formación y espacios</h2>
         </div>
+        <img
+          className='inscripciones__sectionImage'
+          src={CLOUDINARY_ASSETS.inscripcionesClase}
+          alt='Estudiantes del Colegio Ciudad Córdoba durante una actividad de aprendizaje'
+          loading='lazy'
+          decoding='async'
+        />
         <div className='inscripciones__grid inscripciones__grid--two'>
           <article className='inscripciones__card'>
             <h3>Primaria</h3>
@@ -90,6 +104,13 @@ const Inscripciones = () => {
           <p>Más oportunidades</p>
           <h2 id='extra-title'>Extracurriculares</h2>
         </div>
+        <img
+          className='inscripciones__sectionImage'
+          src={CLOUDINARY_ASSETS.inscripcionesDeporte}
+          alt='Equipo deportivo del Colegio Ciudad Córdoba en actividad competitiva'
+          loading='lazy'
+          decoding='async'
+        />
         <div className='inscripciones__grid inscripciones__grid--three'>
           <article className='inscripciones__card'>
             <h3>Formación deportiva</h3>
@@ -139,6 +160,13 @@ const Inscripciones = () => {
           </table>
         </div>
         <p className='inscripciones__warning'>Estos valores corresponden al año lectivo 2026 y se presentan únicamente como referencia. Los costos educativos para 2027 serán actualizados de acuerdo con los incrementos autorizados para el nuevo año escolar y serán publicados oficialmente una vez sean definidos.</p>
+        <img
+          className='inscripciones__sectionImage inscripciones__sectionImage--closing'
+          src={CLOUDINARY_ASSETS.inscripcionesLudica}
+          alt='Estudiantes del Colegio Ciudad Córdoba participando en una actividad educativa'
+          loading='lazy'
+          decoding='async'
+        />
         {/* <NavLink className='inscripciones__cta' to='/tesoreria'>Consultar costos educativos 2026</NavLink> */}
       </section>
     </main>

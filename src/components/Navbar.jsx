@@ -130,7 +130,7 @@ const Navbar = () => {
                     Cronograma 2026
                   </NavLink>
                 </li>
-                {/* <li>
+                <li>
                   <NavLink
                     className='dropdown-item'
                     to='/deporte-ludica'
@@ -138,7 +138,7 @@ const Navbar = () => {
                   >
                     Deportes y Lúdicas
                   </NavLink>
-                </li> */}
+                </li>
 
                 {/* Submenú Horario de Atención */}
                 <li className='dropdown'>
