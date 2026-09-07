@@ -65,7 +65,7 @@ const Inscripciones = () => {
               <li>Sala de Sistemas para Programación, Programas Contables y Programa de Dibujo Arquitectónico.</li>
             </ul>
             <p className='inscripciones__degree'>Titulación: <strong>Bachiller Técnico Comercial o Industrial</strong></p>
-            <NavLink className='inscripciones__cta' to='/modalidades'>Conoce nuestras modalidades</NavLink>
+            {/* <NavLink className='inscripciones__cta' to='/modalidades'>Conoce nuestras modalidades</NavLink> */}
           </article>
         </div>
       </section>
@@ -139,7 +139,7 @@ const Inscripciones = () => {
           </table>
         </div>
         <p className='inscripciones__warning'>Estos valores corresponden al año lectivo 2026 y se presentan únicamente como referencia. Los costos educativos para 2027 serán actualizados de acuerdo con los incrementos autorizados para el nuevo año escolar y serán publicados oficialmente una vez sean definidos.</p>
-        <NavLink className='inscripciones__cta' to='/tesoreria'>Consultar costos educativos 2026</NavLink>
+        {/* <NavLink className='inscripciones__cta' to='/tesoreria'>Consultar costos educativos 2026</NavLink> */}
       </section>
     </main>
   );

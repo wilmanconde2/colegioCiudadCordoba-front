@@ -55,6 +55,11 @@
   display: grid;
   place-items: center;
   border-radius: 1rem;
+  cursor: pointer;
+
+  .inicioHero__banner {
+    border-radius: 20px;
+  }
 }
 
 .inicioHero__banner--left,

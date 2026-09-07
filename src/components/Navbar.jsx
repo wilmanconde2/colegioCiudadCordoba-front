@@ -25,15 +25,15 @@ const Navbar = () => {
   return (
     <nav className={`navbar navbar-expand-lg ${isScrolled ? 'bg-white' : 'bg-transparent'}`}>
       <div className='container-fluid'>
-        <div className='navbar-logo ppf'>
+        <NavLink className='navbar-logo ppf' to='/' aria-label='Ir al inicio'>
           <img src={ppf} alt='logo' width='4729' height='1021' />
-        </div>
-        <div className='navbar-logo club'>
+        </NavLink>
+        <NavLink className='navbar-logo club' to='/' aria-label='Ir al inicio'>
           <img src={club} alt='logo' width='153' height='135' />
-        </div>
-        <div className='navbar-logo logo'>
+        </NavLink>
+        <NavLink className='navbar-logo logo' to='/' aria-label='Ir al inicio'>
           <img src={logo} alt='logo' width='3400' height='4400' />
-        </div>
+        </NavLink>
 
         <button
           className='navbar-toggler'
@@ -205,12 +205,11 @@ const Navbar = () => {
               </ul>
             </li>
 
-            {/* TEMPORAL: habilitar el 7 de septiembre de 2026 */}
-            {/* <li className='nav-item'>
+            <li className='nav-item'>
               <NavLink className='nav-link nav-link--inscripciones' to='/inscripciones' onClick={handleNavLinkClick}>
                 Inscripciones 2027
               </NavLink>
-            </li> */}
+            </li>
             
             <li className='nav-item'>
               <NavLink className='nav-link' to='/pqrs' onClick={handleNavLinkClick}>
