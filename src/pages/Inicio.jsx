@@ -118,7 +118,13 @@ const Inicio = () => {
       </section>
 
       <div className='backgroundContainerText'>
-        <h1>Paz - Progreso - Futuro</h1>
+        <h1 className='institutionalWords'>
+          <span>Paz</span>
+          <span className='institutionalWords__separator' aria-hidden='true'>-</span>
+          <span>Progreso</span>
+          <span className='institutionalWords__separator' aria-hidden='true'>-</span>
+          <span>Futuro</span>
+        </h1>
         <h2>
           ¡Una comunidad acogedora que inspira posibilidades, conecta personas y estimula el
           aprendizaje!

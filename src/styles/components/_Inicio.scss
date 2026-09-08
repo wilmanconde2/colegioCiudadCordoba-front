@@ -58,7 +58,7 @@
   cursor: pointer;
 
   .inicioHero__banner {
-    border-radius: 20px;
+    border-radius: 50px;
   }
 }
 
@@ -135,6 +135,27 @@
   h2 {
     font-size: 24px;
     margin-top: 2rem;
+  }
+
+  .institutionalWords {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3em;
+    font-size: clamp(1.75rem, 7vw, 40px);
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 374px) {
+  .backgroundContainerText .institutionalWords {
+    flex-direction: column;
+    gap: 0.05em;
+    white-space: normal;
+  }
+
+  .institutionalWords__separator {
+    display: none;
   }
 }
 
