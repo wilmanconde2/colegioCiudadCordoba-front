@@ -8,7 +8,7 @@ import { DEFAULT_ANSWER } from './colegio-knowledge.js';
 const requestWith = (handler, payload) =>
   handler({
     httpMethod: 'POST',
-    headers: { origin: 'http://localhost:5173' },
+    headers: { origin: 'http://localhost:5173', 'content-type': 'application/json' },
     body: JSON.stringify(payload),
   });
 
