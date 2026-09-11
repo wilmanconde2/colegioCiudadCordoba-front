@@ -22,7 +22,7 @@ authorization to implement it.
 - Serverless: Netlify Functions under `netlify/functions/`.
 - AI: provider abstraction for Groq, OpenAI, Gemini and Claude. Shared chatbot
   logic and institutional knowledge live in `netlify/functions/_chatbot/`;
-  `chatbot.js` and `chatbot-gemini.js` expose the principal and compatibility endpoints.
+  `chatbot.js` exposes the single public chatbot endpoint.
 - UI: `src/pages/`, `src/components/`, `src/routes/`, `src/hooks/`,
   `src/constants/`, `src/utils/` and `src/styles/`. Public assets: `public/`.
 - External services/resources: Cloudinary, Aval PayCenter, Google Drive,

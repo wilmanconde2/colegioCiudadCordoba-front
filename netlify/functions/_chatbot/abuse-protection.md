@@ -21,31 +21,24 @@ Other methods return 405 with `Allow: POST, OPTIONS`.
 
 ## Native Function configuration
 
-Endpoints are **KEPT SEPARATE**:
-
-- `/.netlify/functions/chatbot`
-- `/.netlify/functions/chatbot-gemini` (deprecated compatibility endpoint)
-
-Both export a modern Request/Response adapter and a literal `config.rateLimit`:
+The single public chatbot endpoint is `POST /.netlify/functions/chatbot`.
+It exports a modern Request/Response adapter and a literal `config.rateLimit`:
 `windowLimit: 10`, `windowSize: 60`, `aggregateBy: ['ip', 'domain']`.
-Update the two small configuration blocks together; tests enforce their policy.
+The configuration lives in `chatbot.js`; tests enforce this policy.
 No method filter is configured, preserving application 405/preflight behavior.
 The native default action returns 429. Requests reaching the Function, including
-local responses, may count. The rules do not guarantee one shared global quota
-across endpoints or domains; switching aliases can provide additional allowance.
+local responses, may count. Aggregation is per IP and domain, not a global budget.
 
 The existing Lambda-style named handler does not support rateLimit extraction in
 the current Netlify bundler. The small transport adapter is therefore necessary;
 provider selection, prompts and application response contracts remain unchanged.
-Netlify documents multiple custom paths, but custom routing replaces default URLs.
-Consolidating these two existing Function URLs was not established as safe without
-deploy routing verification. This change retains file-based endpoints, with no
-custom paths, redirects, new dependency, or infrastructure.
+The Function retains its default file-based URL, with no custom paths, redirects,
+new dependency, or infrastructure.
 
 References checked for this task:
 
 - [Netlify rate limiting](https://docs.netlify.com/manage/security/secure-access-to-sites/rate-limiting/)
-- [Function configuration and multiple paths](https://docs.netlify.com/build/functions/configuration/)
+- [Function configuration](https://docs.netlify.com/build/functions/configuration/)
 - [Netlify source configuration parser](https://github.com/netlify/zip-it-and-ship-it/blob/main/src/runtimes/node/in_source_config/index.ts)
 
 ## Required deploy verification
@@ -55,20 +48,18 @@ does not package Functions or prove Netlify accepted a native rule. No deploy is
 performed as part of this task.
 
 1. Inspect deploy post-processing logs for successful rule detection/validation
-   for **both** Functions, with 10 / 60 / ip+domain. Absence of both success and
+   for `chatbot`, with 10 / 60 / ip+domain. Absence of both success and
    error messages is not success; invalid rules may not fail the deploy.
-2. Confirm both exact endpoint URLs return local JSON answers to a valid POST;
+2. Confirm `/.netlify/functions/chatbot` returns local JSON answers to a valid POST;
    check OPTIONS/CORS and 405/Allow as well, with no SPA HTML or routing failures.
 3. From a controlled IP and domain, send a bounded series exceeding ten valid
    requests in 60 seconds, using a local question such as `¿El colegio tiene ruta?`
-   to avoid provider costs. Confirm a real 429 for each endpoint separately.
+   to avoid provider costs. Confirm a real 429 for the canonical endpoint.
    Enforcement is asynchronous: do not require the eleventh request precisely
    to be rejected. Stop after observing 429; do not run an unbounded load test.
 4. Record Retry-After if present, body format, endpoint and timestamps. Confirm
    the UI displays the neutral wait message and makes no automatic retry.
 5. After the window has elapsed and traffic has stopped, verify requests recover.
-   Alternating endpoints must not be interpreted as proof of one shared counter.
 
-Rollback, if routing/availability fails: revert the rate-limiting commit and
-redeploy the previously verified version with Product Owner authorization.
-The request validation and UI commits can remain independently.
+Rollback, if routing/availability fails: restore a previously verified deployment
+with Product Owner authorization. Reassess its endpoint surface before doing so.
