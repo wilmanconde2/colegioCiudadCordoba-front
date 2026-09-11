@@ -1,16 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { handler as legacyHandler } from '../chatbot-gemini.js';
-import { handler as chatbotHandler } from '../chatbot.js';
+import legacyHandler from '../chatbot-gemini.js';
+import chatbotHandler from '../chatbot.js';
 import { DEFAULT_ANSWER } from './colegio-knowledge.js';
 
-const requestWith = (handler, payload) =>
-  handler({
-    httpMethod: 'POST',
+const requestWith = async (handler, payload) => {
+  const response = await handler(new Request('https://example.test/.netlify/functions/chatbot', {
+    method: 'POST',
     headers: { origin: 'http://localhost:5173', 'content-type': 'application/json' },
     body: JSON.stringify(payload),
-  });
+  }));
+  return { statusCode: response.status, body: await response.text() };
+};
 
 const request = (payload) => requestWith(legacyHandler, payload);
 
