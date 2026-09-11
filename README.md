@@ -158,10 +158,16 @@ Keyla
 │       ├── openai.js
 │       └── claude.js
 └── Frontend
-    └── src/components/ChatbotGemini.jsx
+    └── src/components/Chatbot.jsx
 ```
 
 El endpoint principal es `/.netlify/functions/chatbot`. La respuesta local siempre se intenta primero. Si no existe una respuesta local exacta, `context-retriever.js` selecciona únicamente los bloques institucionales relevantes antes de llamar al proveedor remoto. Esto evita enviar toda la base de conocimiento en cada solicitud y mantiene el consumo de tokens bajo control. El proveedor remoto se selecciona con `AI_PROVIDER`; inicialmente se usa `groq`.
+
+El flujo es `Chatbot → chatbotHandler → AI_PROVIDER → Groq / OpenAI / Gemini / Claude`.
+Groq no es un proveedor permanente: la selección depende de `AI_PROVIDER`.
+`/.netlify/functions/chatbot-gemini` se conserva temporalmente como alias de
+compatibilidad obsoleto para nuevos consumidores. No fuerza Gemini y utiliza el
+mismo handler y la misma selección de proveedor que el endpoint principal.
 
 Variables mínimas en Netlify:
 

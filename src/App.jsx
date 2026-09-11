@@ -7,7 +7,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import PageLoader from './components/PageLoader';
 import BotonWhatsapp from './components/BotonWhatsapp';
-import ChatbotGemini from './components/ChatbotGemini';
+import Chatbot from './components/Chatbot';
 
 const App = () => {
   return (
@@ -20,7 +20,7 @@ const App = () => {
             <Rutas />
           </main>
           <Footer />
-          <ChatbotGemini />
+          <Chatbot />
           <BotonWhatsapp />
         </PageLoader>
       </div>

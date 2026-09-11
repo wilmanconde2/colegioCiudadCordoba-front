@@ -7,6 +7,12 @@ test('registra los cuatro proveedores de IA solicitados', () => {
   assert.deepEqual([...SUPPORTED_PROVIDERS].sort(), ['claude', 'gemini', 'groq', 'openai']);
 });
 
+test('selecciona cada proveedor explícito sin invocar su API', () => {
+  for (const name of ['groq', 'openai', 'gemini', 'claude']) {
+    assert.equal(getProvider(name).name, name);
+  }
+});
+
 test('usa Groq como proveedor predeterminado', () => {
   const previous = process.env.AI_PROVIDER;
   delete process.env.AI_PROVIDER;

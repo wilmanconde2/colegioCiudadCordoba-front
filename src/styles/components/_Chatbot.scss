@@ -1,6 +1,6 @@
-// src/styles/components/_ChatbotGemini.scss
+// src/styles/components/_Chatbot.scss
 
-.chatbot-gemini {
+.chatbot {
   position: fixed;
   left: 14px;
   bottom: max(95px, calc(env(safe-area-inset-bottom) + 91px));
@@ -202,7 +202,7 @@
 }
 
 @media (max-width: 576px) {
-  .chatbot-gemini {
+  .chatbot {
     left: 10px;
     bottom: 85px;
 

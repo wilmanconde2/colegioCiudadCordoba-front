@@ -1,4 +1,4 @@
-// src/components/ChatbotGemini.jsx
+// src/components/Chatbot.jsx
 
 import { useEffect, useRef, useState } from 'react';
 import { FaPaperPlane, FaRobot, FaTimes } from 'react-icons/fa';
@@ -77,7 +77,7 @@ const renderMessageText = (text) => {
   });
 };
 
-const ChatbotGemini = () => {
+const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
   const [input, setInput] = useState('');
@@ -267,21 +267,21 @@ const ChatbotGemini = () => {
   };
 
   return (
-    <div className={`chatbot-gemini ${isOpen ? 'is-open' : ''}`}>
+    <div className={`chatbot ${isOpen ? 'is-open' : ''}`}>
       {isOpen && (
         <section
-          className='chatbot-gemini__panel'
+          className='chatbot__panel'
           aria-label='Asistente virtual del Colegio Ciudad Córdoba'
           aria-live='polite'
         >
-          <header className='chatbot-gemini__header'>
+          <header className='chatbot__header'>
             <div>
               <h2>¿En qué puedo ayudarte?</h2>
             </div>
 
             <button
               type='button'
-              className='chatbot-gemini__close'
+              className='chatbot__close'
               onClick={handleClose}
               aria-label='Cerrar asistente virtual'
             >
@@ -289,7 +289,7 @@ const ChatbotGemini = () => {
             </button>
           </header>
 
-          <div className='chatbot-gemini__quick' aria-label='Preguntas frecuentes'>
+          <div className='chatbot__quick' aria-label='Preguntas frecuentes'>
             {QUICK_QUESTIONS.map((question) => (
               <button
                 key={question}
@@ -303,7 +303,7 @@ const ChatbotGemini = () => {
           </div>
 
           <div
-            className='chatbot-gemini__messages'
+            className='chatbot__messages'
             role='log'
             aria-label='Conversación con Keyla'
             aria-relevant='additions'
@@ -311,7 +311,7 @@ const ChatbotGemini = () => {
             {messages.map((message) => (
               <div
                 key={message.id}
-                className={`chatbot-gemini__message chatbot-gemini__message--${message.role}`}
+                className={`chatbot__message chatbot__message--${message.role}`}
               >
                 {renderMessageText(message.text)}
               </div>
@@ -319,7 +319,7 @@ const ChatbotGemini = () => {
 
             {isLoading && (
               <div
-                className='chatbot-gemini__message chatbot-gemini__message--assistant'
+                className='chatbot__message chatbot__message--assistant'
                 aria-label='Keyla está consultando información'
               >
                 Consultando información...
@@ -329,7 +329,7 @@ const ChatbotGemini = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          <form className='chatbot-gemini__form' onSubmit={handleSubmit}>
+          <form className='chatbot__form' onSubmit={handleSubmit}>
             <input
               ref={inputRef}
               type='text'
@@ -355,7 +355,7 @@ const ChatbotGemini = () => {
 
       <button
         type='button'
-        className='chatbot-gemini__trigger'
+        className='chatbot__trigger'
         onClick={handleToggle}
         aria-expanded={isOpen}
         aria-label={
@@ -369,4 +369,4 @@ const ChatbotGemini = () => {
   );
 };
 
-export default ChatbotGemini;
+export default Chatbot;
