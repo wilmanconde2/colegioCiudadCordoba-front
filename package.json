@@ -3,6 +3,9 @@
   "private": true,
   "version": "1.6.6",
   "type": "module",
+  "engines": {
+    "node": "22.23.2"
+  },
   "scripts": {
     "generate:alumnos": "node ../tools/excel-to-json.mjs",
     "dev": "vite",
