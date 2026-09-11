@@ -171,6 +171,13 @@ const Chatbot = () => {
         signal: controller.signal,
       });
 
+      // Native 429 responses may be text, HTML or empty; inspect status first.
+      if (response.status === 429) {
+        const rateLimitError = new Error('RATE_LIMITED');
+        rateLimitError.retryAfter = response.headers.get('Retry-After');
+        throw rateLimitError;
+      }
+
       const rawResponse = await response.text();
 
       let data = {};
@@ -189,7 +196,7 @@ const Chatbot = () => {
           data,
         });
 
-        if (response.status === 429 || data?.code === 'QUOTA_EXCEEDED') {
+        if (data?.code === 'QUOTA_EXCEEDED') {
           throw new Error('QUOTA_EXCEEDED');
         }
 
@@ -225,6 +232,9 @@ const Chatbot = () => {
 
       if (error?.name === 'AbortError') {
         errorMessage = 'La consulta tardó demasiado tiempo. Por favor intenta nuevamente.';
+      } else if (error?.message === 'RATE_LIMITED') {
+        errorMessage =
+          'Has realizado varias consultas en poco tiempo. Espera un momento antes de volver a intentarlo.';
       } else if (error?.message === 'QUOTA_EXCEEDED') {
         errorMessage =
           'Keyla está atendiendo muchas consultas en este momento. Intenta nuevamente en aproximadamente un minuto.';
