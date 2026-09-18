@@ -3,6 +3,7 @@ import { getLocalAnswer } from './local-answer.js';
 import { buildProviderMessages } from './prompt.js';
 import { getProvider } from './providers/index.js';
 import { generateChatbotAnswer } from './provider-response.js';
+import { getRequestId, logSafeProviderEvent } from './provider-logging.js';
 
 // The client sends 500 message + 6 x 500 history UTF-16 code units.
 // 24 KiB covers even JSON-escaped content (6 bytes/unit) plus structure.
@@ -48,6 +49,7 @@ export const getSafeHistory = (history) => {
 };
 
 export const createChatbotHandler = (resolveProvider = getProvider) => async (event) => {
+  const requestId = getRequestId(event.requestId);
   const headers = buildHeaders(event);
   if (!['POST', 'OPTIONS'].includes(event.httpMethod)) {
     return jsonResponse(405, { ...headers, Allow: 'POST, OPTIONS' }, { error: 'Método no permitido.' });
@@ -92,17 +94,21 @@ export const createChatbotHandler = (resolveProvider = getProvider) => async (ev
   if (localAnswer) return jsonResponse(200, headers, { answer: localAnswer, source: 'local' });
 
   let provider;
+  const providerStarted = performance.now();
   try {
     provider = resolveProvider();
-    const answer = await generateChatbotAnswer(provider, buildProviderMessages(message, history));
+    const answer = await generateChatbotAnswer(provider, buildProviderMessages(message, history), { requestId });
     return jsonResponse(200, headers, { answer, source: provider.name });
   } catch (error) {
     const providerName = provider?.name || process.env.AI_PROVIDER || 'unknown';
     const code = error?.code || 'error';
-    console.error(`${providerName} provider error:`, {
-      code,
-      status: error?.status,
-      message: error?.message,
+    logSafeProviderEvent('error', error, {
+      event: error?.providerStage === 'retry' ? 'chatbot_provider_retry_failed' : 'chatbot_provider_error',
+      requestId,
+      provider: providerName,
+      stage: error?.providerStage || 'initial',
+      retryAttempt: error?.retryAttempt,
+      durationMs: error?.durationMs ?? performance.now() - providerStarted,
     });
     return jsonResponse(200, headers, {
       answer: DEFAULT_ANSWER,

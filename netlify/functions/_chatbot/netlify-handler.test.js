@@ -30,3 +30,23 @@ test(`chatbot adapter preserves validation statuses and CORS`, async (t) => {
   }
   assert.equal(fetch.mock.callCount(), 0);
 });
+
+test('chatbot adapter forwards Netlify requestId only to structured server logs', async t => {
+  const previousProvider = process.env.AI_PROVIDER;
+  process.env.AI_PROVIDER = 'unsupported-test-provider';
+  const errorLog = t.mock.method(console, 'error', () => {});
+  try {
+    const response = await endpoint.default(new Request('https://example.test/.netlify/functions/chatbot', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ message: '¿Qué menú ofrecen mañana?' }),
+    }), { requestId: 'netlify-context-request' });
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).source, 'fallback-unsupported-test-provider-error');
+    assert.equal(errorLog.mock.callCount(), 1);
+    assert.equal(errorLog.mock.calls[0].arguments[0].requestId, 'netlify-context-request');
+  } finally {
+    if (previousProvider === undefined) delete process.env.AI_PROVIDER;
+    else process.env.AI_PROVIDER = previousProvider;
+  }
+});

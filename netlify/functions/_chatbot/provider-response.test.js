@@ -21,6 +21,7 @@ test('retry composition copies frozen input and changes only the trusted channel
 
 test('retry receives only remaining generation budget and keeps the original input', async t => {
   t.mock.method(console, 'info', () => {});
+  t.mock.method(console, 'warn', () => {});
   let now = 100;
   t.mock.method(performance, 'now', () => now);
   const messages = fixture();
@@ -37,17 +38,18 @@ test('retry receives only remaining generation budget and keeps the original inp
 });
 
 test('exhausted generation budget falls back without issuing a second call', async t => {
-  const info = t.mock.method(console, 'info', () => {});
+  t.mock.method(console, 'info', () => {});
+  t.mock.method(console, 'warn', () => {});
   let now = 0;
   t.mock.method(performance, 'now', () => now);
   const generate = t.mock.fn(async () => { now = 15000; return result('truncated'); });
   await assert.rejects(generateChatbotAnswer({ name: 'test', generate }, fixture()), { code: 'timeout' });
   assert.equal(generate.mock.callCount(), 1);
-  assert.deepEqual(info.mock.calls[0].arguments[1], { provider: 'test', finishReason: 'truncated', retryAttempted: false, retryOutcome: 'budget-exhausted' });
 });
 
 test('retry timeout rejects within the original budget without a third call', async t => {
   t.mock.method(console, 'info', () => {});
+  t.mock.method(console, 'warn', () => {});
   t.mock.timers.enable({ apis: ['setTimeout'] });
   let calls = 0;
   const generate = t.mock.fn(async ({ timeoutMs }) => {

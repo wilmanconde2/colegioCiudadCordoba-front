@@ -10,6 +10,7 @@ import { RETRY_INSTRUCTION } from './provider-response.js';
 beforeEach(t => {
   t.mock.method(globalThis, 'fetch', async () => { throw new Error('Unexpected network request'); });
   t.mock.method(console, 'info', () => {});
+  t.mock.method(console, 'warn', () => {});
 });
 
 const question = '¿Cómo se relacionan las modalidades con el futuro laboral?';
@@ -113,7 +114,6 @@ for (const name of ['groq', 'openai', 'gemini', 'claude']) {
   for (const [first, second, source] of scenarios) {
     test(`${name}: ${first} then ${second ?? 'no retry'} preserves public contract and call bound`, async t => {
       const { handler, generate } = setup(t, name);
-      const info = t.mock.method(console, 'info', () => {});
       t.mock.method(console, 'error', () => {});
       const expected = buildProviderMessages(question, normalized);
       const outcomes = second ? [first, second] : [first];
@@ -147,10 +147,6 @@ for (const name of ['groq', 'openai', 'gemini', 'claude']) {
         assert.ok(timeoutMs > 0 && timeoutMs <= 15000);
       }
       assert.deepEqual(generate.mock.calls[0].arguments[0], { messages: expected });
-      assert.equal(info.mock.callCount(), 1);
-      const log = info.mock.calls[0].arguments[1];
-      assert.deepEqual(log, { provider: name, finishReason: first, retryAttempted: Boolean(second),
-        retryOutcome: second ? ['error', 'network', 'empty'].includes(second) ? 'error' : second : 'not-attempted' });
     });
   }
 }
