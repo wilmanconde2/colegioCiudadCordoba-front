@@ -94,8 +94,6 @@ export const createChatbotHandler = (resolveProvider = getProvider) => async (ev
   try {
     provider = resolveProvider();
     const answer = await provider.generate({
-      message,
-      history,
       messages: buildProviderMessages(message, history),
     });
     return jsonResponse(200, headers, { answer, source: provider.name });

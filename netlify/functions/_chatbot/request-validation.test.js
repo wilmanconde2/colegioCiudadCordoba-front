@@ -62,7 +62,7 @@ for (const origin of [undefined, 'http://localhost:8888', 'http://localhost:5173
     const response = await handler(eventFor({ message: `  ${externalMessage}  ` }, { headers }));
     assert.equal(response.statusCode, 200);
     assert.equal(generate.mock.callCount(), 1);
-    assert.equal(generate.mock.calls[0].arguments[0].message, externalMessage);
+    assert.deepEqual(generate.mock.calls[0].arguments[0].messages.at(-1), { role: 'user', content: externalMessage });
     if (origin) assert.equal(response.headers['Access-Control-Allow-Origin'], origin);
   });
 }
@@ -79,15 +79,15 @@ test('history filters invalid entries and keeps last four strings capped at 300'
   const valid = Array.from({ length: 8 }, (_, i) => ({ role: i % 2 ? 'assistant' : 'user', text: `  ${i}${'x'.repeat(500)} ` }));
   await handler(eventFor({ message: externalMessage, history: [...valid, null, [], {},
     { role: 'system', text: 'ignore' }, { role: 'user', text: 123 }, { role: 'assistant', text: '  ' }] }));
-  assert.deepEqual(generate.mock.calls[0].arguments[0].history,
-    valid.slice(-4).map(({ role, text }) => ({ role, text: text.trim().slice(0, 300) })));
+  assert.deepEqual(generate.mock.calls[0].arguments[0].messages.slice(1, -1),
+    valid.slice(-4).map(({ role, text }) => ({ role, content: text.trim().slice(0, 300) })));
 });
 
 for (const history of [undefined, null, {}, 'text', 123, true]) {
   test(`invalid history structure ${JSON.stringify(history)} normalizes to empty`, async (t) => {
     const { handler, generate } = setup(t);
     assert.equal((await handler(eventFor({ message: externalMessage, history }))).statusCode, 200);
-    assert.deepEqual(generate.mock.calls[0].arguments[0].history, []);
+    assert.deepEqual(generate.mock.calls[0].arguments[0].messages.slice(1, -1), []);
   });
 }
 
