@@ -74,7 +74,7 @@ for (const [name, endpoint, model] of cases) {
         }
         return { ok: true, json: async () => success(name) };
       });
-      assert.equal(await provider.generate({ messages }), 'answer');
+      assert.deepEqual(await provider.generate({ messages }), { text: 'answer', finishReason: 'unknown', rawFinishReason: null, truncated: false });
       assert.equal(fetch.mock.callCount(), 1);
       assert.deepEqual(messages, before);
     }

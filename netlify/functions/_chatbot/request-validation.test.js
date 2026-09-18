@@ -10,7 +10,7 @@ const eventFor = (payload = { message: externalMessage }, overrides = {}) => ({
   ...overrides,
 });
 const setup = (t) => {
-  const generate = t.mock.fn(async () => 'Respuesta de prueba');
+  const generate = t.mock.fn(async () => ({ text: 'Respuesta de prueba', finishReason: 'complete', rawFinishReason: 'stop', truncated: false }));
   const resolve = t.mock.fn(() => ({ name: 'test', generate }));
   return { handler: createChatbotHandler(resolve), resolve, generate };
 };

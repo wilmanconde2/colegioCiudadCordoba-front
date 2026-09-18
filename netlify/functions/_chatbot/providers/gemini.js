@@ -1,5 +1,6 @@
 import { classifyHttpError, ProviderError } from './provider-error.js';
 import { splitProviderMessages } from '../provider-contract.js';
+import { normalizeProviderResult } from './provider-result.js';
 
 export const createGeminiProvider = () => ({
   name: 'gemini',
@@ -34,8 +35,10 @@ export const createGeminiProvider = () => ({
         throw classifyHttpError('gemini', response.status, data?.error?.message || `HTTP ${response.status}`);
       }
       const answer = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
-      if (!answer) throw new ProviderError('gemini', 'empty-response', 'Respuesta vacía.', 502);
-      return answer;
+      const blockReason = data?.promptFeedback?.blockReason;
+      const blocked = typeof blockReason === 'string' && blockReason !== '' && blockReason !== 'BLOCK_REASON_UNSPECIFIED';
+      return normalizeProviderResult('gemini', answer,
+        blocked ? blockReason : data?.candidates?.[0]?.finishReason, blocked);
     } catch (error) {
       if (error instanceof ProviderError) throw error;
       if (error?.name === 'AbortError') throw new ProviderError('gemini', 'timeout', 'Tiempo agotado.', 504);

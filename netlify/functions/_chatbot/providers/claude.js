@@ -1,5 +1,6 @@
 import { classifyHttpError, ProviderError } from './provider-error.js';
 import { splitProviderMessages } from '../provider-contract.js';
+import { normalizeProviderResult } from './provider-result.js';
 
 export const createClaudeProvider = () => ({
   name: 'claude',
@@ -34,8 +35,7 @@ export const createClaudeProvider = () => ({
         throw classifyHttpError('claude', response.status, data?.error?.message || `HTTP ${response.status}`);
       }
       const answer = data?.content?.find((item) => item.type === 'text')?.text?.trim();
-      if (!answer) throw new ProviderError('claude', 'empty-response', 'Respuesta vacía.', 502);
-      return answer;
+      return normalizeProviderResult('claude', answer, data?.stop_reason);
     } catch (error) {
       if (error instanceof ProviderError) throw error;
       if (error?.name === 'AbortError') throw new ProviderError('claude', 'timeout', 'Tiempo agotado.', 504);

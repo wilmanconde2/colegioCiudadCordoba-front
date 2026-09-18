@@ -2,6 +2,7 @@ import { DEFAULT_ANSWER } from './colegio-knowledge.js';
 import { getLocalAnswer } from './local-answer.js';
 import { buildProviderMessages } from './prompt.js';
 import { getProvider } from './providers/index.js';
+import { ProviderError } from './providers/provider-error.js';
 
 // The client sends 500 message + 6 x 500 history UTF-16 code units.
 // 24 KiB covers even JSON-escaped content (6 bytes/unit) plus structure.
@@ -93,10 +94,13 @@ export const createChatbotHandler = (resolveProvider = getProvider) => async (ev
   let provider;
   try {
     provider = resolveProvider();
-    const answer = await provider.generate({
+    const result = await provider.generate({
       messages: buildProviderMessages(message, history),
     });
-    return jsonResponse(200, headers, { answer, source: provider.name });
+    if (result.truncated || result.finishReason === 'blocked') {
+      throw new ProviderError(provider.name, result.finishReason, 'Respuesta no completa.', 502);
+    }
+    return jsonResponse(200, headers, { answer: result.text, source: provider.name });
   } catch (error) {
     const providerName = provider?.name || process.env.AI_PROVIDER || 'unknown';
     const code = error?.code || 'error';

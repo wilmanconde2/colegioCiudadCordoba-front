@@ -2,6 +2,9 @@
 
 Status: Accepted for AI-001.
 
+AI-002 extends the result contract and truncation policy in
+[ADR 0002](0002-provider-finish-reasons.md); the message input contract remains unchanged.
+
 ## Context
 
 Adapters consumed different representations of the same request. Gemini ignored

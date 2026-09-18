@@ -1,4 +1,5 @@
 import { classifyHttpError, ProviderError } from './provider-error.js';
+import { normalizeProviderResult } from './provider-result.js';
 
 export const createOpenAICompatibleProvider = ({
   name,
@@ -41,9 +42,8 @@ export const createOpenAICompatibleProvider = ({
       }
 
       const answer = data?.choices?.[0]?.message?.content?.trim();
-      if (!answer) throw new ProviderError(name, 'empty-response', 'Respuesta vacía.', 502);
-
-      return answer;
+      return normalizeProviderResult(name, answer, data?.choices?.[0]?.finish_reason,
+        name === 'openai' && Boolean(data?.choices?.[0]?.message?.refusal));
     } catch (error) {
       if (error instanceof ProviderError) throw error;
       if (error?.name === 'AbortError') {
