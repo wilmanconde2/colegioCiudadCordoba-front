@@ -36,3 +36,26 @@ response is retained for compatibility, without treating it as truncation.
 Blocked and truncated text must never be delivered as final text. Retry policy
 belongs to the common layer, never an adapter. Models, token limits and provider
 error classifications remain unchanged. No real provider calls validate this work.
+
+## Single retry policy
+
+`provider-response.js` owns the retry. Only `truncated === true` triggers a second
+call, using the same provider object and copies of the original messages. The
+second system message appends this fixed server instruction to the original system:
+
+> Responde de forma breve, completa y directa. Prioriza la información esencial y evita explicaciones innecesarias.
+
+The base prompt, context retrieval, history and current question are untouched.
+No partial answer is appended or concatenated. The second call receives only the
+remaining milliseconds of the existing 15000 ms generation budget, measured with
+a monotonic clock. If the budget is exhausted, fallback occurs without another call.
+Adapter defaults and the frontend timeout remain unchanged.
+
+A complete retry returns text with the existing provider source. Truncated,
+blocked, unknown or failed retries use the existing fallback and source pattern.
+Unknown initial text is retained, but after known truncation only explicit complete
+metadata is sufficient. No network/429 retry, continuation or failover is added.
+
+One structured log records provider, initial normalized finishReason,
+retryAttempted and retryOutcome. It contains no raw metadata, prompts, user text,
+history, generated text or credentials. Existing error logging is unchanged.
