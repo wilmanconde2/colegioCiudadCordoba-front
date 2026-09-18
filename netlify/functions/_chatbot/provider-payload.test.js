@@ -9,6 +9,7 @@ beforeEach(t => {
 const cases = [
   ['groq', 'https://api.groq.com/openai/v1/chat/completions', 'openai/gpt-oss-20b'],
   ['openai', 'https://api.openai.com/v1/chat/completions', 'gpt-5-mini'],
+  ['gemini', 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent', 'gemini-2.5-flash'],
 ];
 const fixture = () => Object.freeze([
   { role: 'system', content: 'SYSTEM_MARKER\nCONTEXT_MARKER' },

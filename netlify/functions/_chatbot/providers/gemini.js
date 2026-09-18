@@ -1,18 +1,16 @@
 import { classifyHttpError, ProviderError } from './provider-error.js';
-import { buildSystemPrompt } from '../prompt.js';
+import { splitProviderMessages } from '../provider-contract.js';
 
 export const createGeminiProvider = () => ({
   name: 'gemini',
-  async generate({ message, history = [], timeoutMs = 15000 }) {
+  async generate({ messages, timeoutMs = 15000 }) {
     const apiKey = process.env.GEMINI_API_KEY;
     const model = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
     if (!apiKey) throw new ProviderError('gemini', 'not-configured', 'Gemini API key no configurada.');
 
+    const { system, conversation } = splitProviderMessages(messages);
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), timeoutMs);
-    const context = history.length
-      ? history.map((item) => `${item.role === 'user' ? 'Usuario' : 'Keyla'}: ${item.text}`).join('\n')
-      : 'No hay mensajes anteriores.';
 
     try {
       const response = await fetch(
@@ -22,10 +20,11 @@ export const createGeminiProvider = () => ({
           signal: controller.signal,
           headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
           body: JSON.stringify({
-            contents: [{
-              role: 'user',
-              parts: [{ text: `${buildSystemPrompt()}\n\nCONTEXTO RECIENTE:\n${context}\n\nPREGUNTA:\n${message}` }],
-            }],
+            systemInstruction: { parts: [{ text: system }] },
+            contents: conversation.map(({ role, content }) => ({
+              role: role === 'assistant' ? 'model' : 'user',
+              parts: [{ text: content }],
+            })),
             generationConfig: { temperature: 0, topP: 0.7, maxOutputTokens: 1200 },
           }),
         }
