@@ -1,5 +1,5 @@
 import { classifyHttpError, ProviderError } from './provider-error.js';
-import { buildSystemPrompt } from '../prompt.js';
+import { splitProviderMessages } from '../provider-contract.js';
 
 export const createClaudeProvider = () => ({
   name: 'claude',
@@ -8,11 +8,9 @@ export const createClaudeProvider = () => ({
     const model = process.env.CLAUDE_MODEL || 'claude-haiku-4-5';
     if (!apiKey) throw new ProviderError('claude', 'not-configured', 'Claude API key no configurada.');
 
+    const { system, conversation } = splitProviderMessages(messages);
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), timeoutMs);
-    const conversation = messages
-      .filter((item) => item.role !== 'system')
-      .map((item) => ({ role: item.role, content: item.content }));
 
     try {
       const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -25,7 +23,7 @@ export const createClaudeProvider = () => ({
         },
         body: JSON.stringify({
           model,
-          system: buildSystemPrompt(),
+          system,
           messages: conversation,
           temperature: 0,
           max_tokens: 1200,
