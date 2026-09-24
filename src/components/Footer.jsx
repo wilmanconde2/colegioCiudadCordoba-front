@@ -62,7 +62,15 @@ const Footer = () => {
         </div>
 
         <div>
-          © {year} &middot; Desarrollado por{' '}
+          © {year} &middot;{' '}
+          <a
+            href='/resolucion-costos-educativos-2026.pdf'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            Resolución Costos Educativos 2026
+          </a>{' '}
+          &middot; Desarrollado por{' '}
           <a href='https://krakendigitalsd.netlify.app/' target='_blank' rel='noopener noreferrer'>
             KrakenDigitalSD
           </a>{' '}
