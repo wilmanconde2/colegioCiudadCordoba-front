@@ -129,6 +129,18 @@ npm run generate:alumnos
 
 ---
 
+## Integración continua
+
+GitHub Actions valida los pull requests hacia `main` y los pushes a `main` con
+Node.js 22.23.2. El check `CI / quality` instala con `npm ci` y exige que lint,
+tests y build finalicen correctamente. También informa vulnerabilidades de nivel
+alto o crítico sin bloquear inicialmente.
+
+El workflow no despliega ni necesita credenciales de proveedores de IA. Netlify
+puede continuar desplegando desde `main` una vez integrado el cambio.
+
+---
+
 ## Producción
 
 https://colegiociudadcordoba.edu.co
