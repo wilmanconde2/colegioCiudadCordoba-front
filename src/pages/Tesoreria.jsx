@@ -37,7 +37,7 @@ const Tesoreria = () => {
             siguiente formulario.
           </p>
         </div>
-        <Formulario typesearch='mensualidad' />
+        <Formulario typeSearch='mensualidad' />
       </div>
     </>
   );
