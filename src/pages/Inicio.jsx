@@ -195,7 +195,6 @@ const Inicio = () => {
       {mostrarActividades && (
         <CardSelection
           className='actividades text-center'
-          titulo='Actividades Recuperación Acumulado Primer y Segundo Periodo'
           opciones={RECUPERACION_OPCIONES}
           onChange={handleSelectChange}
           nota='Descarga la actividad de recuperación correspondiente a tu grado.'

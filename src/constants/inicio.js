@@ -64,8 +64,8 @@ export const CARD_IMGS = {
     sizes: CARD_SIZES,
   },
   recuperacion: {
-    src: cldUrl('v1788365280/recuperacion_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1122 }),
-    srcSet: cldSrcSet('v1788365280/recuperacion_cl', capWidths(CARD_WIDTHS, 1122), RESPONSIVE_IMAGE_OPTIONS),
+    src: cldUrl('v1790436695/recuperacion_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1122 }),
+    srcSet: cldSrcSet('v1790436695/recuperacion_cl', capWidths(CARD_WIDTHS, 1122), RESPONSIVE_IMAGE_OPTIONS),
     sizes: CARD_SIZES,
     width: 1122,
     height: 1402,
