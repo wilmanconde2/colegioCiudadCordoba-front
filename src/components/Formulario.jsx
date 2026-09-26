@@ -185,6 +185,10 @@ const Formulario = ({ typeSearch = 'codigo' }) => {
                 <strong className='Formulario__codeTitle'>{currentConfig.resultTitle}</strong>
                 <p className='Formulario__codeValue'>{codigo}</p>
 
+              {/* TODO:
+                Reactivar cuando se integre la fuente de datos de morosidad/mensualidades.
+                La funcionalidad debe mostrar los meses pendientes de pago del estudiante.
+
                 {typeSearch === 'mensualidad' ? (
                   <>
                     <p className='Formulario__resultLine'>
@@ -196,6 +200,7 @@ const Formulario = ({ typeSearch = 'codigo' }) => {
                     </p>
                   </>
                 ) : null}
+              */}
 
                 <button className='btn-form' type='button' onClick={copyCodigo}>
                   Copiar código
