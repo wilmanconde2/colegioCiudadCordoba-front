@@ -1,3 +1,9 @@
+import {
+  ADMISSIONS_2027,
+  ADMISSION_STEPS_2027,
+  COSTS_2026 as SHARED_COSTS_2026,
+} from '../shared/institutional-data.js';
+
 export const JORNADAS = [
   {
     nivel: 'Jardín y Transición',
@@ -31,35 +37,6 @@ export const SERVICIOS = [
   { titulo: 'Salas audiovisuales', texto: 'Espacios tecnológicos diseñados para enriquecer el aprendizaje mediante recursos audiovisuales, actividades interactivas y laboratorios de inglés.' },
 ];
 
-export const PASOS_INSCRIPCION = [
-  { titulo: 'Valor de la inscripción', contenido: ['$20.000'] },
-  {
-    titulo: 'Entrega de documentos',
-    contenido: [
-      'Registro civil legible y en buen estado.',
-      'Fotocopia de la tarjeta de identidad a partir de los 7 años, ampliada al 150%.',
-      'Constancia de estudio indicando nivel académico y convivencia.',
-      'Boletín de calificaciones del período actual.',
-      'Paz y salvo del colegio de procedencia a la fecha.',
-      'Una fotografía tamaño 3 x 4 reciente.',
-      'Certificados de grados anteriores.',
-    ],
-  },
-  { titulo: 'Valoración', contenido: ['Cita con Psicología.', 'Examen de admisión.'] },
-  { titulo: 'Resultados', contenido: ['Revisar la lista de admitidos en la página web.'] },
-  { titulo: 'Reclamación de documentos', contenido: ['Según las fechas asignadas en Admisiones y publicadas en la web.'] },
-];
-
-export const CONDICIONES = [
-  'El colegio se reserva el derecho de admisión.',
-  'Los cupos para estudiantes nuevos son asignados inicialmente en la jornada de la tarde.',
-  'Si se requiere jornada de la mañana, se debe solicitar por escrito a Coordinación el día de la matrícula oficial del año lectivo 2027.',
-  'El cambio depende de disponibilidad.',
-  'No se reintegra dinero por ningún concepto.',
-];
-
-export const COSTOS_2026 = [
-  { nivel: 'Jardín a 5.º', matricula: '$387.000', pension: '$260.000' },
-  { nivel: '6.º', matricula: '$387.000', pension: '$265.000' },
-  { nivel: '7.º a 11.º', matricula: '$387.000', pension: '$285.000' },
-];
+export const PASOS_INSCRIPCION = ADMISSION_STEPS_2027;
+export const CONDICIONES = ADMISSIONS_2027.conditions;
+export const COSTOS_2026 = SHARED_COSTS_2026;

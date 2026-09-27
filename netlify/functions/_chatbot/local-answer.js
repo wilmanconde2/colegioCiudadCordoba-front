@@ -1,16 +1,18 @@
 // netlify/functions/_chatbot/local-answer.js
 
 import {
-  ADMISSIONS_2027,
   COORDINATORS,
   DEFAULT_ANSWER,
-  ENROLLMENT_2026,
   GROUP_DIRECTORS,
   KNOWLEDGE_ENTRIES,
   PSYCHOLOGISTS,
   TEACHERS,
-  TUITION_FEES_2026,
 } from './colegio-knowledge.js';
+import {
+  ADMISSIONS_2027,
+  ENROLLMENT_2026,
+  TUITION_FEES_2026,
+} from '../../../src/shared/institutional-data.js';
 
 const normalize = (value = '') =>
   value
@@ -23,6 +25,16 @@ const normalize = (value = '') =>
     .trim();
 
 const compact = (value = '') => normalize(value).replace(/[\s-]+/g, '');
+
+const formatBulletList = (items) => items.map((item) => `- ${item}`).join('\n');
+
+const buildAdmissionsAvailabilityAnswer = () =>
+  `La información de Inscripciones 2027 ya está disponible en la sección Inscripciones de la página web (${ADMISSIONS_2027.pagePath}). Allí puedes consultar el proceso, los requisitos y las condiciones publicadas. El valor de la inscripción publicado es ${ADMISSIONS_2027.enrollmentFee}.`;
+
+const buildAdmissionsRequirementsAnswer = () => `Requisitos publicados para Inscripciones 2027:
+${formatBulletList(ADMISSIONS_2027.requirements)}
+Valoración:
+${formatBulletList(ADMISSIONS_2027.assessment)}`;
 
 const containsPhrase = (text, phrase) => {
   const cleanText = ` ${normalize(text).replace(/-/g, ' ')} `;
@@ -618,8 +630,16 @@ export const getLocalAnswer = (question = '', history = []) => {
       'ano lectivo',
     ]);
 
+  const enrollmentRequirementsIntent =
+    hasAny(question, ['requisito', 'requisitos', 'documento', 'documentos', 'papeles', 'que necesito']) &&
+    hasAny(question, ['matricula', 'matriculas', 'inscripcion', 'inscripciones']);
+
+  if (enrollmentRequirementsIntent) {
+    return buildAdmissionsRequirementsAnswer();
+  }
+
   if (admissions2027Intent) {
-    return `La información de Inscripciones 2027 estará disponible a partir del ${ADMISSIONS_2027.availableFrom}.`;
+    return buildAdmissionsAvailabilityAnswer();
   }
 
   const appointmentIntent =
@@ -701,14 +721,6 @@ export const getLocalAnswer = (question = '', history = []) => {
     }
 
     return `Para agendar la cita necesito saber si es con Coordinación, un docente o Psicología.`;
-  }
-
-  const enrollmentRequirementsIntent =
-    hasAny(question, ['requisito', 'requisitos', 'documento', 'documentos', 'papeles', 'que necesito']) &&
-    hasAny(question, ['matricula', 'matriculas', 'inscripcion', 'inscripciones']);
-
-  if (enrollmentRequirementsIntent) {
-    return 'Por ahora no tengo confirmada la lista de requisitos o documentos para la matrícula. Para solicitar la información correcta, comunícate con Secretaría al WhatsApp 3104280125.';
   }
 
   const schoolTransportIntent =

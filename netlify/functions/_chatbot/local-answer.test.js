@@ -203,17 +203,22 @@ test('reconoce distintas formas naturales de solicitar una cita', () => {
   }
 });
 
-test('informa la fecha de disponibilidad para cupos 2027', () => {
+test('informa que las inscripciones 2027 ya están disponibles', () => {
   const answer = getLocalAnswer('¿Hay cupo para el año lectivo 2027 para jardín?');
 
-  assert.match(answer, /1 de septiembre de 2026/);
+  assert.match(answer, /ya está disponible/i);
+  assert.match(answer, /\/inscripciones/);
+  assert.doesNotMatch(answer, /estará disponible/i);
   assert.doesNotMatch(answer, /\$258\.000/);
 });
 
-test('no confunde requisitos de matrícula con costos', () => {
-  const answer = getLocalAnswer('¿Cuáles son los requisitos para la matrícula?');
+test('responde los requisitos publicados para inscripciones 2027 sin mezclar costos', () => {
+  const answer = getLocalAnswer('¿Cuáles son los requisitos para la inscripción 2027?');
 
-  assert.match(answer, /no tengo confirmada la lista de requisitos/i);
+  assert.match(answer, /registro civil legible/i);
+  assert.match(answer, /boletín de calificaciones/i);
+  assert.match(answer, /cita con psicología/i);
+  assert.doesNotMatch(answer, /no tengo confirmada/i);
   assert.doesNotMatch(answer, /\$387\.000/);
 });
 
