@@ -46,6 +46,16 @@ describe('Chatbot', () => {
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch.mock.calls[0][0]).toBe('/.netlify/functions/chatbot');
     expect(fetch.mock.calls[0][1].method).toBe('POST');
+    expect(fetch.mock.calls[0][1].headers).toEqual({ 'Content-Type': 'application/json' });
+    expect(JSON.parse(fetch.mock.calls[0][1].body)).toEqual({
+      message: '¿Cómo pago?',
+      history: [
+        {
+          role: 'assistant',
+          text: 'Hola. Soy Keyla, asistente virtual del Colegio Ciudad Córdoba. Puedo ayudarte con costos, matrículas, pensiones, pagos, horarios, cronograma y contacto.',
+        },
+      ],
+    });
 
     resolveFetch(response({ body: JSON.stringify({ answer: 'Puedes pagar por PSE.' }) }));
     expect(await screen.findByText('Puedes pagar por PSE.')).toBeTruthy();
@@ -63,13 +73,23 @@ describe('Chatbot', () => {
   });
 
   it('informa un error de red sin reintentar automáticamente', async () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
     fetch.mockRejectedValue(new TypeError('Network error'));
     render(<Chatbot />);
 
     await openAndSend('Pregunta con error');
 
     expect(await screen.findByText(/en este momento no puedo responder/i)).toBeTruthy();
+    expect(fetch).toHaveBeenCalledTimes(1);
+  });
+
+  it('informa una respuesta inválida sin exponer el contenido ni reintentar', async () => {
+    fetch.mockResolvedValue(response({ body: '<html>respuesta inesperada</html>' }));
+    render(<Chatbot />);
+
+    await openAndSend('Pregunta con respuesta inválida');
+
+    expect(await screen.findByText(/en este momento no puedo responder/i)).toBeTruthy();
+    expect(screen.queryByText(/respuesta inesperada/i)).toBeNull();
     expect(fetch).toHaveBeenCalledTimes(1);
   });
 });
