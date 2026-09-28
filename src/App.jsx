@@ -5,16 +5,16 @@ import ScrollToTop from './components/ScrollToTop';
 import Rutas from './routes/Rutas';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import PageLoader from './components/PageLoader';
 import BotonWhatsapp from './components/BotonWhatsapp';
 import Chatbot from './components/Chatbot';
+import ErrorBoundary from './components/ErrorBoundary';
 
 const App = () => {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div className='app-layout'>
-        <PageLoader>
+      <ErrorBoundary>
+        <div className='app-layout'>
           <main className='main-content'>
             <Header />
             <Rutas />
@@ -22,8 +22,8 @@ const App = () => {
           <Footer />
           <Chatbot />
           <BotonWhatsapp />
-        </PageLoader>
-      </div>
+        </div>
+      </ErrorBoundary>
     </BrowserRouter>
   );
 };

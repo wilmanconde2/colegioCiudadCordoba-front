@@ -1,23 +1,13 @@
 // src/components/PageLoader.jsx
 
-import { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useLocation } from 'react-router';
 import { ClipLoader } from 'react-spinners';
 
-const RouteLoadingOverlay = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setLoading(false), 250);
-
-    return () => clearTimeout(timeout);
-  }, []);
-
-  if (!loading) return null;
-
+const PageLoader = () => {
   return (
     <div
+      role='status'
+      aria-live='polite'
+      aria-label='Cargando página'
       style={{
         position: 'fixed',
         top: 0,
@@ -32,23 +22,9 @@ const RouteLoadingOverlay = () => {
       }}
     >
       <ClipLoader color='#36d7b7' size={60} />
+      <span className='visually-hidden'>Cargando página…</span>
     </div>
   );
-};
-
-const PageLoader = ({ children }) => {
-  const location = useLocation();
-
-  return (
-    <>
-      <RouteLoadingOverlay key={location.pathname} />
-      {children}
-    </>
-  );
-};
-
-PageLoader.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default PageLoader;
