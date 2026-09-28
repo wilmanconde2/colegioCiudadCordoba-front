@@ -1,6 +1,20 @@
 
 // netlify/functions/_chatbot/colegio-knowledge.js
 
+import {
+  ACADEMIC_CALENDAR_2026,
+  ADMISSIONS_2027,
+  ENROLLMENT_2026,
+  TUITION_FEES_2026,
+} from '../../../src/shared/institutional-data.js';
+
+export {
+  ACADEMIC_CALENDAR_2026,
+  ADMISSIONS_2027,
+  ENROLLMENT_2026,
+  TUITION_FEES_2026,
+};
+
 export const DEFAULT_ANSWER =
   'Por ahora no tengo información confirmada sobre esa consulta. Para verificarla, comunícate con el colegio al WhatsApp 3104280125.';
 
@@ -11,10 +25,6 @@ export const APPOINTMENT_LINKS = {
     'https://wa.me/573104280125?text=Hola%2C%20deseo%20agendar%20una%20cita%20con%20un%20profesor%20o%20profesora.',
   psychology:
     'https://wa.me/573175016066?text=Hola%2C%20deseo%20agendar%20una%20cita%20con%20psicolog%C3%ADa.',
-};
-
-export const ADMISSIONS_2027 = {
-  availableFrom: '1 de septiembre de 2026',
 };
 
 export const COORDINATORS = {
@@ -77,6 +87,29 @@ export const GENERAL_CONTEXT = [
   'Las citas se solicitan por WhatsApp para Coordinación, Profesores o Psicología.',
 ].join('\n');
 
+const formatList = (items) => items.map((item) => `- ${item}`).join('\n');
+
+const buildEnrollmentKnowledge = () => `Costos de matrícula 2026:
+- Matrícula ordinaria: ${ENROLLMENT_2026.ordinary} para todos los niveles.
+- Matrícula extraordinaria: ${ENROLLMENT_2026.extraordinary} para todos los niveles.
+- La matrícula extraordinaria aplica con recargo del 10% a partir del 13 de diciembre de 2025.
+- La estampilla Pro-cultura 1,5% y el carné estudiantil están incluidos en el costo de matrícula.`;
+
+const buildAdmissionsKnowledge = () => `Inscripciones 2027:
+- La información ya está disponible en la sección Inscripciones de la página web (${ADMISSIONS_2027.pagePath}).
+- Valor de la inscripción: ${ADMISSIONS_2027.enrollmentFee}.
+- Documentos publicados:\n${formatList(ADMISSIONS_2027.requirements)}
+- Valoración:\n${formatList(ADMISSIONS_2027.assessment)}
+- Resultados: ${ADMISSIONS_2027.resultInstructions[0]}`;
+
+const buildTuitionKnowledge = (scope, feeData) => `Pensión 2026 para ${scope}:
+- Día 1 al 4: ${feeData.discount}.
+- Día 5 al 8: ${feeData.normal}.
+- Desde el día 9: ${feeData.late}.`;
+
+const buildCalendarKnowledge = () => `${ACADEMIC_CALENDAR_2026.title}:
+${formatList(ACADEMIC_CALENDAR_2026.entries)}`;
+
 export const KNOWLEDGE_ENTRIES = [
   {
     id: 'identidad-colegio',
@@ -131,43 +164,43 @@ export const KNOWLEDGE_ENTRIES = [
     id: 'matricula-2026',
     title: 'Matrícula 2026',
     keywords: ['matricula', 'matrícula', 'matriculas', 'matrículas', 'extraordinaria', 'ordinaria', 'inscripcion', 'inscripción'],
-    answer:
-      'Costos de matrícula 2026:\n- Matrícula ordinaria: $387.000 para todos los niveles.\n- Matrícula extraordinaria: $424.340 para todos los niveles.\n- La matrícula extraordinaria aplica con recargo del 10% a partir del 13 de diciembre de 2025.\n- La estampilla Pro-cultura 1,5% y el carné estudiantil están incluidos en el costo de matrícula.',
+    answer: buildEnrollmentKnowledge(),
   },
   {
     id: 'inscripciones-2027',
-    title: 'Disponibilidad de información para Inscripciones 2027',
+    title: 'Inscripciones 2027',
     keywords: ['inscripciones 2027', 'inscripcion 2027', 'matricula 2027', 'matriculas 2027', 'cupos 2027', 'cupo 2027', 'ano lectivo 2027'],
-    answer:
-      'La información de Inscripciones 2027 estará disponible a partir del 1 de septiembre de 2026.',
+    answer: buildAdmissionsKnowledge(),
   },
   {
     id: 'pension-preescolar-primaria',
     title: 'Pensión Jardín, Transición y Primaria 2026',
     keywords: ['pension jardin', 'pensión jardín', 'pension transicion', 'pensión transición', 'pension primero', 'pension segundo', 'pension tercero', 'pension cuarto', 'pension quinto', 'primaria', 'jardin', 'transicion', 'primero', 'segundo', 'tercero', 'cuarto', 'quinto'],
-    answer:
-      'Pensión 2026 para Jardín, Transición y grados 1°, 2°, 3°, 4° y 5°:\n- Día 1 al 4: $258.000.\n- Día 5 al 8: $260.000.\n- Desde el día 9: $265.200.',
+    answer: buildTuitionKnowledge(
+      'Jardín, Transición y grados 1°, 2°, 3°, 4° y 5°',
+      TUITION_FEES_2026.jardin,
+    ),
   },
   {
     id: 'pension-sexto',
     title: 'Pensión grado 6° 2026',
     keywords: ['pension sexto', 'pensión sexto', 'grado 6', 'grado sexto', 'sexto'],
-    answer:
-      'Pensión 2026 para grado 6°:\n- Día 1 al 4: $263.000.\n- Día 5 al 8: $265.000.\n- Desde el día 9: $270.300.',
+    answer: buildTuitionKnowledge('grado 6°', TUITION_FEES_2026.sexto),
   },
   {
     id: 'pension-7-11',
     title: 'Pensión grados 7° a 11° 2026',
     keywords: ['pension septimo', 'pensión séptimo', 'pension octavo', 'pension noveno', 'pension decimo', 'pension once', 'septimo', 'séptimo', 'octavo', 'noveno', 'decimo', 'décimo', 'once', 'grado 7', 'grado 8', 'grado 9', 'grado 10', 'grado 11'],
-    answer:
-      'Pensión 2026 para grados 7°, 8°, 9°, 10° y 11°:\n- Día 1 al 4: $283.000.\n- Día 5 al 8: $285.000.\n- Desde el día 9: $290.700.',
+    answer: buildTuitionKnowledge(
+      'grados 7°, 8°, 9°, 10° y 11°',
+      TUITION_FEES_2026.septimo,
+    ),
   },
   {
     id: 'cronograma-2026',
-    title: 'Cronograma 2026',
+    title: ACADEMIC_CALENDAR_2026.title,
     keywords: ['cronograma', 'calendario', 'inicio clases', 'periodo', 'periodos', 'evaluaciones', 'semana santa', 'vacaciones', 'receso', 'dia cientifico', 'día científico', 'dia familia', 'día familia', 'grados', 'graduacion', 'graduación'],
-    answer:
-      'Cronograma 2026:\n- Planeación: del 21 al 30 de enero.\n- Inicio de clases: lunes 2 de febrero.\n- Primer periodo: del 26 de enero al 17 de abril.\n- Segundo periodo: del 20 de abril al 11 de junio.\n- Tercer periodo: del 14 de julio al 18 de septiembre.\n- Cuarto periodo: del 21 de septiembre al 30 de noviembre.\n- Semana Santa: del 30 de marzo al 3 de abril.\n- Vacaciones estudiantes: del 19 de junio al 13 de julio.\n- Semana cultural y deportiva: del 30 de septiembre al 2 de octubre.\n- Semana de receso institucional: del 5 al 9 de octubre.\n- Día científico: viernes 25 de septiembre.\n- Día de la familia: sábado 7 de noviembre.\n- Expo Cocicor comercial e industrial: jueves 15 de octubre.\n- Grados grado 11: sábado 13 de diciembre.\n- Graduación Transición y Quinto: miércoles 2 de diciembre, 4:00 p.m. y 6:00 p.m.\n- Matrícula privado: 10 de diciembre.\n- Matrícula privado BTO: 11 de diciembre.\n- Matrícula cobertura: 9 de diciembre.',
+    answer: buildCalendarKnowledge(),
   },
   {
     id: 'reuniones-padres-2026',
@@ -247,92 +280,6 @@ export const KNOWLEDGE_ENTRIES = [
       'Reseña histórica: El Colegio Ciudad Córdoba fue fundado en 1990 con educación preescolar, básica primaria y básica secundaria. Su primer rector fue Armando Gordillo López. En 1994-1995 graduó la primera promoción comercial; en 2000-2001 la primera promoción industrial. El colegio también ha desarrollado procesos de calidad, plataforma virtual, actividades deportivas y culturales, y presencia institucional en la comuna 15 de Cali.',
   },
 ];
-
-export const ENROLLMENT_2026 = {
-  ordinary: '$387.000',
-  extraordinary: '$424.340',
-};
-
-export const TUITION_FEES_2026 = {
-  jardin: {
-    label: 'Jardín',
-    discount: '$258.000',
-    normal: '$260.000',
-    late: '$265.200',
-  },
-  transicion: {
-    label: 'Transición',
-    discount: '$258.000',
-    normal: '$260.000',
-    late: '$265.200',
-  },
-  primero: {
-    label: 'grado 1°',
-    discount: '$258.000',
-    normal: '$260.000',
-    late: '$265.200',
-  },
-  segundo: {
-    label: 'grado 2°',
-    discount: '$258.000',
-    normal: '$260.000',
-    late: '$265.200',
-  },
-  tercero: {
-    label: 'grado 3°',
-    discount: '$258.000',
-    normal: '$260.000',
-    late: '$265.200',
-  },
-  cuarto: {
-    label: 'grado 4°',
-    discount: '$258.000',
-    normal: '$260.000',
-    late: '$265.200',
-  },
-  quinto: {
-    label: 'grado 5°',
-    discount: '$258.000',
-    normal: '$260.000',
-    late: '$265.200',
-  },
-  sexto: {
-    label: 'grado 6°',
-    discount: '$263.000',
-    normal: '$265.000',
-    late: '$270.300',
-  },
-  septimo: {
-    label: 'grado 7°',
-    discount: '$283.000',
-    normal: '$285.000',
-    late: '$290.700',
-  },
-  octavo: {
-    label: 'grado 8°',
-    discount: '$283.000',
-    normal: '$285.000',
-    late: '$290.700',
-  },
-  noveno: {
-    label: 'grado 9°',
-    discount: '$283.000',
-    normal: '$285.000',
-    late: '$290.700',
-  },
-  decimo: {
-    label: 'grado 10°',
-    discount: '$283.000',
-    normal: '$285.000',
-    late: '$290.700',
-  },
-  once: {
-    label: 'grado 11°',
-    discount: '$283.000',
-    normal: '$285.000',
-    late: '$290.700',
-  },
-};
 
 export const TEACHERS = [
   {
