@@ -1,5 +1,5 @@
 // front/src/components/ModalInfoCurso.jsx
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   IMG_INFO_GENERAL,
@@ -51,6 +51,10 @@ const GOOGLE_FORM_URL = 'https://forms.gle/c5ZpYPmrNSTnczn49';
 export default function ModalInfoCurso({ open, onClose, alumno, curso }) {
   const [tab, setTab] = useState('general');
   const [horarioSel, setHorarioSel] = useState(null);
+  const panelRef = useRef(null);
+  const closeButtonRef = useRef(null);
+  const previouslyFocusedRef = useRef(null);
+  const titleId = useId();
 
   const handleTabChange = (nextTab) => {
     setTab(nextTab);
@@ -61,11 +65,42 @@ export default function ModalInfoCurso({ open, onClose, alumno, curso }) {
   };
 
   useEffect(() => {
-    function onKey(e) {
-      if (e.key === 'Escape') onClose?.();
+    if (!open) return undefined;
+
+    previouslyFocusedRef.current = document.activeElement;
+    closeButtonRef.current?.focus();
+
+    function onKey(event) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        onClose?.();
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+
+      const focusable = panelRef.current?.querySelectorAll(
+        'a[href], button:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusable?.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
-    if (open) window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      previouslyFocusedRef.current?.focus?.();
+    };
   }, [open, onClose]);
 
   useEffect(() => {
@@ -108,15 +143,15 @@ export default function ModalInfoCurso({ open, onClose, alumno, curso }) {
   if (!open) return null;
 
   return (
-    <div className='ModalCursos' role='dialog' aria-modal='true'>
-      <div className='ModalCursos__backdrop' onClick={onClose} />
+    <div className='ModalCursos' role='dialog' aria-modal='true' aria-labelledby={titleId}>
+      <div className='ModalCursos__backdrop' aria-hidden='true' onClick={onClose} />
 
-      <div className='ModalCursos__panel' onClick={(e) => e.stopPropagation()}>
+      <div ref={panelRef} className='ModalCursos__panel' onClick={(e) => e.stopPropagation()}>
         <div className='ModalCursos__header'>
           <div className='ModalCursos__headerLeft'>
-            {alumno?.nombreCompleto && (
-              <strong className='ModalCursos__studentName'>{alumno.nombreCompleto}</strong>
-            )}
+            <strong id={titleId} className='ModalCursos__studentName'>
+              {alumno?.nombreCompleto || 'Información del curso'}
+            </strong>
             {curso && <div className='ModalCursos__course'>{curso}</div>}
           </div>
 
@@ -127,7 +162,7 @@ export default function ModalInfoCurso({ open, onClose, alumno, curso }) {
             </div>
           </div>
 
-          <button className='ModalCursos__close' onClick={onClose} aria-label='Cerrar'>
+          <button ref={closeButtonRef} type='button' className='ModalCursos__close' onClick={onClose} aria-label='Cerrar información del curso'>
             ✕
           </button>
         </div>

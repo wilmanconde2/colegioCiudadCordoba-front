@@ -1,6 +1,6 @@
 // src/components/Formulario.jsx
 
-import { useMemo, useRef, useState } from 'react';
+import { useId, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ToastContainer, Zoom, toast } from 'react-toastify';
 import { ClipLoader } from 'react-spinners';
@@ -48,8 +48,11 @@ const Formulario = ({ typeSearch = 'codigo' }) => {
   const [alumnos, setAlumnos] = useState([]);
   const [error, setError] = useState('');
   const [selected, setSelected] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const [listDismissed, setListDismissed] = useState(false);
 
   const loadedOnceRef = useRef(false);
+  const listboxId = useId();
 
   async function loadAlumnosOnce() {
     if (loadedOnceRef.current) return;
@@ -78,11 +81,51 @@ const Formulario = ({ typeSearch = 'codigo' }) => {
   }, [query, alumnos]);
 
   const codigo = selected?.codigo || '';
+  const isListboxOpen = filtered.length > 0 && !selected && !listDismissed;
+
+  const selectAlumno = (alumno) => {
+    setSelected(alumno);
+    setQuery(alumno.nombreCompleto);
+    setActiveIndex(-1);
+    setListDismissed(true);
+
+    if (alumno.codigo) {
+      toast.success(`Código del estudiante: ${alumno.codigo}`);
+    } else {
+      toast.error('Estudiante encontrado, pero no hay código en el JSON.');
+    }
+  };
 
   const onClear = () => {
     setQuery('');
     setSelected(null);
     setError('');
+    setActiveIndex(-1);
+    setListDismissed(false);
+  };
+
+  const handleSearchKeyDown = (event) => {
+    if (event.key === 'Escape' && isListboxOpen) {
+      event.preventDefault();
+      setListDismissed(true);
+      setActiveIndex(-1);
+      return;
+    }
+
+    if (!filtered.length || selected) return;
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      setListDismissed(false);
+      setActiveIndex((current) => (current + 1) % filtered.length);
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      setListDismissed(false);
+      setActiveIndex((current) => (current <= 0 ? filtered.length - 1 : current - 1));
+    } else if (event.key === 'Enter' && isListboxOpen && activeIndex >= 0) {
+      event.preventDefault();
+      selectAlumno(filtered[activeIndex]);
+    }
   };
 
   const copyCodigo = async () => {
@@ -114,10 +157,18 @@ const Formulario = ({ typeSearch = 'codigo' }) => {
             onChange={(e) => {
               setQuery(e.target.value);
               setSelected(null);
+              setActiveIndex(-1);
+              setListDismissed(false);
             }}
             onFocus={loadAlumnosOnce}
+            onKeyDown={handleSearchKeyDown}
             placeholder={currentConfig.placeholder}
             aria-label='Buscar estudiante'
+            role='combobox'
+            aria-autocomplete='list'
+            aria-expanded={isListboxOpen}
+            aria-controls={listboxId}
+            aria-activedescendant={activeIndex >= 0 && isListboxOpen ? `${listboxId}-option-${activeIndex}` : undefined}
             autoComplete='off'
             required
           />
@@ -131,23 +182,18 @@ const Formulario = ({ typeSearch = 'codigo' }) => {
 
           {error && <span className='error Formulario__error'>{error}</span>}
 
-          {!!filtered.length && !selected && (
-            <div className='Formulario__dropdown' role='listbox'>
-              {filtered.map((a) => (
+          {isListboxOpen && (
+            <div id={listboxId} className='Formulario__dropdown' role='listbox' aria-label='Estudiantes encontrados'>
+              {filtered.map((a, index) => (
                 <button
+                  id={`${listboxId}-option-${index}`}
                   key={`${a.nombreCompleto}-${a.curso}-${a.codigo || 'sin-codigo'}`}
                   type='button'
-                  className='Formulario__option'
-                  onClick={() => {
-                    setSelected(a);
-                    setQuery(a.nombreCompleto);
-
-                    if (a.codigo) {
-                      toast.success(`Código del estudiante: ${a.codigo}`);
-                    } else {
-                      toast.error('Estudiante encontrado, pero no hay código en el JSON.');
-                    }
-                  }}
+                  role='option'
+                  aria-selected={index === activeIndex}
+                  className={`Formulario__option ${index === activeIndex ? 'is-active' : ''}`}
+                  onMouseEnter={() => setActiveIndex(index)}
+                  onClick={() => selectAlumno(a)}
                 >
                   <span className='Formulario__optionName'>{a.nombreCompleto}</span>
                   <span className='Formulario__optionCourse'>{a.curso}</span>

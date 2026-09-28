@@ -26,7 +26,7 @@ test('E2E-02: Tesorería muestra el formulario y PSE, sin mensualidad incompleta
   await page.goto('/tesoreria');
 
   await expect(page.getByRole('heading', { name: 'Costos Educativos y Medios de Pago' })).toBeVisible();
-  await expect(page.getByRole('textbox', { name: 'Buscar estudiante' })).toBeVisible();
+  await expect(page.getByRole('combobox', { name: 'Buscar estudiante' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Pagar con PSE' }).first()).toBeVisible();
   await expect(page.getByText(/información pendiente por configurar/i)).toHaveCount(0);
   await expect(page.getByText(/meses pendientes de pago/i)).toHaveCount(0);
@@ -38,10 +38,10 @@ test('E2E-03: la búsqueda selecciona y limpia un alumno sintético', async ({ p
   });
   await page.goto('/tesoreria');
 
-  const search = page.getByRole('textbox', { name: 'Buscar estudiante' });
+  const search = page.getByRole('combobox', { name: 'Buscar estudiante' });
   await search.focus();
   await search.fill('Valentina Prueba');
-  await page.getByRole('button', { name: /Valentina Prueba E2E Colegio/i }).click();
+  await page.getByRole('option', { name: /Valentina Prueba E2E Colegio/i }).click();
 
   const result = page.getByRole('heading', { name: 'Resultado' }).locator('..');
   await expect(result).toContainText('Valentina Prueba E2E Colegio');
