@@ -21,7 +21,7 @@ describe('Formulario', () => {
   it('muestra la búsqueda y la acción para limpiar inicialmente', () => {
     render(<Formulario />);
 
-    expect(screen.getByRole('textbox', { name: /buscar estudiante/i })).toBeTruthy();
+    expect(screen.getByRole('combobox', { name: /buscar estudiante/i })).toBeTruthy();
     expect(screen.getByRole('button', { name: /limpiar/i })).toBeTruthy();
   });
 
@@ -31,7 +31,7 @@ describe('Formulario', () => {
     const user = userEvent.setup();
     render(<Formulario />);
 
-    const input = screen.getByRole('textbox', { name: /buscar estudiante/i });
+    const input = screen.getByRole('combobox', { name: /buscar estudiante/i });
     fireEvent.focus(input);
 
     expect(loadAlumnos).toHaveBeenCalledTimes(1);
@@ -41,7 +41,7 @@ describe('Formulario', () => {
     await user.type(input, 'ana maria');
 
     const listbox = await screen.findByRole('listbox');
-    expect(within(listbox).getByRole('button', { name: /ana maría pérez.*5 a mañana/i })).toBeTruthy();
+    expect(within(listbox).getByRole('option', { name: /ana maría pérez.*5 a mañana/i })).toBeTruthy();
     expect(within(listbox).queryByText('Carlos Ruiz')).toBeNull();
   });
 
@@ -49,10 +49,10 @@ describe('Formulario', () => {
     const user = userEvent.setup();
     render(<Formulario />);
 
-    const input = screen.getByRole('textbox', { name: /buscar estudiante/i });
+    const input = screen.getByRole('combobox', { name: /buscar estudiante/i });
     await user.click(input);
     await user.type(input, 'Pérez');
-    await user.click(await screen.findByRole('button', { name: /ana maría pérez.*5 a mañana/i }));
+    await user.click(await screen.findByRole('option', { name: /ana maría pérez.*5 a mañana/i }));
 
     const result = screen.getByRole('heading', { name: /resultado/i }).parentElement;
     expect(within(result).getByText(/ana maría pérez/i)).toBeTruthy();
@@ -81,12 +81,51 @@ describe('Formulario', () => {
     });
     render(<Formulario />);
 
-    const input = screen.getByRole('textbox', { name: /buscar estudiante/i });
+    const input = screen.getByRole('combobox', { name: /buscar estudiante/i });
     await user.click(input);
     await user.type(input, 'Ana');
-    await user.click(await screen.findByRole('button', { name: /ana maría pérez.*5 a mañana/i }));
+    await user.click(await screen.findByRole('option', { name: /ana maría pérez.*5 a mañana/i }));
     await user.click(screen.getByRole('button', { name: /copiar código/i }));
 
     await waitFor(() => expect(writeText).toHaveBeenCalledWith('12345'));
+  });
+
+  it('expone el combobox y navega el listbox con teclado', async () => {
+    const user = userEvent.setup();
+    render(<Formulario />);
+
+    const input = screen.getByRole('combobox', { name: /buscar estudiante/i });
+    expect(input.getAttribute('aria-expanded')).toBe('false');
+
+    await user.click(input);
+    await user.type(input, 'a');
+
+    const listbox = await screen.findByRole('listbox', { name: /estudiantes encontrados/i });
+    expect(input.getAttribute('aria-expanded')).toBe('true');
+    expect(input.getAttribute('aria-controls')).toBe(listbox.id);
+
+    await user.keyboard('{ArrowDown}');
+    const activeOption = within(listbox).getByRole('option', { selected: true });
+    expect(input.getAttribute('aria-activedescendant')).toBe(activeOption.id);
+
+    await user.keyboard('{ArrowDown}{ArrowUp}{Enter}');
+    expect(input.value).toBe('Ana María Pérez');
+    expect(screen.queryByRole('listbox')).toBeNull();
+  });
+
+  it('cierra el listbox con Escape sin borrar la búsqueda', async () => {
+    const user = userEvent.setup();
+    render(<Formulario />);
+
+    const input = screen.getByRole('combobox', { name: /buscar estudiante/i });
+    await user.click(input);
+    await user.type(input, 'Ana');
+    await screen.findByRole('listbox');
+
+    await user.keyboard('{Escape}');
+
+    expect(screen.queryByRole('listbox')).toBeNull();
+    expect(input.getAttribute('aria-expanded')).toBe('false');
+    expect(input.value).toBe('Ana');
   });
 });

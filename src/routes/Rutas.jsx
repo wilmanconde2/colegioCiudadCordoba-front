@@ -3,6 +3,7 @@
 import { lazy, Suspense } from 'react';
 import { useRoutes } from 'react-router';
 import Inicio from '../pages/Inicio';
+import PageLoader from '../components/PageLoader';
 
 const Contacto = lazy(() => import('../pages/Contacto'));
 const Cronograma2026 = lazy(() => import('../pages/Cronograma2026'));
@@ -98,7 +99,7 @@ const Rutas = () => {
     },
   ]);
 
-  return <Suspense fallback={null}>{routes}</Suspense>;
+  return <Suspense fallback={<PageLoader />}>{routes}</Suspense>;
 };
 
 export default Rutas;
