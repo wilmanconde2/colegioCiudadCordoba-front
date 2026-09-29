@@ -19,11 +19,15 @@ const ALLOWED_ORIGINS = [
   'https://colegiociudadcordoba.edu.co',
   'https://www.colegiociudadcordoba.edu.co',
 ];
+const NETLIFY_DEPLOY_PREVIEW_ORIGIN =
+  /^https:\/\/deploy-preview-\d+--colegioccc\.netlify\.app$/;
 
 const getOrigin = (event) => getHeader(event, 'origin') || '';
+const isAllowedOrigin = (origin) =>
+  ALLOWED_ORIGINS.includes(origin) || NETLIFY_DEPLOY_PREVIEW_ORIGIN.test(origin);
 const getAllowedOrigin = (event) => {
   const origin = getOrigin(event);
-  return ALLOWED_ORIGINS.includes(origin)
+  return isAllowedOrigin(origin)
     ? origin
     : 'https://www.colegiociudadcordoba.edu.co';
 };
@@ -57,7 +61,7 @@ export const createChatbotHandler = (resolveProvider = getProvider) => async (ev
   if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers, body: '' };
 
   const origin = getOrigin(event);
-  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+  if (origin && !isAllowedOrigin(origin)) {
     return jsonResponse(403, headers, { error: 'Origen no permitido.' });
   }
 

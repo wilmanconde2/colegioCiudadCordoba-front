@@ -17,15 +17,17 @@ test(`chatbot adapter preserves validation statuses and CORS`, async (t) => {
     ['OPTIONS', { origin: 'http://localhost:5173' }, undefined, 200],
     ['GET', {}, undefined, 405],
     ['POST', { origin: 'null' }, '{}', 403],
+    ['POST', { origin: 'https://deploy-preview-10--otro-sitio.netlify.app' }, '{}', 403],
     ['POST', { 'content-type': 'text/plain' }, '{}', 415],
     ['POST', { 'content-type': 'application/json' }, '{', 400],
     ['POST', { 'content-type': 'application/json' }, '界'.repeat(MAX_BODY_BYTES), 413],
     ['POST', { 'content-type': 'application/json', origin: 'http://localhost:5173' }, JSON.stringify({ message: '¿El colegio tiene ruta?' }), 200],
+    ['POST', { 'content-type': 'application/json', origin: 'https://deploy-preview-10--colegioccc.netlify.app' }, JSON.stringify({ message: '¿El colegio tiene ruta?' }), 200],
   ]) {
     const response = await endpoint.default(new Request(`https://example.test/.netlify/functions/chatbot`, { method, headers, body }));
     assert.equal(response.status, status);
     if (status === 405) assert.equal(response.headers.get('allow'), 'POST, OPTIONS');
-    if (headers.origin === 'http://localhost:5173') assert.equal(response.headers.get('access-control-allow-origin'), headers.origin);
+    if (status === 200 && headers.origin) assert.equal(response.headers.get('access-control-allow-origin'), headers.origin);
     if (method === 'POST' && status === 200) assert.equal((await response.json()).source, 'local');
   }
   assert.equal(fetch.mock.callCount(), 0);

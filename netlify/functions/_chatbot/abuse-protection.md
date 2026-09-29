@@ -13,8 +13,9 @@ JSON escapes fit with structural overhead. Change `MAX_BODY_BYTES` internally.
 History retains existing normalization: non-arrays become empty, invalid entries
 are filtered, and the last four user/assistant strings are trimmed/capped at 300.
 
-POST permits absent Origin or an existing allowlisted Origin; other origins,
-including literal `null`, return 403. Origin is not authentication. OPTIONS keeps
+POST permits absent Origin, an existing allowlisted Origin, or this site's numbered
+`deploy-preview-<number>--colegioccc.netlify.app` origins; other origins, including
+literal `null`, return 403. Origin is not authentication. OPTIONS keeps
 the existing 200 preflight behavior without body validation or provider calls;
 disallowed preflight origins are not reflected in Access-Control-Allow-Origin.
 Other methods return 405 with `Allow: POST, OPTIONS`.
