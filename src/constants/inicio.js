@@ -54,8 +54,8 @@ export const CARD_IMGS = {
     height: 1024,
   },
   circular: {
-    src: cldUrl('circular_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1200 }),
-    srcSet: cldSrcSet('circular_cl', CARD_WIDTHS, RESPONSIVE_IMAGE_OPTIONS),
+    src: cldUrl('v1790696585/circular_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1200 }),
+    srcSet: cldSrcSet('v1790696585/circular_cl', CARD_WIDTHS, RESPONSIVE_IMAGE_OPTIONS),
     sizes: CARD_SIZES,
   },
   reporte: {
@@ -79,8 +79,8 @@ export const CARD_IMGS = {
 
 export const INICIO_HERO_IMAGES = {
   infoInscripciones: {
-    src: cldUrl('v1788794697/infoInscripciones_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 800 }),
-    srcSet: cldSrcSet('v1788794697/infoInscripciones_cl', [160, 240, 320, 480, 640, 800], RESPONSIVE_IMAGE_OPTIONS),
+    src: cldUrl('v1790697032/infoInscripciones_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 800 }),
+    srcSet: cldSrcSet('v1790697032/infoInscripciones_cl', [160, 240, 320, 480, 640, 800], RESPONSIVE_IMAGE_OPTIONS),
     sizes: '(min-width: 1500px) 360px, (min-width: 1400px) 24vw, (min-width: 992px) 21vw, (min-width: 849px) 280px, (min-width: 440px) 33vw, 145px',
     width: 800,
     height: 533,
