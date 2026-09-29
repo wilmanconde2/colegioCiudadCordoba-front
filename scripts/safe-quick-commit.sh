@@ -63,7 +63,7 @@ done <<< "$CHANGED_FILES"
 # -------------------------------------------------------
 
 echo
-echo "Verificando origin/main..."
+echo "Verificando origin/$BASE_BRANCH..."
 
 git fetch origin "$BASE_BRANCH" --quiet
 
@@ -71,7 +71,7 @@ LOCAL="$(git rev-parse "$BASE_BRANCH")"
 REMOTE="$(git rev-parse "origin/$BASE_BRANCH")"
 
 if [[ "$LOCAL" != "$REMOTE" ]]; then
-    echo "ERROR: main local no coincide con origin/main."
+    echo "ERROR: $BASE_BRANCH local no coincide con origin/$BASE_BRANCH."
     echo "Ejecuta: git pull --ff-only"
     exit 1
 fi
@@ -113,7 +113,7 @@ git diff --check -- \
     ':(exclude)*.ico'
 
 # -------------------------------------------------------
-# Crear branch
+# Crear rama temporal
 # -------------------------------------------------------
 
 TIMESTAMP="$(date +%Y%m%d-%H%M%S)"
@@ -200,7 +200,7 @@ if ! gh pr checks "$PR_NUMBER" --watch --fail-fast; then
 fi
 
 # -------------------------------------------------------
-# Esperar confirmación efectiva del merge
+# Esperar confirmación del merge
 # -------------------------------------------------------
 
 echo
@@ -221,35 +221,54 @@ PR_STATE="$(gh pr view "$PR_NUMBER" --json state --jq '.state')"
 
 if [[ "$PR_STATE" != "MERGED" ]]; then
     echo
-    echo "El PR pasó los checks, pero GitHub todavía no confirmó el merge."
+    echo "ERROR: GitHub todavía no confirmó el merge."
     echo "Revisa:"
     echo "$PR_URL"
     exit 1
 fi
 
 # -------------------------------------------------------
-# Restaurar entorno local
+# Sincronizar y limpiar
 # -------------------------------------------------------
 
 echo
 echo "PR fusionado correctamente."
-echo "Sincronizando entorno local..."
+echo "Sincronizando y limpiando entorno local..."
 
 git switch "$BASE_BRANCH"
-git fetch origin "$BASE_BRANCH" --prune
+
+# Actualizar main
+git fetch origin "$BASE_BRANCH" --quiet
 git merge --ff-only "origin/$BASE_BRANCH"
 
-# Eliminar branch local si todavía existe
+# Eliminar rama local
 if git show-ref --verify --quiet "refs/heads/$QUICK_BRANCH"; then
     git branch -D "$QUICK_BRANCH"
 fi
+
+# Eliminar rama remota si todavía existe
+if git ls-remote --exit-code --heads origin "$QUICK_BRANCH" >/dev/null 2>&1; then
+    git push origin --delete "$QUICK_BRANCH"
+fi
+
+# Limpiar referencias remotas obsoletas
+git fetch origin --prune --quiet
+
+# -------------------------------------------------------
+# Resultado
+# -------------------------------------------------------
 
 echo
 echo "======================================"
 echo "OK: cambio publicado correctamente."
 echo "PR #$PR_NUMBER fusionado."
-echo "main está actualizado."
+echo "$BASE_BRANCH está actualizado."
+echo "Ramas temporales eliminadas."
+echo "Referencias remotas limpiadas."
+echo
 echo "Working tree:"
 git status --short
-
+echo
+echo "Últimos commits:"
+git log --oneline --graph --decorate -8
 echo "======================================"
