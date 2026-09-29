@@ -10,7 +10,10 @@ import {
 } from '../constants/inscripciones';
 
 const Inscripciones = () => {
-  useTitulo('Inscripciones 2027');
+  useTitulo(
+    'Inscripciones 2027',
+    'Información oficial sobre inscripciones 2027, jornadas, servicios, proceso de inscripción y costos educativos del Colegio Ciudad Córdoba.',
+  );
 
   return (
     <main className='inscripciones'>

@@ -1,7 +1,10 @@
 import useTitulo from '../hooks/useTitulo';
 
 const Contacto = () => {
-  useTitulo('Contactanos');
+  useTitulo(
+    'Contáctanos',
+    'Dirección, teléfonos, correo y horarios de atención del Colegio Ciudad Córdoba en Cali.',
+  );
   return (
     <>
       <div className='fullContainer'>

@@ -9,7 +9,10 @@ const PSE_PAYMENT_URL =
   'https://www.avalpaycenter.com/wps/portal/portal-de-pagos/web/pagos-aval/resultado-busqueda/realizar-pago?idConv=00024146&origen=buscar';
 
 const Tesoreria = () => {
-  useTitulo('Tesorería');
+  useTitulo(
+    'Tesorería',
+    'Información de costos educativos y medios de pago del Colegio Ciudad Córdoba.',
+  );
 
   return (
     <>

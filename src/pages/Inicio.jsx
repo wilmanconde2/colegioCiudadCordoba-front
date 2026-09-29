@@ -20,7 +20,10 @@ import {
 } from '../constants/inicio';
 
 const Inicio = () => {
-  useTitulo('Inicio');
+  useTitulo(
+    'Inicio',
+    'Sitio oficial del Colegio Ciudad Córdoba en Cali: información institucional, inscripciones, servicios, tesorería y contacto.',
+  );
 
   const { currentImageIndex } = useCarrusel(CARRUSEL_IMAGES);
   // Tarjetas informativas y de selección, se pueden habilitar o deshabilitar según la necesidad de la página de inicio.
