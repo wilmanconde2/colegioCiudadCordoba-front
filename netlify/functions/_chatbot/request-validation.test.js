@@ -19,6 +19,9 @@ const invalidCases = [
   ['GET', eventFor({}, { httpMethod: 'GET' }), 405],
   ['PUT', eventFor({}, { httpMethod: 'PUT' }), 405],
   ['forbidden Origin', eventFor({}, { headers: { origin: 'https://example.org' } }), 403],
+  ['other Netlify site preview', eventFor({}, { headers: { origin: 'https://deploy-preview-10--otro-sitio.netlify.app' } }), 403],
+  ['lookalike preview suffix', eventFor({}, { headers: { origin: 'https://deploy-preview-10--colegioccc.netlify.app.evil.example' } }), 403],
+  ['arbitrary Netlify subdomain', eventFor({}, { headers: { origin: 'https://malicioso.netlify.app' } }), 403],
   ['null Origin', eventFor({}, { headers: { origin: 'null' } }), 403],
   ['text/plain', eventFor({}, { headers: { 'content-type': 'text/plain' } }), 415],
   ['missing Content-Type', eventFor({}, { headers: {} }), 415],
@@ -54,7 +57,9 @@ test('OPTIONS requires no body or Content-Type and never selects provider', asyn
 });
 
 for (const origin of [undefined, 'http://localhost:8888', 'http://localhost:5173',
-  'https://colegioccc.netlify.app', 'https://colegiociudadcordoba.edu.co', 'https://www.colegiociudadcordoba.edu.co']) {
+  'https://colegioccc.netlify.app', 'https://colegiociudadcordoba.edu.co',
+  'https://www.colegiociudadcordoba.edu.co',
+  'https://deploy-preview-10--colegioccc.netlify.app']) {
   test(`valid POST with Origin ${origin} can call provider`, async (t) => {
     const { handler, generate } = setup(t);
     const headers = { 'Content-Type': 'application/json; charset=utf-8' };

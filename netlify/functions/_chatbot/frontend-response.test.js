@@ -1,41 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
-import vm from 'node:vm';
+import { sendChatMessage } from '../../../src/components/chatbot/chatbotApi.js';
+import { getChatbotErrorMessage } from '../../../src/components/chatbot/chatbotUtils.js';
 
-// No DOM/component framework is installed. Execute the actual async UI handler
-// with Node's existing test runner; React rendering remains a manual QA step.
-const source = await readFile(new URL('../../../src/components/Chatbot.jsx', import.meta.url), 'utf8');
-const start = source.indexOf('  const askKeyla = async (question) => {');
-const end = source.indexOf('  const handleSubmit =', start);
-assert.ok(start >= 0 && end > start, 'Locate the production request handler');
-const handlerSource = source.slice(start, end);
 const neutralMessage = 'Has realizado varias consultas en poco tiempo. Espera un momento antes de volver a intentarlo.';
 
 const runRequest = async (t, response) => {
-  let messages = [];
-  const logged = [];
-  const timers = new Map();
-  const fetch = t.mock.fn(async () => response);
-  const requestInProgressRef = { current: false };
-  const context = {
-    fetch, AbortController, MAX_MESSAGE_LENGTH: 500, REQUEST_TIMEOUT_MS: 30_000,
-    CHATBOT_API_URL: '/.netlify/functions/chatbot', messages: [],
-    requestInProgressRef, requestControllerRef: { current: null },
-    getSafeHistory: () => [], createMessageId: () => String(messages.length),
-    setMessages: (update) => { messages = update(messages); },
-    setInput: () => {}, setIsLoading: () => {},
-    console: { error: (...args) => logged.push(args) },
-    window: {
-      setTimeout: (callback) => { timers.set(1, callback); return 1; },
-      clearTimeout: (id) => timers.delete(id),
-    },
-  };
-  await vm.runInNewContext(`${handlerSource}\naskKeyla('Consulta de prueba');`, context);
-  assert.equal(fetch.mock.callCount(), 1, 'one request, no automatic retry');
-  assert.equal(timers.size, 0, 'timeout cleared, no retry timer scheduled');
-  assert.equal(requestInProgressRef.current, false, 'next manual request is enabled');
-  return { answer: messages.at(-1).text, logged };
+  const fetchMock = t.mock.method(globalThis, 'fetch', async () => response);
+
+  try {
+    const answer = await sendChatMessage({
+      message: 'Consulta de prueba',
+      history: [],
+      signal: new AbortController().signal,
+    });
+    assert.equal(fetchMock.mock.callCount(), 1, 'one request, no automatic retry');
+    return { answer, error: null };
+  } catch (error) {
+    assert.equal(fetchMock.mock.callCount(), 1, 'one request, no automatic retry');
+    return { answer: getChatbotErrorMessage(error), error };
+  }
 };
 
 for (const [format, body, contentType] of [
@@ -57,7 +41,7 @@ for (const retryAfter of ['60', 'Fri, 11 Sep 2026 19:00:00 GMT']) {
     const response = new Response('', { status: 429, headers: { 'Retry-After': retryAfter } });
     const result = await runRequest(t, response);
     assert.equal(result.answer, neutralMessage);
-    assert.equal(result.logged[0][1].retryAfter, retryAfter);
+    assert.equal(result.error.retryAfter, retryAfter);
   });
 }
 
