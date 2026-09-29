@@ -1,196 +1,241 @@
-# Colegio Ciudad Córdoba – Sitio Web Oficial
+# Colegio Ciudad Córdoba — sitio web institucional
 
-Frontend del sitio web institucional del **Colegio Ciudad Córdoba**, desarrollado con **React**, **Vite** y **Sass**, y desplegado en **Netlify**.
+## Project Overview
 
----
+Aplicación web oficial del Colegio Ciudad Córdoba. Reúne información institucional,
+admisiones, horarios, tesorería, PQRS y otros recursos para la comunidad educativa.
+También incluye la consulta pública de código estudiantil y **Keyla**, el asistente
+virtual institucional.
 
-## Descripción
+La aplicación es una SPA de React servida por Netlify. El frontend consume una
+única Netlify Function para el chatbot y carga el JSON público de estudiantes desde
+la URL configurada para cada entorno.
 
-Este proyecto reúne en un solo sitio web la información principal del colegio y facilita el acceso a distintos recursos y secciones institucionales.
+## Stack
 
-### Secciones principales
+- React 19 y React Router 8.
+- Vite 8.
+- JavaScript con módulos ES.
+- Sass y Bootstrap 5.
+- Netlify CDN y Netlify Functions.
+- ESLint 10.
+- `node:test` para la lógica serverless.
+- Vitest, Testing Library y jsdom para la interfaz React.
+- Playwright para pruebas E2E en Chromium.
 
-- Inicio
-- Historia
-- Misión y visión
-- Modalidades
-- Perfiles institucionales
-- Horarios
-- Tesorería
-- PQRS
-- Contacto
-- Manual de convivencia
-- Cronograma académico
+Las versiones y rangos exactos se encuentran en `package.json` y
+`package-lock.json`.
 
-Además, incluye una funcionalidad de **consulta de código estudiantil** a partir de un archivo JSON cargado en producción.
+## Requirements
 
----
+- Node.js 22.23.2, versión definida en `.nvmrc`, `package.json`, CI y
+  `netlify.toml`.
+- npm, incluido con Node.js.
 
-## Tecnologías utilizadas
-
-### Base del proyecto
-
-- React
-- Vite
-- JavaScript
-- Sass
-
-### Librerías y utilidades
-
-- Bootstrap
-- React Router DOM
-- React Icons
-- React Toastify
-- React Spinners
-
-### Servicios externos
-
-- Netlify
-- Cloudinary
-
----
-
-## Estructura del proyecto
+## Installation
 
 ```bash
-public/
-src/
-├─ components/
-│  ├─ BotonWhatsapp.jsx
-│  ├─ BuscadorCursoCard.jsx
-│  ├─ CardInformation.jsx
-│  ├─ CardSelection.jsx
-│  ├─ Carrusel.jsx
-│  ├─ CarruselPerfiles.jsx
-│  ├─ Footer.jsx
-│  ├─ Formulario.jsx
-│  ├─ Header.jsx
-│  ├─ ModalInfoCurso.jsx
-│  ├─ Navbar.jsx
-│  └─ PageLoader.jsx
-├─ constants/
-│  ├─ inicio.js
-│  └─ recursosCursos.js
-├─ context/
-├─ helpers/
-├─ hooks/
-│  ├─ useCarrusel.jsx
-│  └─ useTitulo.jsx
-├─ pages/
-│  ├─ Contacto.jsx
-│  ├─ Cronograma2026.jsx
-│  ├─ DeporteLudica.jsx
-│  ├─ Historia.jsx
-│  ├─ HorarioCoordinadores.jsx
-│  ├─ HorarioPrimaria.jsx
-│  ├─ HorarioPsicologia.jsx
-│  ├─ HorarioSecundaria.jsx
-│  ├─ Inicio.jsx
-│  ├─ ManualConvivencia.jsx
-│  ├─ MisionVision.jsx
-│  ├─ Modalidades.jsx
-│  ├─ NoEncontrado.jsx
-│  ├─ PerfilesCCC.jsx
-│  ├─ PQRS.jsx
-│  └─ Tesoreria.jsx
-├─ routes/
-│  └─ Rutas.jsx
-├─ styles/
-│  ├─ base/
-│  ├─ components/
-│  └─ index.scss
-├─ utils/
-│  └─ cloudinary.js
-├─ App.jsx
-└─ main.jsx
+git clone https://github.com/wilmanconde2/colegioCiudadCordoba-front.git
+cd colegioCiudadCordoba-front
+npm ci
 ```
 
----
+Copia `.env.example` como `.env` y configura únicamente las variables necesarias
+para el entorno. `.env` está excluido de Git y no debe incluirse en commits.
 
-## Instalación
-
-```bash
-git clone https://github.com/TU-USUARIO/colegiocc-frontend.git
-cd colegiocc-frontend
-npm install
-```
-
----
-
-## Scripts
+## Development
 
 ```bash
 npm run dev
+```
+
+Este comando inicia el frontend con Vite. No emula por sí solo las Netlify
+Functions; el chatbot requiere que su endpoint esté disponible en el entorno que
+se esté probando.
+
+Para revisar localmente el resultado de un build:
+
+```bash
 npm run build
 npm run preview
-npm run lint
-npm run generate:alumnos
 ```
 
----
+## Scripts
 
-## Integración continua
+| Comando | Propósito |
+| --- | --- |
+| `npm run dev` | Inicia el servidor de desarrollo de Vite. |
+| `npm run build` | Genera el frontend de producción en `dist/`. |
+| `npm run preview` | Sirve localmente el build generado. |
+| `npm run lint` | Ejecuta ESLint sobre el repositorio. |
+| `npm test` | Ejecuta las pruebas serverless y de interfaz. |
+| `npm run test:serverless` | Ejecuta con `node:test` las pruebas del chatbot. |
+| `npm run test:ui` | Ejecuta con Vitest las pruebas React. |
+| `npm run test:e2e` | Ejecuta los smoke tests E2E con Playwright. |
+| `npm run generate:alumnos` | Ejecuta la herramienta local externa `../tools/excel-to-json.mjs`; no forma parte del flujo normal de instalación. |
 
-GitHub Actions valida los pull requests hacia `main` y los pushes a `main` con
-Node.js 22.23.2. El check `CI / quality` instala con `npm ci` y exige que lint,
-tests y build finalicen correctamente. También informa vulnerabilidades de nivel
-alto o crítico sin bloquear inicialmente.
+## Testing
 
-El workflow no despliega ni necesita credenciales de proveedores de IA. Netlify
-puede continuar desplegando desde `main` una vez integrado el cambio.
+El proyecto tiene tres capas automatizadas:
 
----
+- **Serverless:** `node:test` cubre validación, respuestas locales, recuperación
+  de contexto, contrato de proveedores, fallbacks y estructura de conocimiento.
+- **UI:** Vitest, Testing Library y jsdom cubren componentes y rutas de React.
+- **E2E:** Playwright ejecuta smoke tests críticos en Chromium usando una fuente
+  sintética de estudiantes.
 
-## Producción
+```bash
+npm test
+npm run test:e2e
+```
 
-https://colegiociudadcordoba.edu.co
+Antes de abrir un PR con cambios de aplicación se recomienda ejecutar también:
 
----
+```bash
+npm run lint
+npm run build
+```
 
-## Autor
+## CI
 
-Wilman Conde
-https://github.com/wilmanconde2
+`.github/workflows/ci.yml` se ejecuta en pull requests hacia `main` y en pushes a
+`main`, con Node.js 22.23.2. Contiene dos jobs:
 
-KrakenDigitalSD
-https://krakendigitalsd.netlify.app/
-## Arquitectura de Keyla
+- `quality`: instala con `npm ci`, reporta auditorías de severidad alta sin
+  bloquear, y ejecuta lint, pruebas y build.
+- `e2e`: instala Chromium y ejecuta los smoke tests de Playwright.
+
+El workflow no despliega la aplicación ni necesita credenciales de proveedores de
+IA.
+
+## Architecture
 
 ```text
-Keyla
-├── Base de conocimiento local
-│   ├── netlify/functions/_chatbot/colegio-knowledge.js
-│   └── netlify/functions/_chatbot/local-answer.js
-├── Recuperación de contexto
-│   └── netlify/functions/_chatbot/context-retriever.js
-├── AI Provider
-│   └── netlify/functions/_chatbot/providers/
-│       ├── groq.js
-│       ├── gemini.js
-│       ├── openai.js
-│       └── claude.js
-└── Frontend
-    └── src/components/Chatbot.jsx
+React SPA
+  ├─ React Router → páginas y componentes
+  ├─ JSON público de estudiantes
+  └─ POST /.netlify/functions/chatbot
+       ↓
+     chatbot handler
+       ├─ validación, CORS y respuesta local
+       ├─ recuperación de contexto institucional
+       └─ abstracción de proveedor
+            ├─ Groq
+            ├─ OpenAI
+            ├─ Gemini
+            └─ Claude
+
+src/shared/institutional-data.js
+  ├─ frontend institucional
+  ├─ respuestas locales
+  └─ base de conocimiento para IA
 ```
 
-El único endpoint público del chatbot es `POST /.netlify/functions/chatbot`. La respuesta local siempre se intenta primero. Si no existe una respuesta local exacta, `context-retriever.js` selecciona únicamente los bloques institucionales relevantes antes de llamar al proveedor remoto. Esto evita enviar toda la base de conocimiento en cada solicitud y mantiene el consumo de tokens bajo control. El proveedor remoto se selecciona con `AI_PROVIDER`; actualmente producción y desarrollo están configurados para `groq`.
+`src/shared/institutional-data.js` es la fuente compartida para los datos
+institucionales estructurados que necesitan tanto el frontend como el chatbot.
 
-El flujo es `Chatbot → /.netlify/functions/chatbot → chatbotHandler → AI_PROVIDER → provider`.
-Groq no es un proveedor permanente: la selección depende de `AI_PROVIDER`.
-Se conservan los adapters de Groq, OpenAI, Gemini y Claude.
+## Chatbot
 
-Variables mínimas en Netlify:
+Keyla expone un único endpoint público:
 
-```env
-AI_PROVIDER=groq
-GROQ_API_KEY=...
-GROQ_MODEL=openai/gpt-oss-20b
+```text
+POST /.netlify/functions/chatbot
 ```
 
-## Keyla retrieval quality (v1.6.3)
+El handler valida método, origen, tipo y tamaño del cuerpo. Primero intenta una
+respuesta local; cuando no existe una respuesta suficiente, recupera los bloques
+institucionales relevantes, construye el contrato común de mensajes y llama al
+proveedor seleccionado mediante `AI_PROVIDER`. Si el proveedor falla, devuelve el
+fallback público sin exponer detalles internos.
 
-The semantic retriever now prioritizes institutional value-proposition context for synthesis, comparison, strengths, benefits, and family enrollment-intent questions. It keeps the existing local-first and multi-provider architecture unchanged while improving the quality of Groq responses without increasing the 6,500-character context ceiling.
+Los adapters disponibles son Groq, OpenAI, Gemini y Claude. Groq es el proveedor
+predeterminado cuando `AI_PROVIDER` no está definido. La Function también aplica
+la limitación nativa configurada en `netlify/functions/chatbot.js` y restringe
+orígenes de navegador a producción, desarrollo local aprobado y previews
+numerados de este sitio Netlify.
 
-### Groq model
+La documentación detallada del contrato y la protección del endpoint está en:
 
-Groq uses `openai/gpt-oss-20b` as the current default model. The local-first flow and semantic context retrieval remain unchanged; synthesis and relationship questions are routed to the provider when a raw local knowledge entry would not satisfy the requested intent.
+- `docs/adr/0001-provider-neutral-chatbot-message-contract.md`
+- `docs/adr/0002-provider-finish-reasons.md`
+- `netlify/functions/_chatbot/abuse-protection.md`
+
+## Project Structure
+
+```text
+.
+├─ public/                       # recursos estáticos
+├─ src/
+│  ├─ components/               # componentes React, incluido Keyla
+│  ├─ constants/                # configuración de contenido y UI
+│  ├─ hooks/                    # hooks reutilizables
+│  ├─ pages/                    # páginas de la SPA
+│  ├─ routes/                   # definición de rutas con React Router
+│  ├─ shared/                   # datos institucionales compartidos
+│  ├─ styles/                   # Sass global y por componente
+│  ├─ test/                     # configuración de pruebas UI
+│  └─ utils/                    # utilidades del frontend
+├─ netlify/functions/
+│  ├─ chatbot.js                # endpoint público y rate limit
+│  └─ _chatbot/
+│     ├─ knowledge/             # datos y builders de conocimiento
+│     └─ providers/             # adapters de IA
+├─ tests/e2e/                   # smoke tests de Playwright
+├─ docs/adr/                    # decisiones de arquitectura aceptadas
+└─ .github/workflows/ci.yml     # quality y e2e
+```
+
+## Environment Variables
+
+Usa `.env.example` como referencia. Nunca publiques valores reales.
+
+### Frontend
+
+| Variable | Uso |
+| --- | --- |
+| `VITE_ALUMNOS_JSON_URL` | URL del JSON público usado por la consulta estudiantil. |
+
+Las variables con prefijo `VITE_` se incorporan al frontend; no deben contener
+secretos.
+
+### Backend / providers
+
+| Variable | Uso |
+| --- | --- |
+| `AI_PROVIDER` | Proveedor activo: `groq`, `openai`, `gemini` o `claude`. |
+| `GROQ_API_KEY` / `GROQ_MODEL` | Credencial y modelo de Groq. |
+| `OPENAI_API_KEY` / `OPENAI_MODEL` | Credencial y modelo de OpenAI. |
+| `GEMINI_API_KEY` / `GEMINI_MODEL` | Credencial y modelo de Gemini. |
+| `CLAUDE_API_KEY` / `CLAUDE_MODEL` | Credencial y modelo de Claude. |
+
+Las claves de proveedores deben permanecer exclusivamente en el entorno serverless.
+Solo es necesaria la credencial del proveedor seleccionado.
+
+## Deployment
+
+Netlify instala dependencias con `npm ci`, ejecuta `npm run build`, publica
+`dist/` y carga las funciones desde `netlify/functions/`, según `netlify.toml`.
+
+Los pull requests reciben un Deploy Preview mediante la integración del proyecto.
+Después de CI y QA, los cambios integrados en `main` siguen el flujo de despliegue
+a producción de Netlify.
+
+Producción: [colegiociudadcordoba.edu.co](https://colegiociudadcordoba.edu.co)
+
+## Contribution / Workflow
+
+```text
+rama de trabajo
+  → pull request hacia main
+  → CI: quality + e2e
+  → QA del Deploy Preview
+  → squash merge aprobado
+```
+
+Consulta `AGENTS.md` para las reglas de alcance, riesgo, validación, seguridad y
+gobernanza del repositorio. Un PR o un CI exitoso no autoriza por sí solo el merge.
+
+## Authors
+
+- [Wilman Conde](https://github.com/wilmanconde2)
+- [KrakenDigitalSD](https://krakendigitalsd.netlify.app/)
