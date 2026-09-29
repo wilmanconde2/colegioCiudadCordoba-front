@@ -45,6 +45,21 @@ describe('Formulario', () => {
     expect(within(listbox).queryByText('Carlos Ruiz')).toBeNull();
   });
 
+  it('muestra el error de carga y permite reintentar al enfocar de nuevo', async () => {
+    loadAlumnos
+      .mockRejectedValueOnce(new Error('No se pudo cargar el archivo de alumnos.'))
+      .mockResolvedValueOnce(alumnos);
+    render(<Formulario />);
+
+    const input = screen.getByRole('combobox', { name: /buscar estudiante/i });
+    fireEvent.focus(input);
+    expect(await screen.findByText(/no se pudo cargar el archivo de alumnos/i)).toBeTruthy();
+
+    fireEvent.blur(input);
+    fireEvent.focus(input);
+    await waitFor(() => expect(loadAlumnos).toHaveBeenCalledTimes(2));
+  });
+
   it('selecciona un estudiante, muestra sus datos y permite limpiar', async () => {
     const user = userEvent.setup();
     render(<Formulario />);
