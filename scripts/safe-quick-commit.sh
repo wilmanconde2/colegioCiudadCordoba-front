@@ -101,8 +101,16 @@ echo "Ejecutando build..."
 npm run build
 
 echo
-echo "Verificando diff..."
-git diff --check
+echo "Verificando diff en archivos de texto..."
+
+git diff --check -- \
+    ':(exclude)*.pdf' \
+    ':(exclude)*.png' \
+    ':(exclude)*.jpg' \
+    ':(exclude)*.jpeg' \
+    ':(exclude)*.gif' \
+    ':(exclude)*.webp' \
+    ':(exclude)*.ico'
 
 # -------------------------------------------------------
 # Crear branch
