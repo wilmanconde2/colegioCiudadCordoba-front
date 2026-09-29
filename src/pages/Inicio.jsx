@@ -28,7 +28,7 @@ const Inicio = () => {
   const [mostrarCircular] = useState(true);
   const [mostrarTalleres] = useState(false);
   const [mostrarReporte] = useState(false);
-  const [mostrarActividades] = useState(true);
+  const [mostrarActividades] = useState(false);
   const [mostrarHorarios] = useState(false);
 
   const handleSelectChange = (e) => {
