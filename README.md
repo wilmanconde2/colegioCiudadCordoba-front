@@ -72,7 +72,6 @@ npm run preview
 | `npm run test:serverless` | Ejecuta con `node:test` las pruebas del chatbot. |
 | `npm run test:ui` | Ejecuta con Vitest las pruebas React. |
 | `npm run test:e2e` | Ejecuta los smoke tests E2E con Playwright. |
-| `npm run generate:alumnos` | Ejecuta la herramienta local externa `../tools/excel-to-json.mjs`; no forma parte del flujo normal de instalación. |
 
 ## Testing
 
@@ -197,6 +196,12 @@ Usa `.env.example` como referencia. Nunca publiques valores reales.
 
 Las variables con prefijo `VITE_` se incorporan al frontend; no deben contener
 secretos.
+
+Este repositorio web únicamente consume `alumnos.json` mediante
+`VITE_ALUMNOS_JSON_URL`. La generación y actualización del dataset se realiza
+fuera de este repositorio, desde el tooling del workspace hermano `local-data`.
+Ese tooling no es una dependencia del build, CI, Netlify ni de la instalación
+normal del frontend.
 
 ### Backend / providers
 
