@@ -1,7 +1,8 @@
 import useTitulo from '../hooks/useTitulo';
+import { ROUTE_METADATA } from '../constants/seo';
 
 const Contacto = () => {
-  useTitulo('Contactanos');
+  useTitulo(ROUTE_METADATA['/contacto'].title, ROUTE_METADATA['/contacto'].description);
   return (
     <>
       <div className='fullContainer'>

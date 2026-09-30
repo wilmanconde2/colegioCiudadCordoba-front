@@ -9,6 +9,7 @@ import { useCarrusel } from '../hooks/useCarrusel';
 import { NavLink } from 'react-router';
 // eslint-disable-next-line no-unused-vars
 import BuscadorCursoCard from '../components/BuscadorCursoCard';
+import { ROUTE_METADATA } from '../constants/seo';
 
 import {
   CARRUSEL_IMAGES,
@@ -20,7 +21,7 @@ import {
 } from '../constants/inicio';
 
 const Inicio = () => {
-  useTitulo('Inicio');
+  useTitulo(ROUTE_METADATA['/'].title, ROUTE_METADATA['/'].description);
 
   const { currentImageIndex } = useCarrusel(CARRUSEL_IMAGES);
   // Tarjetas informativas y de selección, se pueden habilitar o deshabilitar según la necesidad de la página de inicio.
