@@ -1,5 +1,6 @@
 import useTitulo from '../hooks/useTitulo';
 import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
+import { ROUTE_METADATA } from '../constants/seo';
 import {
   CONDICIONES,
   COSTOS_2026,
@@ -11,8 +12,8 @@ import {
 
 const Inscripciones = () => {
   useTitulo(
-    'Inscripciones 2027',
-    'Información oficial sobre inscripciones 2027, jornadas, servicios, proceso de inscripción y costos educativos del Colegio Ciudad Córdoba.',
+    ROUTE_METADATA['/inscripciones'].title,
+    ROUTE_METADATA['/inscripciones'].description,
   );
 
   return (

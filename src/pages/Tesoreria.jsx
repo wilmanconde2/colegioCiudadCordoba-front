@@ -2,6 +2,7 @@
 
 import useTitulo from '../hooks/useTitulo';
 import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
+import { ROUTE_METADATA } from '../constants/seo';
 import Formulario from '../components/Formulario';
 import PsePaymentCta from '../components/PsePaymentCta';
 
@@ -9,10 +10,7 @@ const PSE_PAYMENT_URL =
   'https://www.avalpaycenter.com/wps/portal/portal-de-pagos/web/pagos-aval/resultado-busqueda/realizar-pago?idConv=00024146&origen=buscar';
 
 const Tesoreria = () => {
-  useTitulo(
-    'Tesorería',
-    'Información de costos educativos y medios de pago del Colegio Ciudad Córdoba.',
-  );
+  useTitulo(ROUTE_METADATA['/tesoreria'].title, ROUTE_METADATA['/tesoreria'].description);
 
   return (
     <>

@@ -9,12 +9,14 @@
   "scripts": {
     "generate:alumnos": "node ../tools/excel-to-json.mjs",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && npm run prerender:metadata && npm run verify:route-metadata",
     "lint": "eslint .",
     "test": "npm run test:serverless && npm run test:ui",
     "test:e2e": "playwright test",
     "test:serverless": "node --test netlify/functions/_chatbot/*.test.js",
     "test:ui": "vitest run --passWithNoTests",
+    "prerender:metadata": "node scripts/prerender-route-metadata.mjs",
+    "verify:route-metadata": "node scripts/verify-route-metadata.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

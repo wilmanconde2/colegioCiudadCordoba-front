@@ -8,6 +8,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import BotonWhatsapp from './components/BotonWhatsapp';
 import ErrorBoundary from './components/ErrorBoundary';
+import OptionalFeatureErrorBoundary from './components/OptionalFeatureErrorBoundary';
 
 const Chatbot = lazy(() => import('./components/Chatbot'));
 
@@ -29,9 +30,11 @@ const DeferredChatbot = () => {
   if (!shouldLoad) return null;
 
   return (
-    <Suspense fallback={null}>
-      <Chatbot />
-    </Suspense>
+    <OptionalFeatureErrorBoundary>
+      <Suspense fallback={null}>
+        <Chatbot />
+      </Suspense>
+    </OptionalFeatureErrorBoundary>
   );
 };
 

@@ -1,10 +1,8 @@
 import useTitulo from '../hooks/useTitulo';
+import { ROUTE_METADATA } from '../constants/seo';
 
 const Contacto = () => {
-  useTitulo(
-    'Contáctanos',
-    'Dirección, teléfonos, correo y horarios de atención del Colegio Ciudad Córdoba en Cali.',
-  );
+  useTitulo(ROUTE_METADATA['/contacto'].title, ROUTE_METADATA['/contacto'].description);
   return (
     <>
       <div className='fullContainer'>

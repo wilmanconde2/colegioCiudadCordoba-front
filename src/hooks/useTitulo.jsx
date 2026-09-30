@@ -1,8 +1,5 @@
 import { useEffect } from 'react';
-
-const SITE_URL = 'https://colegiociudadcordoba.edu.co';
-const DEFAULT_DESCRIPTION =
-  'Sitio oficial del Colegio Ciudad Córdoba en Cali: información institucional, inscripciones, servicios, tesorería y contacto.';
+import { DEFAULT_DESCRIPTION, SITE_URL } from '../constants/seo';
 
 const setMetaContent = (selector, attributes, content) => {
   let element = document.head.querySelector(selector);
