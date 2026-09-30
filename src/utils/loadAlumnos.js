@@ -1,6 +1,7 @@
 // src/utils/loadAlumnos.js
 
 const ALUMNOS_JSON_URL = import.meta.env.VITE_ALUMNOS_JSON_URL;
+let alumnosPromise;
 
 function safeGet(row, key) {
     const value = row?.[key];
@@ -73,11 +74,20 @@ export async function loadAlumnos() {
         throw new Error('Falta configurar VITE_ALUMNOS_JSON_URL en el archivo .env');
     }
 
-    const rows = await readRowsFromJsonUrl(ALUMNOS_JSON_URL);
+    if (!alumnosPromise) {
+        alumnosPromise = readRowsFromJsonUrl(ALUMNOS_JSON_URL)
+            .then((rows) => {
+                if (!rows.length) {
+                    throw new Error('El JSON está vacío o no se pudo leer.');
+                }
 
-    if (!rows.length) {
-        throw new Error('El JSON está vacío o no se pudo leer.');
+                return rows.map(parseAlumnoRow).filter(Boolean);
+            })
+            .catch((error) => {
+                alumnosPromise = undefined;
+                throw error;
+            });
     }
 
-    return rows.map(parseAlumnoRow).filter(Boolean);
+    return alumnosPromise;
 }
