@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import App from './App';
 
@@ -31,6 +31,8 @@ describe('App', () => {
 
   it('aísla un fallo del chatbot y mantiene disponible el resto de la aplicación', async () => {
     render(<App />);
+
+    fireEvent.click(screen.getByRole('button', { name: /cerrar aviso de receso estudiantil/i }));
 
     await waitFor(() => {
       expect(console.error).toHaveBeenCalled();

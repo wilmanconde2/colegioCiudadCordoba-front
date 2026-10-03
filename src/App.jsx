@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import BotonWhatsapp from './components/BotonWhatsapp';
 import ErrorBoundary from './components/ErrorBoundary';
 import OptionalFeatureErrorBoundary from './components/OptionalFeatureErrorBoundary';
+import RecesoEstudiantilModal from './components/RecesoEstudiantilModal';
 
 const Chatbot = lazy(() => import('./components/Chatbot'));
 
@@ -39,11 +40,17 @@ const DeferredChatbot = () => {
 };
 
 const App = () => {
+  const [isRecesoModalOpen, setIsRecesoModalOpen] = useState(true);
+
   return (
     <BrowserRouter>
       <ScrollToTop />
       <ErrorBoundary>
-        <div className='app-layout'>
+        <div
+          className='app-layout'
+          aria-hidden={isRecesoModalOpen || undefined}
+          inert={isRecesoModalOpen || undefined}
+        >
           <main className='main-content'>
             <Header />
             <Rutas />
@@ -52,6 +59,10 @@ const App = () => {
           <DeferredChatbot />
           <BotonWhatsapp />
         </div>
+        <RecesoEstudiantilModal
+          open={isRecesoModalOpen}
+          onClose={() => setIsRecesoModalOpen(false)}
+        />
       </ErrorBoundary>
     </BrowserRouter>
   );
