@@ -1,0 +1,81 @@
+.receso-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: rgba(0, 0, 0, 0.72);
+
+  &__panel {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: min(75rem, 100%);
+    max-width: 100%;
+    max-height: calc(100dvh - 1.5rem);
+    border-radius: 0.75rem;
+    background: #fff;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.38);
+  }
+
+  &__image {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: calc(100dvh - 1.5rem);
+    border-radius: 0.75rem;
+    object-fit: contain;
+  }
+
+  &__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    background: rgba(1, 12, 128, 0.92);
+    box-shadow: 0 0.25rem 0.8rem rgba(0, 0, 0, 0.32);
+    color: #fff;
+    font: inherit;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+
+    &:hover {
+      background: #010c80;
+    }
+
+    &:focus-visible {
+      outline: 3px solid #ffda78;
+      outline-offset: 3px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    padding: 0.5rem;
+
+    &__panel,
+    &__image {
+      max-height: calc(100dvh - 1rem);
+    }
+
+    &__close {
+      top: 0.35rem;
+      right: 0.35rem;
+      width: 2.75rem;
+      height: 2.75rem;
+      font-size: 1.8rem;
+    }
+  }
+}

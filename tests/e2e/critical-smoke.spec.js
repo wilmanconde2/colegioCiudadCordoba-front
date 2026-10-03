@@ -12,8 +12,25 @@ const syntheticStudent = {
   profesor: 'Docente de prueba',
 };
 
+async function dismissRecesoModalIfVisible(page) {
+  const dialog = page.getByRole('dialog', {
+    name: 'Receso estudiantil del 5 al 9 de octubre de 2026',
+  });
+
+  if (!(await dialog.isVisible())) return;
+
+  const closeButton = dialog.getByRole('button', {
+    name: 'Cerrar aviso de receso estudiantil',
+  });
+
+  await expect(closeButton).toBeVisible();
+  await closeButton.click();
+  await expect(dialog).toHaveCount(0);
+}
+
 test('E2E-01: la página principal y su navegación cargan', async ({ page }) => {
   await page.goto('/');
+  await dismissRecesoModalIfVisible(page);
 
   await expect(page).toHaveURL(/\/$/);
   await expect(page.getByRole('main')).toBeVisible();
@@ -24,6 +41,7 @@ test('E2E-01: la página principal y su navegación cargan', async ({ page }) =>
 
 test('E2E-02: Tesorería muestra el formulario y PSE, sin mensualidad incompleta', async ({ page }) => {
   await page.goto('/tesoreria');
+  await dismissRecesoModalIfVisible(page);
 
   await expect(page.getByRole('heading', { name: 'Costos Educativos y Medios de Pago' })).toBeVisible();
   await expect(page.getByRole('combobox', { name: 'Buscar estudiante' })).toBeVisible();
@@ -37,6 +55,7 @@ test('E2E-03: la búsqueda selecciona y limpia un alumno sintético', async ({ p
     await route.fulfill({ json: [syntheticStudent] });
   });
   await page.goto('/tesoreria');
+  await dismissRecesoModalIfVisible(page);
 
   const search = page.getByRole('combobox', { name: 'Buscar estudiante' });
   await search.focus();
@@ -61,6 +80,7 @@ test('E2E-04: el chatbot envía una sola consulta al endpoint canónico', async 
     await route.fulfill({ json: { answer: 'Respuesta controlada del asistente.' } });
   });
   await page.goto('/');
+  await dismissRecesoModalIfVisible(page);
 
   await page.getByRole('button', { name: 'Abrir asistente virtual del colegio' }).click();
   await page.getByRole('textbox', { name: 'Pregunta para el asistente virtual' }).fill('¿Cómo pago?');
@@ -73,6 +93,7 @@ test('E2E-04: el chatbot envía una sola consulta al endpoint canónico', async 
 
 test('E2E-05: navega de Inicio a Tesorería y luego a Contacto', async ({ page }) => {
   await page.goto('/');
+  await dismissRecesoModalIfVisible(page);
   await expect(page.getByRole('heading', { name: /paz.*progreso.*futuro/i })).toBeVisible();
 
   await page.getByRole('link', { name: 'Ir a Tesorería' }).click();
