@@ -82,7 +82,7 @@ describe('Formulario', () => {
   it('acepta mensualidad sin mostrar el mensaje temporal de morosidad', () => {
     render(<Formulario typeSearch='mensualidad' />);
 
-    expect(screen.getByText(/consulta de mensualidad/i)).toBeTruthy();
+    expect(screen.getByText(/consultar código del estudiante/i)).toBeTruthy();
     expect(screen.queryByText(/información pendiente por configurar/i)).toBeNull();
     expect(screen.queryByText(/meses pendientes de pago/i)).toBeNull();
   });
