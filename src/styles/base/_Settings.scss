@@ -18,7 +18,8 @@ $content-image-hover-scale: 1.3;
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;}
+  box-sizing: border-box;
+}
 
 html {
   font-size: 100%;
@@ -38,11 +39,11 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  // background-image: url('/backgroundPage.webp');
+  background-image: url('/backgroundPage.webp');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  opacity: 0.8; // 0.3 opacity
-  filter: blur(2px); // 2px blur
+  opacity: .8; // 0.3 opacity
+  filter: blur(.5px); // 2px blur
   z-index: -1;
 }
