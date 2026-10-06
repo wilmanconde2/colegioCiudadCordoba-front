@@ -8,7 +8,7 @@ export const FORM_CONFIG = {
     missingMessage: 'No se encontró el código en el JSON para este estudiante.',
   },
   mensualidad: {
-    legend: 'Consulta de Mensualidad',
+    legend: 'Consultar Código del Estudiante',
     label: 'Buscar estudiante:',
     placeholder: 'Ej: Thiago Conde',
     resultTitle: 'Código del Estudiante:',
