@@ -3,7 +3,7 @@
   margin: auto;
 
   .imgMiViContainer {
-    width: 80%;
+    width: 70%;
     margin-inline: auto;
     margin-block: 5rem auto;
     margin-bottom: 2rem;
@@ -39,17 +39,17 @@
 
 @media (min-width: 576px) {
   .fullContainerMiVi {
-    width: 70%;
+    width: 65%;
     .imgMiViContainer {
-      width: 70%;
+      width: 65%;
     }
   }
 }
 @media (min-width: 768px) {
   .fullContainerMiVi {
-    width: 65%;
+    width: 55%;
     .imgMiViContainer {
-      width: 65%;
+      width: 55%;
     }
   }
 }
