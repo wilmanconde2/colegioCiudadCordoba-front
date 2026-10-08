@@ -8,6 +8,7 @@ export default [
   {
     ignores: [
       'dist',
+      'coverage',
       '.netlify',
       'node_modules',
     ],
