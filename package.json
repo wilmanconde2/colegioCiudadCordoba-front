@@ -14,6 +14,7 @@
     "test:e2e": "playwright test",
     "test:serverless": "node --test netlify/functions/_chatbot/*.test.js",
     "test:ui": "vitest run --passWithNoTests",
+    "coverage:ui": "vitest run --coverage",
     "prerender:metadata": "node scripts/prerender-route-metadata.mjs",
     "verify:route-metadata": "node scripts/verify-route-metadata.mjs",
     "preview": "vite preview"
@@ -37,6 +38,7 @@
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^6.0.2",
+    "@vitest/coverage-v8": "^5.0.2",
     "esbuild": "^0.28.1",
     "eslint": "^10.8.0",
     "eslint-plugin-react-hooks": "^7.1.1",

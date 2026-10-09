@@ -41,8 +41,11 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Test
-        run: npm test
+      - name: Test serverless
+        run: npm run test:serverless
+
+      - name: Test frontend with coverage report
+        run: npm run coverage:ui
 
       - name: Build
         run: npm run build
