@@ -105,6 +105,42 @@ describe('Formulario', () => {
     await waitFor(() => expect(writeText).toHaveBeenCalledWith('12345'));
   });
 
+  it('mantiene la UI utilizable y muestra feedback si falla el portapapeles', async () => {
+    const user = userEvent.setup();
+    const writeText = vi.fn().mockRejectedValue(new Error('Permiso denegado'));
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText },
+    });
+    render(<Formulario />);
+
+    const input = screen.getByRole('combobox', { name: /buscar estudiante/i });
+    await user.click(input);
+    await user.type(input, 'Ana');
+    await user.click(await screen.findByRole('option', { name: /ana maría pérez.*5 a mañana/i }));
+    await user.click(screen.getByRole('button', { name: /copiar código/i }));
+
+    expect(await screen.findByText(/no se pudo copiar automáticamente/i)).toBeTruthy();
+    expect(screen.getByText('12345')).toBeTruthy();
+    expect(screen.getByRole('button', { name: /copiar código/i })).toBeTruthy();
+  });
+
+  it('muestra un estudiante sin código sin ofrecer una copia inválida', async () => {
+    const user = userEvent.setup();
+    render(<Formulario />);
+
+    const input = screen.getByRole('combobox', { name: /buscar estudiante/i });
+    await user.click(input);
+    await user.type(input, 'Carlos');
+    await user.click(await screen.findByRole('option', { name: /carlos ruiz/i }));
+
+    const result = screen.getByRole('heading', { name: /resultado/i }).parentElement;
+    expect(within(result).getByText(/carlos ruiz/i)).toBeTruthy();
+    expect(within(result).getByText(/no se encontró el código en el json/i)).toBeTruthy();
+    expect(within(result).queryByRole('button', { name: /copiar código/i })).toBeNull();
+    expect(within(result).queryByText(/^undefined$|^null$/i)).toBeNull();
+  });
+
   it('expone el combobox y navega el listbox con teclado', async () => {
     const user = userEvent.setup();
     render(<Formulario />);
