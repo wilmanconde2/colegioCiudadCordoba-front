@@ -25,4 +25,4 @@ for (const route of getPrerenderedRoutes()) {
   assert.match(html, new RegExp(`name="twitter:title" content="${expectedTitle}"`));
 }
 
-console.log('Verified initial HTML metadata for /, /inscripciones, /tesoreria and /contacto.');
+console.log(`Verified initial HTML metadata for ${getPrerenderedRoutes().length} routes.`);

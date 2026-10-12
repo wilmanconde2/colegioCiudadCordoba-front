@@ -6,6 +6,7 @@ import Inicio from '../pages/Inicio';
 import PageLoader from '../components/PageLoader';
 
 const Contacto = lazy(() => import('../pages/Contacto'));
+const Admisiones = lazy(() => import('../pages/Admisiones'));
 const Cronograma2026 = lazy(() => import('../pages/Cronograma2026'));
 const DeporteLudica = lazy(() => import('../pages/DeporteLudica'));
 const DIAN = lazy(() => import('../pages/DIAN'));
@@ -32,6 +33,10 @@ const Rutas = () => {
     {
       path: '/contacto',
       element: <Contacto />,
+    },
+    {
+      path: '/admisiones',
+      element: <Admisiones />,
     },
     {
       path: '/cronograma-2026',
