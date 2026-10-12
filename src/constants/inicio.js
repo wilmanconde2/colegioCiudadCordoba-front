@@ -6,12 +6,12 @@ export const CARRUSEL_PUBLIC_IDS = [
   'background1_cl',
   'background2_cl',
   'background3_cl',
-  'background4_cl',
+  'v1791843450/background4_cl',
   'background5_cl',
-  'background6_cl',
+  'v1791843462/background6_cl',
   'background7_cl',
-  'background8_cl',
-  'background9_cl',
+  'v1791843489/background8_cl',
+  'v1791843429/background9_cl',
   'background10_cl',
 ];
 
