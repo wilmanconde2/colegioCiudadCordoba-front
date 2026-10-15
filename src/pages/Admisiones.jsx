@@ -1,4 +1,4 @@
-import { useId, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import useTitulo from '../hooks/useTitulo';
 import { ROUTE_METADATA } from '../constants/seo';
 import { loadAdmitidos } from '../utils/loadAdmitidos';
@@ -12,6 +12,7 @@ const Admisiones = () => {
   useTitulo(ROUTE_METADATA['/admisiones'].title, ROUTE_METADATA['/admisiones'].description);
 
   const listboxId = useId();
+  const listboxRef = useRef(null);
   const loadingRef = useRef(false);
   const [admitidos, setAdmitidos] = useState([]);
   const [hasLoaded, setHasLoaded] = useState(false);
@@ -28,6 +29,15 @@ const Admisiones = () => {
   const matches = useMemo(() => filterAdmitidos(admitidos, query), [admitidos, query]);
   const isListboxOpen = canSearch && matches.length > 0 && !selected && !listDismissed;
   const showNoResults = canSearch && hasLoaded && !loading && !error && !matches.length && !selected;
+
+  useEffect(() => {
+    if (!isListboxOpen || activeIndex < 0) return;
+
+    listboxRef.current?.children[activeIndex]?.scrollIntoView({
+      block: 'nearest',
+      inline: 'nearest',
+    });
+  }, [activeIndex, isListboxOpen]);
 
   async function ensureLoaded() {
     if (hasLoaded || loadingRef.current) return;
@@ -133,7 +143,7 @@ const Admisiones = () => {
           />
 
           {isListboxOpen && (
-            <div id={listboxId} className='admisionesSearch__options' role='listbox' aria-label='Estudiantes admitidos encontrados'>
+            <div ref={listboxRef} id={listboxId} className='admisionesSearch__options' role='listbox' aria-label='Estudiantes admitidos encontrados'>
               {matches.map((admitido, index) => (
                 <button
                   id={`${listboxId}-option-${index}`}
