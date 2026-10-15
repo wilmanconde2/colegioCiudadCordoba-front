@@ -76,7 +76,11 @@ describe('Admisiones', () => {
     const contactNote = screen.getByText('NOTA:').closest('.admisionesResult__contactNote');
 
     expect(observation.closest('dl').nextElementSibling).toBe(contactNote);
-    expect(contactNote.textContent.replace(/\s+/g, ' ').trim()).toBe(CONTACT_NOTE_TEXT);
+    const contactLines = [
+      contactNote.querySelector('p').textContent,
+      ...Array.from(contactNote.querySelectorAll('li'), (item) => item.textContent),
+    ];
+    expect(contactLines.join(' ').replace(/\s+/g, ' ').trim()).toBe(CONTACT_NOTE_TEXT);
     expect(contactNote.querySelectorAll('li')).toHaveLength(3);
     expect(contactNote.querySelectorAll('a')).toHaveLength(0);
   });
@@ -139,7 +143,11 @@ describe('Admisiones', () => {
     const contactNote = screen.getByText('NOTA:').closest('.admisionesResult__contactNote');
 
     expect(fallbackObservation.closest('dl').nextElementSibling).toBe(contactNote);
-    expect(contactNote.textContent.replace(/\s+/g, ' ').trim()).toBe(CONTACT_NOTE_TEXT);
+    const contactLines = [
+      contactNote.querySelector('p').textContent,
+      ...Array.from(contactNote.querySelectorAll('li'), (item) => item.textContent),
+    ];
+    expect(contactLines.join(' ').replace(/\s+/g, ' ').trim()).toBe(CONTACT_NOTE_TEXT);
     expect(contactNote.querySelectorAll('li')).toHaveLength(3);
     expect(contactNote.querySelectorAll('a')).toHaveLength(0);
 
