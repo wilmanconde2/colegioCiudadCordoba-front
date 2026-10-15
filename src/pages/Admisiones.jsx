@@ -24,11 +24,11 @@ const Admisiones = () => {
   const [listDismissed, setListDismissed] = useState(false);
 
   const normalizedQuery = normalizeAdmissionsText(query);
-  const canSearch =
-    normalizedQuery.replace(/\s/g, '').length >= MIN_ADMISSIONS_QUERY_LENGTH;
+  const canSearch = normalizedQuery.replace(/\s/g, '').length >= MIN_ADMISSIONS_QUERY_LENGTH;
   const matches = useMemo(() => filterAdmitidos(admitidos, query), [admitidos, query]);
   const isListboxOpen = canSearch && matches.length > 0 && !selected && !listDismissed;
-  const showNoResults = canSearch && hasLoaded && !loading && !error && !matches.length && !selected;
+  const showNoResults =
+    canSearch && hasLoaded && !loading && !error && !matches.length && !selected;
 
   useEffect(() => {
     if (!isListboxOpen || activeIndex < 0) return;
@@ -63,10 +63,7 @@ const Admisiones = () => {
     setListDismissed(false);
     setError('');
 
-    if (
-      normalizeAdmissionsText(value).replace(/\s/g, '').length >=
-      MIN_ADMISSIONS_QUERY_LENGTH
-    ) {
+    if (normalizeAdmissionsText(value).replace(/\s/g, '').length >= MIN_ADMISSIONS_QUERY_LENGTH) {
       void ensureLoaded();
     }
   }
@@ -128,9 +125,7 @@ const Admisiones = () => {
             aria-expanded={isListboxOpen}
             aria-controls={listboxId}
             aria-activedescendant={
-              activeIndex >= 0 && isListboxOpen
-                ? `${listboxId}-option-${activeIndex}`
-                : undefined
+              activeIndex >= 0 && isListboxOpen ? `${listboxId}-option-${activeIndex}` : undefined
             }
             autoComplete='off'
             value={query}
@@ -143,7 +138,13 @@ const Admisiones = () => {
           />
 
           {isListboxOpen && (
-            <div ref={listboxRef} id={listboxId} className='admisionesSearch__options' role='listbox' aria-label='Estudiantes admitidos encontrados'>
+            <div
+              ref={listboxRef}
+              id={listboxId}
+              className='admisionesSearch__options'
+              role='listbox'
+              aria-label='Estudiantes admitidos encontrados'
+            >
               {matches.map((admitido, index) => (
                 <button
                   id={`${listboxId}-option-${index}`}
@@ -168,7 +169,10 @@ const Admisiones = () => {
           {error && <p className='admisionesSearch__error'>{error}</p>}
           {showNoResults && <p>No se encontraron coincidencias para la búsqueda.</p>}
           {!loading && !error && canSearch && matches.length > 0 && !selected && (
-            <p>{matches.length} {matches.length === 1 ? 'coincidencia encontrada' : 'coincidencias encontradas'}.</p>
+            <p>
+              {matches.length}{' '}
+              {matches.length === 1 ? 'coincidencia encontrada' : 'coincidencias encontradas'}.
+            </p>
           )}
         </div>
 
@@ -199,18 +203,19 @@ const Admisiones = () => {
               <dd>{selected.observacion || 'Sin observación registrada.'}</dd>
             </div>
           </dl>
-          <p className='admisionesResult__contactNote'>
-            <strong>NOTA:</strong> Si tienes dudas, contáctanos al{' '}
-            <a href='tel:+573104280125'>3104280125</a> o escríbenos por{' '}
-            <a
-              href='https://wa.me/573104280125'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              WhatsApp
-            </a>
-            .
-          </p>
+
+          <div className='admisionesResult__contactNote'>
+            <p>
+              <strong>NOTA:</strong> Si tienen dudas, por favor contáctense con Secretaría. Pueden
+              llamar a las siguientes líneas:
+            </p>
+
+            <ul>
+              <li>Celular: 3104280125 (no WhatsApp)</li>
+              <li>Fijo: 6023731398</li>
+              <li>Fijo: 6023450411</li>
+            </ul>
+          </div>
         </article>
       )}
     </section>

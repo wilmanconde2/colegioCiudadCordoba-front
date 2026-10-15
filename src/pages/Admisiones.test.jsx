@@ -27,7 +27,7 @@ const overflowRecords = Array.from({ length: 7 }, (_, index) => ({
 }));
 
 const CONTACT_NOTE_TEXT =
-  'NOTA: Si tienes dudas, contáctanos al 3104280125 o escríbenos por WhatsApp.';
+  'NOTA: Si tienen dudas, por favor contáctense con Secretaría. Pueden llamar a las siguientes líneas: Celular: 3104280125 (no WhatsApp) Fijo: 6023731398 Fijo: 6023450411';
 
 describe('Admisiones', () => {
   beforeEach(() => loadAdmitidos.mockResolvedValue(records));
@@ -46,9 +46,11 @@ describe('Admisiones', () => {
   it('muestra el estado de carga mientras se obtiene el listado', async () => {
     const user = userEvent.setup();
     let resolveLoad;
-    loadAdmitidos.mockReturnValueOnce(new Promise((resolve) => {
-      resolveLoad = resolve;
-    }));
+    loadAdmitidos.mockReturnValueOnce(
+      new Promise((resolve) => {
+        resolveLoad = resolve;
+      }),
+    );
     render(<Admisiones />);
 
     await user.type(screen.getByRole('combobox', { name: /buscar estudiante/i }), 'ana');
@@ -153,7 +155,10 @@ describe('Admisiones', () => {
     const user = userEvent.setup();
     render(<Admisiones />);
 
-    await user.type(screen.getByRole('combobox', { name: /buscar estudiante/i }), 'nombre inexistente');
+    await user.type(
+      screen.getByRole('combobox', { name: /buscar estudiante/i }),
+      'nombre inexistente',
+    );
 
     expect(await screen.findByText(/no se encontraron coincidencias/i)).toBeTruthy();
   });
