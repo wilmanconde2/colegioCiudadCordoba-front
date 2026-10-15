@@ -189,6 +189,18 @@ const Admisiones = () => {
               <dd>{selected.observacion || 'Sin observación registrada.'}</dd>
             </div>
           </dl>
+          <p className='admisionesResult__contactNote'>
+            <strong>NOTA:</strong> Si tienes dudas, contáctanos al{' '}
+            <a href='tel:+573104280125'>3104280125</a> o escríbenos por{' '}
+            <a
+              href='https://wa.me/573104280125'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              WhatsApp
+            </a>
+            .
+          </p>
         </article>
       )}
     </section>

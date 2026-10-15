@@ -20,6 +20,9 @@ const records = [
   },
 ];
 
+const CONTACT_NOTE_TEXT =
+  'NOTA: Si tienes dudas, contáctanos al 3104280125 o escríbenos por WhatsApp.';
+
 describe('Admisiones', () => {
   beforeEach(() => loadAdmitidos.mockResolvedValue(records));
 
@@ -28,6 +31,7 @@ describe('Admisiones', () => {
     render(<Admisiones />);
 
     expect(screen.queryByRole('listbox')).toBeNull();
+    expect(screen.queryByText('NOTA:')).toBeNull();
     await user.type(screen.getByRole('combobox', { name: /buscar estudiante/i }), 'an');
     expect(loadAdmitidos).not.toHaveBeenCalled();
     expect(screen.queryByRole('option')).toBeNull();
@@ -60,7 +64,17 @@ describe('Admisiones', () => {
     await user.keyboard('{ArrowDown}{Enter}');
     expect(screen.getByRole('heading', { name: /resultado de la consulta/i })).toBeTruthy();
     expect(screen.getByText('Ana María Pérez López')).toBeTruthy();
-    expect(screen.getByText('Admitida para el año lectivo.')).toBeTruthy();
+    const observation = screen.getByText('Admitida para el año lectivo.');
+    const phoneLink = screen.getByRole('link', { name: '3104280125' });
+    const whatsappLink = screen.getByRole('link', { name: 'WhatsApp' });
+    const contactNote = phoneLink.closest('p');
+
+    expect(observation.closest('dl').nextElementSibling).toBe(contactNote);
+    expect(contactNote.textContent).toBe(CONTACT_NOTE_TEXT);
+    expect(phoneLink.getAttribute('href')).toBe('tel:+573104280125');
+    expect(whatsappLink.getAttribute('href')).toBe('https://wa.me/573104280125');
+    expect(whatsappLink.getAttribute('target')).toBe('_blank');
+    expect(whatsappLink.getAttribute('rel')).toBe('noopener noreferrer');
   });
 
   it('permite limpiar y presenta el fallback para una observación vacía', async () => {
@@ -70,11 +84,16 @@ describe('Admisiones', () => {
 
     await user.type(search, 'sofia ruiz');
     await user.click(await screen.findByRole('option', { name: /ana sofía pérez ruiz.*grado 7/i }));
-    expect(screen.getByText('Sin observación registrada.')).toBeTruthy();
+    const fallbackObservation = screen.getByText('Sin observación registrada.');
+    const contactNote = screen.getByRole('link', { name: '3104280125' }).closest('p');
+
+    expect(fallbackObservation.closest('dl').nextElementSibling).toBe(contactNote);
+    expect(contactNote.textContent).toBe(CONTACT_NOTE_TEXT);
 
     await user.click(screen.getByRole('button', { name: /limpiar búsqueda/i }));
     expect(search.value).toBe('');
     expect(screen.queryByRole('heading', { name: /resultado de la consulta/i })).toBeNull();
+    expect(screen.queryByText('NOTA:')).toBeNull();
   });
 
   it('informa cuando no hay coincidencias', async () => {
