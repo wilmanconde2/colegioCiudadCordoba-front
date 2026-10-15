@@ -26,4 +26,4 @@ for (const route of getPrerenderedRoutes()) {
   await writeFile(outputPath, html, 'utf8');
 }
 
-console.log('Generated initial HTML metadata for /, /inscripciones, /tesoreria and /contacto.');
+console.log(`Generated initial HTML metadata for ${getPrerenderedRoutes().length} routes.`);

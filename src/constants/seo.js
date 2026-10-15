@@ -16,6 +16,11 @@ export const ROUTE_METADATA = Object.freeze({
     description:
       'Información oficial sobre inscripciones 2027, jornadas, servicios, proceso de inscripción y costos educativos del Colegio Ciudad Córdoba.',
   },
+  '/admisiones': {
+    title: 'Admisiones 2027',
+    description:
+      'Consulta pública de estudiantes admitidos para el año lectivo 2027 del Colegio Ciudad Córdoba.',
+  },
   '/tesoreria': {
     title: 'Tesorería',
     description: 'Información de costos educativos y medios de pago del Colegio Ciudad Córdoba.',

@@ -12,6 +12,12 @@ const syntheticStudent = {
   profesor: 'Docente de prueba',
 };
 
+const syntheticAdmitido = {
+  nombreCompleto: 'Valentina Prueba E2E Colegio',
+  grado: '6',
+  observacion: 'Admitida para el año lectivo.',
+};
+
 test('E2E-01: la página principal y su navegación cargan', async ({ page }) => {
   await page.goto('/');
 
@@ -19,6 +25,8 @@ test('E2E-01: la página principal y su navegación cargan', async ({ page }) =>
   await expect(page.getByRole('main')).toBeVisible();
   await expect(page.getByRole('navigation')).toBeVisible();
   await expect(page.getByRole('heading', { name: /paz.*progreso.*futuro/i })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Admisiones' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Consultar admitidos' })).toBeVisible();
   await expect(page.getByText(/página no encontrada/i)).toHaveCount(0);
 });
 
@@ -82,4 +90,28 @@ test('E2E-05: navega de Inicio a Tesorería y luego a Contacto', async ({ page }
   await page.getByRole('link', { name: 'Contáctanos' }).click();
   await expect(page).toHaveURL(/\/contacto$/);
   await expect(page.getByRole('heading', { name: 'Contáctanos' })).toBeVisible();
+});
+
+test('E2E-06: consulta y selecciona un admitido sintético', async ({ page }) => {
+  await page.route('**/data/admitidos.json', async (route) => {
+    await route.fulfill({ json: [syntheticAdmitido] });
+  });
+  await page.goto('/');
+  await page.getByRole('link', { name: 'Consultar admitidos' }).click();
+
+  await expect(page.getByRole('heading', { name: 'Consulta de admitidos' })).toBeVisible();
+  await expect(page.getByRole('option')).toHaveCount(0);
+
+  const search = page.getByRole('combobox', { name: 'Buscar estudiante' });
+  await search.fill('e2e val');
+  await page.getByRole('option', { name: /valentina prueba e2e colegio.*grado 6/i }).click();
+
+  const result = page.getByRole('heading', { name: 'Resultado de la consulta' }).locator('..');
+  await expect(result).toContainText('Valentina Prueba E2E Colegio');
+  await expect(result).toContainText('6');
+  await expect(result).toContainText('Admitida para el año lectivo.');
+
+  await page.getByRole('button', { name: 'Limpiar búsqueda' }).click();
+  await expect(result).toHaveCount(0);
+  await expect(search).toHaveValue('');
 });

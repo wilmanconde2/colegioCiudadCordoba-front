@@ -132,6 +132,18 @@ const Inicio = () => {
         </h2>
       </div>
 
+      <section className='inicioAdmisionesCta' aria-labelledby='inicio-admisiones-title'>
+        <h2 id='inicio-admisiones-title'>Listado #1 admitidos 2027</h2>
+        <p>Consulta el resultado del proceso de admisiones por nombres o apellidos.</p>
+        <NavLink
+          className='btn btn-primary'
+          to='/admisiones'
+          onClick={() => window.scrollTo(0, 0)}
+        >
+          Consultar admitidos
+        </NavLink>
+      </section>
+
       {mostrarCircular && (
         <CardInformation
           className='circular'

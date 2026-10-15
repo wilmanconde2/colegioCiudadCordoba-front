@@ -210,6 +210,12 @@ const Navbar = () => {
                 Inscripciones 2027
               </NavLink>
             </li>
+
+            <li className='nav-item'>
+              <NavLink className='nav-link nav-link--admisiones' to='/admisiones' onClick={handleNavLinkClick}>
+                Admisiones
+              </NavLink>
+            </li>
             
             <li className='nav-item'>
               <NavLink className='nav-link' to='/pqrs' onClick={handleNavLinkClick}>
