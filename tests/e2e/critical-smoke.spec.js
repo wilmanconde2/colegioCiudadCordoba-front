@@ -30,6 +30,103 @@ test('E2E-01: la página principal y su navegación cargan', async ({ page }) =>
   await expect(page.getByText(/página no encontrada/i)).toHaveCount(0);
 });
 
+test('E2E-07: Recuperación muestra un enlace nativo con el destino seleccionado', async ({ page, context }) => {
+  await page.addInitScript(() => {
+    window.__externalNavigationAudit = {
+      syntheticAnchorClicks: 0,
+      windowOpenCalls: 0,
+    };
+
+    const originalAnchorClick = HTMLAnchorElement.prototype.click;
+    HTMLAnchorElement.prototype.click = function click(...args) {
+      window.__externalNavigationAudit.syntheticAnchorClicks += 1;
+      return originalAnchorClick.apply(this, args);
+    };
+
+    window.open = () => {
+      window.__externalNavigationAudit.windowOpenCalls += 1;
+      return null;
+    };
+  });
+  await context.route('https://drive.google.com/**', async (route) => {
+    await route.fulfill({ contentType: 'text/html', body: '<p>Destino de prueba</p>' });
+  });
+  await page.goto('/');
+
+  const select = page.getByRole('combobox', { name: 'Selecciona una opción' });
+  const link = page.getByRole('link', { name: 'Abrir actividad de recuperación' });
+  const transicionUrl = 'https://drive.google.com/drive/folders/1Uobyu-micyiGv2OUrBEQCk-Wrbu11SXM';
+  const primeroUrl = 'https://drive.google.com/drive/folders/1g86t0Co61bCOsRywKGIOS24R0lYnXOOp';
+
+  await expect(link).toHaveCount(0);
+
+  await select.selectOption(transicionUrl);
+  await expect(link).toHaveAttribute('href', transicionUrl);
+  await expect(link).toHaveAttribute('target', '_blank');
+  await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+
+  await select.selectOption(primeroUrl);
+  await expect(link).toHaveAttribute('href', primeroUrl);
+  await expect(page.evaluate(() => window.__externalNavigationAudit)).resolves.toEqual({
+    syntheticAnchorClicks: 0,
+    windowOpenCalls: 0,
+  });
+
+  for (const width of [320, 375, 390, 768, 1280]) {
+    await page.setViewportSize({ width, height: 900 });
+    await link.scrollIntoViewIfNeeded();
+
+    const layout = await link.evaluate((element) => {
+      const rect = element.getBoundingClientRect();
+      const elementAtCenter = document.elementFromPoint(
+        rect.left + rect.width / 2,
+        rect.top + rect.height / 2,
+      );
+      const overlappingControls = ['.agenda-float__trigger', '.chatbot__trigger', '.footer-fixed']
+        .filter((selector) => {
+          const control = document.querySelector(selector);
+          if (!control) return false;
+
+          const controlRect = control.getBoundingClientRect();
+          return (
+            rect.left < controlRect.right &&
+            rect.right > controlRect.left &&
+            rect.top < controlRect.bottom &&
+            rect.bottom > controlRect.top
+          );
+        });
+
+      return {
+        insideViewport: rect.left >= 0 && rect.right <= window.innerWidth,
+        unobstructed: elementAtCenter === element || element.contains(elementAtCenter),
+        overlappingControls,
+      };
+    });
+
+    expect(layout, `en viewport de ${width}px`).toEqual({
+      insideViewport: true,
+      unobstructed: true,
+      overlappingControls: [],
+    });
+  }
+
+  await select.evaluate((element) => {
+    element.value = '';
+    element.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+  await expect(link).toHaveCount(0);
+
+  await select.selectOption(primeroUrl);
+  await expect(link).toHaveAttribute('href', primeroUrl);
+  await link.focus();
+  await expect(link).toBeFocused();
+  const popupPromise = page.waitForEvent('popup');
+  await page.keyboard.press('Enter');
+  const popup = await popupPromise;
+  await expect(popup).toHaveURL(primeroUrl);
+  await popup.close();
+});
+
 test('E2E-02: Tesorería muestra el formulario y PSE, sin mensualidad incompleta', async ({ page }) => {
   await page.goto('/tesoreria');
 

@@ -29,23 +29,15 @@ const Inicio = () => {
   const [mostrarReporte] = useState(false);
   const [mostrarActividades] = useState(true);
   const [mostrarHorarios] = useState(false);
+  const [selectedReportUrl, setSelectedReportUrl] = useState('');
+  const [selectedRecoveryUrl, setSelectedRecoveryUrl] = useState('');
 
-  const handleSelectChange = (e) => {
-    const url = e.target.value;
-    if (url) window.open(url, '_blank', 'noopener,noreferrer');
+  const handleReportSelectChange = (e) => {
+    setSelectedReportUrl(e.target.value);
   };
 
   const handleRecoverySelectChange = (e) => {
-    const url = e.target.value;
-    if (!url) return;
-
-    const link = document.createElement('a');
-    link.href = url;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    setSelectedRecoveryUrl(e.target.value);
   };
 
   const handleDownloadCircular = () => {
@@ -179,7 +171,9 @@ const Inicio = () => {
             </>
           }
           opciones={REPORTE_OPCIONES}
-          onChange={handleSelectChange}
+          onChange={handleReportSelectChange}
+          linkHref={selectedReportUrl}
+          linkText='Abrir reporte académico'
           nota=''
           imagen={CARD_IMGS.reporte}
         />
@@ -190,6 +184,8 @@ const Inicio = () => {
           className='actividades text-center'
           opciones={RECUPERACION_OPCIONES}
           onChange={handleRecoverySelectChange}
+          linkHref={selectedRecoveryUrl}
+          linkText='Abrir actividad de recuperación'
           nota='Descarga la actividad de recuperación correspondiente a tu grado.'
           imagen={CARD_IMGS.recuperacion}
         />
