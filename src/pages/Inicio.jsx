@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Carrusel } from '../components/Carrusel';
 import { CardSelection } from '../components/CardSelection';
 import { CardInformation } from '../components/CardInformation';
+import { NativeLinkDisclosure } from '../components/NativeLinkDisclosure';
 import { useCarrusel } from '../hooks/useCarrusel';
 import { NavLink } from 'react-router';
 // eslint-disable-next-line no-unused-vars
@@ -30,14 +31,9 @@ const Inicio = () => {
   const [mostrarActividades] = useState(true);
   const [mostrarHorarios] = useState(false);
   const [selectedReportUrl, setSelectedReportUrl] = useState('');
-  const [selectedRecoveryUrl, setSelectedRecoveryUrl] = useState('');
 
   const handleReportSelectChange = (e) => {
     setSelectedReportUrl(e.target.value);
-  };
-
-  const handleRecoverySelectChange = (e) => {
-    setSelectedRecoveryUrl(e.target.value);
   };
 
   const handleDownloadCircular = () => {
@@ -180,14 +176,16 @@ const Inicio = () => {
       )}
 
       {mostrarActividades && (
-        <CardSelection
+        <CardInformation
           className='actividades text-center'
-          opciones={RECUPERACION_OPCIONES}
-          onChange={handleRecoverySelectChange}
-          linkHref={selectedRecoveryUrl}
-          linkText='Abrir actividad de recuperación'
-          nota='Descarga la actividad de recuperación correspondiente a tu grado.'
           imagen={CARD_IMGS.recuperacion}
+          imgAlt='Actividades de recuperación'
+          texto={
+            <>
+              <NativeLinkDisclosure label='Selecciona tu grado' options={RECUPERACION_OPCIONES} />
+              <p>Descarga la actividad de recuperación correspondiente a tu grado.</p>
+            </>
+          }
         />
       )}
 
