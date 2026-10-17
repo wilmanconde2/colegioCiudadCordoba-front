@@ -27,6 +27,8 @@ export function CardSelection({
   imgWidth,
   imgHeight,
   selectLabel = 'Selecciona una opción',
+  linkHref,
+  linkText,
 }) {
   const imgProps = getImgProps(imagen, { alt: imgAlt, width: imgWidth, height: imgHeight });
 
@@ -63,6 +65,17 @@ export function CardSelection({
             </option>
           ))}
         </select>
+
+        {linkHref && linkText && (
+          <a
+            className='btn btn-primary card-selection__link'
+            href={linkHref}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            {linkText}
+          </a>
+        )}
 
         {nota && (
           <p className='card-text' style={{ marginTop: '1rem' }}>
@@ -103,4 +116,6 @@ CardSelection.propTypes = {
   imgWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   imgHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   selectLabel: PropTypes.string,
+  linkHref: PropTypes.string,
+  linkText: PropTypes.node,
 };
