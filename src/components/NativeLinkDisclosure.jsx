@@ -60,7 +60,8 @@ export function NativeLinkDisclosure({ label, options }) {
       >
         {options.map(({ label: optionLabel, value }) => (
           <li key={value}>
-            <a href={value} target='_blank' rel='noopener noreferrer' onClick={closeAndRestoreFocus}>
+            {/* Explicit zero keeps links in WebKit's restricted Tab traversal, in DOM order. */}
+            <a href={value} target='_blank' rel='noopener noreferrer' tabIndex={0} onClick={closeAndRestoreFocus}>
               {optionLabel}<span className='visually-hidden'> (abre en una pestaña nueva)</span>
             </a>
           </li>

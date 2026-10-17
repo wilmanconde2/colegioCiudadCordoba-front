@@ -70,14 +70,18 @@ test('E2E-07: Recuperación abre cada grado mediante enlaces nativos', async ({ 
   }
   await button.click();
   await expect(list).toBeHidden();
-  await button.press('Enter');
+  // Enter the disclosure through real Tab navigation from the preceding control.
+  await page.locator('.circular').getByRole('button', { name: 'Descargar' }).press('Tab');
+  await expect(button).toBeFocused();
+  await page.keyboard.press('Enter');
   await page.keyboard.press('Tab');
   await expect(links.first()).toBeFocused();
+  await expect(button).toHaveAttribute('aria-expanded', 'true');
   await page.keyboard.press('Escape');
   await expect(list).toBeHidden();
   await expect(button).toBeFocused();
 
-  await button.press('Space');
+  await page.keyboard.press('Space');
   await page.keyboard.press('Tab');
   await page.keyboard.press('Tab');
   await expect(links.nth(1)).toBeFocused();
@@ -89,7 +93,22 @@ test('E2E-07: Recuperación abre cada grado mediante enlaces nativos', async ({ 
   await expect(list).toBeHidden();
   await expect(button).toBeFocused();
 
+  // Every grade must be reachable in DOM order, without programmatic focus.
+  await page.keyboard.press('Enter');
+  for (let index = 0; index < RECUPERACION_OPCIONES.length; index += 1) {
+    await page.keyboard.press('Tab');
+    await expect(links.nth(index)).toBeFocused();
+    await expect(button).toHaveAttribute('aria-expanded', 'true');
+  }
+  await page.keyboard.press('Tab');
+  await expect(list).toBeHidden();
+  await expect(button).not.toBeFocused();
+
   await button.click();
+  // Safari does not focus buttons on pointer activation. Enter from the preceding
+  // control before checking the reverse keyboard route, rather than assuming it did.
+  await page.locator('.circular').getByRole('button', { name: 'Descargar' }).press('Tab');
+  await expect(button).toBeFocused();
   await page.keyboard.press('Tab');
   await page.keyboard.press('Shift+Tab');
   await expect(button).toBeFocused();
@@ -103,7 +122,11 @@ test('E2E-07: Recuperación abre cada grado mediante enlaces nativos', async ({ 
     await page.setViewportSize({ width, height: 844 });
     await button.click();
     for (const link of [links.first(), links.last()]) {
-      await link.scrollIntoViewIfNeeded();
+      // Center the target after resizing: "if needed" can leave it behind the
+      // fixed header in WebKit, even when it is inside the viewport rectangle.
+      await link.evaluate((element) => element.scrollIntoView({
+        block: 'center', inline: 'nearest', behavior: 'instant',
+      }));
       const layout = await link.evaluate((element) => {
         const rect = element.getBoundingClientRect();
         const center = document.elementFromPoint(rect.left + rect.width / 2, rect.top + rect.height / 2);
@@ -141,6 +164,51 @@ test('E2E-07: Recuperación abre cada grado mediante enlaces nativos', async ({ 
   await expect(page.evaluate(() => window.__externalNavigationAudit)).resolves.toEqual({
     syntheticAnchorClicks: 0, windowOpenCalls: 0,
   });
+});
+
+test('E2E-08: Recuperación abre un enlace nativo con un toque en móvil', async ({ browser, baseURL }) => {
+  const context = await browser.newContext({
+    baseURL,
+    viewport: { width: 390, height: 844 },
+    isMobile: true,
+    hasTouch: true,
+  });
+  try {
+    await context.route('https://drive.google.com/**', (route) => route.fulfill({
+      contentType: 'text/html', body: '<p>Destino de prueba táctil</p>',
+    }));
+    const page = await context.newPage();
+    await page.addInitScript(() => {
+      window.__externalNavigationAudit = { syntheticAnchorClicks: 0, windowOpenCalls: 0 };
+      const originalAnchorClick = HTMLAnchorElement.prototype.click;
+      HTMLAnchorElement.prototype.click = function click(...args) {
+        window.__externalNavigationAudit.syntheticAnchorClicks += 1;
+        return originalAnchorClick.apply(this, args);
+      };
+      window.open = () => {
+        window.__externalNavigationAudit.windowOpenCalls += 1;
+        return null;
+      };
+    });
+    await page.goto('/');
+    const button = page.getByRole('button', { name: 'Selecciona tu grado' });
+    const links = page.locator('.actividades').getByRole('list').getByRole('link');
+    await button.tap();
+    await expect(button).toHaveAttribute('aria-expanded', 'true');
+    const popupPromise = page.waitForEvent('popup');
+    await links.first().tap();
+    const popup = await popupPromise;
+    await expect(popup).toHaveURL(RECUPERACION_OPCIONES[0].value);
+    await expect(popup.evaluate(() => window.opener === null)).resolves.toBe(true);
+    await popup.close();
+    await expect(button).toHaveAttribute('aria-expanded', 'false');
+    await expect(links).toHaveCount(0);
+    await expect(page.evaluate(() => window.__externalNavigationAudit)).resolves.toEqual({
+      syntheticAnchorClicks: 0, windowOpenCalls: 0,
+    });
+  } finally {
+    await context.close();
+  }
 });
 
 test('E2E-02: Tesorería muestra el formulario y PSE, sin mensualidad incompleta', async ({ page }) => {

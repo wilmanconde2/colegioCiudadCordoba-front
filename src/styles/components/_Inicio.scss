@@ -232,7 +232,8 @@
     max-height: min(20rem, 40dvh);
     overflow-y: auto;
     overscroll-behavior-y: contain;
-    margin: 0.75rem 0 0;
+    // Leave a side gutter for floating controls, including with overlay scrollbars.
+    margin: 0.75rem 1rem 0;
     padding: 0.25rem;
     list-style: none;
     border: 1px solid $color-primary;
