@@ -15,7 +15,6 @@ import {
   CARRUSEL_IMAGES,
   CARD_IMGS,
   INICIO_HERO_IMAGES,
-  TALLERES_OPCIONES,
   REPORTE_OPCIONES,
   RECUPERACION_OPCIONES,
 } from '../constants/inicio';
@@ -27,7 +26,6 @@ const Inicio = () => {
   // Tarjetas informativas y de selección, se pueden habilitar o deshabilitar según la necesidad de la página de inicio.
   const [mostrarCircularEspecial] = useState(false);
   const [mostrarCircular] = useState(true);
-  const [mostrarTalleres] = useState(false);
   const [mostrarReporte] = useState(false);
   const [mostrarActividades] = useState(true);
   const [mostrarHorarios] = useState(false);
@@ -35,6 +33,19 @@ const Inicio = () => {
   const handleSelectChange = (e) => {
     const url = e.target.value;
     if (url) window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleRecoverySelectChange = (e) => {
+    const url = e.target.value;
+    if (!url) return;
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const handleDownloadCircular = () => {
@@ -158,37 +169,6 @@ const Inicio = () => {
         />
       )}
 
-      {/* TEMPORAL Eliminar cuando se retomen las clases presenciales */}
-      {mostrarTalleres && (
-        <CardSelection
-          className='talleres text-center'
-          titulo='Talleres Académicos'
-          opciones={TALLERES_OPCIONES}
-          onChange={handleSelectChange}
-          selectLabel='Selecciona tu grupo'
-          nota={
-            <>
-              Teniendo en cuenta la situación actual y siguiendo las directrices de la Secretaría de
-              Educación, durante esta semana se implementarán talleres de refuerzo y repaso para
-              nuestros estudiantes. Selecciona tu grupo para acceder a las actividades
-              correspondientes. <br />
-              <em>
-                <b>
-                  <i>NOTA: </i>
-                </b>
-              </em>
-              <i>
-                Las actividades académicas que se encuentran en los talleres, pueden ser
-                desarrolladas en los respectivos cuadernos.
-              </i>
-            </>
-          }
-          imagen={CARD_IMGS.talleres}
-          imgAlt='Estudiantes desarrollando talleres académicos desde casa'
-        />
-      )}
-
-
       {mostrarReporte && (
         <CardSelection
           className='reporte text-center'
@@ -209,7 +189,7 @@ const Inicio = () => {
         <CardSelection
           className='actividades text-center'
           opciones={RECUPERACION_OPCIONES}
-          onChange={handleSelectChange}
+          onChange={handleRecoverySelectChange}
           nota='Descarga la actividad de recuperación correspondiente a tu grado.'
           imagen={CARD_IMGS.recuperacion}
         />
