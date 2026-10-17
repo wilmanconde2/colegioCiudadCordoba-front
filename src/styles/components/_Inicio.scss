@@ -209,6 +209,59 @@
   }
 }
 
+// Expands in document flow so the list does not overlay adjacent cards or the footer.
+.native-link-disclosure {
+  width: 100%;
+  margin-inline: auto;
+
+  &__button {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.5rem;
+    color: $color-secondary;
+    background: white;
+    border: 1px solid $color-primary;
+    border-radius: 25px;
+    box-shadow: 2px 2px 5px $color-primary;
+    font: inherit;
+    overflow-wrap: anywhere;
+  }
+
+  &__links {
+    max-height: 20rem;
+    max-height: min(20rem, 40dvh);
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    // Leave a side gutter for floating controls, including with overlay scrollbars.
+    margin: 0.75rem 1rem 0;
+    padding: 0.25rem;
+    list-style: none;
+    border: 1px solid $color-primary;
+    border-radius: 12px;
+    background: white;
+    scroll-padding-block: 0.25rem;
+
+    a {
+      display: block;
+      min-height: 44px;
+      padding: 0.65rem 0.5rem;
+      color: $color-secondary;
+      border-radius: 8px;
+      overflow-wrap: anywhere;
+
+      &:hover {
+        background: #e6f2ff;
+      }
+    }
+  }
+
+  &__button:focus-visible,
+  a:focus-visible {
+    outline: 3px solid $color-secondary;
+    outline-offset: 2px;
+  }
+}
+
 .card-title {
   text-align: center;
   font-size: 1.5rem;
