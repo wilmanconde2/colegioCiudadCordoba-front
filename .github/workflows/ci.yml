@@ -34,8 +34,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Report high-severity vulnerabilities
-        continue-on-error: true
+      - name: Security audit (HIGH/CRITICAL gate)
         run: npm audit --audit-level=high
 
       - name: Lint
