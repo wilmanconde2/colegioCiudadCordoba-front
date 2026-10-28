@@ -47,8 +47,8 @@ const TESORERIA_SIZES = '64vw';
 
 export const CARD_IMGS = {
   circular: {
-    src: cldUrl('v1790696585/circular_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1200 }),
-    srcSet: cldSrcSet('v1790696585/circular_cl', CARD_WIDTHS, RESPONSIVE_IMAGE_OPTIONS),
+    src: cldUrl('v1793216124/circular_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1200 }),
+    srcSet: cldSrcSet('v1793216124/circular_cl', CARD_WIDTHS, RESPONSIVE_IMAGE_OPTIONS),
     sizes: CARD_SIZES,
   },
   reporte: {
