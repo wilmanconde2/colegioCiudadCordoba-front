@@ -34,8 +34,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Security audit (HIGH/CRITICAL gate)
-        run: npm audit --audit-level=high
+      - name: Test scoped security audit gate
+        run: node --test scripts/check-npm-audit.test.mjs
+
+      - name: Security audit (full report, HIGH/CRITICAL gate)
+        run: node scripts/check-npm-audit.mjs
 
       - name: Lint
         run: npm run lint
