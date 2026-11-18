@@ -30,9 +30,9 @@ const Inicio = () => {
   // Tarjetas informativas y de selección, se pueden habilitar o deshabilitar según la necesidad de la página de inicio.
   const [mostrarCircularEspecial] = useState(false);
   const [mostrarCircular] = useState(true);
-  const [mostrarReporte] = useState(false);
+  const [mostrarReporte] = useState(true);
   const [mostrarActividades] = useState(true);
-  const [mostrarHorarios] = useState(false);
+  const [mostrarHorarios] = useState(true);
   const [selectedReportUrl, setSelectedReportUrl] = useState('');
 
   const handleReportSelectChange = (e) => {
@@ -161,6 +161,20 @@ const Inicio = () => {
         />
       )}
 
+      {mostrarActividades && (
+        <CardInformation
+          className='actividades text-center'
+          imagen={CARD_IMGS.recuperacion}
+          imgAlt='Actividades de recuperación'
+          texto={
+            <>
+              <NativeLinkDisclosure label='Selecciona tu grado' options={RECUPERACION_OPCIONES} />
+              <p>Descarga la actividad de recuperación correspondiente a tu grado.</p>
+            </>
+          }
+        />
+      )}
+
       {mostrarReporte && (
         <CardSelection
           className='reporte text-center'
@@ -176,20 +190,6 @@ const Inicio = () => {
           linkText='Abrir reporte académico'
           nota=''
           imagen={CARD_IMGS.reporte}
-        />
-      )}
-
-      {mostrarActividades && (
-        <CardInformation
-          className='actividades text-center'
-          imagen={CARD_IMGS.recuperacion}
-          imgAlt='Actividades de recuperación'
-          texto={
-            <>
-              <NativeLinkDisclosure label='Selecciona tu grado' options={RECUPERACION_OPCIONES} />
-              <p>Descarga la actividad de recuperación correspondiente a tu grado.</p>
-            </>
-          }
         />
       )}
 
