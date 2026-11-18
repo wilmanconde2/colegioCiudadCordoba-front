@@ -19,9 +19,20 @@ const syntheticAdmitido = {
   observacion: 'Admitida para el año lectivo.',
 };
 
+async function dismissEnrollmentPopup(page) {
+  const close = page.getByRole('button', { name: 'Cerrar información de matrículas 2027' });
+  if (await close.count()) await close.click();
+}
+
 test('E2E-01: la página principal y su navegación cargan', async ({ page }) => {
   await page.goto('/');
 
+  await expect(page.getByRole('dialog', { name: 'Matrículas 2027' })).toBeVisible();
+  const poster = page.locator('img[src="/matricula2027.png"]');
+  await expect(poster).toBeVisible();
+  await expect.poll(() => poster.evaluate((image) => image.naturalWidth)).toBe(1448);
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog', { name: 'Matrículas 2027' })).toHaveCount(0);
   await expect(page).toHaveURL(/\/$/);
   await expect(page.getByRole('main')).toBeVisible();
   await expect(page.getByRole('navigation')).toBeVisible();
@@ -29,6 +40,17 @@ test('E2E-01: la página principal y su navegación cargan', async ({ page }) =>
   await expect(page.getByRole('link', { name: 'Admisiones' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Consultar admitidos' })).toBeVisible();
   await expect(page.getByText(/página no encontrada/i)).toHaveCount(0);
+});
+
+test('E2E-01a: el popup aparece en Inicio, no en rutas internas, y permite seguir navegando', async ({ page }) => {
+  await page.goto('/admisiones');
+  await expect(page.getByRole('dialog', { name: 'Matrículas 2027' })).toHaveCount(0);
+  await page.goto('/');
+  await expect(page.getByRole('dialog', { name: 'Matrículas 2027' })).toBeVisible();
+  await page.getByRole('button', { name: 'Cerrar información de matrículas 2027' }).click();
+  await page.getByRole('link', { name: 'Consultar admitidos' }).click();
+  await expect(page).toHaveURL(/\/admisiones$/);
+  await expect(page.getByRole('heading', { name: 'Consulta de admitidos' })).toBeVisible();
 });
 
 test('E2E-07: Recuperación abre cada grado mediante enlaces nativos', async ({ page, context }) => {
@@ -48,6 +70,7 @@ test('E2E-07: Recuperación abre cada grado mediante enlaces nativos', async ({ 
     await route.fulfill({ contentType: 'text/html', body: '<p>Destino de prueba</p>' });
   });
   await page.goto('/');
+  await dismissEnrollmentPopup(page);
 
   const card = page.locator('.actividades');
   const button = card.getByRole('button', { name: 'Selecciona tu grado' });
@@ -191,6 +214,7 @@ test('E2E-08: Recuperación abre un enlace nativo con un toque en móvil', async
       };
     });
     await page.goto('/');
+    await dismissEnrollmentPopup(page);
     const button = page.getByRole('button', { name: 'Selecciona tu grado' });
     const links = page.locator('.actividades').getByRole('list').getByRole('link');
     await button.tap();
@@ -250,6 +274,7 @@ test('E2E-04: el chatbot envía una sola consulta al endpoint canónico', async 
     await route.fulfill({ json: { answer: 'Respuesta controlada del asistente.' } });
   });
   await page.goto('/');
+  await dismissEnrollmentPopup(page);
 
   await page.getByRole('button', { name: 'Abrir asistente virtual del colegio' }).click();
   await page.getByRole('textbox', { name: 'Pregunta para el asistente virtual' }).fill('¿Cómo pago?');
@@ -262,6 +287,7 @@ test('E2E-04: el chatbot envía una sola consulta al endpoint canónico', async 
 
 test('E2E-05: navega de Inicio a Tesorería y luego a Contacto', async ({ page }) => {
   await page.goto('/');
+  await dismissEnrollmentPopup(page);
   await expect(page.getByRole('heading', { name: /paz.*progreso.*futuro/i })).toBeVisible();
 
   await page.getByRole('link', { name: 'Ir a Tesorería' }).click();
@@ -278,6 +304,7 @@ test('E2E-06: consulta y selecciona un admitido sintético', async ({ page }) =>
     await route.fulfill({ json: [syntheticAdmitido] });
   });
   await page.goto('/');
+  await dismissEnrollmentPopup(page);
   await page.getByRole('link', { name: 'Consultar admitidos' }).click();
 
   await expect(page.getByRole('heading', { name: 'Consulta de admitidos' })).toBeVisible();

@@ -1,7 +1,7 @@
 // front/src/pages/Inicio.jsx
 
 import useTitulo from '../hooks/useTitulo';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Carrusel } from '../components/Carrusel';
 import { CardSelection } from '../components/CardSelection';
 import { CardInformation } from '../components/CardInformation';
@@ -11,6 +11,7 @@ import { NavLink } from 'react-router';
 // eslint-disable-next-line no-unused-vars
 import BuscadorCursoCard from '../components/BuscadorCursoCard';
 import { ROUTE_METADATA } from '../constants/seo';
+import Matricula2027Modal from '../components/Matricula2027Modal';
 
 import {
   CARRUSEL_IMAGES,
@@ -24,6 +25,8 @@ const Inicio = () => {
   useTitulo(ROUTE_METADATA['/'].title, ROUTE_METADATA['/'].description);
 
   const { currentImageIndex } = useCarrusel(CARRUSEL_IMAGES);
+  const [showMatriculaModal, setShowMatriculaModal] = useState(true);
+  const closeMatriculaModal = useCallback(() => setShowMatriculaModal(false), []);
   // Tarjetas informativas y de selección, se pueden habilitar o deshabilitar según la necesidad de la página de inicio.
   const [mostrarCircularEspecial] = useState(false);
   const [mostrarCircular] = useState(true);
@@ -62,6 +65,7 @@ const Inicio = () => {
 
   return (
     <div className='fullContainer'>
+      {showMatriculaModal && <Matricula2027Modal onClose={closeMatriculaModal} />}
       {/* TEMPORAL: Circular especial por la situación actual en Cali. */}
       {mostrarCircularEspecial && (
         <CardInformation
@@ -132,7 +136,7 @@ const Inicio = () => {
       </div>
 
       <section className='inicioAdmisionesCta' aria-labelledby='inicio-admisiones-title'>
-        <h2 id='inicio-admisiones-title'>Listado #1 admitidos 2027</h2>
+        <h2 id='inicio-admisiones-title'>Listado Admitidos 2027</h2>
         <p>Consulta el resultado del proceso de admisiones por nombres o apellidos.</p>
         <NavLink
           className='btn btn-primary'
