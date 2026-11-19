@@ -3,12 +3,17 @@ import { CLOUDINARY_ASSETS } from '../constants/cloudinaryAssets';
 import { ROUTE_METADATA } from '../constants/seo';
 import {
   CONDICIONES,
-  COSTOS_2026,
   ENFASIS_BACHILLERATO,
   JORNADAS,
   PASOS_INSCRIPCION,
   SERVICIOS,
 } from '../constants/inscripciones';
+
+const COSTOS_2027 = [
+  { nivel: 'Jardín a 6.º', matricula: '$407.000', pension: '$295.000' },
+  { nivel: '7.º a 9.º', matricula: '$407.000', pension: '$305.000' },
+  { nivel: '10.º y 11.º', matricula: '$407.000', pension: '$315.000' },
+];
 
 const Inscripciones = () => {
   useTitulo(
@@ -154,16 +159,14 @@ const Inscripciones = () => {
 
       <section className='inscripciones__section' aria-labelledby='costos-title'>
         <div className='inscripciones__heading'>
-          <p>Referencia 2026</p>
-          <h2 id='costos-title'>Costos educativos</h2>
+          <h2 id='costos-title'>Costos educativos 2027</h2>
         </div>
-        <div className='inscripciones__costs' role='region' aria-label='Costos educativos de referencia 2026' tabIndex='0'>
+        <div className='inscripciones__costs' role='region' aria-label='Costos educativos 2027' tabIndex='0'>
           <table>
             <thead><tr><th scope='col'>Nivel</th><th scope='col'>Matrícula</th><th scope='col'>Pensión</th></tr></thead>
-            <tbody>{COSTOS_2026.map((costo) => <tr key={costo.nivel}><th scope='row'>{costo.nivel}</th><td>{costo.matricula}</td><td>{costo.pension}</td></tr>)}</tbody>
+            <tbody>{COSTOS_2027.map((costo) => <tr key={costo.nivel}><th scope='row'>{costo.nivel}</th><td>{costo.matricula}</td><td>{costo.pension}</td></tr>)}</tbody>
           </table>
         </div>
-        <p className='inscripciones__warning'>Estos valores corresponden al año lectivo 2026 y se presentan únicamente como referencia. Los costos educativos para 2027 serán actualizados de acuerdo con los incrementos autorizados para el nuevo año escolar y serán publicados oficialmente una vez sean definidos.</p>
         <img
           className='inscripciones__sectionImage inscripciones__sectionImage--closing'
           src={CLOUDINARY_ASSETS.inscripcionesLudica}
@@ -171,7 +174,6 @@ const Inscripciones = () => {
           loading='lazy'
           decoding='async'
         />
-        {/* <NavLink className='inscripciones__cta' to='/tesoreria'>Consultar costos educativos 2026</NavLink> */}
       </section>
     </main>
   );
