@@ -11,8 +11,7 @@ import {
 
 const COSTOS_2027 = [
   { nivel: 'Jardín a 6.º', matricula: '$407.000', pension: '$295.000' },
-  { nivel: '7.º a 9.º', matricula: '$407.000', pension: '$305.000' },
-  { nivel: '10.º y 11.º', matricula: '$407.000', pension: '$315.000' },
+  { nivel: '7.º a 11.º', matricula: '$407.000', pension: '$315.000' },
 ];
 
 const Inscripciones = () => {
