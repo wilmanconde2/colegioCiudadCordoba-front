@@ -328,37 +328,9 @@ export const REPORTE_OPCIONES = [
 
 export const RECUPERACION_OPCIONES = [
   {
-    label: 'Transición',
-    value: 'https://drive.google.com/drive/folders/1Uobyu-micyiGv2OUrBEQCk-Wrbu11SXM',
-  },
-  {
-    label: 'Primero',
-    value: 'https://drive.google.com/drive/folders/1g86t0Co61bCOsRywKGIOS24R0lYnXOOp',
-  },
-  {
-    label: 'Segundo',
-    value: 'https://drive.google.com/drive/folders/1kZtCzWXSNCjYhsPDSaBS1L3vEY_8oLrh',
-  },
-  {
-    label: 'Tercero',
-    value: 'https://drive.google.com/drive/folders/1QmqEUqv_Dq-42KyYXQMF9WzqSHBOdSFK',
-  },
-  {
-    label: 'Cuarto',
-    value: 'https://drive.google.com/drive/folders/130nN9B4hIGav7Cano4fxraivO9xrCnE4',
-  },
-  {
-    label: 'Quinto',
-    value: 'https://drive.google.com/drive/folders/1KkWEzh9tfHSjHDrtccihf1j5b3cPvDOh',
-  },
-  {
     label: '6',
     value: 'https://drive.google.com/drive/folders/16s5JE3ixvVrgQXhSgLVF6IJsDx3WRWU3?usp=sharing',
   },
-  // {
-  //   label: '6 IND',
-  //   value: 'https://drive.google.com/drive/folders/1tw_eg8YfRsEjATHyuQNroGhPPbjb25Qj',
-  // },
   {
     label: '7 COM',
     value: 'https://drive.google.com/drive/folders/18dT8BcO2wFrXGlWSl6ozrmdY2GzvLoP_?usp=drive_link',
