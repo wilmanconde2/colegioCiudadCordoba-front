@@ -221,108 +221,112 @@ export const BACKGROUND_IMAGES_HISTORIA = [
 
 export const REPORTE_OPCIONES = [
   {
-    label: '6-1 COM',
-    value: 'https://drive.google.com/drive/folders/17OK7HREI7cHBXGQGKamQ0WB300nSb5BE',
+    label: '6-1',
+    value: 'https://drive.google.com/drive/folders/17OK7HREI7cHBXGQGKamQ0WB300nSb5BE?usp=drive_link',
   },
   {
-    label: '6-2 COM',
-    value: 'https://drive.google.com/drive/folders/1cnEHQC89lErsLqzkGfYbDV9MK_xCIGTK',
+    label: '6-2',
+    value: 'https://drive.google.com/drive/folders/1s2Jzy1JKgaU8GaubwpzuGMFuCq2hp3ql?usp=drive_link',
   },
   {
-    label: '6-3 COM',
-    value: 'https://drive.google.com/drive/folders/14P5h5VW_C47HA2qyV3flGpUhMEHsRZx_',
+    label: '6-3',
+    value: 'https://drive.google.com/drive/folders/1cnEHQC89lErsLqzkGfYbDV9MK_xCIGTK?usp=drive_link',
   },
   {
-    label: '6-1 IND',
-    value: 'https://drive.google.com/drive/folders/1s2Jzy1JKgaU8GaubwpzuGMFuCq2hp3ql',
+    label: '6-4',
+    value: 'https://drive.google.com/drive/folders/14P5h5VW_C47HA2qyV3flGpUhMEHsRZx_?usp=drive_link',
   },
   {
-    label: '6-2 IND',
-    value: 'https://drive.google.com/drive/folders/1QyoKaQy5UZhbNw5jvKlYkgGDNfGh03Mx',
+    label: '6-5',
+    value: 'https://drive.google.com/drive/folders/1QyoKaQy5UZhbNw5jvKlYkgGDNfGh03Mx?usp=drive_link',
   },
   {
     label: '7-1 COM',
-    value: 'https://drive.google.com/drive/folders/1Vqc8fzuuuvwI8L_MBxeX4zr3dx8Y3yoN',
-  },
-  {
-    label: '7-2 COM',
-    value: 'https://drive.google.com/drive/folders/1pg9GN9E-HjgTWGkZauIYTHGin9F2faX-',
+    value: 'https://drive.google.com/drive/folders/1Vqc8fzuuuvwI8L_MBxeX4zr3dx8Y3yoN?usp=drive_link',
   },
   {
     label: '7-1 IND',
-    value: 'https://drive.google.com/drive/folders/1ZkpAoRPkhQwtIIZ_phb2JziNLEDazjRO',
+    value: 'https://drive.google.com/drive/folders/1ZkpAoRPkhQwtIIZ_phb2JziNLEDazjRO?usp=drive_link',
+  },
+  {
+    label: '7-2 COM',
+    value: 'https://drive.google.com/drive/folders/1pg9GN9E-HjgTWGkZauIYTHGin9F2faX-?usp=drive_link',
   },
   {
     label: '7-2 IND',
-    value: 'https://drive.google.com/drive/folders/1eCDBHi7pjfs3lMSFH55RrwdNOvXWwSZ6',
+    value: 'https://drive.google.com/drive/folders/1eCDBHi7pjfs3lMSFH55RrwdNOvXWwSZ6?usp=drive_link',
+  },
+  {
+    label: '7-3 COM',
+    value: 'https://drive.google.com/drive/folders/1yK8lZKAu-QMJfesUAL5RZHZG3wi4jUzW?usp=drive_link',
   },
   {
     label: '8-1 COM',
-    value: 'https://drive.google.com/drive/folders/1Od-X7idicx4IdfG8YJWLrrTZE2xqQMPD',
-  },
-  {
-    label: '8-2 COM',
-    value: 'https://drive.google.com/drive/folders/1Hy6n7cSdzcDXhexQQPbPCi0CvaG8fgwo',
-  },
-  {
-    label: '8-3 COM',
-    value: 'https://drive.google.com/drive/folders/15vvx74ZkpiePIuUkX5bU-wyFqbpfnFI_',
+    value: 'https://drive.google.com/drive/folders/1Od-X7idicx4IdfG8YJWLrrTZE2xqQMPD?usp=drive_link',
   },
   {
     label: '8-1 IND',
-    value: 'https://drive.google.com/drive/folders/1_tNoRFHMl8uEDQbsyuTzNX6RHzC0W5Qm',
+    value: 'https://drive.google.com/drive/folders/1_tNoRFHMl8uEDQbsyuTzNX6RHzC0W5Qm?usp=drive_link',
+  },
+  {
+    label: '8-2 COM',
+    value: 'https://drive.google.com/drive/folders/1Hy6n7cSdzcDXhexQQPbPCi0CvaG8fgwo?usp=drive_link',
   },
   {
     label: '8-2 IND',
-    value: 'https://drive.google.com/drive/folders/135R664bD-p-0JQsW2uHrvqog7K30w40Q',
-  },
-  {
-    label: '8-3 IND',
-    value: 'https://drive.google.com/drive/folders/1nr4iWTkNedI38A9ey8gXfG71FlFJMrSr',
+    value: 'https://drive.google.com/drive/folders/135R664bD-p-0JQsW2uHrvqog7K30w40Q?usp=drive_link',
   },
   {
     label: '9-1 COM',
-    value: 'https://drive.google.com/drive/folders/1rFr7T64_ulBtBEl1OGEAxnEEesV6Wzxg',
-  },
-  {
-    label: '9-2 COM',
-    value: 'https://drive.google.com/drive/folders/1E5hscfo7b9Gmlo1FiZHdkxCXZ92DN23A',
+    value: 'https://drive.google.com/drive/folders/1rFr7T64_ulBtBEl1OGEAxnEEesV6Wzxg?usp=drive_link',
   },
   {
     label: '9-1 IND',
-    value: 'https://drive.google.com/drive/folders/1F_3-1TonsQ3rBBJDuRZ3pwE3HlD4K1pK',
+    value: 'https://drive.google.com/drive/folders/1F_3-1TonsQ3rBBJDuRZ3pwE3HlD4K1pK?usp=drive_link',
+  },
+  {
+    label: '9-2 COM',
+    value: 'https://drive.google.com/drive/folders/1E5hscfo7b9Gmlo1FiZHdkxCXZ92DN23A?usp=drive_link',
   },
   {
     label: '9-2 IND',
-    value: 'https://drive.google.com/drive/folders/1fY7dmeCniC0LiCvWGem6NxkMP__p-zmx',
+    value: 'https://drive.google.com/drive/folders/1fY7dmeCniC0LiCvWGem6NxkMP__p-zmx?usp=drive_link',
+  },
+  {
+    label: '9-3 COM',
+    value: 'https://drive.google.com/drive/folders/1S_mBaWl4On6QOYuMvT2RvZdaUsQ398Xw?usp=drive_link',
+  },
+  {
+    label: '9-3 IND',
+    value: 'https://drive.google.com/drive/folders/1cm0AvS_VFPEVCivLaNrBLViqkXWQsoNZ?usp=drive_link',
   },
   {
     label: '10-1 COM',
-    value: 'https://drive.google.com/drive/folders/1u152ki2hO-3uL-S9tTyBP_BoI1_gr1vM',
+    value: 'https://drive.google.com/drive/folders/1u152ki2hO-3uL-S9tTyBP_BoI1_gr1vM?usp=drive_link',
   },
   {
     label: '10-1 IND',
-    value: 'https://drive.google.com/drive/folders/1sx9cM8iQlmBsU6a8prSsr-piXf9lMxyY',
+    value: 'https://drive.google.com/drive/folders/1sx9cM8iQlmBsU6a8prSsr-piXf9lMxyY?usp=drive_link',
   },
   {
-    label: '10-2 INT',
-    value: 'https://drive.google.com/drive/folders/1XrG9eu36buUT49v_36n6aRee2wjIgWyk',
+    label: '10-2 COM',
+    value: 'https://drive.google.com/drive/folders/1XrG9eu36buUT49v_36n6aRee2wjIgWyk?usp=drive_link',
+  },
+  {
+    label: '10-2 IND',
+    value: 'https://drive.google.com/drive/folders/1kg61RrUTHZnT2pBpflPP6euNG0bq9jQb?usp=drive_link',
   },
   {
     label: '11-1 COM',
-    value: 'https://drive.google.com/drive/folders/10T6e_5DI8IY0bTQomqx9K6i8jTmthY4D',
-  },
-  {
-    label: '11-2 COM',
-    value: 'https://drive.google.com/drive/folders/15IjQ95nBQRH3ReCm3pbWS-dr6LHdpgs9',
+    value: 'https://drive.google.com/drive/folders/10T6e_5DI8IY0bTQomqx9K6i8jTmthY4D?usp=drive_link',
   },
   {
     label: '11-1 IND',
-    value: 'https://drive.google.com/drive/folders/1vzwg96ELos0HTn_-tnMV6qvdRlsbS53x',
+    value: 'https://drive.google.com/drive/folders/1vzwg96ELos0HTn_-tnMV6qvdRlsbS53x?usp=drive_link',
   },
   {
-    label: '11-2 IND',
-    value: 'https://drive.google.com/drive/folders/15f8NWTAKHbnStsQ_lsKFSIICFyNZNyJt',
+    label: '11-2 INT',
+    value: 'https://drive.google.com/drive/folders/15f8NWTAKHbnStsQ_lsKFSIICFyNZNyJt?usp=drive_link',
   },
 ];
 
