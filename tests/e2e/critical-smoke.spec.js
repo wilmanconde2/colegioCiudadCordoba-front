@@ -27,7 +27,7 @@ test('E2E-01: la página principal y su navegación cargan', async ({ page }) =>
   await page.goto('/');
 
   await expect(page.getByRole('dialog', { name: 'Matrículas 2027' })).toBeVisible();
-  const poster = page.getByRole('dialog').getByRole('img');
+  const poster = page.getByRole('dialog').locator('img');
   await expect(poster).toBeVisible();
   await expect.poll(() => poster.evaluate((image) => image.naturalWidth)).toBeGreaterThan(0);
   await page.keyboard.press('Escape');
