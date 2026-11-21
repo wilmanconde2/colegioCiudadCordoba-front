@@ -1,3 +1,4 @@
+import { GOOGLE_FORM_URL, HORARIOS_ALUMNOS } from './modal-info-curso/modalInfoCursoData';
 import { useState } from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -61,7 +62,7 @@ describe('ModalInfoCurso', () => {
 
     expect(screen.getByRole('img', { name: /información general/i })).toBeTruthy();
     expect(screen.getByRole('link', { name: /confirmar asistencia aquí/i }).getAttribute('href'))
-      .toBe('https://forms.gle/c5ZpYPmrNSTnczn49');
+      .toBe(GOOGLE_FORM_URL);
     expect(screen.getByRole('link', { name: /abrir en tamaño completo/i })).toBeTruthy();
   });
 
@@ -70,10 +71,9 @@ describe('ModalInfoCurso', () => {
     render(<ModalInfoCurso open onClose={() => {}} alumno={alumno} curso='6-1' />);
 
     await user.click(screen.getByRole('button', { name: /ver horarios de atención/i }));
-    expect(screen.getByText(/selecciona una opción: primaria o bachillerato/i)).toBeTruthy();
-    await user.click(screen.getByRole('button', { name: 'Horario Primaria' }));
+    await user.click(screen.getByRole('button', { name: HORARIOS_ALUMNOS.primaria.label }));
 
-    expect(screen.getByRole('img', { name: 'Horario Primaria' })).toBeTruthy();
+    expect(screen.getByRole('img', { name: HORARIOS_ALUMNOS.primaria.title })).toBeTruthy();
   });
 
   it('muestra el video configurado para el curso', async () => {

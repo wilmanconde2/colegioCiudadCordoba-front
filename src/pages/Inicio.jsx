@@ -21,20 +21,23 @@ import {
   RECUPERACION_OPCIONES,
 } from '../constants/inicio';
 
-const HORARIOS_PDF_URL = `${import.meta.env.BASE_URL}horariosRecuperancion.pdf`;
-
 const Inicio = () => {
-  useTitulo(ROUTE_METADATA['/'].title, ROUTE_METADATA['/'].description);
-
-  const { currentImageIndex } = useCarrusel(CARRUSEL_IMAGES);
-  const [showMatriculaModal, setShowMatriculaModal] = useState(true);
-  const closeMatriculaModal = useCallback(() => setShowMatriculaModal(false), []);
   // Tarjetas informativas y de selección, se pueden habilitar o deshabilitar según la necesidad de la página de inicio.
   const [mostrarCircularEspecial] = useState(false);
   const [mostrarCircular] = useState(true);
   const [mostrarReporte] = useState(true);
   const [mostrarActividades] = useState(false);
   const [mostrarHorarios] = useState(true);
+
+  return <InicioContent {...{ mostrarCircularEspecial, mostrarCircular, mostrarReporte, mostrarActividades, mostrarHorarios }} />;
+};
+
+export function InicioContent({ mostrarCircularEspecial, mostrarCircular, mostrarReporte, mostrarActividades, mostrarHorarios }) {
+  useTitulo(ROUTE_METADATA['/'].title, ROUTE_METADATA['/'].description);
+
+  const { currentImageIndex } = useCarrusel(CARRUSEL_IMAGES);
+  const [showMatriculaModal, setShowMatriculaModal] = useState(true);
+  const closeMatriculaModal = useCallback(() => setShowMatriculaModal(false), []);
   const [selectedReportUrl, setSelectedReportUrl] = useState('');
 
   const handleReportSelectChange = (e) => {
@@ -179,12 +182,6 @@ const Inicio = () => {
       {mostrarReporte && (
         <CardSelection
           className='reporte text-center'
-          titulo={
-            <>
-              Reporte Académico <br />
-              Periodo 4 y Años Anteriores
-            </>
-          }
           opciones={REPORTE_OPCIONES}
           onChange={handleReportSelectChange}
           linkHref={selectedReportUrl}
@@ -209,7 +206,7 @@ const Inicio = () => {
               cualquiera de los dos uniformes institucionales.
             </>
           }
-          link={HORARIOS_PDF_URL}
+          link={`${import.meta.env.BASE_URL}horariosRecuperancion.pdf`}
           linkText='Descargar'
           downloadName='horariosRecuperancion.pdf'
         />
@@ -237,6 +234,6 @@ const Inicio = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Inicio;

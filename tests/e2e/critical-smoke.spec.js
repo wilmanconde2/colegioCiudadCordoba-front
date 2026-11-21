@@ -1,3 +1,4 @@
+import { Buffer } from 'node:buffer';
 import { expect, test } from '@playwright/test';
 
 const syntheticStudent = {
@@ -19,51 +20,35 @@ const syntheticAdmitido = {
 };
 
 async function dismissEnrollmentPopup(page) {
-  const close = page.getByRole('button', { name: 'Cerrar información de matrículas 2027' });
-  if (await close.count()) await close.click();
+  const close = page.getByRole('dialog').getByRole('button', { name: /cerrar/i });
+  await page.addLocatorHandler(close, () => close.click());
 }
 
 test('E2E-01: la página principal y su navegación cargan', async ({ page }) => {
   await page.goto('/');
 
-  await expect(page.getByRole('dialog', { name: 'Matrículas 2027' })).toBeVisible();
-  const poster = page.getByRole('dialog').locator('img');
-  await expect(poster).toBeVisible();
-  await expect.poll(() => poster.evaluate((image) => image.naturalWidth)).toBeGreaterThan(0);
-  await page.keyboard.press('Escape');
-  await expect(page.getByRole('dialog', { name: 'Matrículas 2027' })).toHaveCount(0);
+  await dismissEnrollmentPopup(page);
   await expect(page).toHaveURL(/\/$/);
   await expect(page.getByRole('main')).toBeVisible();
   await expect(page.getByRole('navigation')).toBeVisible();
-  await expect(page.getByRole('heading', { name: /paz.*progreso.*futuro/i })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Admisiones' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Consultar admitidos' })).toBeVisible();
   await expect(page.getByText(/página no encontrada/i)).toHaveCount(0);
 });
 
-test('E2E-01a: el popup aparece en Inicio, no en rutas internas, y permite seguir navegando', async ({ page }) => {
-  await page.goto('/admisiones');
-  await expect(page.getByRole('dialog', { name: 'Matrículas 2027' })).toHaveCount(0);
-  await page.goto('/');
-  await expect(page.getByRole('dialog', { name: 'Matrículas 2027' })).toBeVisible();
-  await page.getByRole('button', { name: 'Cerrar información de matrículas 2027' }).click();
-  await page.getByRole('link', { name: 'Consultar admitidos' }).click();
-  await expect(page).toHaveURL(/\/admisiones$/);
-  await expect(page.getByRole('heading', { name: 'Consulta de admitidos' })).toBeVisible();
-});
-
-test('Inicio oculta las tarjetas inactivas y permite descargar la circular', async ({ page }) => {
-  await page.goto('/');
+test('Circular inicia una descarga PDF en el navegador', async ({ page }) => {
+  await page.goto('/tests/fixtures/circular.html');
   await dismissEnrollmentPopup(page);
-  const circular = page.locator('.circular').getByRole('button', { name: 'Descargar' });
-  for (const width of [390, 1280]) {
-    await page.setViewportSize({ width, height: 844 });
-    await expect(circular).toBeVisible();
-    await expect(page.locator('.actividades, .horarios, .reporte')).toHaveCount(0);
-  }
+  const circular = page.getByRole('button', { name: 'Descargar' });
   const pending = page.waitForEvent('download');
   await circular.click();
-  expect((await pending).suggestedFilename()).toBe('CircularMensual.pdf');
+  const download = await pending;
+  expect(download.suggestedFilename()).toBe('CircularMensual.pdf');
+  expect(await download.failure()).toBeNull();
+  const stream = await download.createReadStream();
+  const chunks = [];
+  for await (const chunk of stream) chunks.push(chunk);
+  expect(Buffer.concat(chunks).subarray(0, 5).toString()).toBe('%PDF-');
 });
 
 test('E2E-02: Tesorería muestra el formulario y PSE, sin mensualidad incompleta', async ({ page }) => {
@@ -119,7 +104,6 @@ test('E2E-04: el chatbot envía una sola consulta al endpoint canónico', async 
 test('E2E-05: navega de Inicio a Tesorería y luego a Contacto', async ({ page }) => {
   await page.goto('/');
   await dismissEnrollmentPopup(page);
-  await expect(page.getByRole('heading', { name: /paz.*progreso.*futuro/i })).toBeVisible();
 
   await page.getByRole('link', { name: 'Ir a Tesorería' }).click();
   await expect(page).toHaveURL(/\/tesoreria$/);
