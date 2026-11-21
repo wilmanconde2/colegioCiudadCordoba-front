@@ -183,26 +183,18 @@ echo "$PR_URL"
 # -------------------------------------------------------
 
 echo
-echo "Activando auto-merge..."
-
-git_head=$(git rev-parse HEAD)
-if ! gh pr merge "$PR_NUMBER" --auto --squash --match-head-commit "$git_head"; then
-    [[ $(gh pr view "$PR_NUMBER" --json state --jq .state) == MERGED ]] || exit 1
-fi
-
-echo
-echo "Auto-merge activado."
-echo "Esperando quality gates de GitHub..."
+echo "Esperando checks de GitHub..."
 
 # -------------------------------------------------------
 # Esperar checks
 # -------------------------------------------------------
 
 for attempt in {1..30}; do
-    checks=$(gh pr view "$PR_NUMBER" --json statusCheckRollup --jq '.statusCheckRollup | length')
-    [[ "$checks" != 0 ]] && break
+    checks=$(gh pr view "$PR_NUMBER" --json statusCheckRollup --jq '[.statusCheckRollup[] | select(.name == "quality" or .name == "e2e") | .name] | unique | length')
+    [[ "$checks" == 2 ]] && break
     sleep 2
 done
+[[ "$checks" == 2 ]] || { echo "GitHub aún no registró quality y e2e. Revisa $PR_URL"; exit 1; }
 if ! gh pr checks "$PR_NUMBER" --watch --fail-fast; then
     echo
     echo "ERROR: Uno o más quality gates fallaron."
@@ -218,6 +210,17 @@ fi
 # -------------------------------------------------------
 
 echo
+echo "Activando auto-merge..."
+
+git_head=$(git rev-parse HEAD)
+if ! gh pr merge "$PR_NUMBER" --auto --squash --match-head-commit "$git_head"; then
+    [[ $(gh pr view "$PR_NUMBER" --json state --jq .state) == MERGED ]] || exit 1
+fi
+
+echo
+echo "Auto-merge activado."
+
+
 echo "Quality gates aprobados."
 echo "Esperando confirmación del merge..."
 
