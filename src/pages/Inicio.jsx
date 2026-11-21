@@ -31,7 +31,7 @@ const Inicio = () => {
   const [mostrarCircularEspecial] = useState(false);
   const [mostrarCircular] = useState(true);
   const [mostrarReporte] = useState(true);
-  const [mostrarActividades] = useState(true);
+  const [mostrarActividades] = useState(false);
   const [mostrarHorarios] = useState(true);
   const [selectedReportUrl, setSelectedReportUrl] = useState('');
 
