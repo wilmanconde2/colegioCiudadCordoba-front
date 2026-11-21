@@ -306,7 +306,7 @@ export const REPORTE_OPCIONES = [
   },
   {
     label: '10-1 IND',
-    value: 'https://drive.google.com/drive/folders/1sx9cM8iQlmBsU6a8prSsr-piXf9lMxyY?usp=drive_link',
+    value: 'https://drive.google.com/drive/folders/1SluIu7343VF2vrNUgtGldrsCjtmzOwOb?usp=drive_link',
   },
   {
     label: '10-2 COM',
