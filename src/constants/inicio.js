@@ -52,13 +52,13 @@ export const CARD_IMGS = {
     sizes: CARD_SIZES,
   },
   reporte: {
-    src: cldUrl('v1795214528/reporte_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1200 }),
-    srcSet: cldSrcSet('v1795214528/reporte_cl', CARD_WIDTHS, RESPONSIVE_IMAGE_OPTIONS),
+    src: cldUrl('v1795233706/reporte_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1200 }),
+    srcSet: cldSrcSet('v1795233706/reporte_cl', CARD_WIDTHS, RESPONSIVE_IMAGE_OPTIONS),
     sizes: CARD_SIZES,
   },
   recuperacion: {
-    src: cldUrl('v1792203729/recuperacion_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1122 }),
-    srcSet: cldSrcSet('v1792203729/recuperacion_cl', capWidths(CARD_WIDTHS, 1122), RESPONSIVE_IMAGE_OPTIONS),
+    src: cldUrl('v1795233222/recuperacion_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1122 }),
+    srcSet: cldSrcSet('v1795233222/recuperacion_cl', capWidths(CARD_WIDTHS, 1122), RESPONSIVE_IMAGE_OPTIONS),
     sizes: CARD_SIZES,
     width: 1122,
     height: 1402,
