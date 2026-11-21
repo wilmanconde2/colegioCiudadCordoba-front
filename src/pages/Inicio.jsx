@@ -21,6 +21,8 @@ import {
   RECUPERACION_OPCIONES,
 } from '../constants/inicio';
 
+const HORARIOS_PDF_URL = `${import.meta.env.BASE_URL}horariosRecuperancion.pdf`;
+
 const Inicio = () => {
   useTitulo(ROUTE_METADATA['/'].title, ROUTE_METADATA['/'].description);
 
@@ -31,7 +33,7 @@ const Inicio = () => {
   const [mostrarCircularEspecial] = useState(false);
   const [mostrarCircular] = useState(true);
   const [mostrarReporte] = useState(false);
-  const [mostrarActividades] = useState(true);
+  const [mostrarActividades] = useState(false);
   const [mostrarHorarios] = useState(false);
   const [selectedReportUrl, setSelectedReportUrl] = useState('');
 
@@ -75,16 +77,15 @@ const Inicio = () => {
           imgAlt='Comunicado especial del Colegio Ciudad Córdoba para el 13, 14 y 15 de agosto de 2026'
           texto={
             <>
-              Información especial sobre actividades académicas y retorno a la
-              presencialidad, de acuerdo con las directrices de la Secretaría de Educación
-              Distrital.
+              Información especial sobre actividades académicas y retorno a la presencialidad, de
+              acuerdo con las directrices de la Secretaría de Educación Distrital.
             </>
           }
           linkText='Descargar'
           onClick={handleDownloadCircularEspecial}
         />
       )}
-      
+
       <section className='inicioHero' aria-label='Información destacada'>
         <NavLink
           className='inicioHero__bannerLink inicioHero__banner--left'
@@ -124,9 +125,13 @@ const Inicio = () => {
       <div className='backgroundContainerText'>
         <h1 className='institutionalWords'>
           <span>Paz</span>
-          <span className='institutionalWords__separator' aria-hidden='true'>-</span>
+          <span className='institutionalWords__separator' aria-hidden='true'>
+            -
+          </span>
           <span>Progreso</span>
-          <span className='institutionalWords__separator' aria-hidden='true'>-</span>
+          <span className='institutionalWords__separator' aria-hidden='true'>
+            -
+          </span>
           <span>Futuro</span>
         </h1>
         <h2>
@@ -138,11 +143,7 @@ const Inicio = () => {
       <section className='inicioAdmisionesCta' aria-labelledby='inicio-admisiones-title'>
         <h2 id='inicio-admisiones-title'>Listado Admitidos 2027</h2>
         <p>Consulta el resultado del proceso de admisiones por nombres o apellidos.</p>
-        <NavLink
-          className='btn btn-primary'
-          to='/admisiones'
-          onClick={() => window.scrollTo(0, 0)}
-        >
+        <NavLink className='btn btn-primary' to='/admisiones' onClick={() => window.scrollTo(0, 0)}>
           Consultar admitidos
         </NavLink>
       </section>
@@ -158,6 +159,20 @@ const Inicio = () => {
           }
           linkText='Descargar'
           onClick={handleDownloadCircular}
+        />
+      )}
+
+      {mostrarActividades && (
+        <CardInformation
+          className='actividades text-center'
+          imagen={CARD_IMGS.recuperacion}
+          imgAlt='Actividades de recuperación'
+          texto={
+            <>
+              <NativeLinkDisclosure label='Selecciona tu grado' options={RECUPERACION_OPCIONES} />
+              <p>Descarga la actividad de recuperación correspondiente a tu grado.</p>
+            </>
+          }
         />
       )}
 
@@ -179,35 +194,24 @@ const Inicio = () => {
         />
       )}
 
-      {mostrarActividades && (
-        <CardInformation
-          className='actividades text-center'
-          imagen={CARD_IMGS.recuperacion}
-          imgAlt='Actividades de recuperación'
-          texto={
-            <>
-              <NativeLinkDisclosure label='Selecciona tu grado' options={RECUPERACION_OPCIONES} />
-              <p>Descarga la actividad de recuperación correspondiente a tu grado.</p>
-            </>
-          }
-        />
-      )}
-
       {mostrarHorarios && (
         <CardInformation
           className='horarios'
-          titulo='Horarios Recuperacion'
           imagen={CARD_IMGS.horarios}
           texto={
             <>
               <em>Nota:</em> Ten presente que el horario publicado, no incluye todas las materias,
               si perdiste una o varias materias que no están incluidas en el horario publicado,
-              debes buscar al docente correspondiente de dicha/s materia/s el día lunes 24 de
+              debes buscar al docente correspondiente de dicha/s materia/s el día lunes 23 de
               noviembre en cualquier hora libre que tengas, para que cada docente te asigne la
-              actividad de recuperación.
+              actividad de recuperación. <br />
+              <em>Importante:</em> Los estudiantes pueden asistir a las recuperaciónes con
+              cualquiera de los dos uniformes institucionales.
             </>
           }
-          link='https://drive.google.com/drive/folders/10tZQth5aMksTOEhyYCmv8fQbLBB8nKAp'
+          link={HORARIOS_PDF_URL}
+          linkText='Descargar'
+          downloadName='horariosRecuperancion.pdf'
         />
       )}
 

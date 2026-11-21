@@ -34,6 +34,7 @@ export function CardInformation({
   texto,
   link,
   linkText = 'Ver más',
+  downloadName,
   onClick,
 }) {
   const imgProps = getImgProps(imagen, {
@@ -71,8 +72,9 @@ export function CardInformation({
             <a
               className='btn btn-primary boton'
               href={link}
-              target='_blank'
-              rel='noopener noreferrer'
+              download={downloadName}
+              target={downloadName ? undefined : '_blank'}
+              rel={downloadName ? undefined : 'noopener noreferrer'}
             >
               {linkText}
             </a>
@@ -106,5 +108,6 @@ CardInformation.propTypes = {
   texto: PropTypes.node,
   link: PropTypes.string,
   linkText: PropTypes.string,
+  downloadName: PropTypes.string,
   onClick: PropTypes.func,
 };

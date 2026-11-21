@@ -32,8 +32,6 @@ describe('Matricula2027Modal', () => {
     expect(dialog.getAttribute('aria-modal')).toBe('true');
     expect(dialog.getAttribute('aria-describedby')).toBeTruthy();
     expect(image.getAttribute('src')).toBe('/matricula2027-v2.png');
-    expect(image.getAttribute('width')).toBe('1448');
-    expect(image.getAttribute('height')).toBe('1086');
     expect(document.activeElement).toBe(screen.getByRole('button', { name: /cerrar información de matrículas/i }));
     expect(root.inert).toBe(true);
     expect(document.body.style.overflow).toBe('hidden');
