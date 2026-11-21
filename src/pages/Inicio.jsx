@@ -25,9 +25,9 @@ const Inicio = () => {
   // Tarjetas informativas y de selección, se pueden habilitar o deshabilitar según la necesidad de la página de inicio.
   const [mostrarCircularEspecial] = useState(false);
   const [mostrarCircular] = useState(true);
-  const [mostrarReporte] = useState(true);
+  const [mostrarReporte] = useState(false);
   const [mostrarActividades] = useState(false);
-  const [mostrarHorarios] = useState(true);
+  const [mostrarHorarios] = useState(false);
 
   return <InicioContent {...{ mostrarCircularEspecial, mostrarCircular, mostrarReporte, mostrarActividades, mostrarHorarios }} />;
 };
