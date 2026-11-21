@@ -45,18 +45,21 @@ fi
 
 BLOCKED_PATTERN='(^|/)(\.env($|\.)|package\.json$|package-lock\.json$|netlify\.toml$|vite\.config\.[^/]+$)|^\.github/|^netlify/functions/|^scripts/'
 
-CHANGED_FILES="$(git status --porcelain | sed 's/^...//')"
-
-while IFS= read -r file; do
-    if [[ "$file" =~ $BLOCKED_PATTERN ]]; then
-        echo
-        echo "ERROR: Archivo no permitido en el flujo rápido:"
-        echo "  $file"
-        echo
-        echo "Usa el flujo normal para este cambio."
-        exit 1
-    fi
-done <<< "$CHANGED_FILES"
+paths=$(mktemp)
+trap 'rm -f "$paths"' EXIT
+trap 'echo "Operación interrumpida. Revisa git status y el PR antes de reintentar." >&2' ERR
+validate_paths() {
+    while IFS= read -r -d '' file; do
+        if [[ "$file" =~ $BLOCKED_PATTERN || "$file" =~ (^|/)(\.npmrc|\.aws|\.ssh|credentials)(/|$)|\.(pem|key|p12|pfx)$ ]]; then
+            printf 'Ruta bloqueada: %q\n' "$file" >&2
+            return 1
+        fi
+    done < "$paths"
+}
+git diff --cached --no-renames --name-only -z > "$paths"
+git diff --no-renames --name-only -z >> "$paths"
+git ls-files --others --exclude-standard -z >> "$paths"
+validate_paths
 
 # -------------------------------------------------------
 # Verificar main
@@ -130,11 +133,14 @@ git switch -c "$QUICK_BRANCH"
 # -------------------------------------------------------
 
 git add --all
+git diff --cached --no-renames --name-only -z > "$paths"
+validate_paths
+git diff --cached --check
 
 if git diff --cached --quiet; then
     echo "No hay cambios para hacer commit."
     git switch "$BASE_BRANCH"
-    git branch -D "$QUICK_BRANCH"
+    git branch -d "$QUICK_BRANCH"
     exit 0
 fi
 
@@ -166,7 +172,7 @@ PR_URL="$(gh pr create \
     --title "$COMMIT_MESSAGE" \
     --body "Automated minor content update created by safe-quick-commit.")"
 
-PR_NUMBER="$(gh pr view "$QUICK_BRANCH" --json number --jq '.number')"
+PR_NUMBER="$PR_URL"
 
 echo
 echo "PR #$PR_NUMBER creado:"
@@ -179,7 +185,10 @@ echo "$PR_URL"
 echo
 echo "Activando auto-merge..."
 
-gh pr merge "$PR_NUMBER" --auto --squash
+git_head=$(git rev-parse HEAD)
+if ! gh pr merge "$PR_NUMBER" --auto --squash --match-head-commit "$git_head"; then
+    [[ $(gh pr view "$PR_NUMBER" --json state --jq .state) == MERGED ]] || exit 1
+fi
 
 echo
 echo "Auto-merge activado."
@@ -189,6 +198,11 @@ echo "Esperando quality gates de GitHub..."
 # Esperar checks
 # -------------------------------------------------------
 
+for attempt in {1..30}; do
+    checks=$(gh pr view "$PR_NUMBER" --json statusCheckRollup --jq '.statusCheckRollup | length')
+    [[ "$checks" != 0 ]] && break
+    sleep 2
+done
 if ! gh pr checks "$PR_NUMBER" --watch --fail-fast; then
     echo
     echo "ERROR: Uno o más quality gates fallaron."
@@ -235,26 +249,16 @@ echo
 echo "PR fusionado correctamente."
 echo "Sincronizando y limpiando entorno local..."
 
+[[ -z $(git status --porcelain) && $(git branch --show-current) == "$QUICK_BRANCH" && $(git rev-parse HEAD) == "$git_head" ]] || exit 1
 git switch "$BASE_BRANCH"
 
 # Actualizar main
 git fetch origin "$BASE_BRANCH" --quiet
 git merge --ff-only "origin/$BASE_BRANCH"
 
-# Eliminar rama local
-if git show-ref --verify --quiet "refs/heads/$QUICK_BRANCH"; then
-    git branch -D "$QUICK_BRANCH"
-fi
+# Eliminar solo la rama temporal local publicada y ya fusionada.
+git branch -d "$QUICK_BRANCH" || echo "Rama local conservada: $QUICK_BRANCH"
 
-# Eliminar rama remota si todavía existe
-if git ls-remote --exit-code --heads origin "$QUICK_BRANCH" >/dev/null 2>&1; then
-    git push origin --delete "$QUICK_BRANCH"
-fi
-
-# Limpiar referencias remotas obsoletas
-git fetch origin --prune --quiet
-
-# -------------------------------------------------------
 # Resultado
 # -------------------------------------------------------
 
@@ -263,8 +267,8 @@ echo "======================================"
 echo "OK: cambio publicado correctamente."
 echo "PR #$PR_NUMBER fusionado."
 echo "$BASE_BRANCH está actualizado."
-echo "Ramas temporales eliminadas."
-echo "Referencias remotas limpiadas."
+echo "Limpieza local finalizada."
+
 echo
 echo "Working tree:"
 git status --short

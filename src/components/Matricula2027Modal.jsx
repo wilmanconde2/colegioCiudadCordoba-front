@@ -82,7 +82,7 @@ export default function Matricula2027Modal({ onClose }) {
         </button>
         <img
           className='Matricula2027Modal__poster'
-          src='/matricula2027.png'
+          src='/matricula2027-v2.png'
           alt=''
           width='1448'
           height='1086'

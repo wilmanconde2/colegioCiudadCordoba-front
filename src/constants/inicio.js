@@ -52,8 +52,8 @@ export const CARD_IMGS = {
     sizes: CARD_SIZES,
   },
   reporte: {
-    src: cldUrl('reporte_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1200 }),
-    srcSet: cldSrcSet('reporte_cl', CARD_WIDTHS, RESPONSIVE_IMAGE_OPTIONS),
+    src: cldUrl('v1795214528/reporte_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1200 }),
+    srcSet: cldSrcSet('v1795214528/reporte_cl', CARD_WIDTHS, RESPONSIVE_IMAGE_OPTIONS),
     sizes: CARD_SIZES,
   },
   recuperacion: {
@@ -64,8 +64,8 @@ export const CARD_IMGS = {
     height: 1402,
   },
   horarios: {
-    src: cldUrl('horarios_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1200 }),
-    srcSet: cldSrcSet('horarios_cl', CARD_WIDTHS, RESPONSIVE_IMAGE_OPTIONS),
+    src: cldUrl('v1795214932/horarios_cl', { ...RESPONSIVE_IMAGE_OPTIONS, w: 1200 }),
+    srcSet: cldSrcSet('v1795214932/horarios_cl', CARD_WIDTHS, RESPONSIVE_IMAGE_OPTIONS),
     sizes: CARD_SIZES,
   },
 };

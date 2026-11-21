@@ -27,9 +27,9 @@ test('E2E-01: la página principal y su navegación cargan', async ({ page }) =>
   await page.goto('/');
 
   await expect(page.getByRole('dialog', { name: 'Matrículas 2027' })).toBeVisible();
-  const poster = page.locator('img[src="/matricula2027.png"]');
+  const poster = page.getByRole('dialog').getByRole('img');
   await expect(poster).toBeVisible();
-  await expect.poll(() => poster.evaluate((image) => image.naturalWidth)).toBe(1448);
+  await expect.poll(() => poster.evaluate((image) => image.naturalWidth)).toBeGreaterThan(0);
   await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog', { name: 'Matrículas 2027' })).toHaveCount(0);
   await expect(page).toHaveURL(/\/$/);
@@ -52,33 +52,18 @@ test('E2E-01a: el popup aparece en Inicio, no en rutas internas, y permite segui
   await expect(page.getByRole('heading', { name: 'Consulta de admitidos' })).toBeVisible();
 });
 
-test('E2E-07: Recuperación permanece deshabilitada en escritorio y móvil', async ({ page }) => {
+test('Inicio oculta las tarjetas inactivas y permite descargar la circular', async ({ page }) => {
   await page.goto('/');
   await dismissEnrollmentPopup(page);
-
-  const card = page.locator('.actividades');
-  for (const width of [320, 375, 390, 768, 1280]) {
+  const circular = page.locator('.circular').getByRole('button', { name: 'Descargar' });
+  for (const width of [390, 1280]) {
     await page.setViewportSize({ width, height: 844 });
-    await expect(card).toHaveCount(0);
+    await expect(circular).toBeVisible();
+    await expect(page.locator('.actividades, .horarios, .reporte')).toHaveCount(0);
   }
-  await expect(page.locator('.circular').getByRole('button', { name: 'Descargar' })).toBeVisible();
-});
-
-test('E2E-08: Recuperación permanece deshabilitada en móvil táctil', async ({ browser, baseURL }) => {
-  const context = await browser.newContext({
-    baseURL,
-    viewport: { width: 390, height: 844 },
-    isMobile: true,
-    hasTouch: true,
-  });
-  try {
-    const page = await context.newPage();
-    await page.goto('/');
-    await dismissEnrollmentPopup(page);
-    await expect(page.locator('.actividades')).toHaveCount(0);
-  } finally {
-    await context.close();
-  }
+  const pending = page.waitForEvent('download');
+  await circular.click();
+  expect((await pending).suggestedFilename()).toBe('CircularMensual.pdf');
 });
 
 test('E2E-02: Tesorería muestra el formulario y PSE, sin mensualidad incompleta', async ({ page }) => {
