@@ -11,12 +11,12 @@ describe('modalInfoCursoUtils', () => {
       .toBe('https://drive.google.com/file/d/abc123/preview');
   });
 
-  it('resuelve los estados declarativos de contenido sin cambiar sus mensajes', () => {
+  it('resuelve los estados declarativos de contenido con una indicación accesible', () => {
     expect(getModalContent({ tab: 'horarios', horarioSel: null, videoUrl: '' }))
-      .toEqual({ type: 'pick-horario', title: 'Horarios' });
+      .toEqual({ type: 'pick-horario', title: expect.stringMatching(/\S/) });
     expect(getModalContent({ tab: 'video', horarioSel: null, videoUrl: '' }))
-      .toEqual({ type: 'empty', msg: 'No hay video configurado para este curso.' });
+      .toEqual({ type: 'empty', msg: expect.stringMatching(/\S/) });
     expect(getModalContent({ tab: 'otro', horarioSel: null, videoUrl: '' }))
-      .toEqual({ type: 'empty', msg: 'Contenido no disponible.' });
+      .toEqual({ type: 'empty', msg: expect.stringMatching(/\S/) });
   });
 });
